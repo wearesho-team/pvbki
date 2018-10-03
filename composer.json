@@ -1,0 +1,46 @@
+{
+    "name": "wearesho-team/pvbki",
+    "description": "PVBKI API integration",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "myclabs/php-enum": "^1.6",
+        "horat1us/environment-config": "^1.2",
+        "nesbot/carbon": "^2.3",
+        "psr/log": "^1.0"
+    },
+    "require-dev": {
+        "gamez/psr-testlogger": "^3.0",
+        "phpunit/phpunit": "^7.3",
+        "squizlabs/php_codesniffer": "^3.3"
+    },
+    "authors": [
+        {
+            "name": "Roman Varkuta",
+            "email": "roman.varkuta@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Wearesho\\Pvbki\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wearesho\\Pvbki\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "process-timeout": 1800,
+        "sort-packages": true,
+        "platform": {
+            "php": "7.2"
+        }
+    },
+    "scripts": {
+        "lint": "./vendor/bin/phpcs --standard=PSR2 ./src ./tests",
+        "phpcbf": "./vendor/bin/phpcbf --standard=PSR2 ./src ./tests",
+        "test": "./vendor/bin/phpunit"
+    }
+}
