@@ -9,9 +9,16 @@ namespace Wearesho\Pvbki\Identifications;
 interface SubjectIdentificationInterface extends \JsonSerializable
 {
     /**
-     * Must return well formatted subject id
+     * @inheritdoc
      *
      * @return string
      */
     public function jsonSerialize(): string;
+
+    /**
+     * Must return well formatted subject id
+     *
+     * @return string
+     */
+    public function getId(): string;
 }

@@ -8,7 +8,7 @@ use Wearesho\Pvbki\Identifications\Validators\NumberValidator;
  * Class DrfoIdentification
  * @package Wearesho\Pvbki\Identifications
  */
-class DrfoIdentification implements SubjectIdentificationInterface
+class DrfoIdentification extends SubjectIdentification implements SubjectIdentificationInterface
 {
     public const DRFO_NUMBER_LENGTH = 10;
 
@@ -36,7 +36,7 @@ class DrfoIdentification implements SubjectIdentificationInterface
     /**
      * @inheritdoc
      */
-    public function jsonSerialize(): string
+    public function getId(): string
     {
         return $this->number;
     }

@@ -8,7 +8,7 @@ use Carbon\Carbon;
  * Class ComplexIdentification
  * @package Wearesho\Pvbki\Identifications
  */
-class ComplexIdentification implements SubjectIdentificationInterface
+class ComplexIdentification extends SubjectIdentification implements SubjectIdentificationInterface
 {
     /** @var string */
     protected $name;
@@ -26,7 +26,10 @@ class ComplexIdentification implements SubjectIdentificationInterface
         $this->birthDate = $birthDate;
     }
 
-    public function jsonSerialize(): string
+    /**
+     * @inheritdoc
+     */
+    public function getId(): string
     {
         return $this->name
             . $this->surname

@@ -3,13 +3,13 @@
 namespace Wearesho\Pvbki\Identifications;
 
 use Wearesho\Pvbki\Identifications\Validators\NumberValidator;
-use Wearesho\Pvbki\Identifications\Validators\StringValidator;
+use Wearesho\Pvbki\Identifications\Validators\UppercaseStringValidator;
 
 /**
  * Class PassportIdentification
  * @package Wearesho\Pvbki\Identifications
  */
-class PassportIdentification implements SubjectIdentificationInterface
+class PassportIdentification extends SubjectIdentification implements SubjectIdentificationInterface
 {
     public const NUMBER_LENGTH = 6;
     public const SERIES_LENGTH = 2;
@@ -35,17 +35,20 @@ class PassportIdentification implements SubjectIdentificationInterface
             $number,
             'Passport number must be in ' . static::NUMBER_LENGTH . ' digits length'
         );
-        StringValidator::validate(
+        UppercaseStringValidator::validate(
             static::SERIES_LENGTH,
             $series,
-            'Passport series must be in ' . static::SERIES_LENGTH . ' digits length'
+            'Passport series must be in ' . static::SERIES_LENGTH . ' chars length'
         );
 
         $this->series = $series;
         $this->number = $number;
     }
 
-    public function jsonSerialize(): string
+    /**
+     * @inheritdoc
+     */
+    public function getId(): string
     {
         return $this->series . $this->number;
     }

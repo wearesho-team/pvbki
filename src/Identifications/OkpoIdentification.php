@@ -8,7 +8,7 @@ use Wearesho\Pvbki\Identifications\Validators\NumberValidator;
  * Class OkpoIdentification
  * @package Wearesho\Pvbki\Identifications
  */
-class OkpoIdentification implements SubjectIdentificationInterface
+class OkpoIdentification extends SubjectIdentification implements SubjectIdentificationInterface
 {
     public const OKPO_NUMBER_LENGTH = 8;
 
@@ -33,7 +33,10 @@ class OkpoIdentification implements SubjectIdentificationInterface
         $this->number = $number;
     }
 
-    public function jsonSerialize(): string
+    /**
+     * @inheritdoc
+     */
+    public function getId(): string
     {
         return $this->number;
     }

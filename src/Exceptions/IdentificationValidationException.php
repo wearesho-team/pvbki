@@ -12,7 +12,7 @@ class IdentificationValidationException extends \Exception
     protected $identificationArgument;
 
     public function __construct(
-        string $identificationArgument = null,
+        string $identificationArgument,
         string $message = "",
         int $code = 0,
         \Throwable $previous = null
