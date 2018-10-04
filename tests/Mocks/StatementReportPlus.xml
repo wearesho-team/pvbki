@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                 xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+    <soap12:Header>
+        <BackError xmlns="https://service.pvbki.com/reverse">
+            <FaultCode>long</FaultCode>
+            <FaultMessage>string</FaultMessage>
+            <FaultType>string</FaultType>
+        </BackError>
+        <BackError xmlns="https://service.pvbki.com/reverse">
+            <FaultCode>long</FaultCode>
+            <FaultMessage>string</FaultMessage>
+            <FaultType>string</FaultType>
+        </BackError>
+        <InvokeReflection xmlns="https://service.pvbki.com/reverse">
+            <UserAgent>string</UserAgent>
+            <IpAddress>string</IpAddress>
+            <HostName>string</HostName>
+            <RequestType>string</RequestType>
+            <RequestContentType>string</RequestContentType>
+            <RequestUrl>string</RequestUrl>
+            <RequestCP>string</RequestCP>
+            <ContentLength>int</ContentLength>
+            <RequestSize>int</RequestSize>
+            <StreamLength>long</StreamLength>
+            <ExecutionTime>unsignedInt</ExecutionTime>
+            <IsSecureConnection>boolean</IsSecureConnection>
+            <SoapVersion>Default or Soap11 or Soap12</SoapVersion>
+            <ResponseHeaderCP>string</ResponseHeaderCP>
+            <ResponseContentCP>string</ResponseContentCP>
+            <ResponseCharset>string</ResponseCharset>
+            <ResponseStatus>string</ResponseStatus>
+        </InvokeReflection>
+    </soap12:Header>
+    <soap12:Body>
+        <Report-StatementResponse xmlns="https://service.pvbki.com/reverse">
+            <Report-StatementResult>hexBinary</Report-StatementResult>
+        </Report-StatementResponse>
+    </soap12:Body>
+</soap12:Envelope>

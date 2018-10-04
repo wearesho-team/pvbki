@@ -40,7 +40,7 @@ class Service implements ServiceInterface
      *
      * @return RequestResponsePair
      * @throws GuzzleHttp\Exception\GuzzleException
-     * @throws SoapException
+     * @todo: add SoapFault validation
      */
     public function import(Statements\Interfaces\CreditRequestInterface $statement): RequestResponsePair
     {
@@ -57,7 +57,6 @@ class Service implements ServiceInterface
 
         $document = new \DOMDocument('1.0', 'UTF-8');
         $document->loadXML((string)$response->getBody());
-        // $this->validateResponse($document);
 
         return new RequestResponsePair(
             $request,
@@ -74,22 +73,21 @@ class Service implements ServiceInterface
         $root->setAttribute(static::XMLNS . ':xsi', 'http://www.w3.org/2001/XMLSchema-instance');
         $root->setAttribute(static::XMLNS . ':xsd', 'http://www.w3.org/2001/XMLSchema');
         $root->setAttribute(static::XMLNS . ':' . static::SOAP, 'http://www.w3.org/2003/05/soap-envelope');
-        $serviceAttribute = $document->createAttribute(static::XMLNS);
+        $serviceAttributeValue = 'https://service.pvbki.com/reverse';
         $header = $document->createElement(static::SOAP . ':Header');
         $credential = $document->createElement('AuthenticationCredential');
-        $serviceAttribute->value = 'https://service.pvbki.com/reverse';
-        $credential->setAttributeNode($serviceAttribute);
+        $credential->setAttribute(static::XMLNS, $serviceAttributeValue);
         $credential->appendChild($document->createElement('UserName', $this->config->getUsername()));
         $credential->appendChild($document->createElement('Password', $this->config->getPassword()));
         $identity = $document->createElement('AuthenticationIdentity');
-        $identity->setAttributeNode($serviceAttribute);
+        $identity->setAttribute(static::XMLNS, $serviceAttributeValue);
         $identity->appendChild($document->createElement('Name', $this->config->getAccessPoint()));
         $identity->appendChild($document->createElement('Key', $this->config->getKey()));
         $header->appendChild($credential);
         $header->appendChild($identity);
         $body = $document->createElement(static::SOAP . ':Body');
         $report = $document->createElement($type->getValue());
-        $report->setAttributeNode($serviceAttribute);
+        $report->setAttribute(static::XMLNS, $serviceAttributeValue);
         $report->appendChild($document->createElement('forID', $statement->getIdentification()->getId()));
         $body->appendChild($report);
         $root->appendChild($header);
@@ -97,12 +95,5 @@ class Service implements ServiceInterface
         $document->appendChild($root);
 
         return $document->saveXML();
-    }
-
-    protected function validateResponse(\DOMDocument $response): void
-    {
-        foreach ($response->getElementsByTagName('BackError') as $error) {
-            throw new SoapException('type', 'message', 0);
-        }
     }
 }
