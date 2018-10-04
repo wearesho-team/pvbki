@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef1f261d732044f988f1f5bf3c37f4cb",
+    "content-hash": "71d112441969d1bd64bcee8bf206d1fe",
     "packages": [
+        {
+            "name": "gamez/psr-testlogger",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeromegamez/php-psr-testlogger.git",
+                "reference": "fde333889357b6041581a471fa1b005962b1a458"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeromegamez/php-psr-testlogger/zipball/fde333889357b6041581a471fa1b005962b1a458",
+                "reference": "fde333889357b6041581a471fa1b005962b1a458",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "psr/log": "^1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.3",
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gamez\\Psr\\Log\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jérôme Gamez",
+                    "email": "jerome@gamez.name"
+                }
+            ],
+            "description": "PSR-3 compliant test logger for developers who like tests and want to check if their application logs messages as they expect.",
+            "keywords": [
+                "log",
+                "phpunit",
+                "psr",
+                "psr-3",
+                "test",
+                "tests"
+            ],
+            "time": "2017-05-13T15:27:56+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.3",
@@ -606,58 +658,6 @@
                 "instantiate"
             ],
             "time": "2017-07-22T11:58:36+00:00"
-        },
-        {
-            "name": "gamez/psr-testlogger",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeromegamez/php-psr-testlogger.git",
-                "reference": "14656b9bd5c6df39b2a6f85fe2955cf2b8f459e2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jeromegamez/php-psr-testlogger/zipball/14656b9bd5c6df39b2a6f85fe2955cf2b8f459e2",
-                "reference": "14656b9bd5c6df39b2a6f85fe2955cf2b8f459e2",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "psr/log": "^1.0"
-            },
-            "provide": {
-                "psr/log-implementation": "^1.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.12",
-                "phpunit/phpunit": "^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Gamez\\Psr\\Log\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jérôme Gamez",
-                    "email": "jerome@gamez.name"
-                }
-            ],
-            "description": "PSR-3 compliant test logger for developers who like tests and want to check if their application logs messages as they expect.",
-            "keywords": [
-                "log",
-                "phpunit",
-                "psr",
-                "psr-3",
-                "test",
-                "tests"
-            ],
-            "time": "2018-06-11T00:22:48+00:00"
         },
         {
             "name": "myclabs/deep-copy",
