@@ -8,7 +8,7 @@ use Wearesho\Pvbki\Statements\Interfaces\CreditResponseInterface;
  * Class CreditResponse
  * @package Wearesho\Pvbki\Statements
  */
-class CreditResponse extends Statement implements CreditResponseInterface
+class StatementResponse extends Statement implements CreditResponseInterface
 {
     /** @var \DOMDocument */
     protected $body;

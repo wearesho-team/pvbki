@@ -60,7 +60,7 @@ class Service implements ServiceInterface
 
         return new RequestResponsePair(
             $request,
-            new Statements\CreditResponse($document, $statement->getType())
+            new Statements\StatementResponse($document, $statement->getType())
         );
     }
 

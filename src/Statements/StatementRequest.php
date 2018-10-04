@@ -8,7 +8,7 @@ use Wearesho\Pvbki\Identifications\SubjectIdentificationInterface;
  * Class CreditRequest
  * @package Wearesho\Pvbki\Statements
  */
-class CreditRequest extends Statement implements Interfaces\CreditRequestInterface
+class StatementRequest extends Statement implements Interfaces\CreditRequestInterface
 {
     /** @var SubjectIdentificationInterface */
     protected $identification;

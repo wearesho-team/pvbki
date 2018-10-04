@@ -99,7 +99,7 @@ class ServiceTest extends TestCase
         /** @noinspection PhpUnhandledExceptionInspection */
         $identification = new Pvbki\Identifications\OkpoIdentification(static::VALID_OKPO_NUMBER);
         /** @noinspection PhpUnhandledExceptionInspection */
-        $requestResponsePair = $this->fakeService->import(new Pvbki\Statements\CreditRequest(
+        $requestResponsePair = $this->fakeService->import(new Pvbki\Statements\StatementRequest(
             $identification,
             Pvbki\Statements\StatementType::BASE()
         ));
@@ -109,7 +109,7 @@ class ServiceTest extends TestCase
             $requestResponsePair->getRequest()->getBody()->__toString()
         );
         /** @noinspection PhpUnhandledExceptionInspection */
-        $requestResponsePair = $this->fakeService->import(new Pvbki\Statements\CreditRequest(
+        $requestResponsePair = $this->fakeService->import(new Pvbki\Statements\StatementRequest(
             $identification,
             Pvbki\Statements\StatementType::SCORING()
         ));

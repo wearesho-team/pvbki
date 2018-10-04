@@ -9,21 +9,21 @@ use Wearesho\Pvbki\Tests\StatementTestCase;
 /**
  * Class CreditRequestTest
  * @package Wearesho\Pvbki\Tests\Unit\Statements
- * @coversDefaultClass Statements\CreditRequest
+ * @coversDefaultClass Statements\StatementRequest
  * @internal
  */
 class CreditRequestTest extends StatementTestCase
 {
     protected const VALID_OKPO_NUMBER = '12345678';
 
-    /** @var Statements\CreditRequest */
+    /** @var Statements\StatementRequest */
     protected $fakeStatement;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->fakeStatement = new Statements\CreditRequest(
+        $this->fakeStatement = new Statements\StatementRequest(
             new OkpoIdentification(static::VALID_OKPO_NUMBER),
             $this->statementType
         );

@@ -26,7 +26,7 @@ class RequestResponsePairTest extends TestCase
     {
         $this->fakeRequestResponsePair = new RequestResponsePair(
             new Request('POST', 'www.google.com'),
-            new Statements\CreditResponse(new \DOMDocument('1.0', 'utf-8'), Statements\StatementType::BASE())
+            new Statements\StatementResponse(new \DOMDocument('1.0', 'utf-8'), Statements\StatementType::BASE())
         );
     }
 
@@ -41,7 +41,7 @@ class RequestResponsePairTest extends TestCase
     public function testGetResponse(): void
     {
         $this->assertEquals(
-            new Statements\CreditResponse(new \DOMDocument('1.0', 'utf-8'), Statements\StatementType::BASE()),
+            new Statements\StatementResponse(new \DOMDocument('1.0', 'utf-8'), Statements\StatementType::BASE()),
             $this->fakeRequestResponsePair->getResponse()
         );
     }
