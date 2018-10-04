@@ -23,7 +23,6 @@ class StatementTestCase extends TestCase
         $this->statementType = new StatementType(
             array_rand(array_flip([
                 StatementType::BASE,
-                StatementType::EXTEND,
                 StatementType::SCORING,
             ]))
         );

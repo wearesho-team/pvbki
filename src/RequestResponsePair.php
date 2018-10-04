@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki;
 
-use Wearesho\Pvbki\Statements\Interfaces;
+use GuzzleHttp;
+use Wearesho\Pvbki\Statements\Interfaces\CreditResponseInterface;
 
 /**
  * Class RequestResponsePair
@@ -10,32 +11,26 @@ use Wearesho\Pvbki\Statements\Interfaces;
  */
 class RequestResponsePair
 {
-    /** @var Interfaces\CreditRequestInterface */
+    /** @var GuzzleHttp\Psr7\Request */
     protected $request;
 
-    /** @var Interfaces\CreditResponseInterface */
+    /** @var CreditResponseInterface */
     protected $response;
 
-    /**
-     * RequestResponsePair constructor.
-     *
-     * @param Interfaces\CreditRequestInterface  $request
-     * @param Interfaces\CreditResponseInterface $response
-     */
     public function __construct(
-        Interfaces\CreditRequestInterface $request,
-        Interfaces\CreditResponseInterface $response
+        GuzzleHttp\Psr7\Request $request,
+        CreditResponseInterface $response
     ) {
         $this->request = $request;
         $this->response = $response;
     }
 
-    public function getRequest(): Interfaces\CreditRequestInterface
+    public function getRequest(): GuzzleHttp\Psr7\Request
     {
         return $this->request;
     }
 
-    public function getResponse(): Interfaces\CreditResponseInterface
+    public function getResponse(): CreditResponseInterface
     {
         return $this->response;
     }

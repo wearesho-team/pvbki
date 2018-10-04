@@ -10,17 +10,17 @@ use Wearesho\Pvbki\Statements\Interfaces\CreditResponseInterface;
  */
 class CreditResponse extends Statement implements CreditResponseInterface
 {
-    /** @var string */
+    /** @var \DOMDocument */
     protected $body;
 
-    public function __construct(string $body, StatementType $type)
+    public function __construct(\DOMDocument $body, StatementType $type)
     {
         $this->body = $body;
 
         parent::__construct($type);
     }
 
-    public function getBody(): string
+    public function getBody(): \DOMDocument
     {
         return $this->body;
     }

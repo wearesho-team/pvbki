@@ -4,15 +4,18 @@ namespace Wearesho\Pvbki;
 
 use GuzzleHttp;
 use Psr\Log;
-use Wearesho\Pvbki\Statements\Interfaces\CreditRequestInterface;
-use Wearesho\Pvbki\Statements\StatementType;
+use Wearesho\Pvbki\Exceptions\SoapException;
+use Wearesho\Pvbki\Statements;
 
 /**
  * Class Service
  * @package Wearesho\Pvbki
  */
-class Service
+class Service implements ServiceInterface
 {
+    protected const SOAP = 'soap12';
+    protected const XMLNS = 'xmlns';
+
     /** @var ConfigInterface */
     protected $config;
 
@@ -32,15 +35,74 @@ class Service
         $this->logger = $logger ?? new Log\NullLogger();
     }
 
-    public function import(CreditRequestInterface $statementRequest): RequestResponsePair
+    /**
+     * @param Statements\Interfaces\CreditRequestInterface $statement
+     *
+     * @return RequestResponsePair
+     * @throws GuzzleHttp\Exception\GuzzleException
+     * @throws SoapException
+     */
+    public function import(Statements\Interfaces\CreditRequestInterface $statement): RequestResponsePair
     {
-        switch ($statementRequest->getType()->getValue()) {
-            case StatementType::BASE:
-                break;
-            case StatementType::EXTEND:
-                break;
-            case StatementType::SCORING:
-                break;
+        $request = new GuzzleHttp\Psr7\Request(
+            'POST',
+            $this->config->getUrl(),
+            [
+                'Content-Type' => 'application/soap+xml; charset=utf-8'
+            ],
+            $this->formBody($statement)
+        );
+
+        $response = $this->client->send($request);
+
+        $document = new \DOMDocument('1.0', 'UTF-8');
+        $document->loadXML((string)$response->getBody());
+        // $this->validateResponse($document);
+
+        return new RequestResponsePair(
+            $request,
+            new Statements\CreditResponse($document, $statement->getType())
+        );
+    }
+
+    protected function formBody(Statements\Interfaces\CreditRequestInterface $statement): string
+    {
+        $type = $statement->getType();
+        $document = new \DOMDocument('1.0', 'UTF-8');
+
+        $root = $document->createElement(static::SOAP . ':Envelope');
+        $root->setAttribute(static::XMLNS . ':xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        $root->setAttribute(static::XMLNS . ':xsd', 'http://www.w3.org/2001/XMLSchema');
+        $root->setAttribute(static::XMLNS . ':' . static::SOAP, 'http://www.w3.org/2003/05/soap-envelope');
+        $serviceAttribute = $document->createAttribute(static::XMLNS);
+        $header = $document->createElement(static::SOAP . ':Header');
+        $credential = $document->createElement('AuthenticationCredential');
+        $serviceAttribute->value = 'https://service.pvbki.com/reverse';
+        $credential->setAttributeNode($serviceAttribute);
+        $credential->appendChild($document->createElement('UserName', $this->config->getUsername()));
+        $credential->appendChild($document->createElement('Password', $this->config->getPassword()));
+        $identity = $document->createElement('AuthenticationIdentity');
+        $identity->setAttributeNode($serviceAttribute);
+        $identity->appendChild($document->createElement('Name', $this->config->getAccessPoint()));
+        $identity->appendChild($document->createElement('Key', $this->config->getKey()));
+        $header->appendChild($credential);
+        $header->appendChild($identity);
+        $body = $document->createElement(static::SOAP . ':Body');
+        $report = $document->createElement($type->getValue());
+        $report->setAttributeNode($serviceAttribute);
+        $report->appendChild($document->createElement('forID', $statement->getIdentification()->getId()));
+        $body->appendChild($report);
+        $root->appendChild($header);
+        $root->appendChild($body);
+        $document->appendChild($root);
+
+        return $document->saveXML();
+    }
+
+    protected function validateResponse(\DOMDocument $response): void
+    {
+        foreach ($response->getElementsByTagName('BackError') as $error) {
+            throw new SoapException('type', 'message', 0);
         }
     }
 }

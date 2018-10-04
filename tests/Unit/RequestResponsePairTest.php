@@ -2,6 +2,7 @@
 
 namespace Wearesho\Pvbki\Tests\Unit;
 
+use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 use Wearesho\Pvbki\Identifications\DrfoIdentification;
 use Wearesho\Pvbki\RequestResponsePair;
@@ -24,21 +25,15 @@ class RequestResponsePairTest extends TestCase
     protected function setUp(): void
     {
         $this->fakeRequestResponsePair = new RequestResponsePair(
-            new Statements\CreditRequest(
-                new DrfoIdentification(static::VALID_DRFO_NUMBER),
-                Statements\StatementType::BASE()
-            ),
-            new Statements\CreditResponse(static::BODY, Statements\StatementType::BASE())
+            new Request('POST', 'www.google.com'),
+            new Statements\CreditResponse(new \DOMDocument('1.0', 'utf-8'), Statements\StatementType::BASE())
         );
     }
 
     public function testGetRequest(): void
     {
         $this->assertEquals(
-            new Statements\CreditRequest(
-                new DrfoIdentification(static::VALID_DRFO_NUMBER),
-                Statements\StatementType::BASE()
-            ),
+            new Request('POST', 'www.google.com'),
             $this->fakeRequestResponsePair->getRequest()
         );
     }
@@ -46,7 +41,7 @@ class RequestResponsePairTest extends TestCase
     public function testGetResponse(): void
     {
         $this->assertEquals(
-            new Statements\CreditResponse(static::BODY, Statements\StatementType::BASE()),
+            new Statements\CreditResponse(new \DOMDocument('1.0', 'utf-8'), Statements\StatementType::BASE()),
             $this->fakeRequestResponsePair->getResponse()
         );
     }

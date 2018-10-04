@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki;
 
 use Horat1us\Environment;
+use Wearesho\Pvbki\Exceptions\InvalidModeException;
 
 /**
  * Class EnvironmentConfig
@@ -34,8 +35,43 @@ class EnvironmentConfig extends Environment\Config implements ConfigInterface
     /**
      * @inheritdoc
      */
+    public function getAccessPoint(): string
+    {
+        return $this->getEnv('ACCESS_POINT');
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getKey(): string
     {
         return $this->getEnv('KEY');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUrl(): string
+    {
+        return $this->getEnv('URL', function (): string {
+            $mode = $this->getMode();
+
+            switch ($mode) {
+                case ConfigInterface::TEST_MODE:
+                    return ConfigInterface::TEST_URL;
+                case ConfigInterface::PRODUCTION_MODE:
+                    return ConfigInterface::PRODUCTION_URL;
+                default:
+                    throw new InvalidModeException($mode);
+            }
+        });
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getMode(): int
+    {
+        return $this->getEnv('MODE', ConfigInterface::PRODUCTION_MODE);
     }
 }

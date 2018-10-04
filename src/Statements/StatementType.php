@@ -9,12 +9,10 @@ use MyCLabs\Enum\Enum;
  * @package Wearesho\Pvbki\Statements
  *
  * @method static StatementType BASE()
- * @method static StatementType EXTEND()
  * @method static StatementType SCORING()
  */
 final class StatementType extends Enum
 {
-    public const BASE = 0;
-    public const EXTEND = 1;
-    public const SCORING = 2;
+    public const BASE = 'Report-Statement';
+    public const SCORING = 'Report-StatementPlus';
 }

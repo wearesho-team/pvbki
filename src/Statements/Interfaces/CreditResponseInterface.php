@@ -8,5 +8,5 @@ namespace Wearesho\Pvbki\Statements\Interfaces;
  */
 interface CreditResponseInterface extends StatementInterface
 {
-    public function getBody(): string;
+    public function getBody(): \DOMDocument;
 }
