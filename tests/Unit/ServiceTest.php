@@ -4,22 +4,19 @@ namespace Wearesho\Pvbki\Tests\Unit;
 
 use GuzzleHttp;
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Config;
-use Wearesho\Pvbki\Identifications\OkpoIdentification;
-use Wearesho\Pvbki\Service;
-use Wearesho\Pvbki\Statements;
+use Wearesho\Pvbki;
 
 /**
  * Class ServiceTest
  * @package Wearesho\Pvbki\Tests\Unit
- * @coversDefaultClass Service
+ * @coversDefaultClass \Wearesho\Pvbki\Service
  * @internal
  */
 class ServiceTest extends TestCase
 {
     protected const VALID_OKPO_NUMBER = '12345678';
 
-    /** @var Service */
+    /** @var Pvbki\Service */
     protected $fakeService;
 
     /** @var GuzzleHttp\Handler\MockHandler */
@@ -35,8 +32,9 @@ class ServiceTest extends TestCase
         $stack = GuzzleHttp\HandlerStack::create($this->mock);
         $stack->push(GuzzleHttp\Middleware::history($this->container));
 
-        $this->fakeService = new Service(
-            new Config('username', 'password', 'access-point', 'key'),
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $this->fakeService = new Pvbki\Service(
+            new Pvbki\Config('username', 'password', 'access-point', 'key'),
             new GuzzleHttp\Client(['handler' => $stack])
         );
     }
@@ -98,18 +96,22 @@ class ServiceTest extends TestCase
             )
         );
 
-        $requestResponsePair = $this->fakeService->import(new Statements\CreditRequest(
-            new OkpoIdentification(static::VALID_OKPO_NUMBER),
-            Statements\StatementType::BASE()
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $identification = new Pvbki\Identifications\OkpoIdentification(static::VALID_OKPO_NUMBER);
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $requestResponsePair = $this->fakeService->import(new Pvbki\Statements\CreditRequest(
+            $identification,
+            Pvbki\Statements\StatementType::BASE()
         ));
         $this->assertNotEmpty($requestResponsePair->getResponse()->getBody()->saveXML());
         $this->assertXmlStringEqualsXmlString(
             $expectStatementBody,
             $requestResponsePair->getRequest()->getBody()->__toString()
         );
-        $requestResponsePair = $this->fakeService->import(new Statements\CreditRequest(
-            new OkpoIdentification(static::VALID_OKPO_NUMBER),
-            Statements\StatementType::SCORING()
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $requestResponsePair = $this->fakeService->import(new Pvbki\Statements\CreditRequest(
+            $identification,
+            Pvbki\Statements\StatementType::SCORING()
         ));
         $this->assertNotEmpty($requestResponsePair->getResponse()->getBody()->saveXML());
         $this->assertXmlStringEqualsXmlString(
