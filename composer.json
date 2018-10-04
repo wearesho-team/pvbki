@@ -5,9 +5,9 @@
     "require": {
         "php": "7.2",
         "guzzlehttp/guzzle": "^6.3",
-        "myclabs/php-enum": "^1.6",
         "horat1us/environment-config": "^1.2",
-        "nesbot/carbon": "^2.3",
+        "myclabs/php-enum": "^1.6",
+        "nesbot/carbon": "^1.33",
         "psr/log": "^1.0"
     },
     "require-dev": {
