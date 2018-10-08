@@ -44,13 +44,15 @@ class Service implements ServiceInterface
      */
     public function import(Statements\Interfaces\CreditRequestInterface $statement): RequestResponsePair
     {
+        $body = $this->formBody($statement);
         $request = new GuzzleHttp\Psr7\Request(
             'POST',
             $this->config->getUrl(),
             [
-                'Content-Type' => 'application/soap+xml; charset=utf-8'
+                'Content-Type' => 'application/soap+xml; charset=utf-8',
+                'Content-Length' => strlen($body)
             ],
-            $this->formBody($statement)
+            $body
         );
 
         $response = $this->client->send($request);
@@ -95,5 +97,10 @@ class Service implements ServiceInterface
         $document->appendChild($root);
 
         return $document->saveXML();
+    }
+
+    public function getConfig(): ConfigInterface
+    {
+        return $this->config;
     }
 }
