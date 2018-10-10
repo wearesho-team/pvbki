@@ -1,0 +1,76 @@
+<?php
+
+namespace Wearesho\Pvbki;
+
+/**
+ * Class BaseCollection
+ * @package Wearesho\Pvbki
+ */
+abstract class BaseCollection extends \ArrayObject implements \JsonSerializable
+{
+    /**
+     * @param array  $elements
+     * @param int    $flags
+     * @param string $iteratorClass
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(
+        array $elements = [],
+        int $flags = 0,
+        string $iteratorClass = \ArrayIterator::class
+    ) {
+        foreach ($elements as $element) {
+            $this->instanceOfType($element);
+        }
+
+        parent::__construct($elements, $flags, $iteratorClass);
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function append($value): void
+    {
+        $this->instanceOfType($value);
+
+        parent::append($value);
+    }
+
+    /**
+     * @param mixed $index
+     * @param mixed $value
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function offsetSet($index, $value): void
+    {
+        $this->instanceOfType($value);
+
+        parent::offsetSet($index, $value);
+    }
+
+    public function jsonSerialize(): array
+    {
+        return (array)$this;
+    }
+
+    abstract public function type(): string;
+
+    /**
+     * @param object $object
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function instanceOfType(object $object): void
+    {
+        $needType = $this->type();
+        $objectType = get_class($object);
+
+        if (!$object instanceof $needType) {
+            throw new \InvalidArgumentException("Element {$objectType} must be instance of " . $needType);
+        }
+    }
+}

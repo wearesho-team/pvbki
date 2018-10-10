@@ -10,6 +10,9 @@ use Wearesho\Pvbki\Statements\Interfaces\StatementInterface;
  */
 abstract class Statement implements StatementInterface
 {
+    public const ROOT = 'Statement';
+    public const SUBJECT = 'Subject';
+
     /** @var StatementType */
     protected $type;
 
