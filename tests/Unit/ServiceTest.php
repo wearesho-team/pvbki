@@ -103,20 +103,28 @@ class ServiceTest extends TestCase
             $identification,
             Pvbki\Statements\StatementType::BASE()
         ));
-        $this->assertNotEmpty($requestResponsePair->getResponse()->getBody()->saveXML());
+        $this->assertNotEmpty($requestResponsePair->getResponse());
         $this->assertXmlStringEqualsXmlString(
             $expectStatementBody,
-            $requestResponsePair->getRequest()->getBody()->__toString()
+            $requestResponsePair->getRequest()
         );
         /** @noinspection PhpUnhandledExceptionInspection */
         $requestResponsePair = $this->fakeService->import(new Pvbki\Statements\StatementRequest(
             $identification,
             Pvbki\Statements\StatementType::SCORING()
         ));
-        $this->assertNotEmpty($requestResponsePair->getResponse()->getBody()->saveXML());
+        $this->assertNotEmpty($requestResponsePair->getResponse());
         $this->assertXmlStringEqualsXmlString(
             $expectStatementPlusBody,
-            $requestResponsePair->getRequest()->getBody()->__toString()
+            $requestResponsePair->getRequest()
+        );
+    }
+
+    public function testGetConfig(): void
+    {
+        $this->assertEquals(
+            new Pvbki\Config('username', 'password', 'access-point', 'key'),
+            $this->fakeService->getConfig()
         );
     }
 }

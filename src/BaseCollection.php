@@ -8,6 +8,8 @@ namespace Wearesho\Pvbki;
  */
 abstract class BaseCollection extends \ArrayObject implements \JsonSerializable
 {
+    public const ROOT = null;
+
     /**
      * @param array  $elements
      * @param int    $flags
@@ -30,13 +32,16 @@ abstract class BaseCollection extends \ArrayObject implements \JsonSerializable
     /**
      * @param mixed $value
      *
+     * @return BaseCollection|static
      * @throws \InvalidArgumentException
      */
-    public function append($value): void
+    public function append($value): BaseCollection
     {
         $this->instanceOfType($value);
 
         parent::append($value);
+
+        return $this;
     }
 
     /**
@@ -57,6 +62,12 @@ abstract class BaseCollection extends \ArrayObject implements \JsonSerializable
         return (array)$this;
     }
 
+    /**
+     * Override to customize type of your collection.
+     * Must return existed class name
+     *
+     * @return string
+     */
     abstract public function type(): string;
 
     /**

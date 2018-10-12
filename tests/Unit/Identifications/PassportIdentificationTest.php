@@ -28,7 +28,7 @@ class PassportIdentificationTest extends IdentificationTestCase
 
     protected function expectedId(): string
     {
-        return 'АК123456';
+        return static::SERIES . static::NUMBER;
     }
 
     /**

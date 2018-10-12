@@ -14,6 +14,12 @@ abstract class Statement implements StatementInterface
     public const ERROR = 'BackError';
     public const ROOT = 'Statement';
     public const SUBJECT = 'Subject';
+    public const IDENTIFICATION = 'Identification';
+    public const COMMUNICATION = 'Communication';
+    public const ADDRESS = 'Address';
+    public const DEPENDANT = 'Dependant';
+
+    public const SCORING = 'Scoring';
 
     /** @var StatementType */
     protected $type;

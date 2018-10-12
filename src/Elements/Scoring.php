@@ -2,12 +2,20 @@
 
 namespace Wearesho\Pvbki\Elements;
 
+use Wearesho\Pvbki\ElementInterface;
+use Wearesho\Pvbki\ParameterType;
+
 /**
  * Class Scoring
  * @package Wearesho\Pvbki\Elements
  */
-class Scoring implements \JsonSerializable
+class Scoring implements ElementInterface
 {
+    public const DEGREE = 'Degree';
+    public const SCORE = 'Score';
+    public const FAULT_CHANCE = 'FaultChance';
+    public const ADVERSE = 'Adverse';
+
     /** @var string|null */
     protected $degree;
 
@@ -39,6 +47,16 @@ class Scoring implements \JsonSerializable
             'score' => $this->score,
             'faultChance' => $this->faultChance,
             'adverse' => $this->adverse,
+        ];
+    }
+
+    public static function parameters(): array
+    {
+        return [
+            static::DEGREE => ParameterType::STRING,
+            static::SCORE => ParameterType::INTEGER,
+            static::FAULT_CHANCE => ParameterType::FLOAT,
+            static::ADVERSE => ParameterType::STRING,
         ];
     }
 

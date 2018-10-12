@@ -59,10 +59,11 @@ class Service implements ServiceInterface
 
         $document = new \DOMDocument('1.0', 'UTF-8');
         $document->loadXML((string)$response->getBody());
+        $responseStatement = new Statements\StatementResponse($document, $statement->getType());
 
         return new RequestResponsePair(
-            $request,
-            new Statements\StatementResponse($document, $statement->getType())
+            $request->getBody()->__toString(),
+            $responseStatement->getBody()->saveXML()
         );
     }
 

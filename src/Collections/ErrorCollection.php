@@ -1,13 +1,13 @@
 <?php
 
-namespace Wearesho\Pvbki\Colelctions;
+namespace Wearesho\Pvbki\Collections;
 
 use Wearesho\Pvbki\BaseCollection;
 use Wearesho\Pvbki\Elements\Error;
 
 /**
  * Class ErrorCollection
- * @package Wearesho\Pvbki\Colelctions
+ * @package Wearesho\Pvbki\Collections
  */
 class ErrorCollection extends BaseCollection
 {

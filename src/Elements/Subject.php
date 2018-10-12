@@ -114,6 +114,9 @@ class Subject implements ElementInterface
     protected $birthPlaceEn;
 
     /** @var int|null */
+    protected $residency;
+
+    /** @var int|null */
     protected $citizenShip;
 
     /** @var int|null */
@@ -180,6 +183,7 @@ class Subject implements ElementInterface
         ?string $birthPlaceUa,
         ?string $birthPlaceRu,
         ?string $birthPlaceEn,
+        ?int $residency,
         ?int $citizenShip,
         ?int $negativeStatus,
         ?int $education,
@@ -217,6 +221,7 @@ class Subject implements ElementInterface
         $this->birthPlaceUa = $birthPlaceUa;
         $this->birthPlaceRu = $birthPlaceRu;
         $this->birthPlaceEn = $birthPlaceEn;
+        $this->residency = $residency;
         $this->citizenShip = $citizenShip;
         $this->negativeStatus = $negativeStatus;
         $this->education = $education;
@@ -234,31 +239,60 @@ class Subject implements ElementInterface
         $this->employeeCount = $employeeCount;
     }
 
-    // todo: add all parameters
     public function jsonSerialize(): array
     {
         return [
             'id' => $this->requestId,
-            'lastUpdate' => $this->lastUpdate !== null ? Carbon::instance($this->lastUpdate)->toDateTimeString() : null,
+            'lastUpdate' => Carbon::make($this->lastUpdate),
             'entity' => $this->entity,
             'gender' => $this->gender,
             'surname' => [
                 'ua' => $this->surnameUa,
                 'ru' => $this->surnameRu,
+                'en' => $this->surnameEn,
             ],
             'name' => [
                 'ua' => $this->nameUa,
                 'ru' => $this->nameRu,
+                'en' => $this->nameEn,
             ],
             'patronymic' => [
                 'ua' => $this->patronymicUa,
                 'ru' => $this->patronymicRu,
+                'en' => $this->patronymicEn,
             ],
             'classification' => $this->classification,
-            'birthDate' => $this->birthDate !== null ? Carbon::instance($this->birthDate)->toDateString() : null,
+            'birthSurname' => [
+                'ua' => $this->birthSurnameUa,
+                'ru' => $this->birthSurnameRu,
+                'en' => $this->birthSurnameEn,
+            ],
+            'birthDate' => $date = Carbon::make($this->birthDate),
+            'birthPlace' => [
+                'ua' => $this->birthPlaceUa,
+                'ru' => $this->birthPlaceRu,
+                'en' => $this->birthPlaceEn,
+            ],
+            'residency' => $this->residency,
             'citizenShip' => $this->citizenShip,
             'negativeStatus' => $this->negativeStatus,
             'education' => $this->education,
+            'maritalStatus' => $this->maritalStatus,
+            'statusId' => $this->statusId,
+            'fullName' => [
+                'ua' => $this->fullNameUa,
+                'ru' => $this->fullNameRu,
+                'en' => $this->fullNameEn,
+            ],
+            'abbreviationName' => [
+                'ua' => $this->abbreviationUa,
+                'ru' => $this->abbreviationRu,
+                'en' => $this->abbreviationEn,
+            ],
+            'ownership' => $this->ownership,
+            'registrationDate' => Carbon::make($this->registrationDate),
+            'economicActivity' => $this->economicActivity,
+            'employeeCount' => $this->employeeCount,
         ];
     }
 
@@ -408,6 +442,11 @@ class Subject implements ElementInterface
     public function getBirthPlaceEn(): ?string
     {
         return $this->birthPlaceEn;
+    }
+
+    public function getResidency(): ?int
+    {
+        return $this->residency;
     }
 
     public function getCitizenShip(): ?int
