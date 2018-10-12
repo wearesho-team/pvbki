@@ -2,9 +2,9 @@
 
 namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
-use Wearesho\Pvbki\Elements\Summary;
-
 use PHPUnit\Framework\TestCase;
+use Wearesho\Pvbki\Elements\Summary;
+use Wearesho\Pvbki\ParameterType;
 
 /**
  * Class SummaryTest
@@ -14,41 +14,76 @@ use PHPUnit\Framework\TestCase;
  */
 class SummaryTest extends TestCase
 {
+    protected const CATEGORY = 'category';
+    protected const VALUE = 1;
+    protected const CODE = 'code';
+    protected const COUNT = 123;
+    protected const AMOUNT = 123.45;
+
     /** @var Summary */
     protected $fakeSummary;
 
     protected function setUp(): void
     {
-        $this->fakeSummary = new Summary();
-    }
-
-    public function testGetCategory(): void
-    {
-
-    }
-
-    public function testGetCode(): void
-    {
-
-    }
-
-    public function testGetCount(): void
-    {
-
+        $this->fakeSummary = new Summary(
+            static::CATEGORY,
+            static::VALUE,
+            static::CODE,
+            static::COUNT,
+            static::AMOUNT
+        );
     }
 
     public function testJsonSerialize(): void
     {
+        $this->assertArraySubset(
+            [
+                'category' => static::CATEGORY,
+                'value' => static::VALUE,
+                'code' => static::CODE,
+                'count' => static::COUNT,
+                'amount' => static::AMOUNT,
+            ],
+            $this->fakeSummary->jsonSerialize()
+        );
+    }
 
+    public function testParameters(): void
+    {
+        $this->assertArraySubset(
+            [
+                Summary::CATEGORY => ParameterType::STRING,
+                Summary::VALUE => ParameterType::INTEGER,
+                Summary::CODE => ParameterType::STRING,
+                Summary::COUNT => ParameterType::INTEGER,
+                Summary::AMOUNT => ParameterType::DOUBLE
+            ],
+            Summary::parameters()
+        );
+    }
+
+    public function testGetCategory(): void
+    {
+        $this->assertEquals(static::CATEGORY, $this->fakeSummary->getCategory());
+    }
+
+    public function testGetCode(): void
+    {
+        $this->assertEquals(static::CODE, $this->fakeSummary->getCode());
+    }
+
+    public function testGetCount(): void
+    {
+        $this->assertEquals(static::COUNT, $this->fakeSummary->getCount());
     }
 
     public function testGetValue(): void
     {
-
+        $this->assertEquals(static::VALUE, $this->fakeSummary->getValue());
     }
 
     public function testGetAmount(): void
     {
-
+        $this->assertEquals(static::AMOUNT, $this->fakeSummary->getAmount());
     }
 }

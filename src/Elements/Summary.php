@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki\Elements;
 
 use Wearesho\Pvbki\ElementInterface;
+use Wearesho\Pvbki\ParameterType;
 
 /**
  * Class Summary
@@ -10,11 +11,11 @@ use Wearesho\Pvbki\ElementInterface;
  */
 class Summary implements ElementInterface
 {
-    protected const CATEGORY = 'category';
-    protected const VALUE = 'value';
-    protected const CODE = 'code';
-    protected const COUNT = 'count';
-    protected const AMOUNT = 'amount';
+    public const CATEGORY = 'category';
+    public const VALUE = 'value';
+    public const CODE = 'code';
+    public const COUNT = 'count';
+    public const AMOUNT = 'amount';
 
     /** @var string|null */
     protected $category;
@@ -31,15 +32,6 @@ class Summary implements ElementInterface
     /** @var double|null */
     protected $amount;
 
-    /**
-     * Summary constructor.
-     *
-     * @param null|string $category
-     * @param int|null    $value
-     * @param null|string $code
-     * @param int|null    $count
-     * @param float|null  $amount
-     */
     public function __construct(?string $category, ?int $value, ?string $code, ?int $count, ?float $amount)
     {
         $this->category = $category;
@@ -57,6 +49,17 @@ class Summary implements ElementInterface
             'code' => $this->code,
             'count' => $this->count,
             'amount' => $this->amount,
+        ];
+    }
+
+    public static function parameters(): array
+    {
+        return [
+            static::CATEGORY => ParameterType::STRING,
+            static::VALUE => ParameterType::INTEGER,
+            static::CODE => ParameterType::STRING,
+            static::COUNT => ParameterType::INTEGER,
+            static::AMOUNT => ParameterType::DOUBLE
         ];
     }
 
