@@ -2,6 +2,7 @@
 
 namespace Wearesho\Pvbki\Elements;
 
+use Wearesho\Pvbki\Colelctions\ErrorCollection;
 use Wearesho\Pvbki\Colelctions\SubjectCollection;
 
 /**
@@ -10,6 +11,9 @@ use Wearesho\Pvbki\Colelctions\SubjectCollection;
  */
 class Report implements \JsonSerializable
 {
+    /** @var ErrorCollection|null */
+    protected $errors;
+
     /** @var SubjectCollection|null */
     protected $subjects;
 
@@ -17,6 +21,7 @@ class Report implements \JsonSerializable
     protected $scoring;
 
     public function __construct(
+        ErrorCollection $errors = null,
         SubjectCollection $subjects = null,
         Scoring $scoring = null
     ) {
@@ -26,10 +31,21 @@ class Report implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
+        if (!empty($this->errors)) {
+            return [
+                'errors' => [$this->errors->jsonSerialize(),],
+            ];
+        }
+
         return [
             'subjects' => $this->subjects->jsonSerialize(),
             'scoring' => $this->scoring->jsonSerialize(),
         ];
+    }
+
+    public function getErrors(): ?ErrorCollection
+    {
+        return $this->errors;
     }
 
     public function getSubjects(): ?SubjectCollection

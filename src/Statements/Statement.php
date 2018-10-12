@@ -10,6 +10,8 @@ use Wearesho\Pvbki\Statements\Interfaces\StatementInterface;
  */
 abstract class Statement implements StatementInterface
 {
+    public const HEADER = 'soap12:Header';
+    public const ERROR = 'BackError';
     public const ROOT = 'Statement';
     public const SUBJECT = 'Subject';
 

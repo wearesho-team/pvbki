@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki;
 
 use Carbon\Carbon;
+use Wearesho\Pvbki\Colelctions\ErrorCollection;
 use Wearesho\Pvbki\Colelctions\SubjectCollection;
 use Wearesho\Pvbki\Elements;
 use Wearesho\Pvbki\Exceptions\InvalidXmlFormatException;
@@ -23,26 +24,39 @@ class Parser
     public function parse(string $plainXml): Elements\Report
     {
         $document = new \DOMDocument('1.0', 'utf-8');
+        $document->loadXML($plainXml);
 
+        // todo: can be incorrect
         if (!$document->schemaValidate(__DIR__ . '../data/schemas/StatementPlusSchema.xsd')
             || !$document->schemaValidate(__DIR__ . '../data/schemas/StatementSchema.xsd')) {
             throw new InvalidXmlFormatException($plainXml);
         }
 
-        $subjectCollection = new SubjectCollection();
+        $errors = new ErrorCollection();
 
-        // todo: The document may not contain a report due to the error described in the block document above.
+        foreach ($document->getElementsByTagName(Statement::ERROR) as $error) {
+            $errors->append(new Elements\Error(
+                ...$this->fetchParameters(simplexml_import_dom($error), Elements\Error::parameters())
+            ));
+        }
+
+        if (!empty($errors)) {
+            return new Elements\Report($errors);
+        }
+
+        $subjectCollection = new SubjectCollection();
         $document = simplexml_import_dom($document->getElementsByTagName('Statement')->item(0));
 
         foreach ($document->{Statement::SUBJECT} as $subject) {
-            $subjectCollection->append(new Elements\Subject(...$this->getContext(
-                $subject,
-                Elements\Subject::parameters()
-            )));
+            $subjectCollection->append(new Elements\Subject(
+                ...$this->fetchParameters($subject, Elements\Subject::parameters())
+            ));
         }
+
+        return new Elements\Report($subjectCollection);
     }
 
-    private function getContext(\SimpleXMLElement $element, array $params): array
+    private function fetchParameters(\SimpleXMLElement $element, array $params): array
     {
         $contexts = [];
 
