@@ -4,6 +4,7 @@ namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use PHPUnit\Framework\TestCase;
 use Wearesho\Pvbki\Elements\Address;
+use Wearesho\Pvbki\Elements\Translator;
 use Wearesho\Pvbki\ParameterType;
 
 /**
@@ -26,14 +27,16 @@ class AddressTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fakeAddress = new Address(
-            static::TYPE_ID,
-            static::LOCATION_ID,
-            static::STREET_UA,
-            static::STREET_RU,
-            static::STREET_EN,
-            static::POSTAL_CODE
-        );
+        $this->fakeAddress = new Address([
+            Address::TYPE_ID => static::TYPE_ID,
+            Address::LOCATION_ID => static::LOCATION_ID,
+            Address::STREET => new Translator([
+                Translator::UA => static::STREET_UA,
+                Translator::RU => static::STREET_RU,
+                Translator::EN => static::STREET_EN
+            ]),
+            Address::POSTAL_CODE => static::POSTAL_CODE
+        ]);
     }
 
     public function testJsonSerialize(): void
@@ -42,11 +45,11 @@ class AddressTest extends TestCase
             [
                 'typeId' => static::TYPE_ID,
                 'locationId' => static::LOCATION_ID,
-                'street' => [
-                    'ua' => static::STREET_UA,
-                    'ru' => static::STREET_RU,
-                    'en' => static::STREET_EN,
-                ],
+                'street' => new Translator([
+                    Translator::UA => static::STREET_UA,
+                    Translator::RU => static::STREET_RU,
+                    Translator::EN => static::STREET_EN
+                ]),
                 'postalCode' => static::POSTAL_CODE,
             ],
             $this->fakeAddress->jsonSerialize()
@@ -59,12 +62,24 @@ class AddressTest extends TestCase
             [
                 Address::TYPE_ID => ParameterType::INTEGER,
                 Address::LOCATION_ID => ParameterType::INTEGER,
-                Address::STREET_UA => ParameterType::STRING,
-                Address::STREET_RU => ParameterType::STRING,
-                Address::STREET_EN => ParameterType::STRING,
+                Address::STREET => Translator::class,
                 Address::POSTAL_CODE => ParameterType::STRING,
             ],
             Address::parameters()
+        );
+    }
+
+    public function testTranslators(): void
+    {
+        $this->assertArraySubset(
+            [
+                Address::STREET => [
+                    Address::STREET_UA,
+                    Address::STREET_RU,
+                    Address::STREET_EN,
+                ],
+            ],
+            Address::translators()
         );
     }
 
@@ -80,12 +95,12 @@ class AddressTest extends TestCase
 
     public function testGetStreetEn(): void
     {
-        $this->assertEquals(static::STREET_EN, $this->fakeAddress->getStreetEn());
+        $this->assertEquals(static::STREET_EN, $this->fakeAddress->getStreet()->getEn());
     }
 
     public function testGetStreetRu(): void
     {
-        $this->assertEquals(static::STREET_RU, $this->fakeAddress->getStreetRu());
+        $this->assertEquals(static::STREET_RU, $this->fakeAddress->getStreet()->getRu());
     }
 
     public function testGetTypeId(): void
@@ -95,6 +110,6 @@ class AddressTest extends TestCase
 
     public function testGetStreetUa(): void
     {
-        $this->assertEquals(static::STREET_UA, $this->fakeAddress->getStreetUa());
+        $this->assertEquals(static::STREET_UA, $this->fakeAddress->getStreet()->getUa());
     }
 }

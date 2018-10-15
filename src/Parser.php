@@ -128,6 +128,10 @@ class Parser
                     $contexts[] = Carbon::parse($value);
 
                     break;
+                case Elements\Translator::class:
+                    $contexts[] = new Elements\Translator($this->fetchParameters($element, Elements\Address::translators()));
+
+                    break;
                 default:
                     $contexts[] = $value;
             }

@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki\Tests\Unit;
 
 use Wearesho\Pvbki\Config;
+use Wearesho\Pvbki\Elements\Record;
 use Wearesho\Pvbki\Tests\ConfigTestCase;
 
 /**

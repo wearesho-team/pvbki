@@ -2,17 +2,18 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\ElementInterface;
+use Wearesho\Pvbki\Element;
 use Wearesho\Pvbki\ParameterType;
 
 /**
  * Class Address
  * @package Wearesho\Pvbki\Elements
  */
-class Address implements ElementInterface
+class Address extends Element
 {
     public const TYPE_ID = 'typeId';
     public const LOCATION_ID = 'locationId';
+    public const STREET = 'street';
     public const STREET_UA = 'streetUA';
     public const STREET_RU = 'streetRU';
     public const STREET_EN = 'streetEN';
@@ -23,6 +24,9 @@ class Address implements ElementInterface
 
     /** @var int|null */
     protected $locationId;
+
+    /** @var Translator */
+    protected $street;
 
     /** @var string|null */
     protected $streetUa;
@@ -36,33 +40,13 @@ class Address implements ElementInterface
     /** @var string|null */
     protected $postalCode;
 
-    public function __construct(
-        ?int $typeId,
-        ?int $locationId,
-        ?string $streetUa,
-        ?string $streetRu,
-        ?string $streetEn,
-        ?string $postalCode
-    ) {
-        $this->typeId = $typeId;
-        $this->locationId = $locationId;
-        $this->streetUa = $streetUa;
-        $this->streetRu = $streetRu;
-        $this->streetEn = $streetEn;
-        $this->postalCode = $postalCode;
-    }
-
     public function jsonSerialize(): array
     {
         return [
-            'typeId' => $this->typeId,
-            'locationId' => $this->locationId,
-            'street' => [
-                'ua' => $this->streetUa,
-                'ru' => $this->streetRu,
-                'en' => $this->streetEn,
-            ],
-            'postalCode' => $this->postalCode,
+            static::TYPE_ID => $this->typeId,
+            static::LOCATION_ID => $this->locationId,
+            static::STREET => $this->street,
+            static::POSTAL_CODE => $this->postalCode,
         ];
     }
 
@@ -71,10 +55,19 @@ class Address implements ElementInterface
         return [
             static::TYPE_ID => ParameterType::INTEGER,
             static::LOCATION_ID => ParameterType::INTEGER,
-            static::STREET_UA => ParameterType::STRING,
-            static::STREET_RU => ParameterType::STRING,
-            static::STREET_EN => ParameterType::STRING,
+            static::STREET => Translator::class,
             static::POSTAL_CODE => ParameterType::STRING,
+        ];
+    }
+
+    public static function translators(): array
+    {
+        return [
+            static::STREET => [
+                Translator::UA => static::STREET_UA,
+                Translator::RU => static::STREET_RU,
+                Translator::EN => static::STREET_EN,
+            ]
         ];
     }
 
@@ -88,19 +81,9 @@ class Address implements ElementInterface
         return $this->locationId;
     }
 
-    public function getStreetUa(): ?string
+    public function getStreet(): Translator
     {
-        return $this->streetUa;
-    }
-
-    public function getStreetRu(): ?string
-    {
-        return $this->streetRu;
-    }
-
-    public function getStreetEn(): ?string
-    {
-        return $this->streetEn;
+        return $this->street;
     }
 
     public function getPostalCode(): ?string
