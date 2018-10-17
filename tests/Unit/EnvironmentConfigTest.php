@@ -2,9 +2,7 @@
 
 namespace Wearesho\Pvbki\Tests\Unit;
 
-use Wearesho\Pvbki\ConfigInterface;
-use Wearesho\Pvbki\EnvironmentConfig;
-use Wearesho\Pvbki\Tests\Extend\ConfigTestCase;
+use Wearesho\Pvbki;
 
 /**
  * Class EnvironmentConfigTest
@@ -12,11 +10,11 @@ use Wearesho\Pvbki\Tests\Extend\ConfigTestCase;
  * @coversDefaultClass \Wearesho\Pvbki\EnvironmentConfig
  * @internal
  */
-class EnvironmentConfigTest extends ConfigTestCase
+class EnvironmentConfigTest extends Pvbki\Tests\Extend\ConfigTestCase
 {
     protected function setUp(): void
     {
-        $this->config = new EnvironmentConfig();
+        $this->config = new Pvbki\EnvironmentConfig();
     }
 
     public function testSuccessGetUsername(): void
@@ -109,7 +107,7 @@ class EnvironmentConfigTest extends ConfigTestCase
     {
         putenv('PVBKI_MODE');
 
-        $this->assertEquals(ConfigInterface::PRODUCTION_MODE, $this->config->getMode());
+        $this->assertEquals(Pvbki\ConfigInterface::PRODUCTION_MODE, $this->config->getMode());
     }
 
     /**
@@ -126,9 +124,9 @@ class EnvironmentConfigTest extends ConfigTestCase
 
     public function testGetTestUrl(): void
     {
-        putenv('PVBKI_MODE=' . ConfigInterface::TEST_MODE);
+        putenv('PVBKI_MODE=' . Pvbki\ConfigInterface::TEST_MODE);
 
-        $this->assertEquals(ConfigInterface::TEST_URL, $this->config->getUrl());
+        $this->assertEquals(Pvbki\ConfigInterface::TEST_URL, $this->config->getUrl());
     }
 
     public function testDefaultUrl(): void
@@ -136,6 +134,6 @@ class EnvironmentConfigTest extends ConfigTestCase
         putenv('PVBKI_URL');
         putenv('PVBKI_MODE');
 
-        $this->assertEquals(ConfigInterface::PRODUCTION_URL, $this->config->getUrl());
+        $this->assertEquals(Pvbki\ConfigInterface::PRODUCTION_URL, $this->config->getUrl());
     }
 }
