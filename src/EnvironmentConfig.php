@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Pvbki;
 
 use Horat1us\Environment;
@@ -71,6 +73,6 @@ class EnvironmentConfig extends Environment\Config implements ConfigInterface
      */
     public function getMode(): int
     {
-        return $this->getEnv('MODE', ConfigInterface::PRODUCTION_MODE);
+        return (int)$this->getEnv('MODE', ConfigInterface::PRODUCTION_MODE);
     }
 }
