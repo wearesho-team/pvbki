@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b2732a02c87db78c5577aab41a6fd3f",
+    "content-hash": "3b4da083325aee6412ff8377111c2ca2",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -273,25 +273,25 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.3.0",
+            "version": "1.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "22092e6179a9f2755400dfa28f86909081470d92"
+                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/22092e6179a9f2755400dfa28f86909081470d92",
-                "reference": "22092e6179a9f2755400dfa28f86909081470d92",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
+                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.8",
-                "symfony/translation": "^4.0"
+                "php": ">=5.3.9",
+                "symfony/translation": "~2.6 || ~3.0 || ~4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.11",
-                "phpunit/phpunit": "^7.1.5"
+                "friendsofphp/php-cs-fixer": "~2",
+                "phpunit/phpunit": "^4.8.35 || ^5.7"
             },
             "type": "library",
             "extra": {
@@ -324,7 +324,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-09-27T07:39:41+00:00"
+            "time": "2018-09-20T19:36:25+00:00"
         },
         {
             "name": "psr/http-message",
@@ -606,58 +606,6 @@
                 "instantiate"
             ],
             "time": "2017-07-22T11:58:36+00:00"
-        },
-        {
-            "name": "gamez/psr-testlogger",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeromegamez/php-psr-testlogger.git",
-                "reference": "14656b9bd5c6df39b2a6f85fe2955cf2b8f459e2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jeromegamez/php-psr-testlogger/zipball/14656b9bd5c6df39b2a6f85fe2955cf2b8f459e2",
-                "reference": "14656b9bd5c6df39b2a6f85fe2955cf2b8f459e2",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "psr/log": "^1.0"
-            },
-            "provide": {
-                "psr/log-implementation": "^1.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.12",
-                "phpunit/phpunit": "^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Gamez\\Psr\\Log\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jérôme Gamez",
-                    "email": "jerome@gamez.name"
-                }
-            ],
-            "description": "PSR-3 compliant test logger for developers who like tests and want to check if their application logs messages as they expect.",
-            "keywords": [
-                "log",
-                "phpunit",
-                "psr",
-                "psr-3",
-                "test",
-                "tests"
-            ],
-            "time": "2018-06-11T00:22:48+00:00"
         },
         {
             "name": "myclabs/deep-copy",
