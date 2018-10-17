@@ -88,7 +88,7 @@ class IdentificationsTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Validation failed for data:
+     * @expectedExceptionMessage Validation failed for data: Name: Name; Surname:
      */
     public function testInvalidSurnameComplex(): void
     {
