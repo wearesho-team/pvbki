@@ -4,7 +4,6 @@ namespace Wearesho\Pvbki\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Wearesho\Pvbki\BaseCollection;
-use Wearesho\Pvbki\Tests\Mocks\Element;
 
 /**
  * Class BaseCollectionTest
@@ -21,7 +20,7 @@ class BaseCollectionTest extends TestCase
         {
             public function type(): string
             {
-                return Element::class;
+                return \stdClass::class;
             }
         };
 
@@ -30,7 +29,7 @@ class BaseCollectionTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Element Exception must be instance of Wearesho\Pvbki\Tests\Mocks\Element
+     * @expectedExceptionMessage Element Exception must be instance of stdClass
      */
     public function testInstanceWithInvalidArgument(): void
     {
@@ -39,24 +38,19 @@ class BaseCollectionTest extends TestCase
 
     public function testAppends(): void
     {
-        $values = [
-            mt_rand(),
-            mt_rand(),
-            mt_rand(),
-        ];
+        $this->collection->append(new \stdClass());
+        $this->collection->append(new \stdClass());
+        $this->collection->append(new \stdClass());
 
-        $this->collection->append(new Element($values[0]));
-        $this->collection->append(new Element($values[1]));
-        $this->collection->append(new Element($values[2]));
-
-        $this->assertEquals($values[0], $this->collection->offsetGet(0)->getValue());
-        $this->assertEquals($values[1], $this->collection->offsetGet(1)->getValue());
-        $this->assertEquals($values[2], $this->collection->offsetGet(2)->getValue());
+        $this->assertCount(3, $this->collection);
+        $this->assertEquals(new \stdClass(), $this->collection->offsetGet(0));
+        $this->assertEquals(new \stdClass(), $this->collection->offsetGet(1));
+        $this->assertEquals(new \stdClass(), $this->collection->offsetGet(2));
     }
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Element Exception must be instance of Wearesho\Pvbki\Tests\Mocks\Element
+     * @expectedExceptionMessage Element Exception must be instance of stdClass
      */
     public function testAppendInvalidElement(): void
     {
@@ -65,35 +59,29 @@ class BaseCollectionTest extends TestCase
 
     public function testJsonSerialize(): void
     {
-        $values = [
-            mt_rand(),
-            mt_rand(),
-            mt_rand(),
-        ];
+        $this->collection->append(new \stdClass());
+        $this->collection->append(new \stdClass());
+        $this->collection->append(new \stdClass());
 
-        $this->collection->append(new Element($values[0]));
-        $this->collection->append(new Element($values[1]));
-        $this->collection->append(new Element($values[2]));
-
-        $this->assertEquals((array)$this->collection, $this->collection->jsonSerialize());
+        $this->assertArraySubset(
+            [
+                new \stdClass(),
+                new \stdClass(),
+                new \stdClass(),
+            ],
+            $this->collection->jsonSerialize()
+        );
     }
 
     public function testArrayObjectAccess(): void
     {
         $this->assertEquals(0, count($this->collection));
 
-        $values = [
-            mt_rand(),
-            mt_rand(),
-            mt_rand(),
-            mt_rand(),
-        ];
+        $this->collection->append(new \stdClass());
+        $this->collection->append(new \stdClass());
+        $this->collection->append(new \stdClass());
 
-        $this->collection->append(new Element($values[0]));
-        $this->collection->append(new Element($values[1]));
-        $this->collection->append(new Element($values[2]));
-
-        $element = new Element($values[3]);
+        $element = new \stdClass();
         $this->collection[] = $element;
 
         $this->assertEquals(4, count($this->collection));
