@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Tests\Unit;
 
-use Wearesho\Pvbki\Config;
-use Wearesho\Pvbki\Tests\Extend\ConfigTestCase;
+use Wearesho\Pvbki;
 
 /**
  * Class ConfigTest
@@ -11,12 +10,12 @@ use Wearesho\Pvbki\Tests\Extend\ConfigTestCase;
  * @coversDefaultClass \Wearesho\Pvbki\Config
  * @internal
  */
-class ConfigTest extends ConfigTestCase
+class ConfigTest extends Pvbki\Tests\Extend\ConfigTestCase
 {
     protected function setUp(): void
     {
         /** @noinspection PhpUnhandledExceptionInspection */
-        $this->config = new Config(
+        $this->config = new Pvbki\Config(
             static::USERNAME,
             static::PASSWORD,
             static::ACCESS_POINT,
@@ -32,7 +31,7 @@ class ConfigTest extends ConfigTestCase
      */
     public function testInvalidMode(): void
     {
-        new Config(
+        new Pvbki\Config(
             static::USERNAME,
             static::PASSWORD,
             static::ACCESS_POINT,
