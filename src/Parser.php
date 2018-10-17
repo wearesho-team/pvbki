@@ -29,7 +29,7 @@ class Parser
 
         foreach ($document->getElementsByTagName(Statement::ERROR) as $error) {
             $errors->append(new Elements\Error(
-                ...$this->fetchParameters(simplexml_import_dom($error), Elements\Error::parameters())
+                ...$this->fetchParameters(simplexml_import_dom($error), Elements\Error::class)
             ));
         }
 
@@ -60,36 +60,36 @@ class Parser
 
         foreach ($document->{Statement::SUBJECT} as $subject) {
             $subjectCollection->append(new Elements\Subject(
-                ...$this->fetchParameters($subject, Elements\Subject::parameters())
+                ...$this->fetchParameters($subject, Elements\Subject::class)
             ));
         }
 
         foreach ($document->{Statement::IDENTIFICATION} as $identification) {
             $identificationCollection->append(new Elements\Identification(
-                ...$this->fetchParameters($identification, Elements\Identification::parameters())
+                ...$this->fetchParameters($identification, Elements\Identification::class)
             ));
         }
 
         foreach ($document->{Statement::COMMUNICATION} as $communication) {
             $communicationCollection->append(new Elements\Communication(
-                ...$this->fetchParameters($communication, Elements\Communication::parameters())
+                ...$this->fetchParameters($communication, Elements\Communication::class)
             ));
         }
 
         foreach ($document->{Statement::ADDRESS} as $address) {
             $addressCollection->append(new Elements\Address(
-                ...$this->fetchParameters($address, Elements\Address::parameters())
+                ...$this->fetchParameters($address, Elements\Address::class)
             ));
         }
 
         foreach ($document->{Statement::DEPENDANT} as $dependant) {
             $dependantCollection->append(new Elements\Dependant(
-                ...$this->fetchParameters($dependant, Elements\Dependant::parameters())
+                ...$this->fetchParameters($dependant, Elements\Dependant::class)
             ));
         }
 
         $scoring = new Elements\Scoring(
-            ...$this->fetchParameters($document->{Statement::SCORING}, Elements\Scoring::parameters())
+            ...$this->fetchParameters($document->{Statement::SCORING}, Elements\Scoring::class)
         );
 
         return new Elements\Report(
@@ -100,7 +100,59 @@ class Parser
         );
     }
 
-    private function fetchParameters(\SimpleXMLElement $element, array $params): array
+    private function fetchParameters(\SimpleXMLElement $element, string $class): array
+    {
+        /** @var Element $class */
+
+        $contexts = [];
+
+        foreach ($class::parameters() as $param => $type) {
+            $value = $element->{$param} ?: null;
+
+            if ($type)
+
+            switch ($type) {
+                case ParameterType::STRING:
+                    $contexts[] = (string)$value;
+
+                    break;
+                case ParameterType::INTEGER:
+                    $contexts[] = (int)$value;
+
+                    break;
+                case ParameterType::FLOAT:
+                    $contexts[] = (float)$value;
+
+                    break;
+                case ParameterType::DOUBLE:
+                    $contexts[] = (double)$value;
+
+                    break;
+                case ParameterType::DATE:
+                    $contexts[] = Carbon::parse($value);
+
+                    break;
+                case Elements\Translator::class:
+                    $translators = $class::translators();
+                    $keys = array_intersect_key($type, $translators);
+                    $rules = [];
+
+                    foreach ($keys as $key) {
+                        $rules[$key] = $translators[$key];
+                    }
+
+                    $contexts[] = new Elements\Translator(...$this->fetchParameters($element, $rules));
+
+                    break;
+                default:
+                    $contexts[] = $value;
+            }
+        }
+
+        return $contexts;
+    }
+
+    private function (\SimpleXMLElement $element, array $params)
     {
         $contexts = [];
 
@@ -126,10 +178,6 @@ class Parser
                     break;
                 case ParameterType::DATE:
                     $contexts[] = Carbon::parse($value);
-
-                    break;
-                case Elements\Translator::class:
-                    $contexts[] = new Elements\Translator($this->fetchParameters($element, Elements\Address::translators()));
 
                     break;
                 default:
