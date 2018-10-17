@@ -35,7 +35,7 @@ class Config implements ConfigInterface
      * @param string $password
      * @param string $accessPoint
      * @param string $key
-     * @param int    $mode
+     * @param int $mode
      * @param string $url
      *
      * @throws UnsupportedMode
