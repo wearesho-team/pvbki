@@ -15,12 +15,8 @@ class Complex implements SubjectInterface
 
     public function __construct(string $name, string $surname, \DateTimeInterface $birthDate)
     {
-        if (empty($name)) {
-            throw new IdentificationDataValidation($name);
-        }
-
-        if (empty($surname)) {
-            throw new IdentificationDataValidation($surname);
+        if (empty($name) || empty($surname)) {
+            throw new IdentificationDataValidation("Name: {$name}; Surname: {$surname};");
         }
 
         $this->id = $name . $surname . Carbon::instance($birthDate)->toDateString();
