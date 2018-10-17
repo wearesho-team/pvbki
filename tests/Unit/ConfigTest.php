@@ -27,7 +27,7 @@ class ConfigTest extends ConfigTestCase
     }
 
     /**
-     * @expectedException \Wearesho\Pvbki\Exceptions\InvalidModeException
+     * @expectedException \Wearesho\Pvbki\Exceptions\UnsupportedMode
      * @expectedExceptionMessageRegExp /^Configured unsupported service mode: \d+$/
      */
     public function testInvalidMode(): void

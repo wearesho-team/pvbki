@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Wearesho\Pvbki;
 
-use Wearesho\Pvbki\Exceptions\InvalidModeException;
+use Wearesho\Pvbki\Exceptions\UnsupportedMode;
 
 /**
  * Class Config
@@ -38,7 +38,7 @@ class Config implements ConfigInterface
      * @param int    $mode
      * @param string $url
      *
-     * @throws InvalidModeException
+     * @throws UnsupportedMode
      */
     public function __construct(
         string $username,
@@ -49,7 +49,7 @@ class Config implements ConfigInterface
         string $url = ConfigInterface::PRODUCTION_URL
     ) {
         if (!in_array($mode, [ConfigInterface::TEST_MODE, ConfigInterface::PRODUCTION_MODE])) {
-            throw new InvalidModeException($mode);
+            throw new UnsupportedMode($mode);
         }
 
         $this->username = $username;

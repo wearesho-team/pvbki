@@ -3,28 +3,21 @@
 namespace Wearesho\Pvbki\Tests\Unit\Exceptions;
 
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Exceptions\InvalidModeException;
+use Wearesho\Pvbki\Exceptions\UnsupportedMode;
 
 /**
  * Class InvalidModeExceptionTest
  * @package Wearesho\Pvbki\Tests\Unit\Exceptions
- * @coversDefaultClass \Wearesho\Pvbki\Exceptions\InvalidModeException
+ * @coversDefaultClass \Wearesho\Pvbki\Exceptions\UnsupportedMode
  * @internal
  */
 class InvalidModeExceptionTest extends TestCase
 {
-    protected const MODE = 5;
-
-    /** @var InvalidModeException */
-    protected $fakeInvalidModeException;
-
-    protected function setUp(): void
-    {
-        $this->fakeInvalidModeException = new InvalidModeException(static::MODE);
-    }
-
     public function testGetMode(): void
     {
-        $this->assertEquals(static::MODE, $this->fakeInvalidModeException->getMode());
+        $mode = 5;
+        $exception = new UnsupportedMode($mode);
+
+        $this->assertEquals($mode, $exception->getMode());
     }
 }

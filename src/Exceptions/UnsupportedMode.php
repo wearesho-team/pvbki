@@ -6,7 +6,7 @@ namespace Wearesho\Pvbki\Exceptions;
  * Class InvalidModeException
  * @package Wearesho\Pvbki\Exceptions
  */
-class InvalidModeException extends \Exception
+class UnsupportedMode extends \InvalidArgumentException
 {
     /** @var int */
     protected $mode;

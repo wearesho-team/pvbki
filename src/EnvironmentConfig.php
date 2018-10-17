@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Wearesho\Pvbki;
 
 use Horat1us\Environment;
-use Wearesho\Pvbki\Exceptions\InvalidModeException;
+use Wearesho\Pvbki\Exceptions\UnsupportedMode;
 
 /**
  * Class EnvironmentConfig
@@ -63,7 +63,7 @@ class EnvironmentConfig extends Environment\Config implements ConfigInterface
                 case ConfigInterface::PRODUCTION_MODE:
                     return ConfigInterface::PRODUCTION_URL;
                 default:
-                    throw new InvalidModeException($mode);
+                    throw new UnsupportedMode($mode);
             }
         });
     }
