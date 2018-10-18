@@ -8,8 +8,6 @@ namespace Wearesho\Pvbki;
  */
 abstract class BaseCollection extends \ArrayObject implements \JsonSerializable
 {
-    public const ROOT = null;
-
     /**
      * @param array  $elements
      * @param int    $flags
