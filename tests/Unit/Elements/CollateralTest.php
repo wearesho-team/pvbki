@@ -4,12 +4,12 @@ namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Elements\Collateral;
+use Wearesho\Pvbki;
 
 /**
  * Class CollateralTest
  * @package Wearesho\Pvbki\Tests\Unit\Elements
- * @coversDefaultClass Collateral
+ * @coversDefaultClass \Wearesho\Pvbki\Elements\Collateral
  * @internal
  */
 class CollateralTest extends TestCase
@@ -33,30 +33,34 @@ class CollateralTest extends TestCase
     protected const AUTHORITY_RU = 'authority_ru';
     protected const AUTHORITY_EN = 'authority_en';
 
-    /** @var Collateral */
+    /** @var Pvbki\Elements\Collateral */
     protected $fakeCollateral;
 
     protected function setUp(): void
     {
-        $this->fakeCollateral = new Collateral(
+        $this->fakeCollateral = new Pvbki\Elements\Collateral(
             static::CONTRACT_ID,
             static::TYPE_ID,
             static::VALUE,
             static::CURRENCY,
             static::ADDRESS_TYPE_ID,
             static::LOCATION_ID,
-            static::STREET_UA,
-            static::STREET_RU,
-            static::STREET_EN,
+            new Pvbki\Sentence\Translation(
+                static::STREET_UA,
+                static::STREET_RU,
+                static::STREET_EN
+            ),
             static::POSTAL_CODE,
             static::IDENTIFICATION_TYPE_ID,
             static::NUMBER,
             Carbon::parse(static::REGISTRATION_DATE),
             Carbon::parse(static::ISSUE_DATE),
             Carbon::parse(static::EXPIRATION_DATE),
-            static::AUTHORITY_UA,
-            static::AUTHORITY_RU,
-            static::AUTHORITY_EN
+            new Pvbki\Sentence\Translation(
+                static::AUTHORITY_UA,
+                static::AUTHORITY_RU,
+                static::AUTHORITY_EN
+            )
         );
     }
 
@@ -70,18 +74,22 @@ class CollateralTest extends TestCase
                 'currency' => static::CURRENCY,
                 'addressTypeId' => static::ADDRESS_TYPE_ID,
                 'locationId' => static::LOCATION_ID,
-                'streetUA' => static::STREET_UA,
-                'streetRU' => static::STREET_RU,
-                'streetEN' => static::STREET_EN,
+                'street' => new Pvbki\Sentence\Translation(
+                    static::STREET_UA,
+                    static::STREET_RU,
+                    static::STREET_EN
+                ),
                 'postalCode' => static::POSTAL_CODE,
                 'identificationTypeId' => static::IDENTIFICATION_TYPE_ID,
                 'number' => static::NUMBER,
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
                 'issueDate' => Carbon::parse(static::ISSUE_DATE),
                 'expirationDate' => Carbon::parse(static::EXPIRATION_DATE),
-                'authorityUA' => static::AUTHORITY_UA,
-                'authorityRU' => static::AUTHORITY_RU,
-                'authorityEN' => static::AUTHORITY_EN,
+                'authority' => new Pvbki\Sentence\Translation(
+                    static::AUTHORITY_UA,
+                    static::AUTHORITY_RU,
+                    static::AUTHORITY_EN
+                ),
             ],
             $this->fakeCollateral->jsonSerialize()
         );
@@ -115,19 +123,28 @@ class CollateralTest extends TestCase
         $this->assertEquals(static::IDENTIFICATION_TYPE_ID, $this->fakeCollateral->getIdentificationTypeId());
     }
 
-    public function testGetStreetRU(): void
+    public function testGetStreet(): void
     {
-        $this->assertEquals(static::STREET_RU, $this->fakeCollateral->getStreetRU());
+        $this->assertEquals(
+            new Pvbki\Sentence\Translation(
+                static::STREET_UA,
+                static::STREET_RU,
+                static::STREET_EN
+            ),
+            $this->fakeCollateral->getStreet()
+        );
     }
 
-    public function testGetAuthorityEN(): void
+    public function testGetAuthority(): void
     {
-        $this->assertEquals(static::AUTHORITY_EN, $this->fakeCollateral->getAuthorityEN());
-    }
-
-    public function testGetStreetEN(): void
-    {
-        $this->assertEquals(static::STREET_EN, $this->fakeCollateral->getStreetEN());
+        $this->assertEquals(
+            new Pvbki\Sentence\Translation(
+                static::AUTHORITY_UA,
+                static::AUTHORITY_RU,
+                static::AUTHORITY_EN
+            ),
+            $this->fakeCollateral->getAuthority()
+        );
     }
 
     public function testGetLocationId(): void
@@ -153,19 +170,9 @@ class CollateralTest extends TestCase
         $this->assertEquals(static::POSTAL_CODE, $this->fakeCollateral->getPostalCode());
     }
 
-    public function testGetAuthorityRU(): void
-    {
-        $this->assertEquals(static::AUTHORITY_RU, $this->fakeCollateral->getAuthorityRU());
-    }
-
     public function testGetTypeId(): void
     {
         $this->assertEquals(static::TYPE_ID, $this->fakeCollateral->getTypeId());
-    }
-
-    public function testGetAuthorityUA(): void
-    {
-        $this->assertEquals(static::AUTHORITY_UA, $this->fakeCollateral->getAuthorityUA());
     }
 
     public function testGetCurrency(): void
@@ -176,10 +183,5 @@ class CollateralTest extends TestCase
     public function testGetNumber(): void
     {
         $this->assertEquals(static::NUMBER, $this->fakeCollateral->getNumber());
-    }
-
-    public function testGetStreetUA(): void
-    {
-        $this->assertEquals(static::STREET_UA, $this->fakeCollateral->getStreetUA());
     }
 }

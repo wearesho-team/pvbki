@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Collateral
  * @package Wearesho\Pvbki\Elements
  */
-class Collateral extends Element
+class Collateral extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Collateral';
     public const CONTRACT_ID = 'contractid';
@@ -47,14 +47,8 @@ class Collateral extends Element
     /** @var int|null */
     protected $locationId;
 
-    /** @var string|null */
-    protected $streetUA;
-
-    /** @var string|null */
-    protected $streetRU;
-
-    /** @var string|null */
-    protected $streetEN;
+    /** @var Pvbki\Sentence\Translation|null */
+    protected $street;
 
     /** @var string|null */
     protected $postalCode;
@@ -74,14 +68,8 @@ class Collateral extends Element
     /** @var \DateTimeInterface|null */
     protected $expirationDate;
 
-    /** @var string|null */
-    protected $authorityUA;
-
-    /** @var string|null */
-    protected $authorityRU;
-
-    /** @var string|null */
-    protected $authorityEN;
+    /** @var Pvbki\Sentence\Translation|null */
+    protected $authority;
 
     public function __construct(
         ?string $contractId,
@@ -90,18 +78,14 @@ class Collateral extends Element
         ?string $currency,
         ?int $addressTypeId,
         ?int $locationId,
-        ?string $streetUA,
-        ?string $streetRU,
-        ?string $streetEN,
+        ?Pvbki\Sentence\Translation $street,
         ?string $postalCode,
         ?int $identificationTypeId,
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $issueDate,
         ?\DateTimeInterface $expirationDate,
-        ?string $authorityUA,
-        ?string $authorityRU,
-        ?string $authorityEN
+        ?Pvbki\Sentence\Translation $authority
     ) {
         $this->contractId = $contractId;
         $this->typeId = $typeId;
@@ -109,18 +93,14 @@ class Collateral extends Element
         $this->currency = $currency;
         $this->addressTypeId = $addressTypeId;
         $this->locationId = $locationId;
-        $this->streetUA = $streetUA;
-        $this->streetRU = $streetRU;
-        $this->streetEN = $streetEN;
+        $this->street = $street;
         $this->postalCode = $postalCode;
         $this->identificationTypeId = $identificationTypeId;
         $this->number = $number;
         $this->registrationDate = $registrationDate;
         $this->issueDate = $issueDate;
         $this->expirationDate = $expirationDate;
-        $this->authorityUA = $authorityUA;
-        $this->authorityRU = $authorityRU;
-        $this->authorityEN = $authorityEN;
+        $this->authority = $authority;
     }
 
     public function getContractId(): ?string
@@ -153,19 +133,9 @@ class Collateral extends Element
         return $this->locationId;
     }
 
-    public function getStreetUA(): ?string
+    public function getStreet(): ?Pvbki\Sentence\Translation
     {
-        return $this->streetUA;
-    }
-
-    public function getStreetRU(): ?string
-    {
-        return $this->streetRU;
-    }
-
-    public function getStreetEN(): ?string
-    {
-        return $this->streetEN;
+        return $this->street;
     }
 
     public function getPostalCode(): ?string
@@ -198,18 +168,8 @@ class Collateral extends Element
         return $this->expirationDate;
     }
 
-    public function getAuthorityUA(): ?string
+    public function getAuthority(): ?Pvbki\Sentence\Translation
     {
-        return $this->authorityUA;
-    }
-
-    public function getAuthorityRU(): ?string
-    {
-        return $this->authorityRU;
-    }
-
-    public function getAuthorityEN(): ?string
-    {
-        return $this->authorityEN;
+        return $this->authority;
     }
 }
