@@ -11,7 +11,7 @@ use Wearesho\Pvbki;
  */
 class Complex implements Pvbki\Interrelations\SubjectInterface
 {
-    use SubjectTrait;
+    use Pvbki\Infrastructure\SubjectTrait;
 
     public function __construct(string $name, string $surname, \DateTimeInterface $birthDate)
     {

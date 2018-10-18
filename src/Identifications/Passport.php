@@ -10,7 +10,7 @@ use Wearesho\Pvbki;
  */
 class Passport implements Pvbki\Interrelations\SubjectInterface
 {
-    use SubjectTrait;
+    use Pvbki\Infrastructure\SubjectTrait;
 
     public function __construct(string $series, string $number)
     {

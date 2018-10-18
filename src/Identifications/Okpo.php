@@ -10,7 +10,7 @@ use Wearesho\Pvbki;
  */
 class Okpo implements Pvbki\Interrelations\SubjectInterface
 {
-    use SubjectTrait;
+    use Pvbki\Infrastructure\SubjectTrait;
 
     public function __construct(string $number)
     {
