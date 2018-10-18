@@ -4,6 +4,7 @@ namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use PHPUnit\Framework\TestCase;
 use Wearesho\Pvbki\Elements\Address;
+use Wearesho\Pvbki\Sentence\Translation;
 
 /**
  * Class AddressTest
@@ -28,9 +29,11 @@ class AddressTest extends TestCase
         $this->fakeAddress = new Address(
             static::LOCATION_ID,
             static::TYPE_ID,
-            static::STREET_UA,
-            static::STREET_RU,
-            static::STREET_EN,
+            new Translation(
+                static::STREET_UA,
+                static::STREET_RU,
+                static::STREET_EN
+            ),
             static::POSTAL_CODE
         );
     }
@@ -41,9 +44,11 @@ class AddressTest extends TestCase
             [
                 'locationId' => static::LOCATION_ID,
                 'typeId' => static::TYPE_ID,
-                'streetUA' => static::STREET_UA,
-                'streetRU' => static::STREET_RU,
-                'streetEN' => static::STREET_EN,
+                'street' => new Translation(
+                    static::STREET_UA,
+                    static::STREET_RU,
+                    static::STREET_EN
+                ),
                 'postalCode' => static::POSTAL_CODE
             ],
             $this->fakeAddress->jsonSerialize()
@@ -70,18 +75,15 @@ class AddressTest extends TestCase
         $this->assertEquals(static::POSTAL_CODE, $this->fakeAddress->getPostalCode());
     }
 
-    public function testGetStreetRU(): void
+    public function testGetStreet(): void
     {
-        $this->assertEquals(static::STREET_RU, $this->fakeAddress->getStreetRU());
-    }
-
-    public function testGetStreetUA(): void
-    {
-        $this->assertEquals(static::STREET_UA, $this->fakeAddress->getStreetUA());
-    }
-
-    public function testGetStreetEN(): void
-    {
-        $this->assertEquals(static::STREET_EN, $this->fakeAddress->getStreetEN());
+        $this->assertEquals(
+            new Translation(
+                static::STREET_UA,
+                static::STREET_RU,
+                static::STREET_EN
+            ),
+            $this->fakeAddress->getStreet()
+        );
     }
 }

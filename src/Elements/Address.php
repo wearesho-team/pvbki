@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Address
  * @package Wearesho\Pvbki\Elements
  */
-class Address extends Element
+class Address extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Address';
     public const TYPE_ID = 'typeId';
@@ -25,23 +25,8 @@ class Address extends Element
     /** @var int */
     protected $locationId;
 
-    /** @var string|null */
-    protected $streetUA;
-
-    /** @var string|null */
-    protected $streetRU;
-
-    /** @var string|null */
-    protected $streetEN;
-
-    /** @var string|null */
-    protected $streetUa;
-
-    /** @var string|null */
-    protected $streetRu;
-
-    /** @var string|null */
-    protected $streetEn;
+    /** @var Pvbki\Sentence\Translation|null */
+    protected $street;
 
     /** @var string|null */
     protected $postalCode;
@@ -49,16 +34,12 @@ class Address extends Element
     public function __construct(
         int $locationId,
         ?int $typeId,
-        ?string $streetUA,
-        ?string $streetRU,
-        ?string $streetEN,
+        ?Pvbki\Sentence\Translation $street,
         ?string $postalCode
     ) {
         $this->typeId = $typeId;
         $this->locationId = $locationId;
-        $this->streetUA = $streetUA;
-        $this->streetRU = $streetRU;
-        $this->streetEN = $streetEN;
+        $this->street = $street;
         $this->postalCode = $postalCode;
     }
 
@@ -72,19 +53,9 @@ class Address extends Element
         return $this->locationId;
     }
 
-    public function getStreetUA(): ?string
+    public function getStreet(): ?Pvbki\Sentence\Translation
     {
-        return $this->streetUA;
-    }
-
-    public function getStreetRU(): ?string
-    {
-        return $this->streetRU;
-    }
-
-    public function getStreetEN(): ?string
-    {
-        return $this->streetEN;
+        return $this->street;
     }
 
     public function getPostalCode(): ?string
