@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Identifications;
 
-use Wearesho\Pvbki\Exceptions\IdentificationDataValidation;
+use Wearesho\Pvbki;
 
 /**
  * Class Passport
  * @package Wearesho\Pvbki\Identifications
  */
-class Passport implements SubjectInterface
+class Passport implements Pvbki\Interrelations\SubjectInterface
 {
     use SubjectTrait;
 
@@ -17,7 +17,7 @@ class Passport implements SubjectInterface
         $passportData = $series . $number;
 
         if (!preg_match('/^[ыЫа-яА-Яa-zA-ZіІєЄґҐїЇ]{2}\d{6}$/u', $series . $number)) {
-            throw new IdentificationDataValidation($passportData);
+            throw new Pvbki\Exceptions\IdentificationDataValidation($passportData);
         }
 
         $this->id = $passportData;
