@@ -65,5 +65,37 @@ PVBKI_MODE=
 
 - Or use [ConfigInterface](./src/ConfigInterface.php) to implement your own config.
 
+### Import
+
+#### Identification subject
+
+Use one of implemented subject's identifications:
+
+```php
+<?php
+
+use Wearesho\Pvbki;
+
+// Subject's passport series and number
+// series must be in 2 chars length, uppercase and UTF-8 format
+// number must be in 6 digits length
+$passport = new Pvbki\Identifications\Passport('АБ', '123456');
+
+// Subject's DRFO number
+// contains 10 digits
+$drfo = new Pvbki\Identifications\Drfo('1234567890');
+
+// Subject's OKPO number
+// contains 8 digits
+$okpo = new Pvbki\Identifications\Okpo('12345678');
+
+// Subject's name, surname and birthdate of subject
+// in request body will have format: NameSurnameDDMMYYY
+$complex = new Pvbki\Identifications\Complex('Name', 'Surname', new DateTime('2018-03-12'));
+```
+
+All identifications implement [SubjectInterface](./src/Interrelations/SubjectInterface.php). 
+Use it if you want to customize identification object.
+
 ## License
 [MIT](./LICENSE)
