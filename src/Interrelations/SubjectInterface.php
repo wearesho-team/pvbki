@@ -1,10 +1,10 @@
 <?php
 
-namespace Wearesho\Pvbki\Identifications;
+namespace Wearesho\Pvbki\Interrelations;
 
 /**
  * Interface SubjectInterface
- * @package Wearesho\Pvbki\Identifications
+ * @package Wearesho\Pvbki\Interrelations
  */
 interface SubjectInterface
 {

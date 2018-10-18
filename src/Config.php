@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Wearesho\Pvbki;
 
-use Wearesho\Pvbki\Exceptions\UnsupportedMode;
-
 /**
  * Class Config
  * @package Wearesho\Pvbki
  */
-class Config implements ConfigInterface
+class Config implements Interrelations\ConfigInterface
 {
     /** @var string */
     protected $username;
@@ -38,18 +36,21 @@ class Config implements ConfigInterface
      * @param int $mode
      * @param string $url
      *
-     * @throws UnsupportedMode
+     * @throws Exceptions\UnsupportedMode
      */
     public function __construct(
         string $username,
         string $password,
         string $accessPoint,
         string $key,
-        int $mode = ConfigInterface::PRODUCTION_MODE,
-        string $url = ConfigInterface::PRODUCTION_URL
+        int $mode = Interrelations\ConfigInterface::PRODUCTION_MODE,
+        string $url = Interrelations\ConfigInterface::PRODUCTION_URL
     ) {
-        if (!in_array($mode, [ConfigInterface::TEST_MODE, ConfigInterface::PRODUCTION_MODE])) {
-            throw new UnsupportedMode($mode);
+        if (!in_array(
+            $mode,
+            [Interrelations\ConfigInterface::TEST_MODE, Interrelations\ConfigInterface::PRODUCTION_MODE]
+        )) {
+            throw new Exceptions\UnsupportedMode($mode);
         }
 
         $this->username = $username;
