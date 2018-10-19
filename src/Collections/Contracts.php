@@ -6,13 +6,13 @@ use Wearesho\BaseCollection;
 use Wearesho\Pvbki;
 
 /**
- * Class Errors
+ * Class Contracts
  * @package Wearesho\Pvbki\Collections
  */
-class Errors extends BaseCollection
+class Contracts extends BaseCollection
 {
     public function type(): string
     {
-        return Pvbki\Elements\Error::class;
+        return Pvbki\Elements\Contract::class;
     }
 }

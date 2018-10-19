@@ -6,13 +6,13 @@ use Wearesho\BaseCollection;
 use Wearesho\Pvbki;
 
 /**
- * Class Errors
+ * Class MonthlyIncomes
  * @package Wearesho\Pvbki\Collections
  */
-class Errors extends BaseCollection
+class MonthlyIncomes extends BaseCollection
 {
     public function type(): string
     {
-        return Pvbki\Elements\Error::class;
+        return Pvbki\Elements\MonthlyIncome::class;
     }
 }
