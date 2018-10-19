@@ -3,7 +3,7 @@
 namespace Wearesho\Pvbki\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\BaseCollection;
+use Wearesho\Pvbki\Infrastructure\BaseCollection;
 
 /**
  * Class BaseCollectionTest
