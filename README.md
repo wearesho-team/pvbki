@@ -65,7 +65,29 @@ PVBKI_MODE=
 
 - Or use [ConfigInterface](src/Interrelations/ConfigInterface.php) to implement your own config.
 
-### Import
+### Service instance
+
+To instantiate service you need config, that implement [ConfigInterface](src/Interrelations/ConfigInterface.php), 
+client, that implement [GuzzleHttp/ClientInterface](http://docs.guzzlephp.org/en/stable), 
+and as optional you can use `Psr\Log\LoggerInterface`.
+
+```php
+<?php
+
+use Psr\Log;
+use GuzzleHttp;
+use Wearesho\Pvbki;
+
+$config = new Pvbki\EnvironmentConfig('PVBKI_');
+$client = new GuzzleHttp\Client();
+$logger = new Log\NullLogger();
+
+$service = new Pvbki\Service($config, $client, $logger);
+```
+
+Use [ServiceInterface](./src/Interrelations/ServiceInterface.php) to customize it;
+
+### Import method
 
 #### Identification subject
 
@@ -96,6 +118,48 @@ $complex = new Pvbki\Identifications\Complex('Name', 'Surname', new DateTime('20
 
 All identifications implement [SubjectInterface](./src/Interrelations/SubjectInterface.php). 
 Use it if you want to customize identification object.
+
+#### Statement request type
+
+Use one of two statement types:
+
+```php
+<?php
+
+use Wearesho\Pvbki\Enums\StatementType;
+
+// Use constructor
+$type = new StatementType(StatementType::BASE);
+$type = new StatementType(StatementType::SCORING);
+
+// Use MyCLabs\Enum\Enum implementation
+$type = StatementType::BASE();
+$type = StatementType::SCORING();
+```
+
+#### Run import method
+
+Combine `SubjectInterface` and `StatementType` into `StatementRequest` and run `import(...)` method.
+
+You will get [RequestResponsePair](./src/RequestResponsePair.php) object, 
+that contains bodies of request and response in `string` format.
+
+```php
+<?php
+
+use Wearesho\Pvbki;
+
+/** @var Pvbki\Interrelations\SubjectInterface $identification*/
+/** @var Pvbki\Enums\StatementType $type */
+/** @var Pvbki\Interrelations\ServiceInterface $service */
+
+$request = new Pvbki\StatementRequest($identification, $type);
+
+$requestResponsePair = $service->import($request);
+
+$requestBody = $requestResponsePair->getRequestBody();
+$responseBody = $requestResponsePair->getResponseBody();
+```
 
 ## License
 [MIT](./LICENSE)
