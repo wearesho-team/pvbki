@@ -8,7 +8,7 @@ use Wearesho\Pvbki;
  * Class Communications
  * @package Wearesho\Pvbki\Collections
  */
-class Communications extends Pvbki\BaseCollection
+class Communications extends Pvbki\Infrastructure\BaseCollection
 {
     public function type(): string
     {
