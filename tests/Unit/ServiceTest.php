@@ -4,9 +4,6 @@ namespace Wearesho\Pvbki\Tests\Unit;
 
 use GuzzleHttp;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\AbstractLogger;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Wearesho\Pvbki;
 
 /**

@@ -3,7 +3,6 @@
 namespace Wearesho\Pvbki;
 
 use GuzzleHttp;
-use Psr\Log;
 
 /**
  * Class Service
@@ -20,17 +19,10 @@ class Service implements Interrelations\ServiceInterface
     /** @var GuzzleHttp\ClientInterface */
     protected $client;
 
-    /** @var Log\LoggerInterface|Log\NullLogger */
-    protected $logger;
-
-    public function __construct(
-        Interrelations\ConfigInterface $config,
-        GuzzleHttp\ClientInterface $client,
-        Log\LoggerInterface $logger = null
-    ) {
+    public function __construct(Interrelations\ConfigInterface $config, GuzzleHttp\ClientInterface $client)
+    {
         $this->config = $config;
         $this->client = $client;
-        $this->logger = $logger ?? new Log\NullLogger();
     }
 
     /**
@@ -52,8 +44,6 @@ class Service implements Interrelations\ServiceInterface
             ],
             $body
         );
-
-        $this->logger->debug("PVBKI import request {url}: ", ['url' => $this->config->getUrl()]);
 
         return new RequestResponsePair(
             $guzzleRequest->getBody()->__toString(),
