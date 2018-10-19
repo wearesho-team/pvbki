@@ -8,7 +8,7 @@ use Wearesho\Pvbki;
  * Class MonthlyIncomes
  * @package Wearesho\Pvbki\Collections
  */
-class MonthlyIncomes extends Pvbki\BaseCollection
+class MonthlyIncomes extends Pvbki\Infrastructure\BaseCollection
 {
     public function type(): string
     {
