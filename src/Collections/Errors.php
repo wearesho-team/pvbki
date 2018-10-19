@@ -5,13 +5,13 @@ namespace Wearesho\Pvbki\Collections;
 use Wearesho\Pvbki;
 
 /**
- * Class Addresses
+ * Class Errors
  * @package Wearesho\Pvbki\Collections
  */
-class Addresses extends Pvbki\Infrastructure\BaseCollection
+class Errors extends Pvbki\Infrastructure\BaseCollection
 {
     public function type(): string
     {
-        return Pvbki\Elements\Address::class;
+        return Pvbki\Elements\Error::class;
     }
 }
