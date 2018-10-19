@@ -8,7 +8,7 @@ use Wearesho\Pvbki;
  * Class Identifiers
  * @package Wearesho\Pvbki\Collections
  */
-class Identifiers extends Pvbki\BaseCollection
+class Identifiers extends Pvbki\Infrastructure\BaseCollection
 {
     public function type(): string
     {
