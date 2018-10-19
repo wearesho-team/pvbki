@@ -26,8 +26,8 @@ $config = new Pvbki\Config(
     $password = 'password',
     $accessPoint = 'access-point',
     $key = 'key',
-    $mode = Pvbki\ConfigInterface::PRODUCTION_MODE, // or TEST_MODE
-    $url = Pvbki\ConfigInterface::PRODUCTION_URL // or TEST_URL
+    $mode = Pvbki\Interrelations\ConfigInterface::PRODUCTION_MODE, // or TEST_MODE
+    $url = Pvbki\Interrelations\ConfigInterface::PRODUCTION_URL // or TEST_URL
 );
 ```
 
@@ -63,7 +63,7 @@ PVBKI_URL=
 PVBKI_MODE=
 ```
 
-- Or use [ConfigInterface](./src/ConfigInterface.php) to implement your own config.
+- Or use [ConfigInterface](src/Interrelations/ConfigInterface.php) to implement your own config.
 
 ## License
 [MIT](./LICENSE)
