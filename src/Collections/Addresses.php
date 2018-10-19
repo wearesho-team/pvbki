@@ -2,17 +2,16 @@
 
 namespace Wearesho\Pvbki\Collections;
 
-use Wearesho\Pvbki\BaseCollection;
-use Wearesho\Pvbki\Elements\Address;
+use Wearesho\Pvbki;
 
 /**
  * Class Addresses
  * @package Wearesho\Pvbki\Collections
  */
-class Addresses extends BaseCollection
+class Addresses extends Pvbki\Infrastructure\BaseCollection
 {
     public function type(): string
     {
-        return Address::class;
+        return Pvbki\Elements\Address::class;
     }
 }
