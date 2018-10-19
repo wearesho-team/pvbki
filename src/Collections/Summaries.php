@@ -8,7 +8,7 @@ use Wearesho\Pvbki;
  * Class Summaries
  * @package Wearesho\Pvbki\Collections
  */
-class Summaries extends Pvbki\BaseCollection
+class Summaries extends Pvbki\Infrastructure\BaseCollection
 {
     public function type(): string
     {
