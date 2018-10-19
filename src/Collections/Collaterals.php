@@ -2,17 +2,16 @@
 
 namespace Wearesho\Pvbki\Collections;
 
-use Wearesho\Pvbki\BaseCollection;
-use Wearesho\Pvbki\Elements\Collateral;
+use Wearesho\Pvbki;
 
 /**
  * Class Collaterals
  * @package Wearesho\Pvbki\Collections
  */
-class Collaterals extends BaseCollection
+class Collaterals extends Pvbki\Infrastructure\BaseCollection
 {
     public function type(): string
     {
-        return Collateral::class;
+        return Pvbki\Elements\Collateral::class;
     }
 }
