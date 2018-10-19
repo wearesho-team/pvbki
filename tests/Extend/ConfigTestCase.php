@@ -3,7 +3,7 @@
 namespace Wearesho\Pvbki\Tests\Extend;
 
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\ConfigInterface;
+use Wearesho\Pvbki\Interrelations\ConfigInterface;
 
 /**
  * Class ConfigTestCase
