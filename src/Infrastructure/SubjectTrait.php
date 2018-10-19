@@ -1,10 +1,10 @@
 <?php
 
-namespace Wearesho\Pvbki\Identifications;
+namespace Wearesho\Pvbki\Infrastructure;
 
 /**
  * Class Subject
- * @package Wearesho\Pvbki\Identifications
+ * @package Wearesho\Pvbki\Infrastructure
  */
 trait SubjectTrait
 {
