@@ -1,10 +1,10 @@
 <?php
 
-namespace Wearesho\Pvbki;
+namespace Wearesho\Pvbki\Infrastructure;
 
 /**
  * Class BaseCollection
- * @package Wearesho\Pvbki
+ * @package Wearesho\Pvbki\Infrastructure
  */
 abstract class BaseCollection extends \ArrayObject implements \JsonSerializable
 {
