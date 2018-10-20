@@ -8,6 +8,15 @@ namespace Wearesho\Pvbki;
  */
 class StatementReport implements \JsonSerializable
 {
+    /** @var bool */
+    protected $protection;
+
+    /** @var \DateTimeInterface */
+    protected $generated;
+
+    /** @var string */
+    protected $powered;
+
     /** @var Collections\Errors */
     protected $errors;
 
@@ -42,6 +51,9 @@ class StatementReport implements \JsonSerializable
     protected $scoring;
 
     public function __construct(
+        bool $protection,
+        \DateTimeInterface $generated,
+        string $powered,
         Collections\Errors $errors,
         Elements\Subject $subject,
         Collections\Identifiers $identifications,
@@ -54,6 +66,9 @@ class StatementReport implements \JsonSerializable
         Collections\Events $events,
         ?Elements\Scoring $scoring
     ) {
+        $this->protection = $protection;
+        $this->generated = $generated;
+        $this->powered = $powered;
         $this->errors = $errors;
         $this->subject = $subject;
         $this->identifications = $identifications;
@@ -70,6 +85,21 @@ class StatementReport implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return get_object_vars($this);
+    }
+
+    public function isProtection(): bool
+    {
+        return $this->protection;
+    }
+
+    public function getGenerated(): \DateTimeInterface
+    {
+        return $this->generated;
+    }
+
+    public function getPowered(): string
+    {
+        return $this->powered;
     }
 
     public function getErrors(): Collections\Errors

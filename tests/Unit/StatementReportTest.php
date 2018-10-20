@@ -20,6 +20,9 @@ class StatementReportTest extends TestCase
     protected function setUp(): void
     {
         $this->fakeStatementReport = new Pvbki\StatementReport(
+            true,
+            Carbon::make('2018-12-12'),
+            'powered',
             new Pvbki\Collections\Errors([
                 new Pvbki\Elements\Error(
                     'code',
@@ -163,6 +166,9 @@ class StatementReportTest extends TestCase
     {
         $this->assertArraySubset(
             [
+                'protection' => true,
+                'generated' => Carbon::make('2018-12-12'),
+                'powered' => 'powered',
                 'errors' => new Pvbki\Collections\Errors([
                     new Pvbki\Elements\Error(
                         'code',
@@ -302,6 +308,21 @@ class StatementReportTest extends TestCase
             ],
             $this->fakeStatementReport->jsonSerialize()
         );
+    }
+
+    public function testIsProtection(): void
+    {
+        $this->assertEquals(true, $this->fakeStatementReport->isProtection());
+    }
+
+    public function testGetGenerated(): void
+    {
+        $this->assertEquals('2018-12-12', Carbon::make($this->fakeStatementReport->getGenerated())->toDateString());
+    }
+
+    public function testGetPowered(): void
+    {
+        $this->assertEquals('powered', $this->fakeStatementReport->getPowered());
     }
 
     public function testGetContracts(): void
