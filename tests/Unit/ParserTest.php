@@ -21,4 +21,9 @@ class ParserTest extends TestCase
     {
         $this->fakeParser = new Parser();
     }
+
+    public function testParse(): void
+    {
+        $report = $this->fakeParser->parse(file_get_contents(dirname(__DIR__) . '/Mocks/StatementReport.xml'));
+    }
 }

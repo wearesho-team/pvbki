@@ -138,6 +138,12 @@ class Parser
 
             $item = $element->{$rule->getArguments()[0]};
 
+            if (empty($item)) {
+                $response[] = null;
+
+                continue;
+            }
+
             switch ($rule->getType()->getValue()) {
                 case Enums\RuleType::STRING:
                     $response[] = (string)$item;
@@ -151,8 +157,6 @@ class Parser
                 case Enums\RuleType::DATETIME:
                     $response[] = Carbon::make((string)$item);
                     break;
-                default:
-                    $response[] = null;
             }
         }
 
