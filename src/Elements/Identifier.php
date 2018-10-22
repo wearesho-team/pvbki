@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki\Elements;
 
 use Wearesho\Pvbki;
+use Wearesho\Pvbki\Collections\RuleCollection;
 
 /**
  * Class Identifier
@@ -47,6 +48,22 @@ class Identifier extends Pvbki\Infrastructure\Element
         $this->registrationDate = $registrationDate;
         $this->expirationDate = $expirationDate;
         $this->authority = $authority;
+    }
+
+    public static function arguments(): RuleCollection
+    {
+        return new RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::NUMBER),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::REGISTRATION_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::EXPIRATION_DATE),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::ISSUED_BY_UA,
+                static::ISSUED_BY_RU,
+                static::ISSUED_BY_EN
+            ),
+        ]);
     }
 
     public function getTypeId(): ?int

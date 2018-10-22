@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Summary
  * @package Wearesho\Pvbki\Elements
  */
-class Summary extends Element
+class Summary extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Summary';
     public const CATEGORY = 'category';
@@ -39,6 +39,17 @@ class Summary extends Element
         $this->code = $code;
         $this->count = $count;
         $this->amount = $amount;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CATEGORY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::VALUE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CODE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::COUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::AMOUNT),
+        ]);
     }
 
     public function getCategory(): string

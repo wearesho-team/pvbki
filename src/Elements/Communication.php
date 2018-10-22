@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Communication
  * @package Wearesho\Pvbki\Elements
  */
-class Communication extends Element
+class Communication extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Communication';
     public const TYPE_ID = 'typeId';
@@ -24,6 +24,14 @@ class Communication extends Element
     {
         $this->value = $value;
         $this->typeId = $typeId;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::VALUE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
+        ]);
     }
 
     public function getTypeId(): ?int

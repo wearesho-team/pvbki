@@ -43,6 +43,16 @@ class Address extends Pvbki\Infrastructure\Element
         $this->postalCode = $postalCode;
     }
 
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::LOCATION_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::TRANSLATE(), static::STREET_UA, static::STREET_RU, static::STREET_EN),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::POSTAL_CODE),
+        ]);
+    }
+
     public function getTypeId(): ?int
     {
         return $this->typeId;

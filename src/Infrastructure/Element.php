@@ -2,6 +2,7 @@
 
 namespace Wearesho\Pvbki\Infrastructure;
 
+use Wearesho\Pvbki\Collections\RuleCollection;
 use Wearesho\Pvbki\Interrelations;
 
 /**
@@ -21,4 +22,11 @@ abstract class Element implements Interrelations\ElementInterface
     {
         return static::ROOT;
     }
+
+    /**
+     * Need rules for parser
+     *
+     * @return RuleCollection
+     */
+    abstract public static function arguments(): RuleCollection;
 }

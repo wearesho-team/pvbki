@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Scoring
  * @package Wearesho\Pvbki\Elements
  */
-class Scoring extends Element
+class Scoring extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Scoring';
     public const DEGREE = 'Degree';
@@ -34,6 +34,16 @@ class Scoring extends Element
         $this->score = $score;
         $this->faultChance = $faultChance;
         $this->adverse = $adverse;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::DEGREE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::SCORE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::FAULT_CHANCE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::ADVERSE),
+        ]);
     }
 
     public function getDegree(): ?string

@@ -15,12 +15,13 @@ class Collateral extends Pvbki\Infrastructure\Element
     public const TYPE_ID = 'typeId';
     public const VALUE = 'value';
     public const CURRENCY = 'currency';
+    public const ADDRESS_TYPE_ID = 'address-typeId';
     public const LOCATION_ID = 'locationId';
     public const STREET_UA = 'streetUA';
     public const STREET_RU = 'streetRU';
     public const STREET_EN = 'streetEN';
     public const POSTAL_CODE = 'postalCode';
-    public const IDENTIFICATION_TYPE_ID = 'identificationTypeId';
+    public const IDENTIFICATION_TYPE_ID = 'identification-typeId';
     public const NUMBER = 'number';
     public const REGISTRATION_DATE = 'registrationDate';
     public const ISSUE_DATE = 'issueDate';
@@ -101,6 +102,31 @@ class Collateral extends Pvbki\Infrastructure\Element
         $this->issueDate = $issueDate;
         $this->expirationDate = $expirationDate;
         $this->authority = $authority;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CONTRACT_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::VALUE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CURRENCY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::ADDRESS_TYPE_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::LOCATION_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::TRANSLATE(), static::STREET_UA, static::STREET_RU, static::STREET_EN),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::POSTAL_CODE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::IDENTIFICATION_TYPE_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::NUMBER),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::REGISTRATION_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::ISSUE_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::EXPIRATION_DATE),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::AUTHORITY_UA,
+                static::AUTHORITY_RU,
+                static::AUTHORITY_EN
+            ),
+        ]);
     }
 
     public function getContractId(): ?string

@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Error
  * @package Wearesho\Pvbki\Elements
  */
-class Error extends Element
+class Error extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'BackError';
     public const CODE = 'FaultCode';
@@ -29,6 +29,15 @@ class Error extends Element
         $this->code = $code;
         $this->message = $message;
         $this->type = $type;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CODE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::MESSAGE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::TYPE),
+        ]);
     }
 
     public function getCode(): ?string

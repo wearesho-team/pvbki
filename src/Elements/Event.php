@@ -2,14 +2,19 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Event
  * @package Wearesho\Pvbki\Elements
  */
-class Event extends Element
+class Event extends Pvbki\Infrastructure\Element
 {
+    public const ROOT = 'Event';
+    public const NAME = 'event';
+    public const WHEN = 'when';
+    public const PROVIDER = 'provider';
+
     /** @var string */
     protected $name;
 
@@ -24,6 +29,15 @@ class Event extends Element
         $this->name = $name;
         $this->when = $when;
         $this->provider = $provider;
+    }
+    
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::NAME),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::WHEN),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PROVIDER),
+        ]);
     }
 
     public function getName(): string

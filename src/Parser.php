@@ -3,6 +3,15 @@
 namespace Wearesho\Pvbki;
 
 use Carbon\Carbon;
+use Wearesho\Pvbki\Collections\Events;
+use Wearesho\Pvbki\Collections\Identifiers;
+use Wearesho\Pvbki\Collections\RuleCollection;
+use Wearesho\Pvbki\Elements\Error;
+use Wearesho\Pvbki\Elements\Scoring;
+use Wearesho\Pvbki\Elements\Subject;
+use Wearesho\Pvbki\Enums\RuleType;
+use Wearesho\Pvbki\Infrastructure\BaseCollection;
+use Wearesho\Pvbki\Infrastructure\Element;
 use Wearesho\Pvbki\Sentence\Translation;
 
 /**
@@ -31,7 +40,7 @@ class Parser
 
         $errors = new Collections\Errors();
 
-        $errorXmlCollection = $this->domDocument->getElementsByTagName(Error::ROOT);
+        $errorXmlCollection = $this->domDocument->getElementsByTagName(Elements\Error::ROOT);
 
         /** @var \DOMElement $errorXml */
         foreach ($errorXmlCollection as $errorXml) {
@@ -50,169 +59,82 @@ class Parser
         // todo: add schema validation
 
         $attributes = $this->simpleXmlDocument->attributes();
-
-        return new StatementReport(
+        $report = new StatementReport(
             (bool)$attributes[StatementReport::PROTECTION],
-            Carbon::make($attributes[StatementReport::GENERATED]),
+            Carbon::make((string)$attributes[StatementReport::GENERATED]),
             (string)$attributes[StatementReport::POWERED],
             $errors,
-            new Elements\Subject(...$this->fetchElements($this->simpleXmlDocument->{Elements\Subject::tag()}, [
-                [Elements\Subject::REQUEST_ID, static::STRING,],
-                [Elements\Subject::LAST_UPDATE, static::DATE,],
-                [Elements\Subject::ENTITY, static::STRING,],
-                [Elements\Subject::GENDER, static::INT,],
-                [
-                    [Elements\Subject::SURNAME_UA, Elements\Subject::SURNAME_RU, Elements\Subject::SURNAME_EN,],
-                    static::TRANSLATION,
-                ],
-                [
-                    [Elements\Subject::NAME_UA, Elements\Subject::NAME_RU, Elements\Subject::NAME_EN,],
-                    static::TRANSLATION,
-                ],
-                [
-                    [
-                        Elements\Subject::PATRONYMIC_UA,
-                        Elements\Subject::PATRONYMIC_RU,
-                        Elements\Subject::PATRONYMIC_EN,
-                    ],
-                    static::TRANSLATION,
-                ],
-                [
-                    [
-                        Elements\Subject::BIRTH_SURNAME_UA,
-                        Elements\Subject::BIRTH_SURNAME_RU,
-                        Elements\Subject::BIRTH_SURNAME_EN,
-                    ],
-                    static::TRANSLATION,
-                ],
-                [Elements\Subject::CLASSIFICATION, static::INT,],
-                [Elements\Subject::BIRTH_DATE, static::DATE,],
-                [
-                    [
-                        Elements\Subject::BIRTH_PLACE_UA,
-                        Elements\Subject::BIRTH_PLACE_RU,
-                        Elements\Subject::BIRTH_PLACE_EN,
-                    ],
-                    static::TRANSLATION,
-                ],
-                [Elements\Subject::RESIDENCY, static::INT,],
-                [Elements\Subject::CITIZENSHIP, static::INT,],
-                [Elements\Subject::NEGATIVE_STATUS, static::INT,],
-                [Elements\Subject::EDUCATION, static::INT,],
-                [Elements\Subject::MARITAL_STATUS, static::INT,],
-                [Elements\Subject::STATUS_ID, static::INT,],
-                [
-                    [Elements\Subject::FULL_NAME_UA, Elements\Subject::FULL_NAME_RU, Elements\Subject::FULL_NAME_EN,],
-                    static::TRANSLATION,
-                ],
-                [
-                    [
-                        Elements\Subject::ABBREVIATION_UA,
-                        Elements\Subject::ABBREVIATION_RU,
-                        Elements\Subject::ABBREVIATION_EN,
-                    ],
-                    static::TRANSLATION,
-                ],
-                [Elements\Subject::OWNERSHIP, static::INT,],
-                [Elements\Subject::REGISTRATION_DATE, static::DATE,],
-                [Elements\Subject::ECONOMIC_ACTIVITY, static::INT,],
-                [Elements\Subject::EMPLOYEE_COUNT, static::INT,],
-            ])),
-            new Collections\Identifiers(array_map(function (\SimpleXMLElement $identifier): Elements\Identifier {
-                return new Elements\Identifier(...$this->fetchElements($identifier, [
-                    [Elements\Identifier::TYPE_ID, static::INT,],
-                    [Elements\Identifier::NUMBER, static::STRING,],
-                    [Elements\Identifier::REGISTRATION_DATE, static::DATE,],
-                    [Elements\Identifier::EXPIRATION_DATE, static::DATE,],
-                    [
-                        [
-                            Elements\Identifier::ISSUED_BY_UA,
-                            Elements\Identifier::ISSUED_BY_RU,
-                            Elements\Identifier::ISSUED_BY_EN,
-                        ],
-                        static::TRANSLATION,
-                    ],
-                ]));
-            }, $this->xmlToArray(Elements\Identifier::class))),
-            new Collections\Communications(
-                array_map(function (\SimpleXMLElement $communication): Elements\Communication {
-                    return new Elements\Communication(...$this->fetchElements($communication, [
-                        [Elements\Communication::VALUE, static::STRING,],
-                        [Elements\Communication::TYPE_ID, static::INT,],
-                    ]));
-                }, $this->xmlToArray(Elements\Communication::class))
-            ),
-            new Collections\Addresses(array_map(function (\SimpleXMLElement $address): Elements\Address {
-                return new Elements\Address(...$this->fetchElements($address, [
-                    [Elements\Address::LOCATION_ID, static::INT,],
-                    [Elements\Address::TYPE_ID, static::INT,],
-                    [
-                        [Elements\Address::STREET_UA, Elements\Address::STREET_RU, Elements\Address::STREET_EN,],
-                        static::TRANSLATION,
-                    ],
-                    [Elements\Address::POSTAL_CODE, static::STRING,],
-                ]));
-            }, $this->xmlToArray(Elements\Address::class))),
-            new Collections\Dependants(array_map(function (\SimpleXMLElement $dependant): Elements\Dependant {
-                return new Elements\Dependant(...$this->fetchElements($dependant, [
-                    [Elements\Dependant::COUNT, static::INT,],
-                    [Elements\Dependant::TYPE_ID, static::INT,],
-                ]));
-            }, $this->xmlToArray(Elements\Dependant::class))),
-            new Collections\MonthlyIncomes(
-                array_map(function (\SimpleXMLElement $monthlyIncome): Elements\MonthlyIncome {
-                    return new Elements\MonthlyIncome(...$this->fetchElements($monthlyIncome, [
-                        [Elements\MonthlyIncome::VALUE, static::FLOAT,],
-                        [Elements\MonthlyIncome::CURRENCY, static::STRING,],
-                    ]));
-                }, $this->xmlToArray(Elements\MonthlyIncome::class))
-            ),
-            new Collections\Summaries(array_map(function (\SimpleXMLElement $summary): Elements\Summary {
-                return new Elements\Summary(...$this->fetchElements($summary, [
-                    [Elements\Summary::CATEGORY, static::STRING,],
-                    [Elements\Summary::VALUE, static::INT,],
-                    [Elements\Summary::CODE, static::STRING,],
-                    [Elements\Summary::COUNT, static::INT,],
-                    [Elements\Summary::AMOUNT, static::FLOAT,],
-                ]));
-            }, $this->xmlToArray(Elements\Summary::class))),
-            new Collections\Contracts(array_map(function (\SimpleXMLElement $contract): Elements\Contract {
-                return new Elements\Contract(...$this->fetchElements($contract, [
+            new Elements\Subject(...$this->fetchElements(
+                $this->simpleXmlDocument->{Elements\Subject::tag()},
+                Subject::arguments()
+            )),
+            $this->fillCollection(new Collections\Identifiers()),
+            $this->fillCollection(new Collections\Communications()),
+            $this->fillCollection(new Collections\Addresses()),
+            $this->fillCollection(new Collections\Dependants()),
+            $this->fillCollection(new Collections\MonthlyIncomes()),
+            $this->fillCollection(new Collections\Summaries()),
+            $this->fillCollection(new Collections\Contracts()),
+            $this->fillCollection(new Events()),
+            new Scoring(...$this->fetchElements(
+                $this->simpleXmlDocument->{Scoring::tag()},
+                Scoring::arguments()
+            ))
+        );
 
-                ]));
-            }, $this->xmlToArray(Elements\Contract::class)))
+        // todo: fill records and collaterals
+
+        return $report;
+    }
+
+    private function fillCollection(BaseCollection $collection): BaseCollection
+    {
+        /** @var Element $element */
+        $element = $collection->type();
+
+        return new $collection(
+            array_map(function (\SimpleXMLElement $xml) use ($element): Element {
+                return new $element(...$this->fetchElements($xml, $element::arguments()));
+            }, $this->xmlToArray($element))
         );
     }
 
-    public function fetchElements(\SimpleXMLElement $element, array $rules): array
+    public function fetchElements(\SimpleXMLElement $element, RuleCollection $rules): array
     {
         $response = [];
 
-        // todo: need refactor
+        /** @var Rule $rule */
         foreach ($rules as $rule) {
-            if ($rule[1] === static::TRANSLATION) {
+            if ($rule->getType()->equals(RuleType::TRANSLATE())) {
                 $response[] = new Translation(
                     ...array_map(function ($code) use ($element) {
                         return (string)$element->{$code};
-                    }, $rule[0])
+                    }, $rule->getArguments())
                 );
 
                 continue;
             }
 
-            $item = $element->{$rule[0]};
+            if ($rule->getType()->equals(RuleType::COLLECTION())) {
+                $collectionName = $rule->getArguments()[0];
+                $response[] = new $collectionName();
 
-            switch ($rule[1]) {
-                case static::STRING:
+                continue;
+            }
+
+            $item = $element->{$rule->getArguments()[0]};
+
+            switch ($rule->getType()->getValue()) {
+                case RuleType::STRING:
                     $response[] = (string)$item;
                     break;
-                case static::INT:
+                case RuleType::INT:
                     $response[] = (int)$item;
                     break;
-                case static::FLOAT:
+                case RuleType::FLOAT:
                     $response[] = (float)$item;
                     break;
-                case static::DATE:
+                case RuleType::DATETIME:
                     $response[] = Carbon::make((string)$item);
                     break;
                 default:

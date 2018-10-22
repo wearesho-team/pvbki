@@ -3,7 +3,10 @@
 namespace Wearesho\Pvbki\Tests\Unit\Infrastructure;
 
 use PHPUnit\Framework\TestCase;
+use Wearesho\Pvbki\Collections\RuleCollection;
+use Wearesho\Pvbki\Enums\RuleType;
 use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki\Rule;
 
 /**
  * Class ElementTest
@@ -28,6 +31,11 @@ class ElementTest extends TestCase
             public function __construct(string $value)
             {
                 $this->value = $value;
+            }
+
+            public static function arguments(): RuleCollection
+            {
+                return new RuleCollection([new Rule(RuleType::STRING(), 'value')]);
             }
         };
     }

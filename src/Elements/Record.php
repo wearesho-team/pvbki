@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Record
  * @package Wearesho\Pvbki\Elements
  */
-class Record extends Element
+class Record extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Record';
     public const CONTRACT_ID = 'contractid';
@@ -68,6 +68,21 @@ class Record extends Element
         $this->overdueAmount = $overdueAmount;
         $this->overdueCurrency = $overdueCurrency;
         $this->overdueCount = $overdueCount;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::ACCOUNTING_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::REST_AMOUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CONTRACT_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::CREDIT_USAGE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::REST_CURRENCY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::REST_INSTALMENT_COUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::OVERDUE_AMOUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::OVERDUE_CURRENCY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::OVERDUE_COUNT),
+        ]);
     }
 
     public function getAccountingDate(): \DateTimeInterface

@@ -27,9 +27,9 @@ class Translation implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'ua' => $this->ua,
-            'ru' => $this->ru,
-            'en' => $this->en
+            'ua' => $this->ua ?: null,
+            'ru' => $this->ru ?: null,
+            'en' => $this->en ?: null,
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki\Elements;
 
 use Wearesho\Pvbki;
+use Wearesho\Pvbki\Collections\RuleCollection;
 
 /**
  * Class Subject
@@ -85,7 +86,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var int|null */
     protected $residency;
 
-    /** @var int|null */
+    /** @var string|null */
     protected $citizenShip;
 
     /** @var int|null */
@@ -131,7 +132,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?\DateTimeInterface $birthDate,
         ?Pvbki\Sentence\Translation $birthPlace,
         ?int $residency,
-        ?int $citizenShip,
+        ?string $citizenShip,
         ?int $negativeStatus,
         ?int $education,
         ?int $maritalStatus,
@@ -166,6 +167,65 @@ class Subject extends Pvbki\Infrastructure\Element
         $this->registrationDate = $registrationDate;
         $this->economicActivity = $economicActivity;
         $this->employeeCount = $employeeCount;
+    }
+
+    public static function arguments(): RuleCollection
+    {
+        return new RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::REQUEST_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::LAST_UPDATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::ENTITY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::GENDER),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::SURNAME_UA,
+                static::SURNAME_RU,
+                static::SURNAME_EN
+            ),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::TRANSLATE(), static::NAME_UA, static::NAME_RU, static::NAME_EN),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::PATRONYMIC_UA,
+                static::PATRONYMIC_RU,
+                static::PATRONYMIC_EN
+            ),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::BIRTH_SURNAME_UA,
+                static::BIRTH_SURNAME_RU,
+                static::BIRTH_SURNAME_EN
+            ),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::CLASSIFICATION),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::BIRTH_DATE),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::BIRTH_PLACE_UA,
+                static::BIRTH_PLACE_RU,
+                static::BIRTH_PLACE_EN
+            ),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::RESIDENCY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CITIZENSHIP),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::NEGATIVE_STATUS),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::EDUCATION),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::MARITAL_STATUS),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::STATUS_ID),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::FULL_NAME_UA,
+                static::FULL_NAME_RU,
+                static::FULL_NAME_EN
+            ),
+            new Pvbki\Rule(
+                Pvbki\Enums\RuleType::TRANSLATE(),
+                static::ABBREVIATION_UA,
+                static::ABBREVIATION_RU,
+                static::ABBREVIATION_EN
+            ),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::OWNERSHIP),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::REGISTRATION_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::ECONOMIC_ACTIVITY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::EMPLOYEE_COUNT),
+        ]);
     }
 
     public function getRequestId(): ?string
@@ -228,7 +288,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->residency;
     }
 
-    public function getCitizenShip(): ?int
+    public function getCitizenShip(): ?string
     {
         return $this->citizenShip;
     }

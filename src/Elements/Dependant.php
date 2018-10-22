@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Dependant
  * @package Wearesho\Pvbki\Elements
  */
-class Dependant extends Element
+class Dependant extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Dependant';
     public const COUNT = 'count';
@@ -24,6 +24,14 @@ class Dependant extends Element
     {
         $this->count = $count;
         $this->typeId = $typeId;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::COUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
+        ]);
     }
 
     public function getCount(): ?int

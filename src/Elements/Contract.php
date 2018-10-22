@@ -2,15 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Collections\Collaterals;
-use Wearesho\Pvbki\Collections\Records;
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Contract
  * @package Wearesho\Pvbki\Elements
  */
-class Contract extends Element
+class Contract extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Contract';
     public const ROLE_ID = 'roleId';
@@ -118,10 +116,10 @@ class Contract extends Element
     /** @var float|null */
     protected $overdueAmount;
 
-    /** @var Records|null */
+    /** @var Pvbki\Collections\Records|null */
     protected $records;
 
-    /** @var Collaterals|null */
+    /** @var Pvbki\Collections\Collaterals|null */
     protected $collaterals;
 
     public function __construct(
@@ -151,8 +149,8 @@ class Contract extends Element
         ?float $restAmount,
         ?int $overdueCount,
         ?float $overdueAmount,
-        ?Records $records,
-        ?Collaterals $collaterals
+        ?Pvbki\Collections\Records $records,
+        ?Pvbki\Collections\Collaterals $collaterals
     ) {
         $this->roleId = $roleId;
         $this->provider = $provider;
@@ -182,6 +180,40 @@ class Contract extends Element
         $this->overdueAmount = $overdueAmount;
         $this->records = $records;
         $this->collaterals = $collaterals;
+    }
+
+    public static function arguments(): Pvbki\Collections\RuleCollection
+    {
+        return new Pvbki\Collections\RuleCollection([
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::ROLE_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::PROVIDER),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CONTRACT_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::LAST_UPDATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PHASE_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CURRENCY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::DATE_OF_SIGNATURE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::CREDIT_PURPOSE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::NEGATIVE_STATUS),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::APPLICATION_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::START_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::EXPECTED_END_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::FACTUAL_END_DATE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::TYPE),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PAYMENT_METHOD_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PAYMENT_PERIOD_ID),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::ACTUAL_CURRENCY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::TOTAL_AMOUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::CREDIT_LIMIT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::INSTALMENT_COUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::INSTALMENT_AMOUNT_CURRENCY),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::INSTALMENT_AMOUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::REST_INSTALMENT_COUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::REST_AMOUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::OVERDUE_COUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::OVERDUE_AMOUNT),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::COLLECTION(), Pvbki\Collections\Records::class),
+            new Pvbki\Rule(Pvbki\Enums\RuleType::COLLECTION(), Pvbki\Collections\Collaterals::class),
+        ]);
     }
 
     public function getRoleId(): ?int
@@ -314,12 +346,12 @@ class Contract extends Element
         return $this->overdueAmount;
     }
 
-    public function getRecords(): ?Records
+    public function getRecords(): ?Pvbki\Collections\Records
     {
         return $this->records;
     }
 
-    public function getCollaterals(): ?Collaterals
+    public function getCollaterals(): ?Pvbki\Collections\Collaterals
     {
         return $this->collaterals;
     }
