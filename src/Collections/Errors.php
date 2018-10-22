@@ -2,13 +2,14 @@
 
 namespace Wearesho\Pvbki\Collections;
 
+use Wearesho\BaseCollection;
 use Wearesho\Pvbki;
 
 /**
  * Class Errors
  * @package Wearesho\Pvbki\Collections
  */
-class Errors extends Pvbki\Infrastructure\BaseCollection
+class Errors extends BaseCollection
 {
     public function type(): string
     {
