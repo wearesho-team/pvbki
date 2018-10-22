@@ -41,9 +41,9 @@ class Subject extends Pvbki\Infrastructure\Element
     public const FULL_NAME_UA = 'nameUA';
     public const FULL_NAME_RU = 'nameRU';
     public const FULL_NAME_EN = 'nameEN';
-    public const ABBREVIATION_NAME_UA = 'abbreviationUA';
-    public const ABBREVIATION_NAME_RU = 'abbreviationRU';
-    public const ABBREVIATION_NAME_EN = 'abbreviationEN';
+    public const ABBREVIATION_UA = 'abbreviationUA';
+    public const ABBREVIATION_RU = 'abbreviationRU';
+    public const ABBREVIATION_EN = 'abbreviationEN';
     public const OWNERSHIP = 'ownership';
     public const REGISTRATION_DATE = 'registrationDate';
     public const ECONOMIC_ACTIVITY = 'economicActivity';

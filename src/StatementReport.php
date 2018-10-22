@@ -8,6 +8,10 @@ namespace Wearesho\Pvbki;
  */
 class StatementReport implements \JsonSerializable
 {
+    public const PROTECTION = 'protection';
+    public const GENERATED = 'generated';
+    public const POWERED = 'powered';
+
     /** @var bool */
     protected $protection;
 
