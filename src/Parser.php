@@ -3,16 +3,9 @@
 namespace Wearesho\Pvbki;
 
 use Carbon\Carbon;
-use Wearesho\Pvbki\Collections\Events;
-use Wearesho\Pvbki\Collections\Identifiers;
-use Wearesho\Pvbki\Collections\RuleCollection;
-use Wearesho\Pvbki\Elements\Error;
-use Wearesho\Pvbki\Elements\Scoring;
-use Wearesho\Pvbki\Elements\Subject;
-use Wearesho\Pvbki\Enums\RuleType;
-use Wearesho\Pvbki\Infrastructure\BaseCollection;
-use Wearesho\Pvbki\Infrastructure\Element;
-use Wearesho\Pvbki\Sentence\Translation;
+use Wearesho\Pvbki\Elements\Collateral;
+use Wearesho\Pvbki\Elements\Contract;
+use Wearesho\Pvbki\Elements\Record;
 
 /**
  * Class Parser
@@ -66,7 +59,7 @@ class Parser
             $errors,
             new Elements\Subject(...$this->fetchElements(
                 $this->simpleXmlDocument->{Elements\Subject::tag()},
-                Subject::arguments()
+                Elements\Subject::arguments()
             )),
             $this->fillCollection(new Collections\Identifiers()),
             $this->fillCollection(new Collections\Communications()),
@@ -75,38 +68,59 @@ class Parser
             $this->fillCollection(new Collections\MonthlyIncomes()),
             $this->fillCollection(new Collections\Summaries()),
             $this->fillCollection(new Collections\Contracts()),
-            $this->fillCollection(new Events()),
-            new Scoring(...$this->fetchElements(
-                $this->simpleXmlDocument->{Scoring::tag()},
-                Scoring::arguments()
+            $this->fillCollection(new Collections\Events()),
+            new Elements\Scoring(...$this->fetchElements(
+                $this->simpleXmlDocument->{Elements\Scoring::tag()},
+                Elements\Scoring::arguments()
             ))
         );
 
-        // todo: fill records and collaterals
+        /** @var Contract $contract */
+        foreach ($report->getContracts() as $contract) {
+            $id = $contract->getContractId();
+
+            foreach ($this->simpleXmlDocument->{Record::tag()} as $element) {
+                if ((string)$element->{Record::CONTRACT_ID} === $id) {
+                    $contract->getRecords()->append(new Record(...$this->fetchElements(
+                        $element,
+                        Record::arguments()
+                    )));
+                }
+            }
+
+            foreach ($this->simpleXmlDocument->{Collateral::tag()} as $element) {
+                if ((string)$element->{Collateral::CONTRACT_ID} === $id) {
+                    $contract->getCollaterals()->append(new Collateral(...$this->fetchElements(
+                        $element,
+                        Collateral::arguments()
+                    )));
+                }
+            }
+        }
 
         return $report;
     }
 
-    private function fillCollection(BaseCollection $collection): BaseCollection
+    private function fillCollection(Infrastructure\BaseCollection $collection): Infrastructure\BaseCollection
     {
-        /** @var Element $element */
+        /** @var Infrastructure\Element $element */
         $element = $collection->type();
 
         return new $collection(
-            array_map(function (\SimpleXMLElement $xml) use ($element): Element {
+            array_map(function (\SimpleXMLElement $xml) use ($element): Infrastructure\Element {
                 return new $element(...$this->fetchElements($xml, $element::arguments()));
             }, $this->xmlToArray($element))
         );
     }
 
-    public function fetchElements(\SimpleXMLElement $element, RuleCollection $rules): array
+    public function fetchElements(\SimpleXMLElement $element, Collections\RuleCollection $rules): array
     {
         $response = [];
 
         /** @var Rule $rule */
         foreach ($rules as $rule) {
-            if ($rule->getType()->equals(RuleType::TRANSLATE())) {
-                $response[] = new Translation(
+            if ($rule->getType()->equals(Enums\RuleType::TRANSLATE())) {
+                $response[] = new Sentence\Translation(
                     ...array_map(function ($code) use ($element) {
                         return (string)$element->{$code};
                     }, $rule->getArguments())
@@ -115,7 +129,7 @@ class Parser
                 continue;
             }
 
-            if ($rule->getType()->equals(RuleType::COLLECTION())) {
+            if ($rule->getType()->equals(Enums\RuleType::COLLECTION())) {
                 $collectionName = $rule->getArguments()[0];
                 $response[] = new $collectionName();
 
@@ -125,16 +139,16 @@ class Parser
             $item = $element->{$rule->getArguments()[0]};
 
             switch ($rule->getType()->getValue()) {
-                case RuleType::STRING:
+                case Enums\RuleType::STRING:
                     $response[] = (string)$item;
                     break;
-                case RuleType::INT:
+                case Enums\RuleType::INT:
                     $response[] = (int)$item;
                     break;
-                case RuleType::FLOAT:
+                case Enums\RuleType::FLOAT:
                     $response[] = (float)$item;
                     break;
-                case RuleType::DATETIME:
+                case Enums\RuleType::DATETIME:
                     $response[] = Carbon::make((string)$item);
                     break;
                 default:
