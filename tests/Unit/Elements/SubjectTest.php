@@ -17,7 +17,6 @@ class SubjectTest extends TestCase
     protected const REQUEST_ID = 'request_id';
     protected const LAST_UPDATE = '2018-09-25';
     protected const ENTITY = 'entity';
-    protected const GENDER = 1;
     protected const SURNAME_UA = 'surname_ua';
     protected const SURNAME_RU = 'surname_ru';
     protected const SURNAME_EN = 'surname_en';
@@ -61,7 +60,7 @@ class SubjectTest extends TestCase
             static::REQUEST_ID,
             Carbon::parse(static::LAST_UPDATE),
             static::ENTITY,
-            static::GENDER,
+            Pvbki\Enums\Gender::MAN(),
             new Pvbki\Sentence\Translation(
                 static::SURNAME_UA,
                 static::SURNAME_RU,
@@ -119,7 +118,7 @@ class SubjectTest extends TestCase
                 'requestId' => static::REQUEST_ID,
                 'lastUpdate' => Carbon::parse(static::LAST_UPDATE),
                 'entity' => static::ENTITY,
-                'gender' => static::GENDER,
+                'gender' => Pvbki\Enums\Gender::MAN(),
                 'surname' => new Pvbki\Sentence\Translation(
                     static::SURNAME_UA,
                     static::SURNAME_RU,
@@ -279,7 +278,7 @@ class SubjectTest extends TestCase
 
     public function testGetGender(): void
     {
-        $this->assertEquals(static::GENDER, $this->fakeSubject->getGender());
+        $this->assertEquals(Pvbki\Enums\Gender::MAN(), $this->fakeSubject->getGender());
     }
 
     public function testGetEducation(): void

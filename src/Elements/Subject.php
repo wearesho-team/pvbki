@@ -58,7 +58,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $entity;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Gender */
     protected $gender;
 
     /** @var Pvbki\Sentence\Translation|null */
@@ -122,7 +122,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?string $requestId,
         ?\DateTimeInterface $lastUpdate,
         ?string $entity,
-        ?int $gender,
+        Pvbki\Enums\Gender $gender,
         ?Pvbki\Sentence\Translation $surname,
         ?Pvbki\Sentence\Translation $name,
         ?Pvbki\Sentence\Translation $patronymic,
@@ -183,7 +183,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->entity;
     }
 
-    public function getGender(): ?int
+    public function getGender(): Pvbki\Enums\Gender
     {
         return $this->gender;
     }
