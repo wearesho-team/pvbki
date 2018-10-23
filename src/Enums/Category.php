@@ -2,7 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class Category
@@ -24,7 +24,7 @@ use MyCLabs\Enum\Enum;
  * @method static Category TOTAL_AMOUNT()
  * @method static Category TYPE()
  */
-class Category extends Enum
+final class Category extends Enum
 {
     public const COLLATERAL = 'collateral';
     public const COLLATERAL_AMOUNT = 'collateralAmount';

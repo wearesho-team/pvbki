@@ -15,7 +15,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static AddressType PREVIOUS_EMPLOYMENT()
  * @method static AddressType COLLATERAL()
  */
-class AddressType extends Enum
+final class AddressType extends Enum
 {
     /**
      * Address of permanent residence or registration

@@ -11,7 +11,7 @@ use MyCLabs\Enum\Enum;
  * @method static StatementType BASE()
  * @method static StatementType SCORING()
  */
-class StatementType extends Enum
+final class StatementType extends Enum
 {
     public const BASE = 'Report-Statement';
     public const SCORING = 'Report-StatementPlus';

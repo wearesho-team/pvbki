@@ -31,5 +31,7 @@ class CategoryTest extends TestCase
         $this->assertEquals(Category::ROLE_ID(), new Category(Category::ROLE_ID));
         $this->assertEquals(Category::TOTAL_AMOUNT(), new Category(Category::TOTAL_AMOUNT));
         $this->assertEquals(Category::TYPE(), new Category(Category::TYPE));
+
+        $this->assertNull((new Category(null))->jsonSerialize());
     }
 }
