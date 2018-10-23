@@ -88,7 +88,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var int|null */
     protected $citizenShip;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\SubjectNegativeStatus */
     protected $negativeStatus;
 
     /** @var int|null */
@@ -132,7 +132,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?Pvbki\Sentence\Translation $birthPlace,
         ?int $residency,
         ?int $citizenShip,
-        ?int $negativeStatus,
+        Pvbki\Enums\SubjectNegativeStatus $negativeStatus,
         ?int $education,
         ?int $maritalStatus,
         ?int $statusId,
@@ -233,7 +233,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->citizenShip;
     }
 
-    public function getNegativeStatus(): ?int
+    public function getNegativeStatus(): Pvbki\Enums\SubjectNegativeStatus
     {
         return $this->negativeStatus;
     }
