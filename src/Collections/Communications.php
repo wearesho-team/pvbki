@@ -6,13 +6,13 @@ use Wearesho\BaseCollection;
 use Wearesho\Pvbki;
 
 /**
- * Class Events
+ * Class Communications
  * @package Wearesho\Pvbki\Collections
  */
-class Events extends BaseCollection
+class Communications extends BaseCollection
 {
     public function type(): string
     {
-        return Pvbki\Elements\Event::class;
+        return Pvbki\Elements\Communication::class;
     }
 }
