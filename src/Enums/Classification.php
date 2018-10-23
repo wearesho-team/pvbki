@@ -11,7 +11,7 @@ use MyCLabs\Enum\Enum;
  * @method static Classification INDIVIDUAL()
  * @method static Classification ENTREPRENEUR()
  */
-class Classification extends Enum
+final class Classification extends Enum
 {
     public const INDIVIDUAL = 1;
     public const ENTREPRENEUR = 2;
