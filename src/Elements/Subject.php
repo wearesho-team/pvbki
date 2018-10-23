@@ -115,7 +115,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var int|null */
     protected $economicActivity;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\EmployeeCount */
     protected $employeeCount;
 
     public function __construct(
@@ -141,7 +141,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?int $ownership,
         ?\DateTimeInterface $registrationDate,
         ?int $economicActivity,
-        ?int $employeeCount
+        Pvbki\Enums\EmployeeCount $employeeCount
     ) {
         $this->requestId = $requestId;
         $this->lastUpdate = $lastUpdate;
@@ -278,7 +278,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->economicActivity;
     }
 
-    public function getEmployeeCount(): ?int
+    public function getEmployeeCount(): Pvbki\Enums\EmployeeCount
     {
         return $this->employeeCount;
     }
