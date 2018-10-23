@@ -4,6 +4,7 @@ namespace Wearesho\Pvbki\Elements;
 
 use Wearesho\Pvbki\Collections\Collaterals;
 use Wearesho\Pvbki\Collections\Records;
+use Wearesho\Pvbki\Enums\ContractType;
 use Wearesho\Pvbki\Infrastructure\Element;
 
 /**
@@ -79,7 +80,7 @@ class Contract extends Element
     /** @var \DateTimeInterface|null */
     protected $factualEndDate;
 
-    /** @var string|null */
+    /** @var ContractType */
     protected $type;
 
     /** @var int|null */
@@ -138,7 +139,7 @@ class Contract extends Element
         ?\DateTimeInterface $startDate,
         ?\DateTimeInterface $expectedEndDate,
         ?\DateTimeInterface $factualEndDate,
-        ?string $type,
+        ContractType $type,
         ?int $paymentMethodId,
         ?int $paymentPeriodId,
         ?string $actualCurrency,
@@ -249,7 +250,7 @@ class Contract extends Element
         return $this->factualEndDate;
     }
 
-    public function getType(): ?string
+    public function getType(): ContractType
     {
         return $this->type;
     }

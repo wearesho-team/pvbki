@@ -7,6 +7,7 @@ use Wearesho\Pvbki\Collections\Collaterals;
 use Wearesho\Pvbki\Collections\Records;
 use Wearesho\Pvbki\Elements\Contract;
 use PHPUnit\Framework\TestCase;
+use Wearesho\Pvbki\Enums\ContractType;
 
 /**
  * Class ContractTest
@@ -29,7 +30,6 @@ class ContractTest extends TestCase
     protected const START_DATE = '2017-09-25';
     protected const EXPECTED_END_DATE = '2020-10-22';
     protected const FACTUAL_END_DATE = '2020-11-25';
-    protected const TYPE = 'type';
     protected const PAYMENT_METHOD_ID = 5;
     protected const PAYMENT_PERIOD_ID = 6;
     protected const ACTUAL_CURRENCY = 'actual_currency';
@@ -62,7 +62,7 @@ class ContractTest extends TestCase
             Carbon::parse(static::START_DATE),
             Carbon::parse(static::EXPECTED_END_DATE),
             Carbon::parse(static::FACTUAL_END_DATE),
-            static::TYPE,
+            ContractType::INSTALMENT(),
             static::PAYMENT_METHOD_ID,
             static::PAYMENT_PERIOD_ID,
             static::ACTUAL_CURRENCY,
@@ -97,7 +97,7 @@ class ContractTest extends TestCase
                 'startDate' => Carbon::parse(static::START_DATE),
                 'expectedEndDate' => Carbon::parse(static::EXPECTED_END_DATE),
                 'factualEndDate' => Carbon::parse(static::FACTUAL_END_DATE),
-                'type' => static::TYPE,
+                'type' => ContractType::INSTALMENT(),
                 'paymentMethodId' => static::PAYMENT_METHOD_ID,
                 'paymentPeriodId' => static::PAYMENT_PERIOD_ID,
                 'actualCurrency' => static::ACTUAL_CURRENCY,
@@ -246,7 +246,7 @@ class ContractTest extends TestCase
 
     public function testGetType(): void
     {
-        $this->assertEquals(static::TYPE, $this->fakeContract->getType());
+        $this->assertEquals(ContractType::INSTALMENT(), $this->fakeContract->getType());
     }
 
     public function testGetInstalmentCount(): void
