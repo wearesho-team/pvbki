@@ -3,16 +3,13 @@
 namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use Carbon\Carbon;
-use Wearesho\Pvbki\Collections\Collaterals;
-use Wearesho\Pvbki\Collections\Records;
-use Wearesho\Pvbki\Elements\Contract;
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Enums\CreditPurpose;
+use Wearesho\Pvbki;
 
 /**
  * Class ContractTest
  * @package Wearesho\Pvbki\Tests\Unit\Elements
- * @coversDefaultClass Contract
+ * @coversDefaultClass \Wearesho\Pvbki\Elements\Contract
  * @internal
  */
 class ContractTest extends TestCase
@@ -43,12 +40,12 @@ class ContractTest extends TestCase
     protected const OVERDUE_COUNT = 7;
     protected const OVERDUE_AMOUNT = 8;
 
-    /** @var Contract */
+    /** @var Pvbki\Elements\Contract */
     protected $fakeContract;
 
     protected function setUp(): void
     {
-        $this->fakeContract = new Contract(
+        $this->fakeContract = new Pvbki\Elements\Contract(
             static::ROLE_ID,
             static::PROVIDER,
             static::CONTRACT_ID,
@@ -56,7 +53,7 @@ class ContractTest extends TestCase
             static::PHASE_ID,
             static::CURRENCY,
             Carbon::parse(static::DATE_OF_SIGNATURE),
-            CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
+            Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
             static::NEGATIVE_STATUS,
             Carbon::parse(static::APPLICATION_DATE),
             Carbon::parse(static::START_DATE),
@@ -75,8 +72,8 @@ class ContractTest extends TestCase
             static::REST_AMOUNT,
             static::OVERDUE_COUNT,
             static::OVERDUE_AMOUNT,
-            new Records([]),
-            new Collaterals([])
+            new Pvbki\Collections\Records([]),
+            new Pvbki\Collections\Collaterals([])
         );
     }
 
@@ -91,7 +88,7 @@ class ContractTest extends TestCase
                 'phaseId' => static::PHASE_ID,
                 'currency' => static::CURRENCY,
                 'dateOfSignature' => Carbon::parse(static::DATE_OF_SIGNATURE),
-                'creditPurpose' => CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
+                'creditPurpose' => Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
                 'negativeStatus' => static::NEGATIVE_STATUS,
                 'applicationDate' => Carbon::parse(static::APPLICATION_DATE),
                 'startDate' => Carbon::parse(static::START_DATE),
@@ -110,8 +107,8 @@ class ContractTest extends TestCase
                 'restAmount' => static::REST_AMOUNT,
                 'overdueCount' => static::OVERDUE_COUNT,
                 'overdueAmount' => static::OVERDUE_AMOUNT,
-                'records' => new Records([]),
-                'collaterals' => new Collaterals([])
+                'records' => new Pvbki\Collections\Records([]),
+                'collaterals' => new Pvbki\Collections\Collaterals([])
             ],
             $this->fakeContract->jsonSerialize()
         );
@@ -145,7 +142,10 @@ class ContractTest extends TestCase
 
     public function testGetCreditPurpose(): void
     {
-        $this->assertEquals(CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(), $this->fakeContract->getCreditPurpose());
+        $this->assertEquals(
+            Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
+            $this->fakeContract->getCreditPurpose()
+        );
     }
 
     public function testGetStartDate(): void
@@ -155,7 +155,7 @@ class ContractTest extends TestCase
 
     public function testGetRecords(): void
     {
-        $this->assertEquals(new Records([]), $this->fakeContract->getRecords());
+        $this->assertEquals(new Pvbki\Collections\Records([]), $this->fakeContract->getRecords());
     }
 
     public function testGetActualCurrency(): void
@@ -183,7 +183,7 @@ class ContractTest extends TestCase
 
     public function testGetCollaterals(): void
     {
-        $this->assertEquals(new Collaterals([]), $this->fakeContract->getCollaterals());
+        $this->assertEquals(new Pvbki\Collections\Collaterals([]), $this->fakeContract->getCollaterals());
     }
 
     public function testGetRestInstalmentCount(): void
