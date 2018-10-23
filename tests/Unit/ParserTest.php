@@ -22,11 +22,9 @@ class ParserTest extends TestCase
         $this->fakeParser = new Pvbki\Parser();
     }
 
-    public function testParse(): void
+    public function testParseStatementReportPlus(): void
     {
         $report = $this->fakeParser->parse(file_get_contents(dirname(__DIR__) . '/Mocks/StatementReportPlus.xml'));
-
-        $this->assertEquals('1928100592', $report->getSubject()->getRequestId());
 
         $this->assertEquals(
             new Pvbki\StatementReport(
@@ -636,6 +634,33 @@ class ParserTest extends TestCase
                 new Pvbki\Elements\Scoring('C-', -1478, 87.0745, 'REQUEST|SOCIAL|OVERDUE')
             ),
             $report
+        );
+    }
+
+    public function testParseStatementReport(): void
+    {
+        $report = $this->fakeParser->parse(file_get_contents(dirname(__DIR__) . '/Mocks/StatementReport.xml'));
+
+        $this->assertEquals(
+            new Pvbki\Collections\Collaterals([
+                new Pvbki\Elements\Collateral(
+                    3,
+                    30,
+                    38675.0000,
+                    'UAH',
+                    null,
+                    null,
+                    new Pvbki\Sentence\Translation(null, null, null),
+                    null,
+                    2,
+                    '1928100592',
+                    null,
+                    null,
+                    null,
+                    null
+                ),
+            ]),
+            $collaterals
         );
     }
 }

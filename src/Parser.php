@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Wearesho\Pvbki\Elements\Collateral;
 use Wearesho\Pvbki\Elements\Contract;
 use Wearesho\Pvbki\Elements\Record;
-use Wearesho\Pvbki\Enums\RuleType;
 
 /**
  * Class Parser
