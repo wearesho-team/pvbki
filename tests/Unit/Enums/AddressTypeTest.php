@@ -2,9 +2,8 @@
 
 namespace Wearesho\Pvbki\Tests\Unit\Enums;
 
-use Wearesho\Pvbki\Enums\AddressType;
-
 use PHPUnit\Framework\TestCase;
+use Wearesho\Pvbki\Enums\AddressType;
 
 /**
  * Class AddressTypeTest
@@ -22,5 +21,7 @@ class AddressTypeTest extends TestCase
         $this->assertEquals(AddressType::CURRENT_EMPLOYMENT(), new AddressType(AddressType::CURRENT_EMPLOYMENT));
         $this->assertEquals(AddressType::PREVIOUS_EMPLOYMENT(), new AddressType(AddressType::PREVIOUS_EMPLOYMENT));
         $this->assertEquals(AddressType::COLLATERAL(), new AddressType(AddressType::COLLATERAL));
+
+        $this->assertNull((new AddressType(null))->jsonSerialize());
     }
 }

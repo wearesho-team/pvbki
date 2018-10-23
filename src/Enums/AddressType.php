@@ -2,7 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class AddressType
@@ -21,22 +21,27 @@ class AddressType extends Enum
      * Address of permanent residence or registration
      */
     public const REGISTRATION = 1;
+
     /**
      * Factual address
      */
     public const FACTUAL = 2;
+
     /**
      * Postal address
      */
     public const POSTAL = 3;
+
     /**
      * Address of employment place
      */
     public const CURRENT_EMPLOYMENT = 4;
+
     /**
      * Address of previous employment place
      */
     public const PREVIOUS_EMPLOYMENT = 5;
+
     /**
      * Address of collateral
      */
