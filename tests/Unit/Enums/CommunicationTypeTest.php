@@ -22,5 +22,7 @@ class CommunicationTypeTest extends TestCase
         $this->assertEquals(CommunicationType::FAX(), new CommunicationType(CommunicationType::FAX));
         $this->assertEquals(CommunicationType::MAIL(), new CommunicationType(CommunicationType::MAIL));
         $this->assertEquals(CommunicationType::WEB(), new CommunicationType(CommunicationType::WEB));
+
+        $this->assertNull((new CommunicationType(null))->jsonSerialize());
     }
 }
