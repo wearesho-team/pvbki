@@ -2,15 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Collections\Collaterals;
-use Wearesho\Pvbki\Collections\Records;
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Contract
  * @package Wearesho\Pvbki\Elements
  */
-class Contract extends Element
+class Contract extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Contract';
     public const ROLE_ID = 'roleId';
@@ -118,10 +116,10 @@ class Contract extends Element
     /** @var float|null */
     protected $overdueAmount;
 
-    /** @var Records|null */
+    /** @var Pvbki\Collections\Records|null */
     protected $records;
 
-    /** @var Collaterals|null */
+    /** @var Pvbki\Collections\Collaterals|null */
     protected $collaterals;
 
     public function __construct(
@@ -151,8 +149,8 @@ class Contract extends Element
         ?float $restAmount,
         ?int $overdueCount,
         ?float $overdueAmount,
-        ?Records $records,
-        ?Collaterals $collaterals
+        Pvbki\Collections\Records $records,
+        Pvbki\Collections\Collaterals $collaterals
     ) {
         $this->roleId = $roleId;
         $this->provider = $provider;
@@ -314,12 +312,12 @@ class Contract extends Element
         return $this->overdueAmount;
     }
 
-    public function getRecords(): ?Records
+    public function getRecords(): Pvbki\Collections\Records
     {
         return $this->records;
     }
 
-    public function getCollaterals(): ?Collaterals
+    public function getCollaterals(): Pvbki\Collections\Collaterals
     {
         return $this->collaterals;
     }
