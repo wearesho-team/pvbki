@@ -61,6 +61,9 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static static R_65()
  * @method static static R_90()
  * @method static static R_91()
+ *
+ * @todo: must be implement as separated package with standardized collateral types
+ * @todo: refactor constants' names
  */
 final class CollateralType extends Enum implements NullableEnum
 {
