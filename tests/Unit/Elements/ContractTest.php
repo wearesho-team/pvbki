@@ -3,16 +3,13 @@
 namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use Carbon\Carbon;
-use Wearesho\Pvbki\Collections\Collaterals;
-use Wearesho\Pvbki\Collections\Records;
-use Wearesho\Pvbki\Elements\Contract;
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Enums\ContractType;
+use Wearesho\Pvbki;
 
 /**
  * Class ContractTest
  * @package Wearesho\Pvbki\Tests\Unit\Elements
- * @coversDefaultClass Contract
+ * @coversDefaultClass \Wearesho\Pvbki\Elements\Contract
  * @internal
  */
 class ContractTest extends TestCase
@@ -43,12 +40,12 @@ class ContractTest extends TestCase
     protected const OVERDUE_COUNT = 7;
     protected const OVERDUE_AMOUNT = 8;
 
-    /** @var Contract */
+    /** @var Pvbki\Elements\Contract */
     protected $fakeContract;
 
     protected function setUp(): void
     {
-        $this->fakeContract = new Contract(
+        $this->fakeContract = new Pvbki\Elements\Contract(
             static::ROLE_ID,
             static::PROVIDER,
             static::CONTRACT_ID,
@@ -62,7 +59,7 @@ class ContractTest extends TestCase
             Carbon::parse(static::START_DATE),
             Carbon::parse(static::EXPECTED_END_DATE),
             Carbon::parse(static::FACTUAL_END_DATE),
-            ContractType::INSTALMENT(),
+            Pvbki\Enums\ContractType::INSTALMENT(),
             static::PAYMENT_METHOD_ID,
             static::PAYMENT_PERIOD_ID,
             static::ACTUAL_CURRENCY,
@@ -75,8 +72,8 @@ class ContractTest extends TestCase
             static::REST_AMOUNT,
             static::OVERDUE_COUNT,
             static::OVERDUE_AMOUNT,
-            new Records([]),
-            new Collaterals([])
+            new Pvbki\Collections\Records([]),
+            new Pvbki\Collections\Collaterals([])
         );
     }
 
@@ -97,7 +94,7 @@ class ContractTest extends TestCase
                 'startDate' => Carbon::parse(static::START_DATE),
                 'expectedEndDate' => Carbon::parse(static::EXPECTED_END_DATE),
                 'factualEndDate' => Carbon::parse(static::FACTUAL_END_DATE),
-                'type' => ContractType::INSTALMENT(),
+                'type' => Pvbki\Enums\ContractType::INSTALMENT(),
                 'paymentMethodId' => static::PAYMENT_METHOD_ID,
                 'paymentPeriodId' => static::PAYMENT_PERIOD_ID,
                 'actualCurrency' => static::ACTUAL_CURRENCY,
@@ -110,8 +107,8 @@ class ContractTest extends TestCase
                 'restAmount' => static::REST_AMOUNT,
                 'overdueCount' => static::OVERDUE_COUNT,
                 'overdueAmount' => static::OVERDUE_AMOUNT,
-                'records' => new Records([]),
-                'collaterals' => new Collaterals([])
+                'records' => new Pvbki\Collections\Records([]),
+                'collaterals' => new Pvbki\Collections\Collaterals([])
             ],
             $this->fakeContract->jsonSerialize()
         );
@@ -155,7 +152,7 @@ class ContractTest extends TestCase
 
     public function testGetRecords(): void
     {
-        $this->assertEquals(new Records([]), $this->fakeContract->getRecords());
+        $this->assertEquals(new Pvbki\Collections\Records([]), $this->fakeContract->getRecords());
     }
 
     public function testGetActualCurrency(): void
@@ -183,7 +180,7 @@ class ContractTest extends TestCase
 
     public function testGetCollaterals(): void
     {
-        $this->assertEquals(new Collaterals([]), $this->fakeContract->getCollaterals());
+        $this->assertEquals(new Pvbki\Collections\Collaterals([]), $this->fakeContract->getCollaterals());
     }
 
     public function testGetRestInstalmentCount(): void
@@ -246,7 +243,7 @@ class ContractTest extends TestCase
 
     public function testGetType(): void
     {
-        $this->assertEquals(ContractType::INSTALMENT(), $this->fakeContract->getType());
+        $this->assertEquals(Pvbki\Enums\ContractType::INSTALMENT(), $this->fakeContract->getType());
     }
 
     public function testGetInstalmentCount(): void
