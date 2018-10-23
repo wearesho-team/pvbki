@@ -55,7 +55,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $lastUpdate;
 
-    /** @var string|null */
+    /** @var Pvbki\Enums\Entity */
     protected $entity;
 
     /** @var int|null */
@@ -121,7 +121,7 @@ class Subject extends Pvbki\Infrastructure\Element
     public function __construct(
         ?string $requestId,
         ?\DateTimeInterface $lastUpdate,
-        ?string $entity,
+        Pvbki\Enums\Entity $entity,
         ?int $gender,
         ?Pvbki\Sentence\Translation $surname,
         ?Pvbki\Sentence\Translation $name,
@@ -178,7 +178,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->lastUpdate;
     }
 
-    public function getEntity(): ?string
+    public function getEntity(): Pvbki\Enums\Entity
     {
         return $this->entity;
     }
