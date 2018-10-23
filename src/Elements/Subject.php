@@ -112,7 +112,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $registrationDate;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\EconomicActivity */
     protected $economicActivity;
 
     /** @var int|null */
@@ -140,7 +140,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?Pvbki\Sentence\Translation $abbreviation,
         ?int $ownership,
         ?\DateTimeInterface $registrationDate,
-        ?int $economicActivity,
+        Pvbki\Enums\EconomicActivity $economicActivity,
         ?int $employeeCount
     ) {
         $this->requestId = $requestId;
@@ -273,7 +273,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->registrationDate;
     }
 
-    public function getEconomicActivity(): ?int
+    public function getEconomicActivity(): Pvbki\Enums\EconomicActivity
     {
         return $this->economicActivity;
     }
