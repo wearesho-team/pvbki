@@ -77,7 +77,7 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $factualEndDate;
 
-    /** @var string|null */
+    /** @var Pvbki\Enums\ContractType */
     protected $type;
 
     /** @var int|null */
@@ -136,7 +136,7 @@ class Contract extends Pvbki\Infrastructure\Element
         ?\DateTimeInterface $startDate,
         ?\DateTimeInterface $expectedEndDate,
         ?\DateTimeInterface $factualEndDate,
-        ?string $type,
+        Pvbki\Enums\ContractType $type,
         ?int $paymentMethodId,
         ?int $paymentPeriodId,
         ?string $actualCurrency,
@@ -247,7 +247,7 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->factualEndDate;
     }
 
-    public function getType(): ?string
+    public function getType(): Pvbki\Enums\ContractType
     {
         return $this->type;
     }
