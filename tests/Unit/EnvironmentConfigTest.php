@@ -107,7 +107,7 @@ class EnvironmentConfigTest extends Pvbki\Tests\Extend\ConfigTestCase
     {
         putenv('PVBKI_MODE');
 
-        $this->assertEquals(Pvbki\ConfigInterface::PRODUCTION_MODE, $this->config->getMode());
+        $this->assertEquals(Pvbki\Interrelations\ConfigInterface::PRODUCTION_MODE, $this->config->getMode());
     }
 
     /**
@@ -124,9 +124,9 @@ class EnvironmentConfigTest extends Pvbki\Tests\Extend\ConfigTestCase
 
     public function testGetTestUrl(): void
     {
-        putenv('PVBKI_MODE=' . Pvbki\ConfigInterface::TEST_MODE);
+        putenv('PVBKI_MODE=' . Pvbki\Interrelations\ConfigInterface::TEST_MODE);
 
-        $this->assertEquals(Pvbki\ConfigInterface::TEST_URL, $this->config->getUrl());
+        $this->assertEquals(Pvbki\Interrelations\ConfigInterface::TEST_URL, $this->config->getUrl());
     }
 
     public function testDefaultUrl(): void
@@ -134,6 +134,6 @@ class EnvironmentConfigTest extends Pvbki\Tests\Extend\ConfigTestCase
         putenv('PVBKI_URL');
         putenv('PVBKI_MODE');
 
-        $this->assertEquals(Pvbki\ConfigInterface::PRODUCTION_URL, $this->config->getUrl());
+        $this->assertEquals(Pvbki\Interrelations\ConfigInterface::PRODUCTION_URL, $this->config->getUrl());
     }
 }

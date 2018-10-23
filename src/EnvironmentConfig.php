@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Wearesho\Pvbki;
 
 use Horat1us\Environment;
-use Wearesho\Pvbki\Exceptions\UnsupportedMode;
 
 /**
  * Class EnvironmentConfig
  * @package Wearesho\Pvbki
  */
-class EnvironmentConfig extends Environment\Config implements ConfigInterface
+class EnvironmentConfig extends Environment\Config implements Interrelations\ConfigInterface
 {
     public function __construct(string $keyPrefix = 'PVBKI_')
     {
@@ -58,12 +57,12 @@ class EnvironmentConfig extends Environment\Config implements ConfigInterface
         return $this->getEnv('URL', function (): string {
             $mode = $this->getMode();
             switch ($mode) {
-                case ConfigInterface::TEST_MODE:
-                    return ConfigInterface::TEST_URL;
-                case ConfigInterface::PRODUCTION_MODE:
-                    return ConfigInterface::PRODUCTION_URL;
+                case Interrelations\ConfigInterface::TEST_MODE:
+                    return Interrelations\ConfigInterface::TEST_URL;
+                case Interrelations\ConfigInterface::PRODUCTION_MODE:
+                    return Interrelations\ConfigInterface::PRODUCTION_URL;
                 default:
-                    throw new UnsupportedMode($mode);
+                    throw new Exceptions\UnsupportedMode($mode);
             }
         });
     }
@@ -73,6 +72,6 @@ class EnvironmentConfig extends Environment\Config implements ConfigInterface
      */
     public function getMode(): int
     {
-        return (int)$this->getEnv('MODE', ConfigInterface::PRODUCTION_MODE);
+        return (int)$this->getEnv('MODE', Interrelations\ConfigInterface::PRODUCTION_MODE);
     }
 }

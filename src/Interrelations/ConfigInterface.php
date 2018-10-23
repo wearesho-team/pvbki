@@ -1,10 +1,10 @@
 <?php
 
-namespace Wearesho\Pvbki;
+namespace Wearesho\Pvbki\Interrelations;
 
 /**
  * Interface ConfigInterface
- * @package Wearesho\Pvbki
+ * @package Wearesho\Pvbki\Interrelations
  */
 interface ConfigInterface
 {
