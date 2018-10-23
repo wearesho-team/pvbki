@@ -2,7 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class CommunicationType
