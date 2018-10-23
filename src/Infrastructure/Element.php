@@ -2,22 +2,19 @@
 
 namespace Wearesho\Pvbki\Infrastructure;
 
-use Wearesho\Pvbki\Collections\RuleCollection;
-use Wearesho\Pvbki\Interrelations;
+use Wearesho\Pvbki;
 
 /**
  * Class Element
  * @package Wearesho\Pvbki\Infrastructure
  */
-abstract class Element implements Interrelations\ElementInterface
+abstract class Element implements Pvbki\Interrelations\ElementInterface
 {
     public const ROOT = null;
 
     public function jsonSerialize(): array
     {
-        return array_filter(get_object_vars($this), function ($item) {
-            return $item !== null;
-        });
+        return get_object_vars($this);
     }
 
     public static function tag(): string
@@ -28,7 +25,7 @@ abstract class Element implements Interrelations\ElementInterface
     /**
      * Need rules for parser
      *
-     * @return RuleCollection
+     * @return Pvbki\Collections\RuleCollection
      */
-    abstract public static function arguments(): RuleCollection;
+    abstract public static function arguments(): Pvbki\Collections\RuleCollection;
 }

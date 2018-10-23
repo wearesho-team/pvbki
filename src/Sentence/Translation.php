@@ -26,9 +26,7 @@ class Translation implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return array_filter(get_object_vars($this), function ($item) {
-            return $item !== null && !empty($item);
-        });
+        return get_object_vars($this);
     }
 
     public function ua(): ?string

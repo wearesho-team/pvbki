@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Wearesho\Pvbki\Elements\Collateral;
 use Wearesho\Pvbki\Elements\Contract;
 use Wearesho\Pvbki\Elements\Record;
+use Wearesho\Pvbki\Enums\RuleType;
 
 /**
  * Class Parser
@@ -53,7 +54,8 @@ class Parser
 
         $attributes = $this->simpleXmlDocument->attributes();
         $report = new StatementReport(
-            (bool)$attributes[StatementReport::PROTECTION],
+            (string)$attributes[StatementReport::PROTECTION] === 'false'
+                ? false : true,
             Carbon::make((string)$attributes[StatementReport::GENERATED]),
             (string)$attributes[StatementReport::POWERED],
             $errors,
