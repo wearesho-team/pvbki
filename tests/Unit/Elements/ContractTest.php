@@ -7,6 +7,7 @@ use Wearesho\Pvbki\Collections\Collaterals;
 use Wearesho\Pvbki\Collections\Records;
 use Wearesho\Pvbki\Elements\Contract;
 use PHPUnit\Framework\TestCase;
+use Wearesho\Pvbki\Enums\CreditPurpose;
 
 /**
  * Class ContractTest
@@ -23,7 +24,6 @@ class ContractTest extends TestCase
     protected const PHASE_ID = 2;
     protected const CURRENCY = 'currency';
     protected const DATE_OF_SIGNATURE = '2018-04-25';
-    protected const CREDIT_PURPOSE = 3;
     protected const NEGATIVE_STATUS = 4;
     protected const APPLICATION_DATE = '2018-02-10';
     protected const START_DATE = '2017-09-25';
@@ -56,7 +56,7 @@ class ContractTest extends TestCase
             static::PHASE_ID,
             static::CURRENCY,
             Carbon::parse(static::DATE_OF_SIGNATURE),
-            static::CREDIT_PURPOSE,
+            CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
             static::NEGATIVE_STATUS,
             Carbon::parse(static::APPLICATION_DATE),
             Carbon::parse(static::START_DATE),
@@ -91,7 +91,7 @@ class ContractTest extends TestCase
                 'phaseId' => static::PHASE_ID,
                 'currency' => static::CURRENCY,
                 'dateOfSignature' => Carbon::parse(static::DATE_OF_SIGNATURE),
-                'creditPurpose' => static::CREDIT_PURPOSE,
+                'creditPurpose' => CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
                 'negativeStatus' => static::NEGATIVE_STATUS,
                 'applicationDate' => Carbon::parse(static::APPLICATION_DATE),
                 'startDate' => Carbon::parse(static::START_DATE),
@@ -145,7 +145,7 @@ class ContractTest extends TestCase
 
     public function testGetCreditPurpose(): void
     {
-        $this->assertEquals(static::CREDIT_PURPOSE, $this->fakeContract->getCreditPurpose());
+        $this->assertEquals(CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(), $this->fakeContract->getCreditPurpose());
     }
 
     public function testGetStartDate(): void

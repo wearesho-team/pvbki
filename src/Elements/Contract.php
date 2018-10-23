@@ -4,6 +4,7 @@ namespace Wearesho\Pvbki\Elements;
 
 use Wearesho\Pvbki\Collections\Collaterals;
 use Wearesho\Pvbki\Collections\Records;
+use Wearesho\Pvbki\Enums\CreditPurpose;
 use Wearesho\Pvbki\Infrastructure\Element;
 
 /**
@@ -61,7 +62,7 @@ class Contract extends Element
     /** @var \DateTimeInterface|null */
     protected $dateOfSignature;
 
-    /** @var int|null */
+    /** @var CreditPurpose */
     protected $creditPurpose;
 
     /** @var int|null */
@@ -132,7 +133,7 @@ class Contract extends Element
         ?int $phaseId,
         ?string $currency,
         ?\DateTimeInterface $dateOfSignature,
-        ?int $creditPurpose,
+        CreditPurpose $creditPurpose,
         ?int $negativeStatus,
         ?\DateTimeInterface $applicationDate,
         ?\DateTimeInterface $startDate,
@@ -219,7 +220,7 @@ class Contract extends Element
         return $this->dateOfSignature;
     }
 
-    public function getCreditPurpose(): ?int
+    public function getCreditPurpose(): CreditPurpose
     {
         return $this->creditPurpose;
     }
