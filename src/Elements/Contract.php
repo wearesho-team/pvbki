@@ -59,7 +59,7 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $dateOfSignature;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\CreditPurpose */
     protected $creditPurpose;
 
     /** @var int|null */
@@ -130,7 +130,7 @@ class Contract extends Pvbki\Infrastructure\Element
         ?int $phaseId,
         ?string $currency,
         ?\DateTimeInterface $dateOfSignature,
-        ?int $creditPurpose,
+        Pvbki\Enums\CreditPurpose $creditPurpose,
         ?int $negativeStatus,
         ?\DateTimeInterface $applicationDate,
         ?\DateTimeInterface $startDate,
@@ -217,7 +217,7 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->dateOfSignature;
     }
 
-    public function getCreditPurpose(): ?int
+    public function getCreditPurpose(): Pvbki\Enums\CreditPurpose
     {
         return $this->creditPurpose;
     }
