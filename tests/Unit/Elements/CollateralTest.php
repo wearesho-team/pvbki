@@ -15,10 +15,8 @@ use Wearesho\Pvbki;
 class CollateralTest extends TestCase
 {
     protected const CONTRACT_ID = 'contract_id';
-    protected const TYPE_ID = 1;
     protected const VALUE = 2.34;
     protected const CURRENCY = 'currency';
-    protected const ADDRESS_TYPE_ID = 3;
     protected const LOCATION_ID = 4;
     protected const STREET_UA = 'street_ua';
     protected const STREET_RU = 'street_ru';
@@ -40,10 +38,10 @@ class CollateralTest extends TestCase
     {
         $this->fakeCollateral = new Pvbki\Elements\Collateral(
             static::CONTRACT_ID,
-            static::TYPE_ID,
+            Pvbki\Enums\CollateralType::R_11(),
             static::VALUE,
             static::CURRENCY,
-            static::ADDRESS_TYPE_ID,
+            Pvbki\Enums\AddressType::COLLATERAL(),
             static::LOCATION_ID,
             new Pvbki\Sentence\Translation(
                 static::STREET_UA,
@@ -69,10 +67,10 @@ class CollateralTest extends TestCase
         $this->assertArraySubset(
             [
                 'contractId' => static::CONTRACT_ID,
-                'typeId' => static::TYPE_ID,
+                'typeId' => Pvbki\Enums\CollateralType::R_11(),
                 'value' => static::VALUE,
                 'currency' => static::CURRENCY,
-                'addressTypeId' => static::ADDRESS_TYPE_ID,
+                'addressTypeId' => Pvbki\Enums\AddressType::COLLATERAL(),
                 'locationId' => static::LOCATION_ID,
                 'street' => new Pvbki\Sentence\Translation(
                     static::STREET_UA,
@@ -97,7 +95,7 @@ class CollateralTest extends TestCase
 
     public function testGetAddressTypeId(): void
     {
-        $this->assertEquals(static::ADDRESS_TYPE_ID, $this->fakeCollateral->getAddressTypeId());
+        $this->assertEquals(Pvbki\Enums\AddressType::COLLATERAL(), $this->fakeCollateral->getAddressTypeId());
     }
 
     public function testGetValue(): void
@@ -172,7 +170,7 @@ class CollateralTest extends TestCase
 
     public function testGetTypeId(): void
     {
-        $this->assertEquals(static::TYPE_ID, $this->fakeCollateral->getTypeId());
+        $this->assertEquals(Pvbki\Enums\CollateralType::R_11(), $this->fakeCollateral->getTypeId());
     }
 
     public function testGetCurrency(): void

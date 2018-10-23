@@ -2,16 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Collections\Collaterals;
-use Wearesho\Pvbki\Collections\Records;
-use Wearesho\Pvbki\Enums\ContractType;
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Contract
  * @package Wearesho\Pvbki\Elements
  */
-class Contract extends Element
+class Contract extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Contract';
     public const ROLE_ID = 'roleId';
@@ -80,7 +77,7 @@ class Contract extends Element
     /** @var \DateTimeInterface|null */
     protected $factualEndDate;
 
-    /** @var ContractType */
+    /** @var Pvbki\Enums\ContractType */
     protected $type;
 
     /** @var int|null */
@@ -119,10 +116,10 @@ class Contract extends Element
     /** @var float|null */
     protected $overdueAmount;
 
-    /** @var Records|null */
+    /** @var Pvbki\Collections\Records|null */
     protected $records;
 
-    /** @var Collaterals|null */
+    /** @var Pvbki\Collections\Collaterals|null */
     protected $collaterals;
 
     public function __construct(
@@ -139,7 +136,7 @@ class Contract extends Element
         ?\DateTimeInterface $startDate,
         ?\DateTimeInterface $expectedEndDate,
         ?\DateTimeInterface $factualEndDate,
-        ContractType $type,
+        Pvbki\Enums\ContractType $type,
         ?int $paymentMethodId,
         ?int $paymentPeriodId,
         ?string $actualCurrency,
@@ -152,8 +149,8 @@ class Contract extends Element
         ?float $restAmount,
         ?int $overdueCount,
         ?float $overdueAmount,
-        ?Records $records,
-        ?Collaterals $collaterals
+        Pvbki\Collections\Records $records,
+        Pvbki\Collections\Collaterals $collaterals
     ) {
         $this->roleId = $roleId;
         $this->provider = $provider;
@@ -250,7 +247,7 @@ class Contract extends Element
         return $this->factualEndDate;
     }
 
-    public function getType(): ContractType
+    public function getType(): Pvbki\Enums\ContractType
     {
         return $this->type;
     }
@@ -315,12 +312,12 @@ class Contract extends Element
         return $this->overdueAmount;
     }
 
-    public function getRecords(): ?Records
+    public function getRecords(): Pvbki\Collections\Records
     {
         return $this->records;
     }
 
-    public function getCollaterals(): ?Collaterals
+    public function getCollaterals(): Pvbki\Collections\Collaterals
     {
         return $this->collaterals;
     }
