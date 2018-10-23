@@ -22,7 +22,6 @@ class CollateralTest extends TestCase
     protected const STREET_RU = 'street_ru';
     protected const STREET_EN = 'street_en';
     protected const POSTAL_CODE = 'postal_code';
-    protected const IDENTIFICATION_TYPE_ID = 5;
     protected const NUMBER = 'number';
     protected const REGISTRATION_DATE = '2017-05-12';
     protected const ISSUE_DATE = '2018-02-25';
@@ -49,7 +48,7 @@ class CollateralTest extends TestCase
                 static::STREET_EN
             ),
             static::POSTAL_CODE,
-            static::IDENTIFICATION_TYPE_ID,
+            Pvbki\Enums\IdentificationType::UNIQUE_NUMBER(),
             static::NUMBER,
             Carbon::parse(static::REGISTRATION_DATE),
             Carbon::parse(static::ISSUE_DATE),
@@ -78,7 +77,7 @@ class CollateralTest extends TestCase
                     static::STREET_EN
                 ),
                 'postalCode' => static::POSTAL_CODE,
-                'identificationTypeId' => static::IDENTIFICATION_TYPE_ID,
+                'identificationTypeId' => Pvbki\Enums\IdentificationType::UNIQUE_NUMBER(),
                 'number' => static::NUMBER,
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
                 'issueDate' => Carbon::parse(static::ISSUE_DATE),
@@ -118,7 +117,10 @@ class CollateralTest extends TestCase
 
     public function testGetIdentificationTypeId(): void
     {
-        $this->assertEquals(static::IDENTIFICATION_TYPE_ID, $this->fakeCollateral->getIdentificationTypeId());
+        $this->assertEquals(
+            Pvbki\Enums\IdentificationType::UNIQUE_NUMBER(),
+            $this->fakeCollateral->getIdentificationTypeId()
+        );
     }
 
     public function testGetStreet(): void
