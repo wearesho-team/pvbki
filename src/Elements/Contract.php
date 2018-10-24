@@ -80,7 +80,7 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Enums\ContractType */
     protected $type;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\PaymentMethod */
     protected $paymentMethodId;
 
     /** @var int|null */
@@ -137,7 +137,7 @@ class Contract extends Pvbki\Infrastructure\Element
         ?\DateTimeInterface $expectedEndDate,
         ?\DateTimeInterface $factualEndDate,
         Pvbki\Enums\ContractType $type,
-        ?int $paymentMethodId,
+        Pvbki\Enums\PaymentMethod $paymentMethodId,
         ?int $paymentPeriodId,
         ?string $actualCurrency,
         ?float $totalAmount,
@@ -252,7 +252,7 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->type;
     }
 
-    public function getPaymentMethodId(): ?int
+    public function getPaymentMethodId(): Pvbki\Enums\PaymentMethod
     {
         return $this->paymentMethodId;
     }
