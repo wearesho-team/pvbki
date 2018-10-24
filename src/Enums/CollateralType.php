@@ -9,330 +9,234 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class CollateralType
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static R_11()
- * @method static static R_12()
- * @method static static R_13()
- * @method static static R_14()
- * @method static static R_15()
- * @method static static R_16()
- * @method static static R_18()
- * @method static static R_19()
- * @method static static R_20()
- * @method static static R_21()
- * @method static static R_22()
- * @method static static R_23()
- * @method static static R_24()
- * @method static static R_25()
- * @method static static R_26()
- * @method static static R_27()
- * @method static static R_28()
- * @method static static R_29()
- * @method static static R_30()
- * @method static static R_31()
- * @method static static R_32()
- * @method static static R_33()
- * @method static static R_34()
- * @method static static R_35()
- * @method static static R_36()
- * @method static static R_37()
- * @method static static R_38()
- * @method static static R_39()
- * @method static static R_40()
- * @method static static R_41()
- * @method static static R_42()
- * @method static static R_43()
- * @method static static R_44()
- * @method static static R_45()
- * @method static static R_50()
- * @method static static R_51()
- * @method static static R_52()
- * @method static static R_53()
- * @method static static R_54()
- * @method static static R_55()
- * @method static static R_56()
- * @method static static R_57()
- * @method static static R_58()
- * @method static static R_59()
- * @method static static R_60()
- * @method static static R_61()
- * @method static static R_62()
- * @method static static R_63()
- * @method static static R_64()
- * @method static static R_65()
- * @method static static R_90()
- * @method static static R_91()
+ * @method static CollateralType NOT_DEFINED()
+ * @method static CollateralType CABINET_MINISTERS_GUARANTEES()
+ * @method static CollateralType NATIONAL_BANK_GUARANTEES()
+ * @method static CollateralType INTERNATIONAL_BANKS_GUARANTEES()
+ * @method static CollateralType OTHER_BANKS_GUARANTEE()
+ * @method static CollateralType RIGHT_PROPERTY_TO_CASH_DEPOSITS()
+ * @method static CollateralType BANKS_AND_COUNTRY_GUARANTEE_WITH_RATE_A()
+ * @method static CollateralType RIGHT_PROPERTY_TO_CASH_PLACED_ON_DEPOSIT()
+ * @method static CollateralType SECURITIES_ISSUED_BY_NBU()
+ * @method static CollateralType BONDS_OF_STATE_MORTGAGE_INSTITUTION()
+ * @method static CollateralType BANK_METALS()
+ * @method static CollateralType PRECIOUS_METALS()
+ * @method static CollateralType GOVERNMENT_SECURITIES()
+ * @method static CollateralType NON_GOVERNMENT_SECURITIES()
+ * @method static CollateralType REAL_ESTATE()
+ * @method static CollateralType PROPERTY_RIGHTS_TO_FUTURE_REAL_ESTATE()
+ * @method static CollateralType FINISHED_PRODUCTS()
+ * @method static CollateralType STOCK_IN_TRADE()
+ * @method static CollateralType MOTOR_TRANSPORT()
+ * @method static CollateralType OTHER_MOVABLE_STATE()
+ * @method static CollateralType OTHER_REAL_ESTATE()
+ * @method static CollateralType PROPERTY_RIGHTS_TO_OTHER_COLLATERAL_OBJECTS()
+ * @method static CollateralType OTHER_TYPES_OF_COLLATERAL()
+ * @method static CollateralType GUARANTEE()
+ * @method static CollateralType LIGHT_VEHICLES()
+ * @method static CollateralType MONEY_COVER()
+ * @method static CollateralType REAL_ESTATE_EXCEPT_FOR_HOUSING()
+ * @method static CollateralType TRANSPORT_VEHICLES_EXCEPT_LIGHT_CARS()
+ * @method static CollateralType MORTGAGE_BONDS()
+ * @method static CollateralType SEVERAL_COLLATERAL()
+ * @method static CollateralType SEVERAL_SECURITY()
+ * @method static CollateralType SEVERAL_SECURITY_REAL_ESTATE_OF_HOUSING()
+ * @method static CollateralType SEVERAL_COLLATERAL_WITH_LARGEST_REAL_ESTATE()
+ * @method static CollateralType SEVERAL_COLLATERAL_WITH_FUTURE_LARGEST_REAL_ESTATE()
+ * @method static CollateralType SEVERAL_COLLATERAL_MORTGAGE()
+ * @method static CollateralType INTEGRAL_PROPERTY_COMPLEX_OBJECT()
+ * @method static CollateralType EQUIPMENT()
+ * @method static CollateralType SECURITIES_THAT_ENTERED_IN_EXCHANGE_REGISTER()
+ * @method static CollateralType SECURITIES_ISSUED_BY_LOCAL_AUTHORITIES()
+ * @method static CollateralType INVESTMENT_CERTIFICATES()
+ * @method static CollateralType BIOLOGICAL_ASSETS()
+ * @method static CollateralType PROPERTY_RIGHTS_PROPERTY_THAT_WILL_BELONG_NON_HOUSING_FUND()
+ * @method static CollateralType GOVERNMENT_SECURITIES_ON_REPO_TRANSACTIONS()
+ * @method static CollateralType MORTGAGE_BONDS_ISSUED_BY_FINANCIAL_INSTITUTION()
+ * @method static CollateralType NOMINAL_SAVINGS()
+ * @method static CollateralType SECURED_CASH_BANKS_GUARANTEES()
+ * @method static CollateralType GOVERNMENT_COUNTRIES_GUARANTEES_WITH_RATING_A()
+ * @method static CollateralType BANKS_GUARANTEES_WITH_CREDIT_RATING_A()
+ * @method static CollateralType INTERNATIONAL_MULTILATERAL_BANKS_GUARANTEES()
+ * @method static CollateralType GOVERNMENT_COUNTRIES_GUARANTEES_WITH_RATING_BBB()
+ * @method static CollateralType BANKS_GUARANTEE_WITH_CREDIT_RATING_NOT_LOWER_BBB()
+ * @method static CollateralType WITHOUT_COLLATERAL()
  *
  * @todo: must be implement as separated package with standardized collateral types
- * @todo: refactor constants' names
  */
 final class CollateralType extends Enum implements NullableEnum
 {
-    /**
-     * Undefined
-     *
-     * Same as UNDEFINED()
-     */
-    public const R_0 = 0;
+    public const NOT_DEFINED = 0;
 
     /**
      * Guarantees of the Cabinet of Ministers
      */
-    public const R_11 = 11;
+    public const CABINET_MINISTERS_GUARANTEES = 11;
 
     /**
      * Guarantees of the National Bank of Ukraine
      */
-    public const R_12 = 12;
+    public const NATIONAL_BANK_GUARANTEES = 12;
 
     /**
      * Guarantees of international banks and "investment class" banks
      */
-    public const R_13 = 13;
+    public const INTERNATIONAL_BANKS_GUARANTEES = 13;
 
     /**
      * Guarantees of other banks in Ukraine
      */
-    public const R_14 = 14;
+    public const OTHER_BANKS_GUARANTEE = 14;
 
     /**
      * Property rights to cash deposits and registered money certificates
      */
-    public const R_15 = 15;
+    public const RIGHT_PROPERTY_TO_CASH_DEPOSITS = 15;
 
     /**
      * Guarantees of the governments of countries and banks rated at least "A"
      */
-    public const R_16 = 16;
+    public const BANKS_AND_COUNTRY_GUARANTEE_WITH_RATE_A = 16;
 
     /**
      * Property rights to cash placed on a deposit account with a bank with a rating not lower than the "investment
      * class"
      */
-    public const R_18 = 18;
+    public const RIGHT_PROPERTY_TO_CASH_PLACED_ON_DEPOSIT = 18;
 
     /**
      * Securities issued by the National Bank of Ukraine
      */
-    public const R_19 = 19;
+    public const SECURITIES_ISSUED_BY_NBU = 19;
 
     /**
      * Bonds of the state mortgage institution, placement of which was carried out under the guarantee of the Cabinet
      * of Ministers of Ukraine
      */
-    public const R_20 = 20;
+    public const BONDS_OF_STATE_MORTGAGE_INSTITUTION = 20;
 
-    /**
-     * Bank metals
-     */
-    public const R_21 = 21;
+    public const BANK_METALS = 21;
 
-    /**
-     * Precious metals
-     */
-    public const R_22 = 22;
+    public const PRECIOUS_METALS = 22;
 
-    /**
-     * Government securities
-     */
-    public const R_23 = 23;
+    public const GOVERNMENT_SECURITIES = 23;
 
-    /**
-     * Non-government securities
-     */
-    public const R_24 = 24;
+    public const NON_GOVERNMENT_SECURITIES = 24;
 
-    /**
-     * Real estate
-     */
-    public const R_25 = 25;
+    public const REAL_ESTATE = 25;
 
-    /**
-     * Property rights to the future real estate
-     */
-    public const R_26 = 26;
+    public const PROPERTY_RIGHTS_TO_FUTURE_REAL_ESTATE = 26;
 
-    /**
-     * Finished products
-     */
-    public const R_27 = 27;
+    public const FINISHED_PRODUCTS = 27;
 
-    /**
-     * Stock-in-trade
-     */
-    public const R_28 = 28;
+    public const STOCK_IN_TRADE = 28;
 
-    /**
-     * Motor transport
-     */
-    public const R_29 = 29;
+    public const MOTOR_TRANSPORT = 29;
 
-    /**
-     * Other movable state
-     */
-    public const R_30 = 30;
+    public const OTHER_MOVABLE_STATE = 30;
 
-    /**
-     * Other real estate
-     */
-    public const R_31 = 31;
+    public const OTHER_REAL_ESTATE = 31;
 
-    /**
-     * Property rights to other collateral objects
-     */
-    public const R_32 = 32;
+    public const PROPERTY_RIGHTS_TO_OTHER_COLLATERAL_OBJECTS = 32;
 
-    /**
-     * Other types of collateral
-     */
-    public const R_33 = 33;
+    public const OTHER_TYPES_OF_COLLATERAL = 33;
 
-    /**
-     * Guarantee
-     */
-    public const R_34 = 34;
+    public const GUARANTEE = 34;
 
-    /**
-     * Light vehicles
-     */
-    public const R_35 = 35;
+    public const LIGHT_VEHICLES = 35;
 
     /**
      * The money cover, which is placed in the bank for a period not less than the period of using the asset
      */
-    public const R_36 = 36;
+    public const MONEY_COVER = 36;
 
-    /**
-     * Real estate (except for housing)
-     */
-    public const R_37 = 37;
+    public const REAL_ESTATE_EXCEPT_FOR_HOUSING = 37;
 
-    /**
-     * Transport vehicles (except light cars)
-     */
-    public const R_38 = 38;
+    public const TRANSPORT_VEHICLES_EXCEPT_LIGHT_CARS = 38;
 
-    /**
-     * Mortgage bonds
-     */
-    public const R_39 = 39;
+    public const MORTGAGE_BONDS = 39;
 
-    /**
-     * Several types of collateral
-     */
-    public const R_40 = 40;
+    public const SEVERAL_COLLATERAL = 40;
 
-    /**
-     * Several types of security, among which the cost of real estate is the largest
-     */
-    public const R_41 = 41;
+    public const SEVERAL_SECURITY = 41;
 
     /**
      * Several types of security, among which the value of property rights for the future real estate of the housing
      * stock - the largest
      */
-    public const R_42 = 42;
+    public const SEVERAL_SECURITY_REAL_ESTATE_OF_HOUSING = 42;
 
     /**
      * Several types of collateral, among which the value of other real estate is the largest
      */
-    public const R_43 = 43;
+    public const SEVERAL_COLLATERAL_WITH_LARGEST_REAL_ESTATE = 43;
 
     /**
      * Several types of collateral, among which the value of property rights for another future real estate is the
      * largest
      */
-    public const R_44 = 44;
+    public const SEVERAL_COLLATERAL_WITH_FUTURE_LARGEST_REAL_ESTATE = 44;
 
     /**
      * Several types of collateral, among which the cost of a mortgage is less than the value of other types of
      * collateral
      */
-    public const R_45 = 45;
+    public const SEVERAL_COLLATERAL_MORTGAGE = 45;
 
-    /**
-     * Objects of integral property complex
-     */
-    public const R_50 = 50;
+    public const INTEGRAL_PROPERTY_COMPLEX_OBJECT = 50;
 
-    /**
-     * Equipment
-     */
-    public const R_51 = 51;
+    public const EQUIPMENT = 51;
 
-    /**
-     * Securities that are entered in the exchange register
-     */
-    public const R_52 = 52;
+    public const SECURITIES_THAT_ENTERED_IN_EXCHANGE_REGISTER = 52;
 
-    /**
-     * Securities issued by local authorities
-     */
-    public const R_53 = 53;
+    public const SECURITIES_ISSUED_BY_LOCAL_AUTHORITIES = 53;
 
-    /**
-     * Investment certificates
-     */
-    public const R_54 = 54;
+    public const INVESTMENT_CERTIFICATES = 54;
 
-    /**
-     * Biological assets
-     */
-    public const R_55 = 55;
+    public const BIOLOGICAL_ASSETS = 55;
 
-    /**
-     * Property rights to property that will belong to a non-housing fund
-     */
-    public const R_56 = 56;
+    public const PROPERTY_RIGHTS_PROPERTY_THAT_WILL_BELONG_NON_HOUSING_FUND = 56;
 
-    /**
-     * Government securities on repo transactions
-     */
-    public const R_57 = 57;
+    public const GOVERNMENT_SECURITIES_ON_REPO_TRANSACTIONS = 57;
 
     /**
      * Mortgage bonds issued by a financial institution with more than 50 percent of corporate rights owned by the
      * state and / or state banks
      */
-    public const R_58 = 58;
+    public const MORTGAGE_BONDS_ISSUED_BY_FINANCIAL_INSTITUTION = 58;
 
     /**
      * Nominal savings (deposit) certificates issued by the creditor bank, property rights to money placed on a deposit
      * account with a creditor bank for a period not less than the period of using the asset
      */
-    public const R_59 = 59;
+    public const NOMINAL_SAVINGS = 59;
 
     /**
      * Guarantees of banks of Ukraine, secured by a cash cover for a period not less than the period of using the asset
      */
-    public const R_60 = 60;
+    public const SECURED_CASH_BANKS_GUARANTEES = 60;
 
     /**
      * The guarantees of the governments of countries that have a credit rating are not lower than the A-
      */
-    public const R_61 = 61;
+    public const GOVERNMENT_COUNTRIES_GUARANTEES_WITH_RATING_A = 61;
 
     /**
      * Guarantees of banks and other institutions that have a credit rating are not lower than A-
      */
-    public const R_62 = 62;
+    public const BANKS_GUARANTEES_WITH_CREDIT_RATING_A = 62;
 
-    /**
-     * Guarantees of international multilateral banks
-     */
-    public const R_63 = 63;
+    public const INTERNATIONAL_MULTILATERAL_BANKS_GUARANTEES = 63;
 
     /**
      * The guarantees of the governments of countries that have a credit rating are not lower than the BBB-
      */
-    public const R_64 = 64;
+    public const GOVERNMENT_COUNTRIES_GUARANTEES_WITH_RATING_BBB = 64;
 
     /**
      * Guarantees of banks that have a credit rating are not lower than BBB-
      */
-    public const R_65 = 65;
+    public const BANKS_GUARANTEE_WITH_CREDIT_RATING_NOT_LOWER_BBB = 65;
 
-    /**
-     * Without collateral (blank)
-     */
-    public const R_90 = 90;
+    public const WITHOUT_COLLATERAL = 90;
 }

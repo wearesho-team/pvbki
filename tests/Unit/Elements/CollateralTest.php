@@ -38,7 +38,7 @@ class CollateralTest extends TestCase
     {
         $this->fakeCollateral = new Pvbki\Elements\Collateral(
             static::CONTRACT_ID,
-            Pvbki\Enums\CollateralType::R_11(),
+            Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(),
             static::VALUE,
             static::CURRENCY,
             Pvbki\Enums\AddressType::COLLATERAL(),
@@ -67,7 +67,7 @@ class CollateralTest extends TestCase
         $this->assertArraySubset(
             [
                 'contractId' => static::CONTRACT_ID,
-                'typeId' => Pvbki\Enums\CollateralType::R_11(),
+                'typeId' => Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(),
                 'value' => static::VALUE,
                 'currency' => static::CURRENCY,
                 'addressTypeId' => Pvbki\Enums\AddressType::COLLATERAL(),
@@ -170,7 +170,10 @@ class CollateralTest extends TestCase
 
     public function testGetTypeId(): void
     {
-        $this->assertEquals(Pvbki\Enums\CollateralType::R_11(), $this->fakeCollateral->getTypeId());
+        $this->assertEquals(
+            Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(),
+            $this->fakeCollateral->getTypeId()
+        );
     }
 
     public function testGetCurrency(): void
