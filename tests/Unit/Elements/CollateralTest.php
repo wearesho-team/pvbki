@@ -170,7 +170,10 @@ class CollateralTest extends TestCase
 
     public function testGetTypeId(): void
     {
-        $this->assertEquals(Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(), $this->fakeCollateral->getTypeId());
+        $this->assertEquals(
+            Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(),
+            $this->fakeCollateral->getTypeId()
+        );
     }
 
     public function testGetCurrency(): void
