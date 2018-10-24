@@ -123,7 +123,7 @@ class Contract extends Pvbki\Infrastructure\Element
     protected $collaterals;
 
     public function __construct(
-        ?int $roleId,
+        Pvbki\Enums\Role $roleId,
         ?string $provider,
         ?string $contractId,
         ?\DateTimeInterface $lastUpdate,
@@ -182,7 +182,7 @@ class Contract extends Pvbki\Infrastructure\Element
         $this->collaterals = $collaterals;
     }
 
-    public function getRoleId(): ?int
+    public function getRoleId(): Pvbki\Enums\Role
     {
         return $this->roleId;
     }
