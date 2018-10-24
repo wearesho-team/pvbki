@@ -35,7 +35,6 @@ class SubjectTest extends TestCase
     protected const BIRTH_PLACE_EN = 'birth_place_en';
     protected const RESIDENCY = 3;
     protected const CITIZEN_SHIP = 4;
-    protected const STATUS_ID = 8;
     protected const FULL_NAME_UA = 'full_name_ua';
     protected const FULL_NAME_RU = 'full_name_ru';
     protected const FULL_NAME_EN = 'full_name_en';
@@ -86,7 +85,7 @@ class SubjectTest extends TestCase
             Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
             Pvbki\Enums\Education::UNFINISHED(),
             Pvbki\Enums\MaritalStatus::WIDOW(),
-            static::STATUS_ID,
+            Pvbki\Enums\Status::CLOSED(),
             new Pvbki\Sentence\Translation(
                 static::FULL_NAME_UA,
                 static::FULL_NAME_RU,
@@ -144,7 +143,7 @@ class SubjectTest extends TestCase
                 'negativeStatus' => Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
                 'education' => Pvbki\Enums\Education::UNFINISHED(),
                 'maritalStatus' => Pvbki\Enums\MaritalStatus::WIDOW(),
-                'statusId' => static::STATUS_ID,
+                'statusId' => Pvbki\Enums\Status::CLOSED(),
                 'fullName' => new Pvbki\Sentence\Translation(
                     static::FULL_NAME_UA,
                     static::FULL_NAME_RU,
@@ -284,7 +283,7 @@ class SubjectTest extends TestCase
 
     public function testGetStatusId(): void
     {
-        $this->assertEquals(static::STATUS_ID, $this->fakeSubject->getStatusId());
+        $this->assertEquals(Pvbki\Enums\Status::CLOSED(), $this->fakeSubject->getStatusId());
     }
 
     public function testGetRegistrationDate(): void
