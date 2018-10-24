@@ -21,7 +21,6 @@ class ContractTest extends TestCase
     protected const PHASE_ID = 2;
     protected const CURRENCY = 'currency';
     protected const DATE_OF_SIGNATURE = '2018-04-25';
-    protected const NEGATIVE_STATUS = 4;
     protected const APPLICATION_DATE = '2018-02-10';
     protected const START_DATE = '2017-09-25';
     protected const EXPECTED_END_DATE = '2020-10-22';
@@ -53,7 +52,7 @@ class ContractTest extends TestCase
             static::CURRENCY,
             Carbon::parse(static::DATE_OF_SIGNATURE),
             Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
-            static::NEGATIVE_STATUS,
+            Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(),
             Carbon::parse(static::APPLICATION_DATE),
             Carbon::parse(static::START_DATE),
             Carbon::parse(static::EXPECTED_END_DATE),
@@ -88,7 +87,7 @@ class ContractTest extends TestCase
                 'currency' => static::CURRENCY,
                 'dateOfSignature' => Carbon::parse(static::DATE_OF_SIGNATURE),
                 'creditPurpose' => Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
-                'negativeStatus' => static::NEGATIVE_STATUS,
+                'negativeStatus' => Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(),
                 'applicationDate' => Carbon::parse(static::APPLICATION_DATE),
                 'startDate' => Carbon::parse(static::START_DATE),
                 'expectedEndDate' => Carbon::parse(static::EXPECTED_END_DATE),
@@ -235,7 +234,10 @@ class ContractTest extends TestCase
 
     public function testGetNegativeStatus(): void
     {
-        $this->assertEquals(static::NEGATIVE_STATUS, $this->fakeContract->getNegativeStatus());
+        $this->assertEquals(
+            Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(),
+            $this->fakeContract->getNegativeStatus()
+        );
     }
 
     public function testGetRestAmount(): void
