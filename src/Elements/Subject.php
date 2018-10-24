@@ -106,7 +106,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Sentence\Translation|null */
     protected $abbreviation;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Ownership */
     protected $ownership;
 
     /** @var \DateTimeInterface|null */
@@ -138,7 +138,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?int $statusId,
         ?Pvbki\Sentence\Translation $fullName,
         ?Pvbki\Sentence\Translation $abbreviation,
-        ?int $ownership,
+        Pvbki\Enums\Ownership $ownership,
         ?\DateTimeInterface $registrationDate,
         ?int $economicActivity,
         ?int $employeeCount
@@ -263,7 +263,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->abbreviation;
     }
 
-    public function getOwnership(): ?int
+    public function getOwnership(): Pvbki\Enums\Ownership
     {
         return $this->ownership;
     }

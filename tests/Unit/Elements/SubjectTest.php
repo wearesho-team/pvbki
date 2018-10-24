@@ -47,7 +47,6 @@ class SubjectTest extends TestCase
     protected const ABBREVIATION_UA = 'abbreviation_ua';
     protected const ABBREVIATION_RU = 'abbreviation_ru';
     protected const ABBREVIATION_EN = 'abbreviation_en';
-    protected const OWNERSHIP = 9;
     protected const REGISTRATION_DATE = '2018-04-12';
     protected const ECONOMIC_ACTIVITY = 10;
     protected const EMPLOYEE_COUNT = 11;
@@ -105,7 +104,7 @@ class SubjectTest extends TestCase
                 static::ABBREVIATION_RU,
                 static::ABBREVIATION_EN
             ),
-            static::OWNERSHIP,
+            Pvbki\Enums\Ownership::SEPARATED_BRANCHES(),
             Carbon::parse(static::REGISTRATION_DATE),
             static::ECONOMIC_ACTIVITY,
             static::EMPLOYEE_COUNT
@@ -163,7 +162,7 @@ class SubjectTest extends TestCase
                     static::ABBREVIATION_RU,
                     static::ABBREVIATION_EN
                 ),
-                'ownership' => static::OWNERSHIP,
+                'ownership' => Pvbki\Enums\Ownership::SEPARATED_BRANCHES(),
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
                 'economicActivity' => static::ECONOMIC_ACTIVITY,
                 'employeeCount' => static::EMPLOYEE_COUNT,
@@ -174,7 +173,7 @@ class SubjectTest extends TestCase
 
     public function testGetOwnership(): void
     {
-        $this->assertEquals(static::OWNERSHIP, $this->fakeSubject->getOwnership());
+        $this->assertEquals(Pvbki\Enums\Ownership::SEPARATED_BRANCHES(), $this->fakeSubject->getOwnership());
     }
 
     public function testGetLastUpdate(): void
