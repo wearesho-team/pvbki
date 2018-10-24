@@ -23,7 +23,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static SubjectNegativeStatus LIMITED_CIVIL_CAPABILITY()
  * @method static SubjectNegativeStatus CRIMINAL_PROCEEDINGS_STARTED()
  */
-class SubjectNegativeStatus extends Enum implements NullableEnum
+final class SubjectNegativeStatus extends Enum implements NullableEnum
 {
     public const WITHOUT_NEGATIVE_STATUS = 0;
     public const CUSTOMER_UNTRACEABLE_OR_DECEASED = 1;
