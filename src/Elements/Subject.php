@@ -58,7 +58,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Enums\Entity */
     protected $entity;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Gender */
     protected $gender;
 
     /** @var Pvbki\Sentence\Translation|null */
@@ -94,7 +94,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Enums\Education */
     protected $education;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\MaritalStatus */
     protected $maritalStatus;
 
     /** @var int|null */
@@ -122,7 +122,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?string $requestId,
         ?\DateTimeInterface $lastUpdate,
         Pvbki\Enums\Entity $entity,
-        ?int $gender,
+        Pvbki\Enums\Gender $gender,
         ?Pvbki\Sentence\Translation $surname,
         ?Pvbki\Sentence\Translation $name,
         ?Pvbki\Sentence\Translation $patronymic,
@@ -134,7 +134,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?int $citizenShip,
         Pvbki\Enums\SubjectNegativeStatus $negativeStatus,
         Pvbki\Enums\Education $education,
-        ?int $maritalStatus,
+        Pvbki\Enums\MaritalStatus $maritalStatus,
         ?int $statusId,
         ?Pvbki\Sentence\Translation $fullName,
         ?Pvbki\Sentence\Translation $abbreviation,
@@ -183,7 +183,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->entity;
     }
 
-    public function getGender(): ?int
+    public function getGender(): Pvbki\Enums\Gender
     {
         return $this->gender;
     }
@@ -243,7 +243,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->education;
     }
 
-    public function getMaritalStatus(): ?int
+    public function getMaritalStatus(): Pvbki\Enums\MaritalStatus
     {
         return $this->maritalStatus;
     }
