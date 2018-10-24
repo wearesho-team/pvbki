@@ -82,7 +82,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Sentence\Translation|null */
     protected $birthPlace;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Residency */
     protected $residency;
 
     /** @var int|null */
@@ -130,7 +130,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?int $classification,
         ?\DateTimeInterface $birthDate,
         ?Pvbki\Sentence\Translation $birthPlace,
-        ?int $residency,
+        Pvbki\Enums\Residency $residency,
         ?int $citizenShip,
         Pvbki\Enums\SubjectNegativeStatus $negativeStatus,
         Pvbki\Enums\Education $education,
@@ -223,7 +223,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->birthPlace;
     }
 
-    public function getResidency(): ?int
+    public function getResidency(): Pvbki\Enums\Residency
     {
         return $this->residency;
     }

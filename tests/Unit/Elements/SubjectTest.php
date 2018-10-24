@@ -33,7 +33,6 @@ class SubjectTest extends TestCase
     protected const BIRTH_PLACE_UA = 'birth_place_ua';
     protected const BIRTH_PLACE_RU = 'birth_place_ru';
     protected const BIRTH_PLACE_EN = 'birth_place_en';
-    protected const RESIDENCY = 3;
     protected const CITIZEN_SHIP = 4;
     protected const STATUS_ID = 8;
     protected const FULL_NAME_UA = 'full_name_ua';
@@ -81,7 +80,7 @@ class SubjectTest extends TestCase
                 static::BIRTH_PLACE_RU,
                 static::BIRTH_PLACE_EN
             ),
-            static::RESIDENCY,
+            Pvbki\Enums\Residency::RESIDENT(),
             static::CITIZEN_SHIP,
             Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
             Pvbki\Enums\Education::UNFINISHED(),
@@ -139,7 +138,7 @@ class SubjectTest extends TestCase
                     static::BIRTH_PLACE_RU,
                     static::BIRTH_PLACE_EN
                 ),
-                'residency' => static::RESIDENCY,
+                'residency' => Pvbki\Enums\Residency::RESIDENT(),
                 'citizenShip' => static::CITIZEN_SHIP,
                 'negativeStatus' => Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
                 'education' => Pvbki\Enums\Education::UNFINISHED(),
@@ -251,7 +250,7 @@ class SubjectTest extends TestCase
 
     public function testGetResidency(): void
     {
-        $this->assertEquals(static::RESIDENCY, $this->fakeSubject->getResidency());
+        $this->assertEquals(Pvbki\Enums\Residency::RESIDENT(), $this->fakeSubject->getResidency());
     }
 
     public function testGetBirthDate(): void
