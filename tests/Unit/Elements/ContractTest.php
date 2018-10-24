@@ -25,7 +25,6 @@ class ContractTest extends TestCase
     protected const START_DATE = '2017-09-25';
     protected const EXPECTED_END_DATE = '2020-10-22';
     protected const FACTUAL_END_DATE = '2020-11-25';
-    protected const PAYMENT_METHOD_ID = 5;
     protected const ACTUAL_CURRENCY = 'actual_currency';
     protected const TOTAL_AMOUNT = 78.90;
     protected const CREDIT_LIMIT = 1234;
@@ -57,7 +56,7 @@ class ContractTest extends TestCase
             Carbon::parse(static::EXPECTED_END_DATE),
             Carbon::parse(static::FACTUAL_END_DATE),
             Pvbki\Enums\ContractType::INSTALMENT(),
-            static::PAYMENT_METHOD_ID,
+            Pvbki\Enums\PaymentMethod::UNDETERMINED(),
             Pvbki\Enums\PaymentPeriod::EVERY_30_DAYS(),
             static::ACTUAL_CURRENCY,
             static::TOTAL_AMOUNT,
@@ -92,7 +91,7 @@ class ContractTest extends TestCase
                 'expectedEndDate' => Carbon::parse(static::EXPECTED_END_DATE),
                 'factualEndDate' => Carbon::parse(static::FACTUAL_END_DATE),
                 'type' => Pvbki\Enums\ContractType::INSTALMENT(),
-                'paymentMethodId' => static::PAYMENT_METHOD_ID,
+                'paymentMethodId' => Pvbki\Enums\PaymentMethod::UNDETERMINED(),
                 'paymentPeriodId' => Pvbki\Enums\PaymentPeriod::EVERY_30_DAYS(),
                 'actualCurrency' => static::ACTUAL_CURRENCY,
                 'totalAmount' => static::TOTAL_AMOUNT,
@@ -228,7 +227,7 @@ class ContractTest extends TestCase
 
     public function testGetPaymentMethodId(): void
     {
-        $this->assertEquals(static::PAYMENT_METHOD_ID, $this->fakeContract->getPaymentMethodId());
+        $this->assertEquals(Pvbki\Enums\PaymentMethod::UNDETERMINED(), $this->fakeContract->getPaymentMethodId());
     }
 
     public function testGetNegativeStatus(): void
