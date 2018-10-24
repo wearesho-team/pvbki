@@ -19,7 +19,7 @@ class Address extends Pvbki\Infrastructure\Element
     public const STREET_EN = 'streetEN';
     public const POSTAL_CODE = 'postalCode';
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\AddressType */
     protected $typeId;
 
     /** @var int */
@@ -33,7 +33,7 @@ class Address extends Pvbki\Infrastructure\Element
 
     public function __construct(
         int $locationId,
-        ?int $typeId,
+        Pvbki\Enums\AddressType $typeId,
         ?Pvbki\Sentence\Translation $street,
         ?string $postalCode
     ) {
@@ -43,7 +43,7 @@ class Address extends Pvbki\Infrastructure\Element
         $this->postalCode = $postalCode;
     }
 
-    public function getTypeId(): ?int
+    public function getTypeId(): Pvbki\Enums\AddressType
     {
         return $this->typeId;
     }
