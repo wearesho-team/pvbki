@@ -55,7 +55,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $lastUpdate;
 
-    /** @var string|null */
+    /** @var Pvbki\Enums\Entity */
     protected $entity;
 
     /** @var int|null */
@@ -91,7 +91,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var int|null */
     protected $negativeStatus;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Education */
     protected $education;
 
     /** @var Pvbki\Enums\MaritalStatus */
@@ -106,13 +106,13 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Sentence\Translation|null */
     protected $abbreviation;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Ownership */
     protected $ownership;
 
     /** @var \DateTimeInterface|null */
     protected $registrationDate;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\EconomicActivity */
     protected $economicActivity;
 
     /** @var int|null */
@@ -121,7 +121,7 @@ class Subject extends Pvbki\Infrastructure\Element
     public function __construct(
         ?string $requestId,
         ?\DateTimeInterface $lastUpdate,
-        ?string $entity,
+        Pvbki\Enums\Entity $entity,
         ?int $gender,
         ?Pvbki\Sentence\Translation $surname,
         ?Pvbki\Sentence\Translation $name,
@@ -133,14 +133,14 @@ class Subject extends Pvbki\Infrastructure\Element
         ?int $residency,
         ?int $citizenShip,
         ?int $negativeStatus,
-        ?int $education,
+        Pvbki\Enums\Education $education,
         Pvbki\Enums\MaritalStatus $maritalStatus,
         ?int $statusId,
         ?Pvbki\Sentence\Translation $fullName,
         ?Pvbki\Sentence\Translation $abbreviation,
-        ?int $ownership,
+        Pvbki\Enums\Ownership $ownership,
         ?\DateTimeInterface $registrationDate,
-        ?int $economicActivity,
+        Pvbki\Enums\EconomicActivity $economicActivity,
         ?int $employeeCount
     ) {
         $this->requestId = $requestId;
@@ -178,7 +178,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->lastUpdate;
     }
 
-    public function getEntity(): ?string
+    public function getEntity(): Pvbki\Enums\Entity
     {
         return $this->entity;
     }
@@ -238,7 +238,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->negativeStatus;
     }
 
-    public function getEducation(): ?int
+    public function getEducation(): Pvbki\Enums\Education
     {
         return $this->education;
     }
@@ -263,7 +263,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->abbreviation;
     }
 
-    public function getOwnership(): ?int
+    public function getOwnership(): Pvbki\Enums\Ownership
     {
         return $this->ownership;
     }
@@ -273,7 +273,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->registrationDate;
     }
 
-    public function getEconomicActivity(): ?int
+    public function getEconomicActivity(): Pvbki\Enums\EconomicActivity
     {
         return $this->economicActivity;
     }
