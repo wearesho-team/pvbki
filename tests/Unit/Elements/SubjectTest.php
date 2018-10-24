@@ -49,7 +49,6 @@ class SubjectTest extends TestCase
     protected const ABBREVIATION_EN = 'abbreviation_en';
     protected const OWNERSHIP = 9;
     protected const REGISTRATION_DATE = '2018-04-12';
-    protected const ECONOMIC_ACTIVITY = 10;
     protected const EMPLOYEE_COUNT = 11;
 
     /** @var Pvbki\Elements\Subject */
@@ -107,7 +106,7 @@ class SubjectTest extends TestCase
             ),
             static::OWNERSHIP,
             Carbon::parse(static::REGISTRATION_DATE),
-            static::ECONOMIC_ACTIVITY,
+            Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
             static::EMPLOYEE_COUNT
         );
     }
@@ -165,7 +164,7 @@ class SubjectTest extends TestCase
                 ),
                 'ownership' => static::OWNERSHIP,
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
-                'economicActivity' => static::ECONOMIC_ACTIVITY,
+                'economicActivity' => Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
                 'employeeCount' => static::EMPLOYEE_COUNT,
             ],
             $this->fakeSubject->jsonSerialize()
@@ -336,6 +335,9 @@ class SubjectTest extends TestCase
 
     public function testGetEconomicActivity(): void
     {
-        $this->assertEquals(static::ECONOMIC_ACTIVITY, $this->fakeSubject->getEconomicActivity());
+        $this->assertEquals(
+            Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
+            $this->fakeSubject->getEconomicActivity()
+        );
     }
 }
