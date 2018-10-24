@@ -14,7 +14,6 @@ use Wearesho\Pvbki;
  */
 class ContractTest extends TestCase
 {
-    protected const ROLE_ID = 1;
     protected const PROVIDER = 'provider';
     protected const CONTRACT_ID = 'contract_id';
     protected const LAST_UPDATE = '2018-03-12';
@@ -41,7 +40,7 @@ class ContractTest extends TestCase
     protected function setUp(): void
     {
         $this->fakeContract = new Pvbki\Elements\Contract(
-            static::ROLE_ID,
+            Pvbki\Enums\Role::PARTNER(),
             static::PROVIDER,
             static::CONTRACT_ID,
             Carbon::parse(static::LAST_UPDATE),
@@ -76,7 +75,7 @@ class ContractTest extends TestCase
     {
         $this->assertArraySubset(
             [
-                'roleId' => static::ROLE_ID,
+                'roleId' => Pvbki\Enums\Role::PARTNER(),
                 'provider' => static::PROVIDER,
                 'contractId' => static::CONTRACT_ID,
                 'lastUpdate' => Carbon::parse(static::LAST_UPDATE),
@@ -259,7 +258,7 @@ class ContractTest extends TestCase
 
     public function testGetRoleId(): void
     {
-        $this->assertEquals(static::ROLE_ID, $this->fakeContract->getRoleId());
+        $this->assertEquals(Pvbki\Enums\Role::PARTNER(), $this->fakeContract->getRoleId());
     }
 
     public function testGetProvider(): void
