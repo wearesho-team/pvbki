@@ -97,7 +97,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Enums\MaritalStatus */
     protected $maritalStatus;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Status */
     protected $statusId;
 
     /** @var Pvbki\Sentence\Translation|null */
@@ -135,7 +135,7 @@ class Subject extends Pvbki\Infrastructure\Element
         Pvbki\Enums\SubjectNegativeStatus $negativeStatus,
         Pvbki\Enums\Education $education,
         Pvbki\Enums\MaritalStatus $maritalStatus,
-        ?int $statusId,
+        Pvbki\Enums\Status $statusId,
         ?Pvbki\Sentence\Translation $fullName,
         ?Pvbki\Sentence\Translation $abbreviation,
         Pvbki\Enums\Ownership $ownership,
@@ -248,7 +248,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->maritalStatus;
     }
 
-    public function getStatusId(): ?int
+    public function getStatusId(): Pvbki\Enums\Status
     {
         return $this->statusId;
     }
