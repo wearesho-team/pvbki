@@ -20,7 +20,7 @@ class Identifier extends Pvbki\Infrastructure\Element
     public const ISSUED_BY_RU = 'authorityRU';
     public const ISSUED_BY_EN = 'authorityEN';
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\IdentificationType */
     protected $typeId;
 
     /** @var string|null */
@@ -36,7 +36,7 @@ class Identifier extends Pvbki\Infrastructure\Element
     protected $authority;
 
     public function __construct(
-        ?int $typeId,
+        Pvbki\Enums\IdentificationType $typeId,
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $expirationDate,
@@ -49,7 +49,7 @@ class Identifier extends Pvbki\Infrastructure\Element
         $this->authority = $authority;
     }
 
-    public function getTypeId(): ?int
+    public function getTypeId(): Pvbki\Enums\IdentificationType
     {
         return $this->typeId;
     }

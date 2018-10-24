@@ -28,12 +28,11 @@ class SubjectTest extends TestCase
     protected const BIRTH_SURNAME_UA = 'birth_surname_ua';
     protected const BIRTH_SURNAME_RU = 'birth_surname_ru';
     protected const BIRTH_SURNAME_EN = 'birth_surname_en';
-    protected const CLASSIFICATION = 2;
     protected const BIRTH_DATE = '1998-03-12';
     protected const BIRTH_PLACE_UA = 'birth_place_ua';
     protected const BIRTH_PLACE_RU = 'birth_place_ru';
     protected const BIRTH_PLACE_EN = 'birth_place_en';
-    protected const CITIZEN_SHIP = 4;
+    protected const CITIZEN_SHIP = 'UA';
     protected const FULL_NAME_UA = 'full_name_ua';
     protected const FULL_NAME_RU = 'full_name_ru';
     protected const FULL_NAME_EN = 'full_name_en';
@@ -72,7 +71,7 @@ class SubjectTest extends TestCase
                 static::BIRTH_SURNAME_RU,
                 static::BIRTH_SURNAME_EN
             ),
-            static::CLASSIFICATION,
+            Pvbki\Enums\Classification::INDIVIDUAL(),
             Carbon::parse(static::BIRTH_DATE),
             new Pvbki\Sentence\Translation(
                 static::BIRTH_PLACE_UA,
@@ -125,7 +124,7 @@ class SubjectTest extends TestCase
                     static::PATRONYMIC_RU,
                     static::PATRONYMIC_EN
                 ),
-                'classification' => static::CLASSIFICATION,
+                'classification' => Pvbki\Enums\Classification::INDIVIDUAL(),
                 'birthSurname' => new Pvbki\Sentence\Translation(
                     static::BIRTH_SURNAME_UA,
                     static::BIRTH_SURNAME_RU,
@@ -239,7 +238,7 @@ class SubjectTest extends TestCase
 
     public function testGetClassification(): void
     {
-        $this->assertEquals(static::CLASSIFICATION, $this->fakeSubject->getClassification());
+        $this->assertEquals(Pvbki\Enums\Classification::INDIVIDUAL(), $this->fakeSubject->getClassification());
     }
 
     public function testGetEmployeeCount(): void

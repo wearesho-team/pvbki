@@ -14,7 +14,6 @@ use Wearesho\Pvbki;
  */
 class IdentifierTest extends TestCase
 {
-    protected const TYPE_ID = 1;
     protected const NUMBER = 'number';
     protected const REGISTRATION_DATE = '2017-03-12';
     protected const EXPIRATION_DATE = '2020-03-12';
@@ -28,7 +27,7 @@ class IdentifierTest extends TestCase
     protected function setUp(): void
     {
         $this->fakeIdentifier = new Pvbki\Elements\Identifier(
-            static::TYPE_ID,
+            Pvbki\Enums\IdentificationType::PASSPORT(),
             static::NUMBER,
             Carbon::parse(static::REGISTRATION_DATE),
             Carbon::parse(static::EXPIRATION_DATE),
@@ -44,7 +43,7 @@ class IdentifierTest extends TestCase
     {
         $this->assertArraySubset(
             [
-                'typeId' => static::TYPE_ID,
+                'typeId' => Pvbki\Enums\IdentificationType::PASSPORT(),
                 'number' => static::NUMBER,
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
                 'expirationDate' => Carbon::parse(static::EXPIRATION_DATE),
@@ -73,7 +72,7 @@ class IdentifierTest extends TestCase
 
     public function testGetTypeId(): void
     {
-        $this->assertEquals(static::TYPE_ID, $this->fakeIdentifier->getTypeId());
+        $this->assertEquals(Pvbki\Enums\IdentificationType::PASSPORT(), $this->fakeIdentifier->getTypeId());
     }
 
     public function testGetAuthority(): void

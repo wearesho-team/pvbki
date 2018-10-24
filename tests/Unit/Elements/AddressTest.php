@@ -4,6 +4,7 @@ namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use PHPUnit\Framework\TestCase;
 use Wearesho\Pvbki\Elements\Address;
+use Wearesho\Pvbki\Enums\AddressType;
 use Wearesho\Pvbki\Sentence\Translation;
 
 /**
@@ -28,7 +29,7 @@ class AddressTest extends TestCase
     {
         $this->fakeAddress = new Address(
             static::LOCATION_ID,
-            static::TYPE_ID,
+            AddressType::COLLATERAL(),
             new Translation(
                 static::STREET_UA,
                 static::STREET_RU,
@@ -43,7 +44,7 @@ class AddressTest extends TestCase
         $this->assertArraySubset(
             [
                 'locationId' => static::LOCATION_ID,
-                'typeId' => static::TYPE_ID,
+                'typeId' => AddressType::COLLATERAL(),
                 'street' => new Translation(
                     static::STREET_UA,
                     static::STREET_RU,
@@ -62,7 +63,7 @@ class AddressTest extends TestCase
 
     public function testGetTypeId(): void
     {
-        $this->assertEquals(static::TYPE_ID, $this->fakeAddress->getTypeId());
+        $this->assertEquals(AddressType::COLLATERAL(), $this->fakeAddress->getTypeId());
     }
 
     public function testGetLocationId(): void
