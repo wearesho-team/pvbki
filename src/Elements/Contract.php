@@ -50,7 +50,7 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $lastUpdate;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Phase */
     protected $phaseId;
 
     /** @var string|null */
@@ -127,7 +127,7 @@ class Contract extends Pvbki\Infrastructure\Element
         ?string $provider,
         ?string $contractId,
         ?\DateTimeInterface $lastUpdate,
-        ?int $phaseId,
+        Pvbki\Enums\Phase $phaseId,
         ?string $currency,
         ?\DateTimeInterface $dateOfSignature,
         Pvbki\Enums\CreditPurpose $creditPurpose,
@@ -202,7 +202,7 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->lastUpdate;
     }
 
-    public function getPhaseId(): ?int
+    public function getPhaseId(): Pvbki\Enums\Phase
     {
         return $this->phaseId;
     }
