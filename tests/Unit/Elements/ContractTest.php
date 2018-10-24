@@ -234,7 +234,10 @@ class ContractTest extends TestCase
 
     public function testGetNegativeStatus(): void
     {
-        $this->assertEquals(Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(), $this->fakeContract->getNegativeStatus());
+        $this->assertEquals(
+            Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(),
+            $this->fakeContract->getNegativeStatus()
+        );
     }
 
     public function testGetRestAmount(): void

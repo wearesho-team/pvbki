@@ -24,12 +24,30 @@ class ContractNegativeStatusTest extends TestCase
             ContractNegativeStatus::UNAUTHORIZED_DEBIT_BALANCE_ON_CURRENT_ACCOUNT(),
             new ContractNegativeStatus(ContractNegativeStatus::UNAUTHORIZED_DEBIT_BALANCE_ON_CURRENT_ACCOUNT)
         );
-        $this->assertEquals(ContractNegativeStatus::LOAN_TRANSFERRED_TO_LOSSES(), new ContractNegativeStatus(ContractNegativeStatus::LOAN_TRANSFERRED_TO_LOSSES));
-        $this->assertEquals(ContractNegativeStatus::LOAN_WRITTEN_OFF(), new ContractNegativeStatus(ContractNegativeStatus::LOAN_WRITTEN_OFF));
-        $this->assertEquals(ContractNegativeStatus::CREDIT_REASSIGNED_TO_NEW_BORROWER(), new ContractNegativeStatus(ContractNegativeStatus::CREDIT_REASSIGNED_TO_NEW_BORROWER));
-        $this->assertEquals(ContractNegativeStatus::BLOCKED(), new ContractNegativeStatus(ContractNegativeStatus::BLOCKED));
-        $this->assertEquals(ContractNegativeStatus::INCREASED_RISK(), new ContractNegativeStatus(ContractNegativeStatus::INCREASED_RISK));
-        $this->assertEquals(ContractNegativeStatus::CANCELLED_DUE_TO_DELAYED_PAYMENTS(), new ContractNegativeStatus(ContractNegativeStatus::CANCELLED_DUE_TO_DELAYED_PAYMENTS));
+        $this->assertEquals(
+            ContractNegativeStatus::LOAN_TRANSFERRED_TO_LOSSES(),
+            new ContractNegativeStatus(ContractNegativeStatus::LOAN_TRANSFERRED_TO_LOSSES)
+        );
+        $this->assertEquals(
+            ContractNegativeStatus::LOAN_WRITTEN_OFF(),
+            new ContractNegativeStatus(ContractNegativeStatus::LOAN_WRITTEN_OFF)
+        );
+        $this->assertEquals(
+            ContractNegativeStatus::CREDIT_REASSIGNED_TO_NEW_BORROWER(),
+            new ContractNegativeStatus(ContractNegativeStatus::CREDIT_REASSIGNED_TO_NEW_BORROWER)
+        );
+        $this->assertEquals(
+            ContractNegativeStatus::BLOCKED(),
+            new ContractNegativeStatus(ContractNegativeStatus::BLOCKED)
+        );
+        $this->assertEquals(
+            ContractNegativeStatus::INCREASED_RISK(),
+            new ContractNegativeStatus(ContractNegativeStatus::INCREASED_RISK)
+        );
+        $this->assertEquals(
+            ContractNegativeStatus::CANCELLED_DUE_TO_DELAYED_PAYMENTS(),
+            new ContractNegativeStatus(ContractNegativeStatus::CANCELLED_DUE_TO_DELAYED_PAYMENTS)
+        );
         $this->assertEquals(
             ContractNegativeStatus::CONTRACT_STATUS_IS_NOT_NEGATIVE(),
             new ContractNegativeStatus(ContractNegativeStatus::CONTRACT_STATUS_IS_NOT_NEGATIVE)
@@ -52,7 +70,9 @@ class ContractNegativeStatusTest extends TestCase
         );
         $this->assertEquals(
             ContractNegativeStatus::DOES_NOT_HAVE_TECHNICAL_OPPORTUNITY_TO_PASS_HISTORICAL_INFORMATION(),
-            new ContractNegativeStatus(ContractNegativeStatus::DOES_NOT_HAVE_TECHNICAL_OPPORTUNITY_TO_PASS_HISTORICAL_INFORMATION)
+            new ContractNegativeStatus(
+                ContractNegativeStatus::DOES_NOT_HAVE_TECHNICAL_OPPORTUNITY_TO_PASS_HISTORICAL_INFORMATION
+            )
         );
         $this->assertEquals(
             ContractNegativeStatus::CREDIT_IS_RESTRUCTURED(),
