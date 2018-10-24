@@ -52,7 +52,7 @@ class ContractTest extends TestCase
             static::CURRENCY,
             Carbon::parse(static::DATE_OF_SIGNATURE),
             Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
-            Pvbki\Enums\ContractNegativeStatus::CNS_7(),
+            Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(),
             Carbon::parse(static::APPLICATION_DATE),
             Carbon::parse(static::START_DATE),
             Carbon::parse(static::EXPECTED_END_DATE),
@@ -87,7 +87,7 @@ class ContractTest extends TestCase
                 'currency' => static::CURRENCY,
                 'dateOfSignature' => Carbon::parse(static::DATE_OF_SIGNATURE),
                 'creditPurpose' => Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
-                'negativeStatus' => Pvbki\Enums\ContractNegativeStatus::CNS_7(),
+                'negativeStatus' => Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(),
                 'applicationDate' => Carbon::parse(static::APPLICATION_DATE),
                 'startDate' => Carbon::parse(static::START_DATE),
                 'expectedEndDate' => Carbon::parse(static::EXPECTED_END_DATE),
@@ -234,7 +234,7 @@ class ContractTest extends TestCase
 
     public function testGetNegativeStatus(): void
     {
-        $this->assertEquals(Pvbki\Enums\ContractNegativeStatus::CNS_7(), $this->fakeContract->getNegativeStatus());
+        $this->assertEquals(Pvbki\Enums\ContractNegativeStatus::INCREASED_RISK(), $this->fakeContract->getNegativeStatus());
     }
 
     public function testGetRestAmount(): void

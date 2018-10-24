@@ -9,91 +9,67 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class ContractNegativeStatus
  * @package Wearesho\Pvbki\Enums
  *
- * @method static ContractNegativeStatus CNS_0()
- * @method static ContractNegativeStatus CNS_1()
- * @method static ContractNegativeStatus CNS_2()
- * @method static ContractNegativeStatus CNS_3()
- * @method static ContractNegativeStatus CNS_4()
- * @method static ContractNegativeStatus CNS_5()
- * @method static ContractNegativeStatus CNS_6()
- * @method static ContractNegativeStatus CNS_7()
- * @method static ContractNegativeStatus CNS_8()
- * @method static ContractNegativeStatus CNS_10()
- * @method static ContractNegativeStatus CNS_11()
- * @method static ContractNegativeStatus CNS_12()
- * @method static ContractNegativeStatus CNS_13()
+ * @method static ContractNegativeStatus NONE()
+ * @method static ContractNegativeStatus CREDIT_ASSIGNMENT_TO_THIRD_PARTY()
+ * @method static ContractNegativeStatus UNAUTHORIZED_DEBIT_BALANCE_ON_CURRENT_ACCOUNT()
+ * @method static ContractNegativeStatus LOAN_TRANSFERRED_TO_LOSSES()
+ * @method static ContractNegativeStatus LOAN_WRITTEN_OFF()
+ * @method static ContractNegativeStatus CREDIT_REASSIGNED_TO_NEW_BORROWER()
+ * @method static ContractNegativeStatus BLOCKED()
+ * @method static ContractNegativeStatus INCREASED_RISK()
+ * @method static ContractNegativeStatus CANCELLED_DUE_TO_DELAYED_PAYMENTS()
+ * @method static ContractNegativeStatus CONTRACT_STATUS_IS_NOT_NEGATIVE()
+ * @method static ContractNegativeStatus FINANCIAL_INSTITUTION_CEASED_TO_EXIST()
+ * @method static ContractNegativeStatus DOES_NOT_HAVE_TECHNICAL_OPPORTUNITY_TO_RENEW_INFORMATION()
+ * @method static ContractNegativeStatus SALE_OF_CREDIT()
  * @method static ContractNegativeStatus CNS_14()
- * @method static ContractNegativeStatus CNS_15()
- * @method static ContractNegativeStatus CNS_16()
- * @method static ContractNegativeStatus CNS_17()
- * @method static ContractNegativeStatus CNS_18()
+ * @method static ContractNegativeStatus DOES_NOT_HAVE_TECHNICAL_OPPORTUNITY_TO_PASS_HISTORICAL_INFORMATION()
+ * @method static ContractNegativeStatus CREDIT_IS_RESTRUCTURED()
+ * @method static ContractNegativeStatus INFORMATION_ABOUT_THE_CREDIT_IS_GIVEN_BY_MISTAKE()
+ * @method static ContractNegativeStatus SPECIAL_TERMS()
  */
 final class ContractNegativeStatus extends Enum implements NullableEnum
 {
-    /**
-     * None
-     */
-    public const CNS_0 = 0;
+    public const NONE = 0;
 
-    /**
-     * Assignment of Credit to Third Party (with discount)
-     */
-    public const CNS_1 = 1;
+    public const CREDIT_ASSIGNMENT_TO_THIRD_PARTY = 1;
 
-    /**
-     * Unauthorized Debit Balance on Current Account
-     */
-    public const CNS_2 = 2;
+    public const UNAUTHORIZED_DEBIT_BALANCE_ON_CURRENT_ACCOUNT = 2;
 
     /**
      * Loan Transferred to Losses, 100% nonliquid, on balance sheet account
      */
-    public const CNS_3 = 3;
+    public const LOAN_TRANSFERRED_TO_LOSSES = 3;
 
     /**
      * Loan Written Off to Off-Balance Sheet Account
      */
-    public const CNS_4 = 4;
+    public const LOAN_WRITTEN_OFF = 4;
 
     /**
      * Credit Reassigned to a New Borrower
      */
-    public const CNS_5 = 5;
+    public const CREDIT_REASSIGNED_TO_NEW_BORROWER = 5;
 
-    /**
-     * Blocked
-     */
-    public const CNS_6 = 6;
+    public const BLOCKED = 6;
 
-    /**
-     * Increased Risk
-     */
-    public const CNS_7 = 7;
+    public const INCREASED_RISK = 7;
 
-    /**
-     * Cancelled Due to Delayed Payements
-     */
-    public const CNS_8 = 8;
+    public const CANCELLED_DUE_TO_DELAYED_PAYMENTS = 8;
 
-    /**
-     * Contract Status Is Not Negative
-     */
-    public const CNS_10 = 10;
+    public const CONTRACT_STATUS_IS_NOT_NEGATIVE = 10;
 
-    /**
-     * Financial institution ceased to exist
-     */
-    public const CNS_11 = 11;
+    public const FINANCIAL_INSTITUTION_CEASED_TO_EXIST = 11;
 
     /**
      * Financial institution does not have the technical opportunity to renew information
      */
-    public const CNS_12 = 12;
+    public const DOES_NOT_HAVE_TECHNICAL_OPPORTUNITY_TO_RENEW_INFORMATION = 12;
 
     /**
      * Sale of credit to other creditor in connection with the change of credit politics of creditor
      */
-    public const CNS_13 = 13;
+    public const SALE_OF_CREDIT = 13;
 
     /**
      * (No description)
@@ -105,20 +81,14 @@ final class ContractNegativeStatus extends Enum implements NullableEnum
      * Financial institution does not have the technical opportunity to pass historical information, cumulative
      * information is given
      */
-    public const CNS_15 = 15;
+    public const DOES_NOT_HAVE_TECHNICAL_OPPORTUNITY_TO_PASS_HISTORICAL_INFORMATION = 15;
 
-    /**
-     * Credit is restructured
-     */
-    public const CNS_16 = 16;
+    public const CREDIT_IS_RESTRUCTURED = 16;
 
-    /**
-     * Information about the credit is given by mistake
-     */
-    public const CNS_17 = 17;
+    public const INFORMATION_ABOUT_THE_CREDIT_IS_GIVEN_BY_MISTAKE = 17;
 
     /**
      * Special terms of service in connection with mobilization of client
      */
-    public const CNS_18 = 18;
+    public const SPECIAL_TERMS = 18;
 }
