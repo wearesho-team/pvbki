@@ -44,7 +44,6 @@ class SubjectTest extends TestCase
     protected const ABBREVIATION_RU = 'abbreviation_ru';
     protected const ABBREVIATION_EN = 'abbreviation_en';
     protected const REGISTRATION_DATE = '2018-04-12';
-    protected const EMPLOYEE_COUNT = 11;
 
     /** @var Pvbki\Elements\Subject */
     protected $fakeSubject;
@@ -102,7 +101,7 @@ class SubjectTest extends TestCase
             Pvbki\Enums\Ownership::SEPARATED_BRANCHES(),
             Carbon::parse(static::REGISTRATION_DATE),
             Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
-            static::EMPLOYEE_COUNT
+            Pvbki\Enums\EmployeeCount::FROM_101_TO_500()
         );
     }
 
@@ -160,7 +159,7 @@ class SubjectTest extends TestCase
                 'ownership' => Pvbki\Enums\Ownership::SEPARATED_BRANCHES(),
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
                 'economicActivity' => Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
-                'employeeCount' => static::EMPLOYEE_COUNT,
+                'employeeCount' => Pvbki\Enums\EmployeeCount::FROM_101_TO_500()
             ],
             $this->fakeSubject->jsonSerialize()
         );
@@ -248,7 +247,7 @@ class SubjectTest extends TestCase
 
     public function testGetEmployeeCount(): void
     {
-        $this->assertEquals(static::EMPLOYEE_COUNT, $this->fakeSubject->getEmployeeCount());
+        $this->assertEquals(Pvbki\Enums\EmployeeCount::FROM_101_TO_500(), $this->fakeSubject->getEmployeeCount());
     }
 
     public function testGetResidency(): void
