@@ -5,6 +5,7 @@ namespace Wearesho\Pvbki\Tests\Unit\Elements;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Wearesho\Pvbki\Elements\Record;
+use Wearesho\Pvbki\Enums\CreditUsage;
 
 /**
  * Class RecordTest
@@ -17,7 +18,6 @@ class RecordTest extends TestCase
     protected const ACCOUNTING_DATE = '2018-03-12';
     protected const REST_AMOUNT = 123.45;
     protected const CONTRACT_ID = 'contract_id';
-    protected const CREDIT_USAGE = 6;
     protected const REST_CURRENCY = 'rest_currency';
     protected const REST_INSTALMENT_COUNT = 7;
     protected const OVERDUE_AMOUNT = 89.01;
@@ -33,7 +33,7 @@ class RecordTest extends TestCase
             Carbon::parse(static::ACCOUNTING_DATE),
             static::REST_AMOUNT,
             static::CONTRACT_ID,
-            static::CREDIT_USAGE,
+            CreditUsage::IN(),
             static::REST_CURRENCY,
             static::REST_INSTALMENT_COUNT,
             static::OVERDUE_AMOUNT,
@@ -49,7 +49,7 @@ class RecordTest extends TestCase
                 'accountingDate' => Carbon::parse(static::ACCOUNTING_DATE),
                 'restAmount' => static::REST_AMOUNT,
                 'contractId' => static::CONTRACT_ID,
-                'creditUsage' => static::CREDIT_USAGE,
+                'creditUsage' => CreditUsage::IN(),
                 'restCurrency' => static::REST_CURRENCY,
                 'restInstalmentCount' => static::REST_INSTALMENT_COUNT,
                 'overdueAmount' => static::OVERDUE_AMOUNT,
@@ -95,7 +95,7 @@ class RecordTest extends TestCase
 
     public function testGetCreditUsage(): void
     {
-        $this->assertEquals(static::CREDIT_USAGE, $this->fakeRecord->getCreditUsage());
+        $this->assertEquals(CreditUsage::IN(), $this->fakeRecord->getCreditUsage());
     }
 
     public function testGetOverdueAmount(): void

@@ -3,27 +3,26 @@
 namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Elements\Communication;
+use Wearesho\Pvbki;
 
 /**
  * Class CommunicationTest
  * @package Wearesho\Pvbki\Tests\Unit\Elements
- * @coversDefaultClass Communication
+ * @coversDefaultClass \Wearesho\Pvbki\Enums\CommunicationType
  * @internal
  */
 class CommunicationTest extends TestCase
 {
     protected const VALUE = 'value';
-    protected const TYPE_ID = 1;
 
-    /** @var Communication */
+    /** @var Pvbki\Elements\Communication */
     protected $fakeCommunication;
 
     protected function setUp(): void
     {
-        $this->fakeCommunication = new Communication(
+        $this->fakeCommunication = new Pvbki\Elements\Communication(
             static::VALUE,
-            static::TYPE_ID
+            Pvbki\Enums\CommunicationType::MAIL()
         );
     }
 
@@ -32,7 +31,7 @@ class CommunicationTest extends TestCase
         $this->assertArraySubset(
             [
                 'value' => static::VALUE,
-                'typeId' => static::TYPE_ID,
+                'typeId' => Pvbki\Enums\CommunicationType::MAIL(),
             ],
             $this->fakeCommunication->jsonSerialize()
         );
@@ -40,11 +39,27 @@ class CommunicationTest extends TestCase
 
     public function testGetTypeId(): void
     {
-        $this->assertEquals(static::TYPE_ID, $this->fakeCommunication->getTypeId());
+        $this->assertEquals(Pvbki\Enums\CommunicationType::MAIL(), $this->fakeCommunication->getTypeId());
     }
 
     public function testGetValue(): void
     {
         $this->assertEquals(static::VALUE, $this->fakeCommunication->getValue());
+    }
+
+    public function testJsonSerializeWithNullEnum(): void
+    {
+        $communication = new Pvbki\Elements\Communication(
+            static::VALUE,
+            new Pvbki\Enums\CommunicationType(null)
+        );
+
+        $this->assertArraySubset(
+            [
+                'value' => static::VALUE,
+                'typeId' => null,
+            ],
+            json_decode(json_encode($communication), true)
+        );
     }
 }

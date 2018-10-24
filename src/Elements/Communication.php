@@ -2,6 +2,7 @@
 
 namespace Wearesho\Pvbki\Elements;
 
+use Wearesho\Pvbki\Enums\CommunicationType;
 use Wearesho\Pvbki\Infrastructure\Element;
 
 /**
@@ -17,16 +18,16 @@ class Communication extends Element
     /** @var string */
     protected $value;
 
-    /** @var int|null */
+    /** @var CommunicationType */
     protected $typeId;
 
-    public function __construct(string $value, ?int $typeId)
+    public function __construct(string $value, CommunicationType $typeId)
     {
         $this->value = $value;
         $this->typeId = $typeId;
     }
 
-    public function getTypeId(): ?int
+    public function getTypeId(): CommunicationType
     {
         return $this->typeId;
     }

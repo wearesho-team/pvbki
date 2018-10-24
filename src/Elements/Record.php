@@ -2,6 +2,7 @@
 
 namespace Wearesho\Pvbki\Elements;
 
+use Wearesho\Pvbki\Enums\CreditUsage;
 use Wearesho\Pvbki\Infrastructure\Element;
 
 /**
@@ -30,7 +31,7 @@ class Record extends Element
     /** @var string|null */
     protected $contractId;
 
-    /** @var int|null */
+    /** @var CreditUsage */
     protected $creditUsage;
 
     /** @var string|null */
@@ -52,7 +53,7 @@ class Record extends Element
         \DateTimeInterface $accountingDate,
         float $restAmount,
         ?string $contractId,
-        ?int $creditUsage,
+        CreditUsage $creditUsage,
         ?string $restCurrency,
         ?int $restInstalmentCount,
         ?float $overdueAmount,
@@ -85,7 +86,7 @@ class Record extends Element
         return $this->contractId;
     }
 
-    public function getCreditUsage(): ?int
+    public function getCreditUsage(): CreditUsage
     {
         return $this->creditUsage;
     }

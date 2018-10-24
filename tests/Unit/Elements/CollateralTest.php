@@ -15,16 +15,13 @@ use Wearesho\Pvbki;
 class CollateralTest extends TestCase
 {
     protected const CONTRACT_ID = 'contract_id';
-    protected const TYPE_ID = 1;
     protected const VALUE = 2.34;
     protected const CURRENCY = 'currency';
-    protected const ADDRESS_TYPE_ID = 3;
     protected const LOCATION_ID = 4;
     protected const STREET_UA = 'street_ua';
     protected const STREET_RU = 'street_ru';
     protected const STREET_EN = 'street_en';
     protected const POSTAL_CODE = 'postal_code';
-    protected const IDENTIFICATION_TYPE_ID = 5;
     protected const NUMBER = 'number';
     protected const REGISTRATION_DATE = '2017-05-12';
     protected const ISSUE_DATE = '2018-02-25';
@@ -40,10 +37,10 @@ class CollateralTest extends TestCase
     {
         $this->fakeCollateral = new Pvbki\Elements\Collateral(
             static::CONTRACT_ID,
-            static::TYPE_ID,
+            Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(),
             static::VALUE,
             static::CURRENCY,
-            static::ADDRESS_TYPE_ID,
+            Pvbki\Enums\AddressType::COLLATERAL(),
             static::LOCATION_ID,
             new Pvbki\Sentence\Translation(
                 static::STREET_UA,
@@ -51,7 +48,7 @@ class CollateralTest extends TestCase
                 static::STREET_EN
             ),
             static::POSTAL_CODE,
-            static::IDENTIFICATION_TYPE_ID,
+            Pvbki\Enums\IdentificationType::UNIQUE_NUMBER(),
             static::NUMBER,
             Carbon::parse(static::REGISTRATION_DATE),
             Carbon::parse(static::ISSUE_DATE),
@@ -69,10 +66,10 @@ class CollateralTest extends TestCase
         $this->assertArraySubset(
             [
                 'contractId' => static::CONTRACT_ID,
-                'typeId' => static::TYPE_ID,
+                'typeId' => Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(),
                 'value' => static::VALUE,
                 'currency' => static::CURRENCY,
-                'addressTypeId' => static::ADDRESS_TYPE_ID,
+                'addressTypeId' => Pvbki\Enums\AddressType::COLLATERAL(),
                 'locationId' => static::LOCATION_ID,
                 'street' => new Pvbki\Sentence\Translation(
                     static::STREET_UA,
@@ -80,7 +77,7 @@ class CollateralTest extends TestCase
                     static::STREET_EN
                 ),
                 'postalCode' => static::POSTAL_CODE,
-                'identificationTypeId' => static::IDENTIFICATION_TYPE_ID,
+                'identificationTypeId' => Pvbki\Enums\IdentificationType::UNIQUE_NUMBER(),
                 'number' => static::NUMBER,
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
                 'issueDate' => Carbon::parse(static::ISSUE_DATE),
@@ -97,7 +94,7 @@ class CollateralTest extends TestCase
 
     public function testGetAddressTypeId(): void
     {
-        $this->assertEquals(static::ADDRESS_TYPE_ID, $this->fakeCollateral->getAddressTypeId());
+        $this->assertEquals(Pvbki\Enums\AddressType::COLLATERAL(), $this->fakeCollateral->getAddressTypeId());
     }
 
     public function testGetValue(): void
@@ -120,7 +117,10 @@ class CollateralTest extends TestCase
 
     public function testGetIdentificationTypeId(): void
     {
-        $this->assertEquals(static::IDENTIFICATION_TYPE_ID, $this->fakeCollateral->getIdentificationTypeId());
+        $this->assertEquals(
+            Pvbki\Enums\IdentificationType::UNIQUE_NUMBER(),
+            $this->fakeCollateral->getIdentificationTypeId()
+        );
     }
 
     public function testGetStreet(): void
@@ -172,7 +172,10 @@ class CollateralTest extends TestCase
 
     public function testGetTypeId(): void
     {
-        $this->assertEquals(static::TYPE_ID, $this->fakeCollateral->getTypeId());
+        $this->assertEquals(
+            Pvbki\Enums\CollateralType::CABINET_MINISTERS_GUARANTEES(),
+            $this->fakeCollateral->getTypeId()
+        );
     }
 
     public function testGetCurrency(): void

@@ -2,13 +2,14 @@
 
 namespace Wearesho\Pvbki\Collections;
 
+use Wearesho\BaseCollection;
 use Wearesho\Pvbki;
 
 /**
  * Class Summaries
  * @package Wearesho\Pvbki\Collections
  */
-class Summaries extends Pvbki\Infrastructure\BaseCollection
+class Summaries extends BaseCollection
 {
     public function type(): string
     {

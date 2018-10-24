@@ -2,13 +2,14 @@
 
 namespace Wearesho\Pvbki\Collections;
 
+use Wearesho\BaseCollection;
 use Wearesho\Pvbki;
 
 /**
  * Class Events
  * @package Wearesho\Pvbki\Collections
  */
-class Events extends Pvbki\Infrastructure\BaseCollection
+class Events extends BaseCollection
 {
     public function type(): string
     {

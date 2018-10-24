@@ -32,7 +32,7 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $contractId;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\CollateralType */
     protected $typeId;
 
     /** @var float|null */
@@ -41,7 +41,7 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $currency;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\AddressType */
     protected $addressTypeId;
 
     /** @var int|null */
@@ -53,7 +53,7 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $postalCode;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\IdentificationType */
     protected $identificationTypeId;
 
     /** @var string|null */
@@ -73,14 +73,14 @@ class Collateral extends Pvbki\Infrastructure\Element
 
     public function __construct(
         ?string $contractId,
-        ?int $typeId,
+        Pvbki\Enums\CollateralType $typeId,
         ?float $value,
         ?string $currency,
-        ?int $addressTypeId,
+        Pvbki\Enums\AddressType $addressTypeId,
         ?int $locationId,
         ?Pvbki\Sentence\Translation $street,
         ?string $postalCode,
-        ?int $identificationTypeId,
+        Pvbki\Enums\IdentificationType $identificationTypeId,
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $issueDate,
@@ -108,7 +108,7 @@ class Collateral extends Pvbki\Infrastructure\Element
         return $this->contractId;
     }
 
-    public function getTypeId(): ?int
+    public function getTypeId(): Pvbki\Enums\CollateralType
     {
         return $this->typeId;
     }
@@ -123,7 +123,7 @@ class Collateral extends Pvbki\Infrastructure\Element
         return $this->currency;
     }
 
-    public function getAddressTypeId(): ?int
+    public function getAddressTypeId(): Pvbki\Enums\AddressType
     {
         return $this->addressTypeId;
     }
@@ -143,7 +143,7 @@ class Collateral extends Pvbki\Infrastructure\Element
         return $this->postalCode;
     }
 
-    public function getIdentificationTypeId(): ?int
+    public function getIdentificationTypeId(): Pvbki\Enums\IdentificationType
     {
         return $this->identificationTypeId;
     }
