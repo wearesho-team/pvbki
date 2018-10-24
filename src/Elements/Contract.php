@@ -62,7 +62,7 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Enums\CreditPurpose */
     protected $creditPurpose;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\ContractNegativeStatus */
     protected $negativeStatus;
 
     /** @var \DateTimeInterface|null */
@@ -131,7 +131,7 @@ class Contract extends Pvbki\Infrastructure\Element
         ?string $currency,
         ?\DateTimeInterface $dateOfSignature,
         Pvbki\Enums\CreditPurpose $creditPurpose,
-        ?int $negativeStatus,
+        Pvbki\Enums\ContractNegativeStatus $negativeStatus,
         ?\DateTimeInterface $applicationDate,
         ?\DateTimeInterface $startDate,
         ?\DateTimeInterface $expectedEndDate,
@@ -222,7 +222,7 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->creditPurpose;
     }
 
-    public function getNegativeStatus(): ?int
+    public function getNegativeStatus(): Pvbki\Enums\ContractNegativeStatus
     {
         return $this->negativeStatus;
     }
