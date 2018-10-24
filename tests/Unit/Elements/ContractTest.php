@@ -18,7 +18,6 @@ class ContractTest extends TestCase
     protected const PROVIDER = 'provider';
     protected const CONTRACT_ID = 'contract_id';
     protected const LAST_UPDATE = '2018-03-12';
-    protected const PHASE_ID = 2;
     protected const CURRENCY = 'currency';
     protected const DATE_OF_SIGNATURE = '2018-04-25';
     protected const APPLICATION_DATE = '2018-02-10';
@@ -48,7 +47,7 @@ class ContractTest extends TestCase
             static::PROVIDER,
             static::CONTRACT_ID,
             Carbon::parse(static::LAST_UPDATE),
-            static::PHASE_ID,
+            Pvbki\Enums\Phase::WITHDRAWN(),
             static::CURRENCY,
             Carbon::parse(static::DATE_OF_SIGNATURE),
             Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
@@ -83,7 +82,7 @@ class ContractTest extends TestCase
                 'provider' => static::PROVIDER,
                 'contractId' => static::CONTRACT_ID,
                 'lastUpdate' => Carbon::parse(static::LAST_UPDATE),
-                'phaseId' => static::PHASE_ID,
+                'phaseId' => Pvbki\Enums\Phase::WITHDRAWN(),
                 'currency' => static::CURRENCY,
                 'dateOfSignature' => Carbon::parse(static::DATE_OF_SIGNATURE),
                 'creditPurpose' => Pvbki\Enums\CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
@@ -224,7 +223,7 @@ class ContractTest extends TestCase
 
     public function testGetPhaseId(): void
     {
-        $this->assertEquals(static::PHASE_ID, $this->fakeContract->getPhaseId());
+        $this->assertEquals(Pvbki\Enums\Phase::WITHDRAWN(), $this->fakeContract->getPhaseId());
     }
 
     public function testGetPaymentMethodId(): void
