@@ -16,7 +16,6 @@ class SubjectTest extends TestCase
 {
     protected const REQUEST_ID = 'request_id';
     protected const LAST_UPDATE = '2018-09-25';
-    protected const ENTITY = 'entity';
     protected const GENDER = 1;
     protected const SURNAME_UA = 'surname_ua';
     protected const SURNAME_RU = 'surname_ru';
@@ -37,7 +36,6 @@ class SubjectTest extends TestCase
     protected const BIRTH_PLACE_EN = 'birth_place_en';
     protected const RESIDENCY = 3;
     protected const CITIZEN_SHIP = 4;
-    protected const EDUCATION = 6;
     protected const MARITAL_STATUS = 7;
     protected const STATUS_ID = 8;
     protected const FULL_NAME_UA = 'full_name_ua';
@@ -46,9 +44,7 @@ class SubjectTest extends TestCase
     protected const ABBREVIATION_UA = 'abbreviation_ua';
     protected const ABBREVIATION_RU = 'abbreviation_ru';
     protected const ABBREVIATION_EN = 'abbreviation_en';
-    protected const OWNERSHIP = 9;
     protected const REGISTRATION_DATE = '2018-04-12';
-    protected const ECONOMIC_ACTIVITY = 10;
     protected const EMPLOYEE_COUNT = 11;
 
     /** @var Pvbki\Elements\Subject */
@@ -59,7 +55,7 @@ class SubjectTest extends TestCase
         $this->fakeSubject = new Pvbki\Elements\Subject(
             static::REQUEST_ID,
             Carbon::parse(static::LAST_UPDATE),
-            static::ENTITY,
+            Pvbki\Enums\Entity::SUBJECT(),
             static::GENDER,
             new Pvbki\Sentence\Translation(
                 static::SURNAME_UA,
@@ -91,7 +87,7 @@ class SubjectTest extends TestCase
             static::RESIDENCY,
             static::CITIZEN_SHIP,
             Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
-            static::EDUCATION,
+            Pvbki\Enums\Education::UNFINISHED(),
             static::MARITAL_STATUS,
             static::STATUS_ID,
             new Pvbki\Sentence\Translation(
@@ -104,9 +100,9 @@ class SubjectTest extends TestCase
                 static::ABBREVIATION_RU,
                 static::ABBREVIATION_EN
             ),
-            static::OWNERSHIP,
+            Pvbki\Enums\Ownership::SEPARATED_BRANCHES(),
             Carbon::parse(static::REGISTRATION_DATE),
-            static::ECONOMIC_ACTIVITY,
+            Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
             static::EMPLOYEE_COUNT
         );
     }
@@ -117,7 +113,7 @@ class SubjectTest extends TestCase
             [
                 'requestId' => static::REQUEST_ID,
                 'lastUpdate' => Carbon::parse(static::LAST_UPDATE),
-                'entity' => static::ENTITY,
+                'entity' => Pvbki\Enums\Entity::SUBJECT(),
                 'gender' => static::GENDER,
                 'surname' => new Pvbki\Sentence\Translation(
                     static::SURNAME_UA,
@@ -149,7 +145,7 @@ class SubjectTest extends TestCase
                 'residency' => static::RESIDENCY,
                 'citizenShip' => static::CITIZEN_SHIP,
                 'negativeStatus' => Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
-                'education' => static::EDUCATION,
+                'education' => Pvbki\Enums\Education::UNFINISHED(),
                 'maritalStatus' => static::MARITAL_STATUS,
                 'statusId' => static::STATUS_ID,
                 'fullName' => new Pvbki\Sentence\Translation(
@@ -162,9 +158,9 @@ class SubjectTest extends TestCase
                     static::ABBREVIATION_RU,
                     static::ABBREVIATION_EN
                 ),
-                'ownership' => static::OWNERSHIP,
+                'ownership' => Pvbki\Enums\Ownership::SEPARATED_BRANCHES(),
                 'registrationDate' => Carbon::parse(static::REGISTRATION_DATE),
-                'economicActivity' => static::ECONOMIC_ACTIVITY,
+                'economicActivity' => Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
                 'employeeCount' => static::EMPLOYEE_COUNT,
             ],
             $this->fakeSubject->jsonSerialize()
@@ -173,7 +169,7 @@ class SubjectTest extends TestCase
 
     public function testGetOwnership(): void
     {
-        $this->assertEquals(static::OWNERSHIP, $this->fakeSubject->getOwnership());
+        $this->assertEquals(Pvbki\Enums\Ownership::SEPARATED_BRANCHES(), $this->fakeSubject->getOwnership());
     }
 
     public function testGetLastUpdate(): void
@@ -286,7 +282,7 @@ class SubjectTest extends TestCase
 
     public function testGetEducation(): void
     {
-        $this->assertEquals(static::EDUCATION, $this->fakeSubject->getEducation());
+        $this->assertEquals(Pvbki\Enums\Education::UNFINISHED(), $this->fakeSubject->getEducation());
     }
 
     public function testGetStatusId(): void
@@ -321,7 +317,7 @@ class SubjectTest extends TestCase
 
     public function testGetEntity(): void
     {
-        $this->assertEquals(static::ENTITY, $this->fakeSubject->getEntity());
+        $this->assertEquals(Pvbki\Enums\Entity::SUBJECT(), $this->fakeSubject->getEntity());
     }
 
     public function testGetFullName(): void
@@ -338,6 +334,9 @@ class SubjectTest extends TestCase
 
     public function testGetEconomicActivity(): void
     {
-        $this->assertEquals(static::ECONOMIC_ACTIVITY, $this->fakeSubject->getEconomicActivity());
+        $this->assertEquals(
+            Pvbki\Enums\EconomicActivity::TRANSPORT_AND_COMMUNICATION(),
+            $this->fakeSubject->getEconomicActivity()
+        );
     }
 }
