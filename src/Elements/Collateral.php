@@ -53,7 +53,7 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $postalCode;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\IdentificationType */
     protected $identificationTypeId;
 
     /** @var string|null */
@@ -80,7 +80,7 @@ class Collateral extends Pvbki\Infrastructure\Element
         ?int $locationId,
         ?Pvbki\Sentence\Translation $street,
         ?string $postalCode,
-        ?int $identificationTypeId,
+        Pvbki\Enums\IdentificationType $identificationTypeId,
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $issueDate,
@@ -143,7 +143,7 @@ class Collateral extends Pvbki\Infrastructure\Element
         return $this->postalCode;
     }
 
-    public function getIdentificationTypeId(): ?int
+    public function getIdentificationTypeId(): Pvbki\Enums\IdentificationType
     {
         return $this->identificationTypeId;
     }
