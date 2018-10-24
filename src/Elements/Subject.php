@@ -91,7 +91,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var int|null */
     protected $negativeStatus;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Education */
     protected $education;
 
     /** @var int|null */
@@ -133,7 +133,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?int $residency,
         ?int $citizenShip,
         ?int $negativeStatus,
-        ?int $education,
+        Pvbki\Enums\Education $education,
         ?int $maritalStatus,
         ?int $statusId,
         ?Pvbki\Sentence\Translation $fullName,
@@ -238,7 +238,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->negativeStatus;
     }
 
-    public function getEducation(): ?int
+    public function getEducation(): Pvbki\Enums\Education
     {
         return $this->education;
     }

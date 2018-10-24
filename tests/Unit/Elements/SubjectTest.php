@@ -38,7 +38,6 @@ class SubjectTest extends TestCase
     protected const RESIDENCY = 3;
     protected const CITIZEN_SHIP = 4;
     protected const NEGATIVE_STATUS = 5;
-    protected const EDUCATION = 6;
     protected const MARITAL_STATUS = 7;
     protected const STATUS_ID = 8;
     protected const FULL_NAME_UA = 'full_name_ua';
@@ -91,7 +90,7 @@ class SubjectTest extends TestCase
             static::RESIDENCY,
             static::CITIZEN_SHIP,
             static::NEGATIVE_STATUS,
-            static::EDUCATION,
+            Pvbki\Enums\Education::UNFINISHED(),
             static::MARITAL_STATUS,
             static::STATUS_ID,
             new Pvbki\Sentence\Translation(
@@ -149,7 +148,7 @@ class SubjectTest extends TestCase
                 'residency' => static::RESIDENCY,
                 'citizenShip' => static::CITIZEN_SHIP,
                 'negativeStatus' => static::NEGATIVE_STATUS,
-                'education' => static::EDUCATION,
+                'education' => Pvbki\Enums\Education::UNFINISHED(),
                 'maritalStatus' => static::MARITAL_STATUS,
                 'statusId' => static::STATUS_ID,
                 'fullName' => new Pvbki\Sentence\Translation(
@@ -283,7 +282,7 @@ class SubjectTest extends TestCase
 
     public function testGetEducation(): void
     {
-        $this->assertEquals(static::EDUCATION, $this->fakeSubject->getEducation());
+        $this->assertEquals(Pvbki\Enums\Education::UNFINISHED(), $this->fakeSubject->getEducation());
     }
 
     public function testGetStatusId(): void
