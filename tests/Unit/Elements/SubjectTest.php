@@ -35,7 +35,6 @@ class SubjectTest extends TestCase
     protected const BIRTH_PLACE_EN = 'birth_place_en';
     protected const RESIDENCY = 3;
     protected const CITIZEN_SHIP = 4;
-    protected const NEGATIVE_STATUS = 5;
     protected const STATUS_ID = 8;
     protected const FULL_NAME_UA = 'full_name_ua';
     protected const FULL_NAME_RU = 'full_name_ru';
@@ -84,7 +83,7 @@ class SubjectTest extends TestCase
             ),
             static::RESIDENCY,
             static::CITIZEN_SHIP,
-            static::NEGATIVE_STATUS,
+            Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
             Pvbki\Enums\Education::UNFINISHED(),
             Pvbki\Enums\MaritalStatus::WIDOW(),
             static::STATUS_ID,
@@ -142,7 +141,7 @@ class SubjectTest extends TestCase
                 ),
                 'residency' => static::RESIDENCY,
                 'citizenShip' => static::CITIZEN_SHIP,
-                'negativeStatus' => static::NEGATIVE_STATUS,
+                'negativeStatus' => Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
                 'education' => Pvbki\Enums\Education::UNFINISHED(),
                 'maritalStatus' => Pvbki\Enums\MaritalStatus::WIDOW(),
                 'statusId' => static::STATUS_ID,
@@ -262,7 +261,10 @@ class SubjectTest extends TestCase
 
     public function testGetNegativeStatus(): void
     {
-        $this->assertEquals(static::NEGATIVE_STATUS, $this->fakeSubject->getNegativeStatus());
+        $this->assertEquals(
+            Pvbki\Enums\SubjectNegativeStatus::WITHOUT_NEGATIVE_STATUS(),
+            $this->fakeSubject->getNegativeStatus()
+        );
     }
 
     public function testGetMaritalStatus(): void
