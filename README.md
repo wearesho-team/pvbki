@@ -161,5 +161,22 @@ $requestBody = $requestResponsePair->getRequestBody();
 $responseBody = $requestResponsePair->getResponseBody();
 ```
 
+### Parser
+
+You can parse existed report to get beautiful objects.
+
+```php
+<?php
+
+use Wearesho\Pvbki;
+
+/** @var string $report */
+
+$reportObj = (new Pvbki\Parser())->parse($report);
+
+// It is jsonSerializable
+$serialized = json_encode($reportObj);
+```
+
 ## License
 [MIT](./LICENSE)
