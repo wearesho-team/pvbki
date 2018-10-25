@@ -25,7 +25,7 @@ class Address extends Pvbki\Infrastructure\Element
     /** @var int */
     protected $locationId;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $street;
 
     /** @var string|null */
@@ -34,7 +34,7 @@ class Address extends Pvbki\Infrastructure\Element
     public function __construct(
         int $locationId,
         ?int $typeId,
-        ?Pvbki\Sentence\Translation $street,
+        Pvbki\Sentence\Translation $street,
         ?string $postalCode
     ) {
         $this->typeId = $typeId;
@@ -53,7 +53,7 @@ class Address extends Pvbki\Infrastructure\Element
         return $this->locationId;
     }
 
-    public function getStreet(): ?Pvbki\Sentence\Translation
+    public function getStreet(): Pvbki\Sentence\Translation
     {
         return $this->street;
     }
