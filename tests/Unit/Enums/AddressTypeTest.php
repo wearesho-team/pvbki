@@ -25,5 +25,6 @@ class AddressTypeTest extends TestCase
 
         $this->assertInstanceOf(NullableEnum::class, new AddressType(null));
         $this->assertNull((new AddressType(null))->jsonSerialize());
+        $this->assertNull(AddressType::UNDEFINED()->getValue());
     }
 }

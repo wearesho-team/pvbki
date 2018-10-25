@@ -34,5 +34,6 @@ class PaymentPeriodTest extends TestCase
         );
 
         $this->assertNull((new PaymentPeriod(null))->jsonSerialize());
+        $this->assertNull(PaymentPeriod::UNDEFINED()->getValue());
     }
 }

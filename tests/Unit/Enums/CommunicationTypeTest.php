@@ -24,5 +24,6 @@ class CommunicationTypeTest extends TestCase
         $this->assertEquals(CommunicationType::WEB(), new CommunicationType(CommunicationType::WEB));
 
         $this->assertNull((new CommunicationType(null))->jsonSerialize());
+        $this->assertNull(CommunicationType::UNDEFINED()->getValue());
     }
 }

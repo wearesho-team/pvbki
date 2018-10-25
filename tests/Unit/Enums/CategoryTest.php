@@ -33,5 +33,6 @@ class CategoryTest extends TestCase
         $this->assertEquals(Category::TYPE(), new Category(Category::TYPE));
 
         $this->assertNull((new Category(null))->jsonSerialize());
+        $this->assertNull(Category::UNDEFINED()->getValue());
     }
 }

@@ -20,5 +20,6 @@ class GenderTest extends TestCase
         $this->assertEquals(Gender::FEMALE(), new Gender(Gender::FEMALE));
 
         $this->assertNull((new Gender(null))->jsonSerialize());
+        $this->assertNull(Gender::UNDEFINED()->getValue());
     }
 }

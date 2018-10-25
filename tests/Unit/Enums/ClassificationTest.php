@@ -15,5 +15,8 @@ class ClassificationTest extends TestCase
     {
         $this->assertEquals(Classification::INDIVIDUAL(), new Classification(Classification::INDIVIDUAL));
         $this->assertEquals(Classification::ENTREPRENEUR(), new Classification(Classification::ENTREPRENEUR));
+
+        $this->assertNull((new Classification(null))->getValue());
+        $this->assertNull(Classification::UNDEFINED()->getValue());
     }
 }

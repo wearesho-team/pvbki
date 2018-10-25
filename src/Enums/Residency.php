@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class Residency
@@ -12,7 +11,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static Residency RESIDENT()
  * @method static Residency FOREIGNER()
  */
-final class Residency extends Enum implements NullableEnum
+final class Residency extends Enum
 {
     public const RESIDENT = 1;
     public const FOREIGNER = 2;

@@ -26,5 +26,6 @@ class OwnershipTest extends TestCase
         $this->assertEquals(Ownership::SEPARATED_BRANCHES(), new Ownership(Ownership::SEPARATED_BRANCHES));
 
         $this->assertNull((new Ownership(null))->jsonSerialize());
+        $this->assertNull(Ownership::UNDEFINED()->getValue());
     }
 }

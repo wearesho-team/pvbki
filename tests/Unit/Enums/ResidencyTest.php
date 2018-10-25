@@ -19,5 +19,6 @@ class ResidencyTest extends TestCase
         $this->assertEquals(Residency::RESIDENT(), new Residency(Residency::RESIDENT));
 
         $this->assertNull((new Residency(null))->jsonSerialize());
+        $this->assertNull(Residency::UNDEFINED()->getValue());
     }
 }

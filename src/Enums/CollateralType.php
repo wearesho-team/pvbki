@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class CollateralType
@@ -64,7 +63,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  *
  * @todo: must be implement as separated package with standardized collateral types
  */
-final class CollateralType extends Enum implements NullableEnum
+final class CollateralType extends Enum
 {
     public const NOT_DEFINED = 0;
 

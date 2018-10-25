@@ -21,5 +21,8 @@ class ContractTypeTest extends TestCase
         $this->assertEquals(ContractType::INSTALMENT(), new ContractType(ContractType::INSTALMENT));
         $this->assertEquals(ContractType::LEASING(), new ContractType(ContractType::LEASING));
         $this->assertEquals(ContractType::NON_INSTALMENT(), new ContractType(ContractType::NON_INSTALMENT));
+
+        $this->assertNull((new ContractType(null))->jsonSerialize());
+        $this->assertNull(ContractType::UNDEFINED()->getValue());
     }
 }
