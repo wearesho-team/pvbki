@@ -32,7 +32,7 @@ class SubjectTest extends TestCase
     protected const BIRTH_PLACE_UA = 'birth_place_ua';
     protected const BIRTH_PLACE_RU = 'birth_place_ru';
     protected const BIRTH_PLACE_EN = 'birth_place_en';
-    protected const CITIZEN_SHIP = 4;
+    protected const CITIZEN_SHIP = 'UA';
     protected const FULL_NAME_UA = 'full_name_ua';
     protected const FULL_NAME_RU = 'full_name_ru';
     protected const FULL_NAME_EN = 'full_name_en';
