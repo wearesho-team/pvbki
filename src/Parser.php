@@ -10,26 +10,14 @@ use Carbon\Carbon;
  */
 class Parser
 {
-    protected const STRING = 0;
-    protected const INT = 1;
-    protected const FLOAT = 2;
-    protected const DATE = 3;
-    protected const TRANSLATION = 4;
-
-    /** @var \DOMDocument */
-    private $domDocument;
-
-    /** @var \SimpleXMLElement */
-    private $simpleXmlDocument;
-
     public function parse(string $reportXml): StatementReport
     {
-        $this->domDocument = new \DOMDocument('1.0', 'utf-8');
-        $this->domDocument->loadXML($reportXml);
+        $domDocument = new \DOMDocument('1.0', 'utf-8');
+        $domDocument->loadXML($reportXml);
 
         $errors = new Collections\Errors();
 
-        $errorXmlCollection = $this->domDocument->getElementsByTagName(Elements\Error::ROOT);
+        $errorXmlCollection = $domDocument->getElementsByTagName(Elements\Error::ROOT);
 
         /** @var \DOMElement $errorXml */
         foreach ($errorXmlCollection as $errorXml) {
@@ -42,13 +30,13 @@ class Parser
         }
 
         /** @var \DOMElement $report */
-        $report = $this->domDocument->getElementsByTagName('Statement')[0];
-        $this->simpleXmlDocument = simplexml_import_dom($report);
+        $report = $domDocument->getElementsByTagName('Statement')[0];
+        $xml = simplexml_import_dom($report);
 
         // todo: add schema validation
-        $subject = $this->simpleXmlDocument->{Elements\Subject::tag()};
-        $scoring = $this->simpleXmlDocument->{Elements\Scoring::tag()};
-        $attributes = $this->simpleXmlDocument->attributes();
+        $subject = $xml->{Elements\Subject::tag()};
+        $scoring = $xml->{Elements\Scoring::tag()};
+        $attributes = $xml->attributes();
 
         return new StatementReport(
             (string)$attributes[StatementReport::PROTECTION] === 'false'
@@ -121,13 +109,13 @@ class Parser
                         (string)$element->{Elements\Identifier::ISSUED_BY_EN} ?: null
                     )
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Identifier::tag()}))),
+            }, $this->xmlToArray($xml->{Elements\Identifier::tag()}))),
             new Collections\Communications(array_map(function (\SimpleXMLElement $element): Elements\Communication {
                 return new Elements\Communication(
                     (string)$element->{Elements\Communication::VALUE},
                     new Enums\CommunicationType((int)$element->{Elements\Communication::TYPE_ID} ?: null)
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Communication::tag()}))),
+            }, $this->xmlToArray($xml->{Elements\Communication::tag()}))),
             new Collections\Addresses(array_map(function (\SimpleXMLElement $element): Elements\Address {
                 return new Elements\Address(
                     (int)$element->{Elements\Address::LOCATION_ID},
@@ -139,19 +127,19 @@ class Parser
                     ),
                     (string)$element->{Elements\Address::POSTAL_CODE} ?: null
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Address::tag()}))),
+            }, $this->xmlToArray($xml->{Elements\Address::tag()}))),
             new Collections\Dependants(array_map(function (\SimpleXMLElement $element): Elements\Dependant {
                 return new Elements\Dependant(
                     (int)$element->{Elements\Dependant::COUNT},
                     (int)$element->{Elements\Dependant::TYPE_ID} ?: null
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Dependant::tag()}))),
+            }, $this->xmlToArray($xml->{Elements\Dependant::tag()}))),
             new Collections\MonthlyIncomes(array_map(function (\SimpleXMLElement $element): Elements\MonthlyIncome {
                 return new Elements\MonthlyIncome(
                     (float)$element->{Elements\MonthlyIncome::VALUE} ?: null,
                     (string)$element->{Elements\MonthlyIncome::CURRENCY} ?: null
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\MonthlyIncome::tag()}))),
+            }, $this->xmlToArray($xml->{Elements\MonthlyIncome::tag()}))),
             new Collections\Summaries(array_map(function (\SimpleXMLElement $element): Elements\Summary {
                 return new Elements\Summary(
                     new Enums\Category((string)$element->{Elements\Summary::CATEGORY} ?: null),
@@ -160,8 +148,8 @@ class Parser
                     (int)$element->{Elements\Summary::COUNT} ?: null,
                     (float)$element->{Elements\Summary::AMOUNT} ?: null
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Summary::tag()}))),
-            new Collections\Contracts(array_map(function (\SimpleXMLElement $element): Elements\Contract {
+            }, $this->xmlToArray($xml->{Elements\Summary::tag()}))),
+            new Collections\Contracts(array_map(function (\SimpleXMLElement $element) use ($xml): Elements\Contract {
                 $contractId = (string)$element->{Elements\Contract::CONTRACT_ID};
 
                 return new Elements\Contract(
@@ -206,7 +194,7 @@ class Parser
                                     (int)$element->{Elements\Record::OVERDUE_COUNT} ?: null
                                 )
                                 : null;
-                        }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Record::tag()}))
+                        }, $this->xmlToArray($xml->{Elements\Record::tag()}))
                     )),
                     new Collections\Collaterals(array_filter(
                         array_map(function (\SimpleXMLElement $element) use ($contractId): ?Elements\Collateral {
@@ -240,25 +228,23 @@ class Parser
                                     )
                                 )
                                 : null;
-                        }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Collateral::tag()}))
+                        }, $this->xmlToArray($xml->{Elements\Collateral::tag()}))
                     ))
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Contract::tag()}))),
+            }, $this->xmlToArray($xml->{Elements\Contract::tag()}))),
             new Collections\Events(array_map(function (\SimpleXMLElement $element): Elements\Event {
                 return new Elements\Event(
                     (string)$element->{Elements\Event::NAME},
                     Carbon::parse((string)$element->{Elements\Event::WHEN}),
                     (int)$element->{Elements\Event::PROVIDER} ?: null
                 );
-            }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Event::tag()}))),
-            !empty($scoring)
-                ? new Elements\Scoring(
-                    (string)$scoring->{Elements\Scoring::DEGREE} ?: null,
-                    (int)$scoring->{Elements\Scoring::SCORE} ?: null,
-                    (float)$scoring->{Elements\Scoring::FAULT_CHANCE} ?: null,
-                    (string)$scoring->{Elements\Scoring::ADVERSE} ?: null
-                )
-                : null
+            }, $this->xmlToArray($xml->{Elements\Event::tag()}))),
+            new Elements\Scoring(
+                (string)$scoring->{Elements\Scoring::DEGREE} ?: null,
+                (int)$scoring->{Elements\Scoring::SCORE} ?: null,
+                (float)$scoring->{Elements\Scoring::FAULT_CHANCE} ?: null,
+                (string)$scoring->{Elements\Scoring::ADVERSE} ?: null
+            )
         );
     }
 

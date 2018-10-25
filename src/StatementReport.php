@@ -68,7 +68,7 @@ class StatementReport implements \JsonSerializable
         Collections\Summaries $summaries,
         Collections\Contracts $contracts,
         Collections\Events $events,
-        ?Elements\Scoring $scoring
+        Elements\Scoring $scoring
     ) {
         $this->protection = $protection;
         $this->generated = $generated;
