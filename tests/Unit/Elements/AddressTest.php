@@ -15,7 +15,6 @@ use Wearesho\Pvbki\Sentence\Translation;
  */
 class AddressTest extends TestCase
 {
-    protected const TYPE_ID = 1;
     protected const LOCATION_ID = 2;
     protected const STREET_UA = 'street_ua';
     protected const STREET_RU = 'street_ru';
