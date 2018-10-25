@@ -23,9 +23,9 @@ class Parser
         foreach ($errorXmlCollection as $errorXml) {
             $error = simplexml_import_dom($errorXml);
             $errors->append(new Elements\Error(
-                (string)$error->{Elements\Error::CODE},
-                (string)$error->{Elements\Error::MESSAGE},
-                (string)$error->{Elements\Error::TYPE}
+                $this->toString($error, Elements\Error::CODE),
+                $this->toString($error, Elements\Error::MESSAGE),
+                $this->toString($error, Elements\Error::TYPE)
             ));
         }
 
@@ -34,8 +34,8 @@ class Parser
         $xml = simplexml_import_dom($report);
 
         // todo: add schema validation
-        $subject = $xml->{Elements\Subject::tag()};
-        $scoring = $xml->{Elements\Scoring::tag()};
+        $subject = $this->fetchTag($xml, Elements\Subject::tag());
+        $scoring = $this->fetchTag($xml, Elements\Scoring::tag());
         $attributes = $xml->attributes();
 
         return new StatementReport(
@@ -45,217 +45,243 @@ class Parser
             (string)$attributes[StatementReport::POWERED],
             $errors,
             new Elements\Subject(
-                (string)$subject->{Elements\Subject::REQUEST_ID} ?: null,
-                Carbon::make((string)$subject->{Elements\Subject::LAST_UPDATE} ?: null),
-                new Enums\Entity((string)$subject->{Elements\Subject::ENTITY} ?: null),
-                new Enums\Gender((int)$subject->{Elements\Subject::GENDER} ?: null),
+                $this->toString($subject, Elements\Subject::REQUEST_ID),
+                $this->toCarbon($subject, Elements\Subject::LAST_UPDATE),
+                new Enums\Entity($this->toString($subject, Elements\Subject::ENTITY)),
+                new Enums\Gender($this->toInt($subject, Elements\Subject::GENDER)),
                 new Sentence\Translation(
-                    (string)$subject->{Elements\Subject::SURNAME_UA} ?: null,
-                    (string)$subject->{Elements\Subject::SURNAME_RU} ?: null,
-                    (string)$subject->{Elements\Subject::SURNAME_EN} ?: null
+                    $this->toString($subject, Elements\Subject::SURNAME_UA),
+                    $this->toString($subject, Elements\Subject::SURNAME_RU),
+                    $this->toString($subject, Elements\Subject::SURNAME_EN)
                 ),
                 new Sentence\Translation(
-                    (string)$subject->{Elements\Subject::NAME_UA} ?: null,
-                    (string)$subject->{Elements\Subject::NAME_RU} ?: null,
-                    (string)$subject->{Elements\Subject::NAME_EN} ?: null
+                    $this->toString($subject, Elements\Subject::NAME_UA),
+                    $this->toString($subject, Elements\Subject::NAME_RU),
+                    $this->toString($subject, Elements\Subject::NAME_EN)
                 ),
                 new Sentence\Translation(
-                    (string)$subject->{Elements\Subject::PATRONYMIC_UA} ?: null,
-                    (string)$subject->{Elements\Subject::PATRONYMIC_RU} ?: null,
-                    (string)$subject->{Elements\Subject::PATRONYMIC_EN} ?: null
+                    $this->toString($subject, Elements\Subject::PATRONYMIC_UA),
+                    $this->toString($subject, Elements\Subject::PATRONYMIC_RU),
+                    $this->toString($subject, Elements\Subject::PATRONYMIC_EN)
                 ),
                 new Sentence\Translation(
-                    (string)$subject->{Elements\Subject::BIRTH_SURNAME_UA} ?: null,
-                    (string)$subject->{Elements\Subject::BIRTH_SURNAME_RU} ?: null,
-                    (string)$subject->{Elements\Subject::BIRTH_SURNAME_EN} ?: null
+                    $this->toString($subject, Elements\Subject::BIRTH_SURNAME_UA),
+                    $this->toString($subject, Elements\Subject::BIRTH_SURNAME_RU),
+                    $this->toString($subject, Elements\Subject::BIRTH_SURNAME_EN)
                 ),
-                new Enums\Classification((int)$subject->{Elements\Subject::CLASSIFICATION}),
-                Carbon::make((string)$subject->{Elements\Subject::BIRTH_DATE} ?: null),
+                new Enums\Classification($this->toInt($subject, Elements\Subject::CLASSIFICATION)),
+                $this->toCarbon($subject, Elements\Subject::BIRTH_DATE),
                 new Sentence\Translation(
-                    (string)$subject->{Elements\Subject::BIRTH_PLACE_UA} ?: null,
-                    (string)$subject->{Elements\Subject::BIRTH_PLACE_RU} ?: null,
-                    (string)$subject->{Elements\Subject::BIRTH_PLACE_EN} ?: null
+                    $this->toString($subject, Elements\Subject::BIRTH_PLACE_UA),
+                    $this->toString($subject, Elements\Subject::BIRTH_PLACE_RU),
+                    $this->toString($subject, Elements\Subject::BIRTH_PLACE_EN)
                 ),
-                new Enums\Residency((int)$subject->{Elements\Subject::RESIDENCY} ?: null),
-                (string)$subject->{Elements\Subject::CITIZENSHIP} ?: null,
-                new Enums\SubjectNegativeStatus((int)$subject->{Elements\Subject::NEGATIVE_STATUS} ?: null),
-                new Enums\Education((int)$subject->{Elements\Subject::EDUCATION} ?: null),
-                new Enums\MaritalStatus((int)$subject->{Elements\Subject::MARITAL_STATUS} ?: null),
-                new Enums\Status((int)$subject->{Elements\Subject::STATUS_ID} ?: null),
+                new Enums\Residency($this->toInt($subject, Elements\Subject::RESIDENCY)),
+                $this->toString($subject, Elements\Subject::CITIZENSHIP),
+                new Enums\SubjectNegativeStatus($this->toInt($subject, Elements\Subject::NEGATIVE_STATUS)),
+                new Enums\Education($this->toInt($subject, Elements\Subject::EDUCATION)),
+                new Enums\MaritalStatus($this->toInt($subject, Elements\Subject::MARITAL_STATUS)),
+                new Enums\Status($this->toInt($subject, Elements\Subject::STATUS_ID)),
                 new Sentence\Translation(
-                    (string)$subject->{Elements\Subject::FULL_NAME_UA} ?: null,
-                    (string)$subject->{Elements\Subject::FULL_NAME_RU} ?: null,
-                    (string)$subject->{Elements\Subject::FULL_NAME_EN} ?: null
+                    $this->toString($subject, Elements\Subject::FULL_NAME_UA),
+                    $this->toString($subject, Elements\Subject::FULL_NAME_RU),
+                    $this->toString($subject, Elements\Subject::FULL_NAME_EN)
                 ),
                 new Sentence\Translation(
-                    (string)$subject->{Elements\Subject::ABBREVIATION_UA} ?: null,
-                    (string)$subject->{Elements\Subject::ABBREVIATION_RU} ?: null,
-                    (string)$subject->{Elements\Subject::ABBREVIATION_EN} ?: null
+                    $this->toString($subject, Elements\Subject::ABBREVIATION_UA),
+                    $this->toString($subject, Elements\Subject::ABBREVIATION_RU),
+                    $this->toString($subject, Elements\Subject::ABBREVIATION_EN)
                 ),
-                new Enums\Ownership((int)$subject->{Elements\Subject::OWNERSHIP} ?: null),
-                Carbon::make((string)$subject->{Elements\Subject::REGISTRATION_DATE} ?: null),
-                new Enums\EconomicActivity((int)$subject->{Elements\Subject::ECONOMIC_ACTIVITY} ?: null),
-                new Enums\EmployeeCount((int)$subject->{Elements\Subject::EMPLOYEE_COUNT} ?: null)
+                new Enums\Ownership($this->toInt($subject, Elements\Subject::OWNERSHIP)),
+                $this->toCarbon($subject, Elements\Subject::REGISTRATION_DATE),
+                new Enums\EconomicActivity($this->toInt($subject, Elements\Subject::ECONOMIC_ACTIVITY)),
+                new Enums\EmployeeCount($this->toInt($subject, Elements\Subject::EMPLOYEE_COUNT))
             ),
             new Collections\Identifiers(array_map(function (\SimpleXMLElement $element): Elements\Identifier {
                 return new Elements\Identifier(
-                    new Enums\IdentificationType((int)$element->{Elements\Identifier::TYPE_ID} ?: null),
-                    (string)$element->{Elements\Identifier::NUMBER} ?: null,
-                    Carbon::make((string)$element->{Elements\Identifier::REGISTRATION_DATE} ?: null),
-                    Carbon::make((string)$element->{Elements\Identifier::EXPIRATION_DATE} ?: null),
+                    new Enums\IdentificationType($this->toInt($element, Elements\Identifier::TYPE_ID)),
+                    $this->toString($element, Elements\Identifier::NUMBER),
+                    $this->toCarbon($element, Elements\Identifier::REGISTRATION_DATE),
+                    $this->toCarbon($element, Elements\Identifier::EXPIRATION_DATE),
                     new Sentence\Translation(
-                        (string)$element->{Elements\Identifier::ISSUED_BY_UA} ?: null,
-                        (string)$element->{Elements\Identifier::ISSUED_BY_RU} ?: null,
-                        (string)$element->{Elements\Identifier::ISSUED_BY_EN} ?: null
+                        $this->toString($element, Elements\Identifier::ISSUED_BY_UA),
+                        $this->toString($element, Elements\Identifier::ISSUED_BY_RU),
+                        $this->toString($element, Elements\Identifier::ISSUED_BY_EN)
                     )
                 );
-            }, $this->xmlToArray($xml->{Elements\Identifier::tag()}))),
+            }, $this->toArray($xml, Elements\Identifier::class))),
             new Collections\Communications(array_map(function (\SimpleXMLElement $element): Elements\Communication {
                 return new Elements\Communication(
-                    (string)$element->{Elements\Communication::VALUE},
-                    new Enums\CommunicationType((int)$element->{Elements\Communication::TYPE_ID} ?: null)
+                    $this->toString($element, Elements\Communication::VALUE),
+                    new Enums\CommunicationType($this->toInt($element, Elements\Communication::TYPE_ID))
                 );
-            }, $this->xmlToArray($xml->{Elements\Communication::tag()}))),
+            }, $this->toArray($xml, Elements\Communication::class))),
             new Collections\Addresses(array_map(function (\SimpleXMLElement $element): Elements\Address {
                 return new Elements\Address(
-                    (int)$element->{Elements\Address::LOCATION_ID},
-                    new Enums\AddressType((int)$element->{Elements\Address::TYPE_ID} ?: null),
+                    $this->toInt($element, Elements\Address::LOCATION_ID),
+                    new Enums\AddressType($this->toInt($element, Elements\Address::TYPE_ID)),
                     new Sentence\Translation(
-                        (string)$element->{Elements\Address::STREET_UA} ?: null,
-                        (string)$element->{Elements\Address::STREET_RU} ?: null,
-                        (string)$element->{Elements\Address::STREET_EN} ?: null
+                        $this->toString($element, Elements\Address::STREET_UA),
+                        $this->toString($element, Elements\Address::STREET_RU),
+                        $this->toString($element, Elements\Address::STREET_EN)
                     ),
-                    (string)$element->{Elements\Address::POSTAL_CODE} ?: null
+                    $this->toString($element, Elements\Address::POSTAL_CODE)
                 );
-            }, $this->xmlToArray($xml->{Elements\Address::tag()}))),
+            }, $this->toArray($xml, Elements\Address::class))),
             new Collections\Dependants(array_map(function (\SimpleXMLElement $element): Elements\Dependant {
                 return new Elements\Dependant(
-                    (int)$element->{Elements\Dependant::COUNT},
-                    (int)$element->{Elements\Dependant::TYPE_ID} ?: null
+                    $this->toInt($element, Elements\Dependant::COUNT),
+                    $this->toInt($element, Elements\Dependant::TYPE_ID)
                 );
-            }, $this->xmlToArray($xml->{Elements\Dependant::tag()}))),
+            }, $this->toArray($xml, Elements\Dependant::class))),
             new Collections\MonthlyIncomes(array_map(function (\SimpleXMLElement $element): Elements\MonthlyIncome {
                 return new Elements\MonthlyIncome(
-                    (float)$element->{Elements\MonthlyIncome::VALUE} ?: null,
-                    (string)$element->{Elements\MonthlyIncome::CURRENCY} ?: null
+                    $this->toFloat($element, Elements\MonthlyIncome::VALUE),
+                    $this->toString($element, Elements\MonthlyIncome::CURRENCY)
                 );
-            }, $this->xmlToArray($xml->{Elements\MonthlyIncome::tag()}))),
+            }, $this->toArray($xml, Elements\MonthlyIncome::class))),
             new Collections\Summaries(array_map(function (\SimpleXMLElement $element): Elements\Summary {
                 return new Elements\Summary(
-                    new Enums\Category((string)$element->{Elements\Summary::CATEGORY} ?: null),
-                    (int)$element->{Elements\Summary::VALUE} ?: null,
-                    (string)$element->{Elements\Summary::CODE} ?: null,
-                    (int)$element->{Elements\Summary::COUNT} ?: null,
-                    (float)$element->{Elements\Summary::AMOUNT} ?: null
+                    new Enums\Category($this->toString($element, Elements\Summary::CATEGORY)),
+                    $this->toInt($element, Elements\Summary::VALUE),
+                    $this->toString($element, Elements\Summary::CODE),
+                    $this->toInt($element, Elements\Summary::COUNT),
+                    $this->toFloat($element, Elements\Summary::AMOUNT)
                 );
-            }, $this->xmlToArray($xml->{Elements\Summary::tag()}))),
+            }, $this->toArray($xml, Elements\Summary::class))),
             new Collections\Contracts(array_map(function (\SimpleXMLElement $element) use ($xml): Elements\Contract {
-                $contractId = (string)$element->{Elements\Contract::CONTRACT_ID};
+                $contractId = $this->toString($element, Elements\Contract::CONTRACT_ID);
 
                 return new Elements\Contract(
-                    new Enums\Role((int)$element->{Elements\Contract::ROLE_ID} ?: null),
-                    (string)$element->{Elements\Contract::PROVIDER} ?: null,
+                    new Enums\Role($this->toInt($element, Elements\Contract::ROLE_ID)),
+                    $this->toString($element, Elements\Contract::PROVIDER),
                     $contractId,
-                    Carbon::make((string)$element->{Elements\Contract::LAST_UPDATE} ?: null),
-                    new Enums\Phase((int)$element->{Elements\Contract::PHASE_ID} ?: null),
-                    (string)$element->{Elements\Contract::CURRENCY} ?: null,
-                    Carbon::make((string)$element->{Elements\Contract::DATE_OF_SIGNATURE} ?: null),
-                    new Enums\CreditPurpose((int)$element->{Elements\Contract::CREDIT_PURPOSE} ?: null),
-                    new Enums\ContractNegativeStatus((int)$element->{Elements\Contract::NEGATIVE_STATUS} ?: null),
-                    Carbon::make((string)$element->{Elements\Contract::APPLICATION_DATE} ?: null),
-                    Carbon::make((string)$element->{Elements\Contract::START_DATE} ?: null),
-                    Carbon::make((string)$element->{Elements\Contract::EXPECTED_END_DATE} ?: null),
-                    Carbon::make((string)$element->{Elements\Contract::FACTUAL_END_DATE} ?: null),
-                    new Enums\ContractType((string)$element->{Elements\Contract::TYPE} ?: null),
-                    new Enums\PaymentMethod((int)$element->{Elements\Contract::PAYMENT_METHOD_ID} ?: null),
-                    new Enums\PaymentPeriod((int)$element->{Elements\Contract::PAYMENT_PERIOD_ID} ?: null),
-                    (string)$element->{Elements\Contract::ACTUAL_CURRENCY} ?: null,
-                    (float)$element->{Elements\Contract::TOTAL_AMOUNT} ?: null,
-                    (float)$element->{Elements\Contract::CREDIT_LIMIT} ?: null,
-                    (int)$element->{Elements\Contract::INSTALMENT_COUNT} ?: null,
-                    (string)$element->{Elements\Contract::INSTALMENT_AMOUNT_CURRENCY} ?: null,
-                    (float)$element->{Elements\Contract::INSTALMENT_AMOUNT} ?: null,
-                    (int)$element->{Elements\Contract::REST_INSTALMENT_COUNT} ?: null,
-                    (float)$element->{Elements\Contract::REST_AMOUNT} ?: null,
-                    (int)$element->{Elements\Contract::OVERDUE_COUNT} ?: null,
-                    (float)$element->{Elements\Contract::OVERDUE_AMOUNT} ?: null,
+                    $this->toCarbon($element, Elements\Contract::LAST_UPDATE),
+                    new Enums\Phase($this->toInt($element, Elements\Contract::PHASE_ID)),
+                    $this->toString($element, Elements\Contract::CURRENCY),
+                    $this->toCarbon($element, Elements\Contract::DATE_OF_SIGNATURE),
+                    new Enums\CreditPurpose($this->toInt($element, Elements\Contract::CREDIT_PURPOSE)),
+                    new Enums\ContractNegativeStatus($this->toInt($element, Elements\Contract::NEGATIVE_STATUS)),
+                    $this->toCarbon($element, Elements\Contract::APPLICATION_DATE),
+                    $this->toCarbon($element, Elements\Contract::START_DATE),
+                    $this->toCarbon($element, Elements\Contract::EXPECTED_END_DATE),
+                    $this->toCarbon($element, Elements\Contract::FACTUAL_END_DATE),
+                    new Enums\ContractType($this->toString($element, Elements\Contract::TYPE)),
+                    new Enums\PaymentMethod($this->toInt($element, Elements\Contract::PAYMENT_METHOD_ID)),
+                    new Enums\PaymentPeriod($this->toInt($element, Elements\Contract::PAYMENT_PERIOD_ID)),
+                    $this->toString($element, Elements\Contract::ACTUAL_CURRENCY),
+                    $this->toFloat($element, Elements\Contract::TOTAL_AMOUNT),
+                    $this->toFloat($element, Elements\Contract::CREDIT_LIMIT),
+                    $this->toInt($element, Elements\Contract::INSTALMENT_COUNT),
+                    $this->toString($element, Elements\Contract::INSTALMENT_AMOUNT_CURRENCY),
+                    $this->toFloat($element, Elements\Contract::INSTALMENT_AMOUNT),
+                    $this->toInt($element, Elements\Contract::REST_INSTALMENT_COUNT),
+                    $this->toFloat($element, Elements\Contract::REST_AMOUNT),
+                    $this->toInt($element, Elements\Contract::OVERDUE_COUNT),
+                    $this->toFloat($element, Elements\Contract::OVERDUE_AMOUNT),
                     new Collections\Records(array_filter(
                         array_map(function (\SimpleXMLElement $element) use ($contractId): ?Elements\Record {
-                            return $contractId === (string)$element->{Elements\Record::CONTRACT_ID}
+                            return $contractId === $this->toString($element, Elements\Record::CONTRACT_ID)
                                 ? new Elements\Record(
-                                    Carbon::make((string)$element->{Elements\Record::ACCOUNTING_DATE}),
-                                    (float)$element->{Elements\Record::REST_AMOUNT},
+                                    $this->toCarbon($element, Elements\Record::ACCOUNTING_DATE),
+                                    $this->toFloat($element, Elements\Record::REST_AMOUNT),
                                     $contractId,
-                                    new Enums\CreditUsage((int)$element->{Elements\Record::CREDIT_USAGE} ?: null),
-                                    (string)$element->{Elements\Record::REST_CURRENCY} ?: null,
-                                    (int)$element->{Elements\Record::REST_INSTALMENT_COUNT} ?: null,
-                                    (float)$element->{Elements\Record::OVERDUE_AMOUNT} ?: null,
-                                    (string)$element->{Elements\Record::OVERDUE_CURRENCY} ?: null,
-                                    (int)$element->{Elements\Record::OVERDUE_COUNT} ?: null
+                                    new Enums\CreditUsage($this->toInt($element, Elements\Record::CREDIT_USAGE)),
+                                    $this->toString($element, Elements\Record::REST_CURRENCY),
+                                    $this->toInt($element, Elements\Record::REST_INSTALMENT_COUNT),
+                                    $this->toFloat($element, Elements\Record::OVERDUE_AMOUNT),
+                                    $this->toString($element, Elements\Record::OVERDUE_CURRENCY),
+                                    $this->toInt($element, Elements\Record::OVERDUE_COUNT)
                                 )
                                 : null;
-                        }, $this->xmlToArray($xml->{Elements\Record::tag()}))
+                        }, $this->toArray($xml, Elements\Record::class))
                     )),
                     new Collections\Collaterals(array_filter(
                         array_map(function (\SimpleXMLElement $element) use ($contractId): ?Elements\Collateral {
-                            return $contractId === (string)$element->{Elements\Collateral::CONTRACT_ID}
+                            return $contractId === $this->toString($element, Elements\Collateral::CONTRACT_ID)
                                 ? new Elements\Collateral(
                                     $contractId,
-                                    new Enums\CollateralType((int)$element->{Elements\Collateral::TYPE_ID} ?: null),
-                                    (float)$element->{Elements\Collateral::VALUE} ?: null,
-                                    (string)$element->{Elements\Collateral::CURRENCY} ?: null,
+                                    new Enums\CollateralType($this->toInt($element, Elements\Collateral::TYPE_ID)),
+                                    $this->toFloat($element, Elements\Collateral::VALUE),
+                                    $this->toString($element, Elements\Collateral::CURRENCY),
                                     new Enums\AddressType(
-                                        (int)$element->{Elements\Collateral::ADDRESS_TYPE_ID} ?: null
+                                        $this->toInt($element, Elements\Collateral::ADDRESS_TYPE_ID)
                                     ),
-                                    (int)$element->{Elements\Collateral::LOCATION_ID} ?: null,
+                                    $this->toInt($element, Elements\Collateral::LOCATION_ID),
                                     new Sentence\Translation(
-                                        (string)$element->{Elements\Collateral::STREET_UA} ?: null,
-                                        (string)$element->{Elements\Collateral::STREET_RU} ?: null,
-                                        (string)$element->{Elements\Collateral::STREET_EN} ?: null
+                                        $this->toString($element, Elements\Collateral::STREET_UA),
+                                        $this->toString($element, Elements\Collateral::STREET_RU),
+                                        $this->toString($element, Elements\Collateral::STREET_EN)
                                     ),
-                                    (string)$element->{Elements\Collateral::POSTAL_CODE},
+                                    $this->toString($element, Elements\Collateral::POSTAL_CODE),
                                     new Enums\IdentificationType(
-                                        (int)$element->{Elements\Collateral::IDENTIFICATION_TYPE_ID} ?: null
+                                        $this->toInt($element, Elements\Collateral::IDENTIFICATION_TYPE_ID)
                                     ),
-                                    (string)$element->{Elements\Collateral::NUMBER} ?: null,
-                                    Carbon::make((string)$element->{Elements\Collateral::REGISTRATION_DATE} ?: null),
-                                    Carbon::make((string)$element->{Elements\Collateral::ISSUE_DATE} ?: null),
-                                    Carbon::make((string)$element->{Elements\Collateral::EXPIRATION_DATE} ?: null),
+                                    $this->toString($element, Elements\Collateral::NUMBER),
+                                    $this->toCarbon($element, Elements\Collateral::REGISTRATION_DATE),
+                                    $this->toCarbon($element, Elements\Collateral::ISSUE_DATE),
+                                    $this->toCarbon($element, Elements\Collateral::EXPIRATION_DATE),
                                     new Sentence\Translation(
-                                        (string)$element->{Elements\Collateral::AUTHORITY_UA} ?: null,
-                                        (string)$element->{Elements\Collateral::AUTHORITY_RU} ?: null,
-                                        (string)$element->{Elements\Collateral::AUTHORITY_EN} ?: null
+                                        $this->toString($element, Elements\Collateral::AUTHORITY_UA),
+                                        $this->toString($element, Elements\Collateral::AUTHORITY_RU),
+                                        $this->toString($element, Elements\Collateral::AUTHORITY_EN)
                                     )
                                 )
                                 : null;
-                        }, $this->xmlToArray($xml->{Elements\Collateral::tag()}))
+                        }, $this->toArray($xml, Elements\Collateral::class))
                     ))
                 );
-            }, $this->xmlToArray($xml->{Elements\Contract::tag()}))),
+            }, $this->toArray($xml, Elements\Contract::class))),
             new Collections\Events(array_map(function (\SimpleXMLElement $element): Elements\Event {
                 return new Elements\Event(
-                    (string)$element->{Elements\Event::NAME},
-                    Carbon::parse((string)$element->{Elements\Event::WHEN}),
-                    (int)$element->{Elements\Event::PROVIDER} ?: null
+                    $this->toString($element, Elements\Event::NAME),
+                    $this->toCarbon($element, Elements\Event::WHEN),
+                    $this->toInt($element, Elements\Event::PROVIDER)
                 );
-            }, $this->xmlToArray($xml->{Elements\Event::tag()}))),
+            }, $this->toArray($xml, Elements\Event::class))),
             new Elements\Scoring(
-                (string)$scoring->{Elements\Scoring::DEGREE} ?: null,
-                (int)$scoring->{Elements\Scoring::SCORE} ?: null,
-                (float)$scoring->{Elements\Scoring::FAULT_CHANCE} ?: null,
-                (string)$scoring->{Elements\Scoring::ADVERSE} ?: null
+                $this->toString($scoring, Elements\Scoring::DEGREE),
+                $this->toInt($scoring, Elements\Scoring::SCORE),
+                $this->toFloat($scoring, Elements\Scoring::FAULT_CHANCE),
+                $this->toString($scoring, Elements\Scoring::ADVERSE)
             )
         );
     }
 
-    private function xmlToArray(\SimpleXMLElement $element): array
+    private function toCarbon(\SimpleXMLElement $element, string $tagName): ?Carbon
+    {
+        return Carbon::make($this->toString($element, $tagName));
+    }
+
+    private function toFloat(\SimpleXMLElement $element, string $tagName, $alternateValue = null): ?float
+    {
+        return (float)$this->fetchTag($element, $tagName) ?: $alternateValue;
+    }
+
+    private function toString(\SimpleXMLElement $element, string $tagName, $alternateValue = null): ?string
+    {
+        return (string)$this->fetchTag($element, $tagName) ?: $alternateValue;
+    }
+
+    private function toInt(\SimpleXMLElement $element, string $tagName, $alternateValue = null): ?int
+    {
+        return (int)$this->fetchTag($element, $tagName) ?: $alternateValue;
+    }
+
+    private function toArray(\SimpleXMLElement $element, string $class): array
     {
         $response = [];
 
-        foreach ($element as $item) {
+        /** @var Infrastructure\Element $class */
+        foreach ($this->fetchTag($element, $class::tag()) as $item) {
             $response[] = $item;
         }
 
         return $response;
+    }
+
+    private function fetchTag(\SimpleXMLElement $element, string $tagName): \SimpleXMLElement
+    {
+        return $element->{$tagName};
     }
 }

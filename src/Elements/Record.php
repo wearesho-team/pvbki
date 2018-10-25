@@ -24,7 +24,7 @@ class Record extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface */
     protected $accountingDate;
 
-    /** @var float */
+    /** @var float|null */
     protected $restAmount;
 
     /** @var string|null */
@@ -50,7 +50,7 @@ class Record extends Pvbki\Infrastructure\Element
 
     public function __construct(
         \DateTimeInterface $accountingDate,
-        float $restAmount,
+        ?float $restAmount,
         ?string $contractId,
         Pvbki\Enums\CreditUsage $creditUsage,
         ?string $restCurrency,
@@ -75,7 +75,7 @@ class Record extends Pvbki\Infrastructure\Element
         return $this->accountingDate;
     }
 
-    public function getRestAmount(): float
+    public function getRestAmount(): ?float
     {
         return $this->restAmount;
     }
