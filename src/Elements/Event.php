@@ -30,15 +30,6 @@ class Event extends Pvbki\Infrastructure\Element
         $this->when = $when;
         $this->provider = $provider;
     }
-    
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::NAME),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::WHEN),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PROVIDER),
-        ]);
-    }
 
     public function getName(): string
     {

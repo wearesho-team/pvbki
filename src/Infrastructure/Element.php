@@ -21,11 +21,4 @@ abstract class Element implements Pvbki\Interrelations\ElementInterface
     {
         return static::ROOT;
     }
-
-    /**
-     * Need rules for parser
-     *
-     * @return Pvbki\Collections\RuleCollection
-     */
-    abstract public static function arguments(): Pvbki\Collections\RuleCollection;
 }

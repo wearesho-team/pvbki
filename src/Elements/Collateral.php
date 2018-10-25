@@ -33,7 +33,7 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $contractId;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\CollateralType */
     protected $typeId;
 
     /** @var float|null */
@@ -42,19 +42,19 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $currency;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\AddressType */
     protected $addressTypeId;
 
     /** @var int|null */
     protected $locationId;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $street;
 
     /** @var string|null */
     protected $postalCode;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\IdentificationType */
     protected $identificationTypeId;
 
     /** @var string|null */
@@ -69,24 +69,24 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $expirationDate;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $authority;
 
     public function __construct(
         ?string $contractId,
-        ?int $typeId,
+        Pvbki\Enums\CollateralType $typeId,
         ?float $value,
         ?string $currency,
-        ?int $addressTypeId,
+        Pvbki\Enums\AddressType $addressTypeId,
         ?int $locationId,
-        ?Pvbki\Sentence\Translation $street,
+        Pvbki\Sentence\Translation $street,
         ?string $postalCode,
-        ?int $identificationTypeId,
+        Pvbki\Enums\IdentificationType $identificationTypeId,
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $issueDate,
         ?\DateTimeInterface $expirationDate,
-        ?Pvbki\Sentence\Translation $authority
+        Pvbki\Sentence\Translation $authority
     ) {
         $this->contractId = $contractId;
         $this->typeId = $typeId;
@@ -104,37 +104,12 @@ class Collateral extends Pvbki\Infrastructure\Element
         $this->authority = $authority;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CONTRACT_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::VALUE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CURRENCY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::ADDRESS_TYPE_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::LOCATION_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::TRANSLATE(), static::STREET_UA, static::STREET_RU, static::STREET_EN),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::POSTAL_CODE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::IDENTIFICATION_TYPE_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::NUMBER),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::REGISTRATION_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::ISSUE_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::EXPIRATION_DATE),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::AUTHORITY_UA,
-                static::AUTHORITY_RU,
-                static::AUTHORITY_EN
-            ),
-        ]);
-    }
-
     public function getContractId(): ?string
     {
         return $this->contractId;
     }
 
-    public function getTypeId(): ?int
+    public function getTypeId(): Pvbki\Enums\CollateralType
     {
         return $this->typeId;
     }
@@ -149,7 +124,7 @@ class Collateral extends Pvbki\Infrastructure\Element
         return $this->currency;
     }
 
-    public function getAddressTypeId(): ?int
+    public function getAddressTypeId(): Pvbki\Enums\AddressType
     {
         return $this->addressTypeId;
     }
@@ -169,7 +144,7 @@ class Collateral extends Pvbki\Infrastructure\Element
         return $this->postalCode;
     }
 
-    public function getIdentificationTypeId(): ?int
+    public function getIdentificationTypeId(): Pvbki\Enums\IdentificationType
     {
         return $this->identificationTypeId;
     }

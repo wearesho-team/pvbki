@@ -3,7 +3,6 @@
 namespace Wearesho\Pvbki\Elements;
 
 use Wearesho\Pvbki;
-use Wearesho\Pvbki\Collections\RuleCollection;
 
 /**
  * Class Subject
@@ -56,22 +55,22 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $lastUpdate;
 
-    /** @var string|null */
+    /** @var Pvbki\Enums\Entity */
     protected $entity;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Gender */
     protected $gender;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $surname;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $name;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $patronymic;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $birthSurname;
 
     /** @var int|null */
@@ -80,69 +79,69 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $birthDate;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $birthPlace;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Residency */
     protected $residency;
 
     /** @var string|null */
     protected $citizenShip;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\SubjectNegativeStatus */
     protected $negativeStatus;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Education */
     protected $education;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\MaritalStatus */
     protected $maritalStatus;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Status */
     protected $statusId;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $fullName;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $abbreviation;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Ownership */
     protected $ownership;
 
     /** @var \DateTimeInterface|null */
     protected $registrationDate;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\EconomicActivity */
     protected $economicActivity;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\EmployeeCount */
     protected $employeeCount;
 
     public function __construct(
         ?string $requestId,
         ?\DateTimeInterface $lastUpdate,
-        ?string $entity,
-        ?int $gender,
-        ?Pvbki\Sentence\Translation $surname,
-        ?Pvbki\Sentence\Translation $name,
-        ?Pvbki\Sentence\Translation $patronymic,
-        ?Pvbki\Sentence\Translation $birthSurname,
-        ?int $classification,
+        Pvbki\Enums\Entity $entity,
+        Pvbki\Enums\Gender $gender,
+        Pvbki\Sentence\Translation $surname,
+        Pvbki\Sentence\Translation $name,
+        Pvbki\Sentence\Translation $patronymic,
+        Pvbki\Sentence\Translation $birthSurname,
+        Pvbki\Enums\Classification $classification,
         ?\DateTimeInterface $birthDate,
-        ?Pvbki\Sentence\Translation $birthPlace,
-        ?int $residency,
+        Pvbki\Sentence\Translation $birthPlace,
+        Pvbki\Enums\Residency $residency,
         ?string $citizenShip,
-        ?int $negativeStatus,
-        ?int $education,
-        ?int $maritalStatus,
-        ?int $statusId,
-        ?Pvbki\Sentence\Translation $fullName,
-        ?Pvbki\Sentence\Translation $abbreviation,
-        ?int $ownership,
+        Pvbki\Enums\SubjectNegativeStatus $negativeStatus,
+        Pvbki\Enums\Education $education,
+        Pvbki\Enums\MaritalStatus $maritalStatus,
+        Pvbki\Enums\Status $statusId,
+        Pvbki\Sentence\Translation $fullName,
+        Pvbki\Sentence\Translation $abbreviation,
+        Pvbki\Enums\Ownership $ownership,
         ?\DateTimeInterface $registrationDate,
-        ?int $economicActivity,
-        ?int $employeeCount
+        Pvbki\Enums\EconomicActivity $economicActivity,
+        Pvbki\Enums\EmployeeCount $employeeCount
     ) {
         $this->requestId = $requestId;
         $this->lastUpdate = $lastUpdate;
@@ -169,65 +168,6 @@ class Subject extends Pvbki\Infrastructure\Element
         $this->employeeCount = $employeeCount;
     }
 
-    public static function arguments(): RuleCollection
-    {
-        return new RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::REQUEST_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::LAST_UPDATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::ENTITY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::GENDER),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::SURNAME_UA,
-                static::SURNAME_RU,
-                static::SURNAME_EN
-            ),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::TRANSLATE(), static::NAME_UA, static::NAME_RU, static::NAME_EN),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::PATRONYMIC_UA,
-                static::PATRONYMIC_RU,
-                static::PATRONYMIC_EN
-            ),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::BIRTH_SURNAME_UA,
-                static::BIRTH_SURNAME_RU,
-                static::BIRTH_SURNAME_EN
-            ),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::CLASSIFICATION),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::BIRTH_DATE),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::BIRTH_PLACE_UA,
-                static::BIRTH_PLACE_RU,
-                static::BIRTH_PLACE_EN
-            ),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::RESIDENCY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CITIZENSHIP),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::NEGATIVE_STATUS),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::EDUCATION),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::MARITAL_STATUS),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::STATUS_ID),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::FULL_NAME_UA,
-                static::FULL_NAME_RU,
-                static::FULL_NAME_EN
-            ),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::ABBREVIATION_UA,
-                static::ABBREVIATION_RU,
-                static::ABBREVIATION_EN
-            ),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::OWNERSHIP),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::REGISTRATION_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::ECONOMIC_ACTIVITY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::EMPLOYEE_COUNT),
-        ]);
-    }
-
     public function getRequestId(): ?string
     {
         return $this->requestId;
@@ -238,37 +178,37 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->lastUpdate;
     }
 
-    public function getEntity(): ?string
+    public function getEntity(): Pvbki\Enums\Entity
     {
         return $this->entity;
     }
 
-    public function getGender(): ?int
+    public function getGender(): Pvbki\Enums\Gender
     {
         return $this->gender;
     }
 
-    public function getSurname(): ?Pvbki\Sentence\Translation
+    public function getSurname(): Pvbki\Sentence\Translation
     {
         return $this->surname;
     }
 
-    public function getName(): ?Pvbki\Sentence\Translation
+    public function getName(): Pvbki\Sentence\Translation
     {
         return $this->name;
     }
 
-    public function getPatronymic(): ?Pvbki\Sentence\Translation
+    public function getPatronymic(): Pvbki\Sentence\Translation
     {
         return $this->patronymic;
     }
 
-    public function getBirthSurname(): ?Pvbki\Sentence\Translation
+    public function getBirthSurname(): Pvbki\Sentence\Translation
     {
         return $this->birthSurname;
     }
 
-    public function getClassification(): ?int
+    public function getClassification(): Pvbki\Enums\Classification
     {
         return $this->classification;
     }
@@ -278,12 +218,12 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->birthDate;
     }
 
-    public function getBirthPlace(): ?Pvbki\Sentence\Translation
+    public function getBirthPlace(): Pvbki\Sentence\Translation
     {
         return $this->birthPlace;
     }
 
-    public function getResidency(): ?int
+    public function getResidency(): Pvbki\Enums\Residency
     {
         return $this->residency;
     }
@@ -293,37 +233,37 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->citizenShip;
     }
 
-    public function getNegativeStatus(): ?int
+    public function getNegativeStatus(): Pvbki\Enums\SubjectNegativeStatus
     {
         return $this->negativeStatus;
     }
 
-    public function getEducation(): ?int
+    public function getEducation(): Pvbki\Enums\Education
     {
         return $this->education;
     }
 
-    public function getMaritalStatus(): ?int
+    public function getMaritalStatus(): Pvbki\Enums\MaritalStatus
     {
         return $this->maritalStatus;
     }
 
-    public function getStatusId(): ?int
+    public function getStatusId(): Pvbki\Enums\Status
     {
         return $this->statusId;
     }
 
-    public function getFullName(): ?Pvbki\Sentence\Translation
+    public function getFullName(): Pvbki\Sentence\Translation
     {
         return $this->fullName;
     }
 
-    public function getAbbreviation(): ?Pvbki\Sentence\Translation
+    public function getAbbreviation(): Pvbki\Sentence\Translation
     {
         return $this->abbreviation;
     }
 
-    public function getOwnership(): ?int
+    public function getOwnership(): Pvbki\Enums\Ownership
     {
         return $this->ownership;
     }
@@ -333,12 +273,12 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->registrationDate;
     }
 
-    public function getEconomicActivity(): ?int
+    public function getEconomicActivity(): Pvbki\Enums\EconomicActivity
     {
         return $this->economicActivity;
     }
 
-    public function getEmployeeCount(): ?int
+    public function getEmployeeCount(): Pvbki\Enums\EmployeeCount
     {
         return $this->employeeCount;
     }

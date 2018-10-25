@@ -17,7 +17,7 @@ class Summary extends Pvbki\Infrastructure\Element
     public const COUNT = 'count';
     public const AMOUNT = 'amount';
 
-    /** @var string */
+    /** @var Pvbki\Enums\Category */
     protected $category;
 
     /** @var int|null */
@@ -32,7 +32,7 @@ class Summary extends Pvbki\Infrastructure\Element
     /** @var double|null */
     protected $amount;
 
-    public function __construct(string $category, ?int $value, ?string $code, ?int $count, ?float $amount)
+    public function __construct(Pvbki\Enums\Category $category, ?int $value, ?string $code, ?int $count, ?float $amount)
     {
         $this->category = $category;
         $this->value = $value;
@@ -41,18 +41,7 @@ class Summary extends Pvbki\Infrastructure\Element
         $this->amount = $amount;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CATEGORY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::VALUE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CODE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::COUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::AMOUNT),
-        ]);
-    }
-
-    public function getCategory(): string
+    public function getCategory(): Pvbki\Enums\Category
     {
         return $this->category;
     }

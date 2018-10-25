@@ -31,15 +31,6 @@ class Error extends Pvbki\Infrastructure\Element
         $this->type = $type;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CODE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::MESSAGE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::TYPE),
-        ]);
-    }
-
     public function getCode(): ?string
     {
         return $this->code;

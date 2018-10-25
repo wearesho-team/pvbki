@@ -26,14 +26,6 @@ class MonthlyIncome extends Pvbki\Infrastructure\Element
         $this->currency = $currency;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::VALUE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CURRENCY),
-        ]);
-    }
-
     public function getValue(): ?float
     {
         return $this->value;

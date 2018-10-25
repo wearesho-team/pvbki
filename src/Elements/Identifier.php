@@ -3,7 +3,6 @@
 namespace Wearesho\Pvbki\Elements;
 
 use Wearesho\Pvbki;
-use Wearesho\Pvbki\Collections\RuleCollection;
 
 /**
  * Class Identifier
@@ -21,7 +20,7 @@ class Identifier extends Pvbki\Infrastructure\Element
     public const ISSUED_BY_RU = 'authorityRU';
     public const ISSUED_BY_EN = 'authorityEN';
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\IdentificationType */
     protected $typeId;
 
     /** @var string|null */
@@ -33,15 +32,15 @@ class Identifier extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $expirationDate;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $authority;
 
     public function __construct(
-        ?int $typeId,
+        Pvbki\Enums\IdentificationType $typeId,
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $expirationDate,
-        ?Pvbki\Sentence\Translation $authority
+        Pvbki\Sentence\Translation $authority
     ) {
         $this->typeId = $typeId;
         $this->number = $number;
@@ -50,23 +49,7 @@ class Identifier extends Pvbki\Infrastructure\Element
         $this->authority = $authority;
     }
 
-    public static function arguments(): RuleCollection
-    {
-        return new RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::NUMBER),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::REGISTRATION_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::EXPIRATION_DATE),
-            new Pvbki\Rule(
-                Pvbki\Enums\RuleType::TRANSLATE(),
-                static::ISSUED_BY_UA,
-                static::ISSUED_BY_RU,
-                static::ISSUED_BY_EN
-            ),
-        ]);
-    }
-
-    public function getTypeId(): ?int
+    public function getTypeId(): Pvbki\Enums\IdentificationType
     {
         return $this->typeId;
     }

@@ -4,6 +4,7 @@ namespace Wearesho\Pvbki\Tests\Unit\Elements;
 
 use PHPUnit\Framework\TestCase;
 use Wearesho\Pvbki\Elements\Summary;
+use Wearesho\Pvbki\Enums\Category;
 
 /**
  * Class SummaryTest
@@ -13,7 +14,6 @@ use Wearesho\Pvbki\Elements\Summary;
  */
 class SummaryTest extends TestCase
 {
-    protected const CATEGORY = 'category';
     protected const VALUE = 1;
     protected const CODE = 'code';
     protected const COUNT = 2;
@@ -25,7 +25,7 @@ class SummaryTest extends TestCase
     protected function setUp(): void
     {
         $this->fakeSummary = new Summary(
-            static::CATEGORY,
+            Category::COLLATERAL(),
             static::VALUE,
             static::CODE,
             static::COUNT,
@@ -37,7 +37,7 @@ class SummaryTest extends TestCase
     {
         $this->assertArraySubset(
             [
-                'category' => static::CATEGORY,
+                'category' => Category::COLLATERAL(),
                 'value' => static::VALUE,
                 'code' => static::CODE,
                 'count' => static::COUNT,
@@ -54,7 +54,7 @@ class SummaryTest extends TestCase
 
     public function testGetCategory(): void
     {
-        $this->assertEquals(static::CATEGORY, $this->fakeSummary->getCategory());
+        $this->assertEquals(Category::COLLATERAL(), $this->fakeSummary->getCategory());
     }
 
     public function testGetValue(): void

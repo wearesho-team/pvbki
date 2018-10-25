@@ -30,7 +30,7 @@ class Record extends Pvbki\Infrastructure\Element
     /** @var string|null */
     protected $contractId;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\CreditUsage */
     protected $creditUsage;
 
     /** @var string|null */
@@ -52,7 +52,7 @@ class Record extends Pvbki\Infrastructure\Element
         \DateTimeInterface $accountingDate,
         float $restAmount,
         ?string $contractId,
-        ?int $creditUsage,
+        Pvbki\Enums\CreditUsage $creditUsage,
         ?string $restCurrency,
         ?int $restInstalmentCount,
         ?float $overdueAmount,
@@ -70,21 +70,6 @@ class Record extends Pvbki\Infrastructure\Element
         $this->overdueCount = $overdueCount;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::ACCOUNTING_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::REST_AMOUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CONTRACT_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::CREDIT_USAGE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::REST_CURRENCY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::REST_INSTALMENT_COUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::OVERDUE_AMOUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::OVERDUE_CURRENCY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::OVERDUE_COUNT),
-        ]);
-    }
-
     public function getAccountingDate(): \DateTimeInterface
     {
         return $this->accountingDate;
@@ -100,7 +85,7 @@ class Record extends Pvbki\Infrastructure\Element
         return $this->contractId;
     }
 
-    public function getCreditUsage(): ?int
+    public function getCreditUsage(): Pvbki\Enums\CreditUsage
     {
         return $this->creditUsage;
     }

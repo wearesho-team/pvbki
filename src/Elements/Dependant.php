@@ -26,14 +26,6 @@ class Dependant extends Pvbki\Infrastructure\Element
         $this->typeId = $typeId;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::COUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
-        ]);
-    }
-
     public function getCount(): ?int
     {
         return $this->count;

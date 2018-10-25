@@ -36,16 +36,6 @@ class Scoring extends Pvbki\Infrastructure\Element
         $this->adverse = $adverse;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::DEGREE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::SCORE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::FAULT_CHANCE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::ADVERSE),
-        ]);
-    }
-
     public function getDegree(): ?string
     {
         return $this->degree;

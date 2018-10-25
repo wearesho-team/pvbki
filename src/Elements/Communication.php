@@ -17,24 +17,16 @@ class Communication extends Pvbki\Infrastructure\Element
     /** @var string */
     protected $value;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\CommunicationType */
     protected $typeId;
 
-    public function __construct(string $value, ?int $typeId)
+    public function __construct(string $value, Pvbki\Enums\CommunicationType $typeId)
     {
         $this->value = $value;
         $this->typeId = $typeId;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::VALUE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
-        ]);
-    }
-
-    public function getTypeId(): ?int
+    public function getTypeId(): Pvbki\Enums\CommunicationType
     {
         return $this->typeId;
     }

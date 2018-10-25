@@ -50,7 +50,7 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $lastUpdate;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\Phase */
     protected $phaseId;
 
     /** @var string|null */
@@ -59,10 +59,10 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $dateOfSignature;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\CreditPurpose */
     protected $creditPurpose;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\ContractNegativeStatus */
     protected $negativeStatus;
 
     /** @var \DateTimeInterface|null */
@@ -77,13 +77,13 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $factualEndDate;
 
-    /** @var string|null */
+    /** @var Pvbki\Enums\ContractType */
     protected $type;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\PaymentMethod */
     protected $paymentMethodId;
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\PaymentPeriod */
     protected $paymentPeriodId;
 
     /** @var string|null */
@@ -116,29 +116,29 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var float|null */
     protected $overdueAmount;
 
-    /** @var Pvbki\Collections\Records|null */
+    /** @var Pvbki\Collections\Records */
     protected $records;
 
-    /** @var Pvbki\Collections\Collaterals|null */
+    /** @var Pvbki\Collections\Collaterals */
     protected $collaterals;
 
     public function __construct(
-        ?int $roleId,
+        Pvbki\Enums\Role $roleId,
         ?string $provider,
         ?string $contractId,
         ?\DateTimeInterface $lastUpdate,
-        ?int $phaseId,
+        Pvbki\Enums\Phase $phaseId,
         ?string $currency,
         ?\DateTimeInterface $dateOfSignature,
-        ?int $creditPurpose,
-        ?int $negativeStatus,
+        Pvbki\Enums\CreditPurpose $creditPurpose,
+        Pvbki\Enums\ContractNegativeStatus $negativeStatus,
         ?\DateTimeInterface $applicationDate,
         ?\DateTimeInterface $startDate,
         ?\DateTimeInterface $expectedEndDate,
         ?\DateTimeInterface $factualEndDate,
-        ?string $type,
-        ?int $paymentMethodId,
-        ?int $paymentPeriodId,
+        Pvbki\Enums\ContractType $type,
+        Pvbki\Enums\PaymentMethod $paymentMethodId,
+        Pvbki\Enums\PaymentPeriod $paymentPeriodId,
         ?string $actualCurrency,
         ?float $totalAmount,
         ?float $creditLimit,
@@ -149,8 +149,8 @@ class Contract extends Pvbki\Infrastructure\Element
         ?float $restAmount,
         ?int $overdueCount,
         ?float $overdueAmount,
-        ?Pvbki\Collections\Records $records,
-        ?Pvbki\Collections\Collaterals $collaterals
+        Pvbki\Collections\Records $records,
+        Pvbki\Collections\Collaterals $collaterals
     ) {
         $this->roleId = $roleId;
         $this->provider = $provider;
@@ -182,41 +182,7 @@ class Contract extends Pvbki\Infrastructure\Element
         $this->collaterals = $collaterals;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::ROLE_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::PROVIDER),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CONTRACT_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::LAST_UPDATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PHASE_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::CURRENCY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::DATE_OF_SIGNATURE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::CREDIT_PURPOSE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::NEGATIVE_STATUS),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::APPLICATION_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::START_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::EXPECTED_END_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::DATETIME(), static::FACTUAL_END_DATE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::TYPE),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PAYMENT_METHOD_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::PAYMENT_PERIOD_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::ACTUAL_CURRENCY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::TOTAL_AMOUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::CREDIT_LIMIT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::INSTALMENT_COUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::INSTALMENT_AMOUNT_CURRENCY),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::INSTALMENT_AMOUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::REST_INSTALMENT_COUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::REST_AMOUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::OVERDUE_COUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::FLOAT(), static::OVERDUE_AMOUNT),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::COLLECTION(), Pvbki\Collections\Records::class),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::COLLECTION(), Pvbki\Collections\Collaterals::class),
-        ]);
-    }
-
-    public function getRoleId(): ?int
+    public function getRoleId(): Pvbki\Enums\Role
     {
         return $this->roleId;
     }
@@ -236,7 +202,7 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->lastUpdate;
     }
 
-    public function getPhaseId(): ?int
+    public function getPhaseId(): Pvbki\Enums\Phase
     {
         return $this->phaseId;
     }
@@ -251,12 +217,12 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->dateOfSignature;
     }
 
-    public function getCreditPurpose(): ?int
+    public function getCreditPurpose(): Pvbki\Enums\CreditPurpose
     {
         return $this->creditPurpose;
     }
 
-    public function getNegativeStatus(): ?int
+    public function getNegativeStatus(): Pvbki\Enums\ContractNegativeStatus
     {
         return $this->negativeStatus;
     }
@@ -281,17 +247,17 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->factualEndDate;
     }
 
-    public function getType(): ?string
+    public function getType(): Pvbki\Enums\ContractType
     {
         return $this->type;
     }
 
-    public function getPaymentMethodId(): ?int
+    public function getPaymentMethodId(): Pvbki\Enums\PaymentMethod
     {
         return $this->paymentMethodId;
     }
 
-    public function getPaymentPeriodId(): ?int
+    public function getPaymentPeriodId(): Pvbki\Enums\PaymentPeriod
     {
         return $this->paymentPeriodId;
     }
@@ -346,12 +312,12 @@ class Contract extends Pvbki\Infrastructure\Element
         return $this->overdueAmount;
     }
 
-    public function getRecords(): ?Pvbki\Collections\Records
+    public function getRecords(): Pvbki\Collections\Records
     {
         return $this->records;
     }
 
-    public function getCollaterals(): ?Pvbki\Collections\Collaterals
+    public function getCollaterals(): Pvbki\Collections\Collaterals
     {
         return $this->collaterals;
     }

@@ -19,13 +19,13 @@ class Address extends Pvbki\Infrastructure\Element
     public const STREET_EN = 'streetEN';
     public const POSTAL_CODE = 'postalCode';
 
-    /** @var int|null */
+    /** @var Pvbki\Enums\AddressType */
     protected $typeId;
 
     /** @var int */
     protected $locationId;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $street;
 
     /** @var string|null */
@@ -33,8 +33,8 @@ class Address extends Pvbki\Infrastructure\Element
 
     public function __construct(
         int $locationId,
-        ?int $typeId,
-        ?Pvbki\Sentence\Translation $street,
+        Pvbki\Enums\AddressType $typeId,
+        Pvbki\Sentence\Translation $street,
         ?string $postalCode
     ) {
         $this->typeId = $typeId;
@@ -43,17 +43,7 @@ class Address extends Pvbki\Infrastructure\Element
         $this->postalCode = $postalCode;
     }
 
-    public static function arguments(): Pvbki\Collections\RuleCollection
-    {
-        return new Pvbki\Collections\RuleCollection([
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::LOCATION_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::INT(), static::TYPE_ID),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::TRANSLATE(), static::STREET_UA, static::STREET_RU, static::STREET_EN),
-            new Pvbki\Rule(Pvbki\Enums\RuleType::STRING(), static::POSTAL_CODE),
-        ]);
-    }
-
-    public function getTypeId(): ?int
+    public function getTypeId(): Pvbki\Enums\AddressType
     {
         return $this->typeId;
     }
@@ -63,7 +53,7 @@ class Address extends Pvbki\Infrastructure\Element
         return $this->locationId;
     }
 
-    public function getStreet(): ?Pvbki\Sentence\Translation
+    public function getStreet(): Pvbki\Sentence\Translation
     {
         return $this->street;
     }
