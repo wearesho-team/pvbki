@@ -127,7 +127,7 @@ class Subject extends Pvbki\Infrastructure\Element
         ?Pvbki\Sentence\Translation $name,
         ?Pvbki\Sentence\Translation $patronymic,
         ?Pvbki\Sentence\Translation $birthSurname,
-        ?int $classification,
+        Pvbki\Enums\Classification $classification,
         ?\DateTimeInterface $birthDate,
         ?Pvbki\Sentence\Translation $birthPlace,
         Pvbki\Enums\Residency $residency,
@@ -208,7 +208,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->birthSurname;
     }
 
-    public function getClassification(): ?int
+    public function getClassification(): Pvbki\Enums\Classification
     {
         return $this->classification;
     }
