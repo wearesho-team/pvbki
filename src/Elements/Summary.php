@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Summary
  * @package Wearesho\Pvbki\Elements
  */
-class Summary extends Element
+class Summary extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Summary';
     public const CATEGORY = 'category';
@@ -17,7 +17,7 @@ class Summary extends Element
     public const COUNT = 'count';
     public const AMOUNT = 'amount';
 
-    /** @var string */
+    /** @var Pvbki\Enums\Category */
     protected $category;
 
     /** @var int|null */
@@ -32,7 +32,7 @@ class Summary extends Element
     /** @var double|null */
     protected $amount;
 
-    public function __construct(string $category, ?int $value, ?string $code, ?int $count, ?float $amount)
+    public function __construct(Pvbki\Enums\Category $category, ?int $value, ?string $code, ?int $count, ?float $amount)
     {
         $this->category = $category;
         $this->value = $value;
@@ -41,7 +41,7 @@ class Summary extends Element
         $this->amount = $amount;
     }
 
-    public function getCategory(): string
+    public function getCategory(): Pvbki\Enums\Category
     {
         return $this->category;
     }
