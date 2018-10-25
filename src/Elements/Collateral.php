@@ -47,7 +47,7 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var int|null */
     protected $locationId;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $street;
 
     /** @var string|null */
@@ -68,7 +68,7 @@ class Collateral extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $expirationDate;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $authority;
 
     public function __construct(
@@ -78,14 +78,14 @@ class Collateral extends Pvbki\Infrastructure\Element
         ?string $currency,
         Pvbki\Enums\AddressType $addressTypeId,
         ?int $locationId,
-        ?Pvbki\Sentence\Translation $street,
+        Pvbki\Sentence\Translation $street,
         ?string $postalCode,
         Pvbki\Enums\IdentificationType $identificationTypeId,
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $issueDate,
         ?\DateTimeInterface $expirationDate,
-        ?Pvbki\Sentence\Translation $authority
+        Pvbki\Sentence\Translation $authority
     ) {
         $this->contractId = $contractId;
         $this->typeId = $typeId;

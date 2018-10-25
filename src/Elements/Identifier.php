@@ -32,7 +32,7 @@ class Identifier extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $expirationDate;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $authority;
 
     public function __construct(
@@ -40,7 +40,7 @@ class Identifier extends Pvbki\Infrastructure\Element
         ?string $number,
         ?\DateTimeInterface $registrationDate,
         ?\DateTimeInterface $expirationDate,
-        ?Pvbki\Sentence\Translation $authority
+        Pvbki\Sentence\Translation $authority
     ) {
         $this->typeId = $typeId;
         $this->number = $number;
