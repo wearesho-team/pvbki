@@ -31,7 +31,10 @@ class ParserTest extends TestCase
                 false,
                 Carbon::make('2016-12-27T18:02:11.899+02:00'),
                 'reverse.8.DA.engine',
-                new Pvbki\Collections\Errors([]),
+                new Pvbki\Collections\Errors([
+                    new Pvbki\Elements\Error('1', 'First message', 'First type'),
+                    new Pvbki\Elements\Error('2', 'Second message', 'Second Type'),
+                ]),
                 new Pvbki\Elements\Subject(
                     '1928100592',
                     Carbon::make('2011-06-23T15:58:19.343+03:00'),
@@ -142,8 +145,12 @@ class ParserTest extends TestCase
                         '83037'
                     ),
                 ]),
-                new Pvbki\Collections\Dependants([]),
-                new Pvbki\Collections\MonthlyIncomes([]),
+                new Pvbki\Collections\Dependants([
+                    new Pvbki\Elements\Dependant(5, 1)
+                ]),
+                new Pvbki\Collections\MonthlyIncomes([
+                    new Pvbki\Elements\MonthlyIncome(2400.0000, 'UAH')
+                ]),
                 new Pvbki\Collections\Summaries([
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::ROLE_ID(), 1, null, 1, null),
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::PHASE_ID(), 5, null, 1, null),

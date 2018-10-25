@@ -3,6 +3,16 @@
                  xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
     <soap12:Header>
         <InvokeReflection xmlns="https://service.pvbki.com/reverse">
+            <BackError xmlns="https://service.pvbki.com/reverse">
+                <FaultCode>1</FaultCode>
+                <FaultMessage>First message</FaultMessage>
+                <FaultType>First type</FaultType>
+            </BackError>
+            <BackError xmlns="https://service.pvbki.com/reverse">
+                <FaultCode>2</FaultCode>
+                <FaultMessage>Second message</FaultMessage>
+                <FaultType>Second Type</FaultType>
+            </BackError>
             <UserAgent>string</UserAgent>
             <IpAddress>string</IpAddress>
             <HostName>string</HostName>
@@ -139,6 +149,14 @@
                         <code>request</code>
                         <count>254</count>
                     </Summary>
+                    <Dependant>
+                        <count>5</count>
+                        <typeId>1</typeId>
+                    </Dependant>
+                    <MonthlyIncome>
+                        <value>2400.0000</value>
+                        <currency>UAH</currency>
+                    </MonthlyIncome>
                     <Contract>
                         <roleId>1</roleId>
                         <provider>1</provider>
