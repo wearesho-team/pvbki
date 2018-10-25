@@ -61,16 +61,16 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Enums\Gender */
     protected $gender;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $surname;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $name;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $patronymic;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $birthSurname;
 
     /** @var int|null */
@@ -79,7 +79,7 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var \DateTimeInterface|null */
     protected $birthDate;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $birthPlace;
 
     /** @var Pvbki\Enums\Residency */
@@ -100,10 +100,10 @@ class Subject extends Pvbki\Infrastructure\Element
     /** @var Pvbki\Enums\Status */
     protected $statusId;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $fullName;
 
-    /** @var Pvbki\Sentence\Translation|null */
+    /** @var Pvbki\Sentence\Translation */
     protected $abbreviation;
 
     /** @var Pvbki\Enums\Ownership */
@@ -123,21 +123,21 @@ class Subject extends Pvbki\Infrastructure\Element
         ?\DateTimeInterface $lastUpdate,
         Pvbki\Enums\Entity $entity,
         Pvbki\Enums\Gender $gender,
-        ?Pvbki\Sentence\Translation $surname,
-        ?Pvbki\Sentence\Translation $name,
-        ?Pvbki\Sentence\Translation $patronymic,
-        ?Pvbki\Sentence\Translation $birthSurname,
+        Pvbki\Sentence\Translation $surname,
+        Pvbki\Sentence\Translation $name,
+        Pvbki\Sentence\Translation $patronymic,
+        Pvbki\Sentence\Translation $birthSurname,
         Pvbki\Enums\Classification $classification,
         ?\DateTimeInterface $birthDate,
-        ?Pvbki\Sentence\Translation $birthPlace,
+        Pvbki\Sentence\Translation $birthPlace,
         Pvbki\Enums\Residency $residency,
         ?int $citizenShip,
         Pvbki\Enums\SubjectNegativeStatus $negativeStatus,
         Pvbki\Enums\Education $education,
         Pvbki\Enums\MaritalStatus $maritalStatus,
         Pvbki\Enums\Status $statusId,
-        ?Pvbki\Sentence\Translation $fullName,
-        ?Pvbki\Sentence\Translation $abbreviation,
+        Pvbki\Sentence\Translation $fullName,
+        Pvbki\Sentence\Translation $abbreviation,
         Pvbki\Enums\Ownership $ownership,
         ?\DateTimeInterface $registrationDate,
         Pvbki\Enums\EconomicActivity $economicActivity,
@@ -188,22 +188,22 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->gender;
     }
 
-    public function getSurname(): ?Pvbki\Sentence\Translation
+    public function getSurname(): Pvbki\Sentence\Translation
     {
         return $this->surname;
     }
 
-    public function getName(): ?Pvbki\Sentence\Translation
+    public function getName(): Pvbki\Sentence\Translation
     {
         return $this->name;
     }
 
-    public function getPatronymic(): ?Pvbki\Sentence\Translation
+    public function getPatronymic(): Pvbki\Sentence\Translation
     {
         return $this->patronymic;
     }
 
-    public function getBirthSurname(): ?Pvbki\Sentence\Translation
+    public function getBirthSurname(): Pvbki\Sentence\Translation
     {
         return $this->birthSurname;
     }
@@ -218,7 +218,7 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->birthDate;
     }
 
-    public function getBirthPlace(): ?Pvbki\Sentence\Translation
+    public function getBirthPlace(): Pvbki\Sentence\Translation
     {
         return $this->birthPlace;
     }
@@ -253,12 +253,12 @@ class Subject extends Pvbki\Infrastructure\Element
         return $this->statusId;
     }
 
-    public function getFullName(): ?Pvbki\Sentence\Translation
+    public function getFullName(): Pvbki\Sentence\Translation
     {
         return $this->fullName;
     }
 
-    public function getAbbreviation(): ?Pvbki\Sentence\Translation
+    public function getAbbreviation(): Pvbki\Sentence\Translation
     {
         return $this->abbreviation;
     }
