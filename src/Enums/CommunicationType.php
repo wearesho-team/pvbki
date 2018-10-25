@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class CommunicationType
@@ -17,7 +16,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static CommunicationType MAIL()
  * @method static CommunicationType WEB()
  */
-final class CommunicationType extends Enum implements NullableEnum
+final class CommunicationType extends Enum
 {
     public const HOME = 1;
     public const OFFICE = 2;

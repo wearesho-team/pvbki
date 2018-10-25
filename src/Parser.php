@@ -209,7 +209,7 @@ class Parser
                         }, $this->xmlToArray($this->simpleXmlDocument->{Elements\Record::tag()}))
                     )),
                     new Collections\Collaterals(array_filter(
-                        array_map(function (\SimpleXMLElement $element) use ($contractId): Elements\Collateral {
+                        array_map(function (\SimpleXMLElement $element) use ($contractId): ?Elements\Collateral {
                             return $contractId === (string)$element->{Elements\Collateral::CONTRACT_ID}
                                 ? new Elements\Collateral(
                                     $contractId,
@@ -227,7 +227,7 @@ class Parser
                                     ),
                                     (string)$element->{Elements\Collateral::POSTAL_CODE},
                                     new Enums\IdentificationType(
-                                        (int)$element->{Elements\Collateral::IDENTIFICATION_TYPE_ID}
+                                        (int)$element->{Elements\Collateral::IDENTIFICATION_TYPE_ID} ?: null
                                     ),
                                     (string)$element->{Elements\Collateral::NUMBER} ?: null,
                                     Carbon::make((string)$element->{Elements\Collateral::REGISTRATION_DATE} ?: null),

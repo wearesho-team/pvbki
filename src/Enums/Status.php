@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class Status
@@ -13,7 +12,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static Status EXISTING()
  * @method static Status CLOSED()
  */
-final class Status extends Enum implements NullableEnum
+final class Status extends Enum
 {
     public const EXISTING = 1;
     public const CLOSED = 2;

@@ -35,7 +35,7 @@ class ParserTest extends TestCase
                 new Pvbki\Elements\Subject(
                     '1928100592',
                     Carbon::make('2011-06-23T15:58:19.343+03:00'),
-                    'individual',
+                    Pvbki\Enums\Entity::INDIVIDUAL(),
                     Pvbki\Enums\Gender::MAN(),
                     new Pvbki\Sentence\Translation('Француз', 'Француз', null),
                     new Pvbki\Sentence\Translation('Виктор', 'Виктор', null),
@@ -149,7 +149,7 @@ class ParserTest extends TestCase
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::PHASE_ID(), 5, null, 1, null),
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::CURRENCY(), null, 'UAH', 1, null),
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::TYPE(), null, 'instalment', 1, null),
-                    new Pvbki\Elements\Summary(Pvbki\Enums\Category::INSTALMENT_AMOUNT(), null, 'UAH', 1, 6500.0000),
+                    new Pvbki\Elements\Summary(Pvbki\Enums\Category::TOTAL_AMOUNT(), null, 'UAH', 1, 6500.0000),
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::REST_AMOUNT(), null, 'UAH', null, 0.0000),
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::OVERDUE_AMOUNT(), null, 'UAH', null, 0.0000),
                     new Pvbki\Elements\Summary(Pvbki\Enums\Category::EVENT(), null, 'request', 254, null),
@@ -171,7 +171,7 @@ class ParserTest extends TestCase
                         Carbon::make('2010-01-28T00:00:00+02:00'),
                         Pvbki\Enums\ContractType::INSTALMENT(),
                         Pvbki\Enums\PaymentMethod::UNDEFINED(),
-                        Pvbki\Enums\PaymentPeriod::EVERY_30_DAYS,
+                        Pvbki\Enums\PaymentPeriod::EVERY_30_DAYS(),
                         'UAH',
                         6500.0000,
                         null,
@@ -371,7 +371,40 @@ class ParserTest extends TestCase
                                 0
                             ),
                         ]),
-                        new Pvbki\Collections\Collaterals([])
+                        new Pvbki\Collections\Collaterals([
+                            new Pvbki\Elements\Collateral(
+                                '1',
+                                Pvbki\Enums\CollateralType::OTHER_MOVABLE_STATE(),
+                                38675.0000,
+                                'UAH',
+                                Pvbki\Enums\AddressType::UNDEFINED(),
+                                null,
+                                new Pvbki\Sentence\Translation(null, null, null),
+                                null,
+                                Pvbki\Enums\IdentificationType::TAX_ID(),
+                                '1928100592',
+                                null,
+                                null,
+                                null,
+                                new Pvbki\Sentence\Translation(null, null, null)
+                            ),
+                            new Pvbki\Elements\Collateral(
+                                '1',
+                                Pvbki\Enums\CollateralType::WITHOUT_COLLATERAL(),
+                                50575.0000,
+                                'UAH',
+                                Pvbki\Enums\AddressType::UNDEFINED(),
+                                null,
+                                new Pvbki\Sentence\Translation(null, null, null),
+                                null,
+                                Pvbki\Enums\IdentificationType::TAX_ID(),
+                                '1928100592',
+                                null,
+                                null,
+                                null,
+                                new Pvbki\Sentence\Translation(null, null, null)
+                            )
+                        ])
                     )
                 ]),
                 new Pvbki\Collections\Events([
@@ -634,33 +667,6 @@ class ParserTest extends TestCase
                 new Pvbki\Elements\Scoring('C-', -1478, 87.0745, 'REQUEST|SOCIAL|OVERDUE')
             ),
             $report
-        );
-    }
-
-    public function testParseStatementReport(): void
-    {
-        $report = $this->fakeParser->parse(file_get_contents(dirname(__DIR__) . '/Mocks/StatementReport.xml'));
-
-        $this->assertEquals(
-            new Pvbki\Collections\Collaterals([
-                new Pvbki\Elements\Collateral(
-                    3,
-                    30,
-                    38675.0000,
-                    'UAH',
-                    null,
-                    null,
-                    new Pvbki\Sentence\Translation(null, null, null),
-                    null,
-                    2,
-                    '1928100592',
-                    null,
-                    null,
-                    null,
-                    null
-                ),
-            ]),
-            $collaterals
         );
     }
 }

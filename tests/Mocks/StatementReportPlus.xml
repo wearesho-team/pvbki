@@ -165,6 +165,22 @@
                         <overdueCount>0</overdueCount>
                         <overdueAmount>0.0000</overdueAmount>
                     </Contract>
+                    <Collateral>
+                        <contractid>1</contractid>
+                        <typeId>30</typeId>
+                        <value>38675.0000</value>
+                        <currency>UAH</currency>
+                        <identification-typeId>2</identification-typeId>
+                        <number>1928100592</number>
+                    </Collateral>
+                    <Collateral>
+                        <contractid>1</contractid>
+                        <typeId>90</typeId>
+                        <value>50575.0000</value>
+                        <currency>UAH</currency>
+                        <identification-typeId>2</identification-typeId>
+                        <number>1928100592</number>
+                    </Collateral>
                     <Record>
                         <contractid>1</contractid>
                         <accountingDate>2008-03-01T00:00:00+02:00</accountingDate>

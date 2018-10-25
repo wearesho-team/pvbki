@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class ContractNegativeStatus
@@ -29,7 +28,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static ContractNegativeStatus INFORMATION_ABOUT_THE_CREDIT_IS_GIVEN_BY_MISTAKE()
  * @method static ContractNegativeStatus SPECIAL_TERMS()
  */
-final class ContractNegativeStatus extends Enum implements NullableEnum
+final class ContractNegativeStatus extends Enum
 {
     public const NONE = 0;
 

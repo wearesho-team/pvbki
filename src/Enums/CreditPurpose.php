@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class CreditPurpose
@@ -30,7 +29,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static CreditPurpose ADDITION_TURNOVER_LEGAL_ENTITY_MEANS()
  * @method static CreditPurpose INVESTMENT_PURPOSES()
  */
-final class CreditPurpose extends Enum implements NullableEnum
+final class CreditPurpose extends Enum
 {
     public const REPLENISHMENT_CURRENT_ASSETS= 1;
     public const AQUISITION_INVESTMENT = 2;
