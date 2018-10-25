@@ -64,4 +64,10 @@ class StatementRequestTest extends TestCase
         $this->assertEquals($drfo, $request->getIdentification());
         $this->assertEquals($this->type, $request->getType());
     }
+
+    public function testNullabelEnum(): void
+    {
+        Pvbki\Enums\CreditUsage::UNDEFINED();
+        Pvbki\Enums\MaritalStatus::UNDEFINED();
+    }
 }

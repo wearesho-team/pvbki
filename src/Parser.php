@@ -178,7 +178,7 @@ class Parser
                     Carbon::make((string)$element->{Elements\Contract::START_DATE} ?: null),
                     Carbon::make((string)$element->{Elements\Contract::EXPECTED_END_DATE} ?: null),
                     Carbon::make((string)$element->{Elements\Contract::FACTUAL_END_DATE} ?: null),
-                    new Enums\ContractType((int)$element->{Elements\Contract::TYPE} ?: null),
+                    new Enums\ContractType((string)$element->{Elements\Contract::TYPE} ?: null),
                     new Enums\PaymentMethod((int)$element->{Elements\Contract::PAYMENT_METHOD_ID} ?: null),
                     new Enums\PaymentPeriod((int)$element->{Elements\Contract::PAYMENT_PERIOD_ID} ?: null),
                     (string)$element->{Elements\Contract::ACTUAL_CURRENCY} ?: null,

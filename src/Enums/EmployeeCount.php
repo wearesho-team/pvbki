@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class EmployeeCount
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static EmployeeCount FROM_1_TO_5()
  * @method static EmployeeCount FROM_6_TO_30()
  * @method static EmployeeCount FROM_31_TO_100()

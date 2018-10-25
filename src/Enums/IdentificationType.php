@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class IdentificationType
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static IdentificationType UNIQUE_NUMBER()
  * @method static IdentificationType TAX_ID()
  * @method static IdentificationType COMPOSITE_KEY()

@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class EconomicActivity
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static EconomicActivity INDUSTRY()
  * @method static EconomicActivity AGRICULTURE()
  * @method static EconomicActivity FORESTRY()

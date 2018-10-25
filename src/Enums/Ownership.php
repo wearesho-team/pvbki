@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class Ownership
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static Ownership ENTERPRISES()
  * @method static Ownership ECONOMIC_COMPANIES()
  * @method static Ownership COOPERATIVES()

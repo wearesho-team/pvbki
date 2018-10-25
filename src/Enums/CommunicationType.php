@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class CommunicationType
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static CommunicationType HOME()
  * @method static CommunicationType OFFICE()
  * @method static CommunicationType MOBILE()

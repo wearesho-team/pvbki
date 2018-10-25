@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class ContractNegativeStatus
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static ContractNegativeStatus NONE()
  * @method static ContractNegativeStatus CREDIT_ASSIGNMENT_TO_THIRD_PARTY()
  * @method static ContractNegativeStatus UNAUTHORIZED_DEBIT_BALANCE_ON_CURRENT_ACCOUNT()

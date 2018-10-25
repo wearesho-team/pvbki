@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class CreditUsage
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static CreditUsage OUT()
  * @method static CreditUsage IN()
  * @method static CreditUsage NO()

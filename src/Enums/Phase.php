@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class Phase
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static Phase REQUESTED()
  * @method static Phase WITHDRAWN()
  * @method static Phase REJECTED()

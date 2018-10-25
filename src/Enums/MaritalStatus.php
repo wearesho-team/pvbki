@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class MaritalStatus
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static MaritalStatus UNMARRIED()
  * @method static MaritalStatus MARRIED()
  * @method static MaritalStatus DIVORCED()

@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class Role
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static Role BORROWER()
  * @method static Role CO_DEBTOR()
  * @method static Role GUARANTOR()

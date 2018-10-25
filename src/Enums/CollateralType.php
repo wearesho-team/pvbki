@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class CollateralType
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static static UNDEFINED()
  * @method static CollateralType NOT_DEFINED()
  * @method static CollateralType CABINET_MINISTERS_GUARANTEES()
  * @method static CollateralType NATIONAL_BANK_GUARANTEES()
