@@ -9,6 +9,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * Class AddressType
  * @package Wearesho\Pvbki\Enums
  *
+ * @method static AddressType UNDEFINED()
  * @method static AddressType REGISTRATION()
  * @method static AddressType FACTUAL()
  * @method static AddressType POSTAL()
