@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Error
  * @package Wearesho\Pvbki\Elements
  */
-class Error extends Element
+class Error extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'BackError';
     public const CODE = 'FaultCode';
