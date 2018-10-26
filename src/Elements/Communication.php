@@ -2,14 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Enums\CommunicationType;
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Communication
  * @package Wearesho\Pvbki\Elements
  */
-class Communication extends Element
+class Communication extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Communication';
     public const TYPE_ID = 'typeId';
@@ -18,16 +17,16 @@ class Communication extends Element
     /** @var string */
     protected $value;
 
-    /** @var CommunicationType */
+    /** @var Pvbki\Enums\CommunicationType */
     protected $typeId;
 
-    public function __construct(string $value, CommunicationType $typeId)
+    public function __construct(string $value, Pvbki\Enums\CommunicationType $typeId)
     {
         $this->value = $value;
         $this->typeId = $typeId;
     }
 
-    public function getTypeId(): CommunicationType
+    public function getTypeId(): Pvbki\Enums\CommunicationType
     {
         return $this->typeId;
     }
