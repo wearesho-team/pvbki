@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class CreditPurpose
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static CreditPurpose REPLENISHMENT_CURRENT_ASSETS()
  * @method static CreditPurpose AQUISITION_INVESTMENT()
  * @method static CreditPurpose OTHER_BUSINESS_PURPOSE()

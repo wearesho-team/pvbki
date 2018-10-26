@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class PaymentPeriod
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static PaymentPeriod EVERY_15_DAYS()
  * @method static PaymentPeriod EVERY_30_DAYS()
  * @method static PaymentPeriod EVERY_60_DAYS()

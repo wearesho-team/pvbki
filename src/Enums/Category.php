@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class Category
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static Category COLLATERAL()
  * @method static Category COLLATERAL_AMOUNT()
  * @method static Category CREDIT_LIMIT()

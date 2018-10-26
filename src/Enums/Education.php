@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class Education
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static Education UNFINISHED()
  * @method static Education BASIC()
  * @method static Education CERTIFICATED_SECONDARY()

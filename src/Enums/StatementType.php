@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class StatementType
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static StatementType BASE()
  * @method static StatementType SCORING()
  */

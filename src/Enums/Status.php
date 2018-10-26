@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class Status
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static Status EXISTING()
  * @method static Status CLOSED()
  */

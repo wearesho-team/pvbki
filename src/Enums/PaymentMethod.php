@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class PaymentMethod
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static PaymentMethod CURRENT_ACCOUNT_DEBIT()
  * @method static PaymentMethod EXCHANGE_BILL()
  * @method static PaymentMethod BANKING_RECEIPT()

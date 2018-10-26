@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class Gender
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static Gender MAN()
  * @method static Gender FEMALE()
  */

@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class Entity
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static Entity COMPANY()
  * @method static Entity INDIVIDUAL()
  * @method static Entity SUBJECT()

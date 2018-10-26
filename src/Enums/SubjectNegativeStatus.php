@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class SubjectNegativeStatus
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static SubjectNegativeStatus WITHOUT_NEGATIVE_STATUS()
  * @method static SubjectNegativeStatus CUSTOMER_UNTRACEABLE_OR_DECEASED()
  * @method static SubjectNegativeStatus ASSETS_FROZEN_OR_SEIZED()

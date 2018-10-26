@@ -8,7 +8,6 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * Class ContractType
  * @package Wearesho\Pvbki\Enums
  *
- * @method static static UNDEFINED()
  * @method static ContractType BUSINESS()
  * @method static ContractType CREDIT()
  * @method static ContractType INSTALMENT()
