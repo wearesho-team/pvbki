@@ -16,6 +16,7 @@ class StatementReportTest extends TestCase
 {
     /** @var Pvbki\StatementReport */
     protected $fakeStatementReport;
+
     protected function setUp(): void
     {
         $this->fakeStatementReport = new Pvbki\StatementReport(
@@ -160,6 +161,7 @@ class StatementReportTest extends TestCase
             new Pvbki\Elements\Scoring('degree', 1000, 12.34, 'adverse')
         );
     }
+
     public function testJsonSerialize(): void
     {
         $this->assertArraySubset(
@@ -307,18 +309,22 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->jsonSerialize()
         );
     }
+
     public function testIsProtection(): void
     {
         $this->assertEquals(true, $this->fakeStatementReport->isProtection());
     }
+
     public function testGetGenerated(): void
     {
         $this->assertEquals('2018-12-12', Carbon::make($this->fakeStatementReport->getGenerated())->toDateString());
     }
+
     public function testGetPowered(): void
     {
         $this->assertEquals('powered', $this->fakeStatementReport->getPowered());
     }
+
     public function testGetContracts(): void
     {
         $this->assertEquals(
@@ -386,6 +392,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getContracts()
         );
     }
+
     public function testGetSubject(): void
     {
         $this->assertEquals(
@@ -417,6 +424,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getSubject()
         );
     }
+
     public function testGetCommunications(): void
     {
         $this->assertEquals(
@@ -427,6 +435,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getCommunications()
         );
     }
+
     public function testGetEvents(): void
     {
         $this->assertEquals(
@@ -439,6 +448,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getEvents()
         );
     }
+
     public function testGetAddresses(): void
     {
         $this->assertEquals(
@@ -453,6 +463,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getAddresses()
         );
     }
+
     public function testGetErrors(): void
     {
         $this->assertEquals(
@@ -466,6 +477,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getErrors()
         );
     }
+
     public function testGetScoring(): void
     {
         $this->assertEquals(
@@ -473,6 +485,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getScoring()
         );
     }
+
     public function testGetSummaries(): void
     {
         $this->assertEquals(
@@ -486,6 +499,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getSummaries()
         );
     }
+
     public function testGetMonthlyIncomes(): void
     {
         $this->assertEquals(
@@ -495,6 +509,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getMonthlyIncomes()
         );
     }
+
     public function testGetIdentifications(): void
     {
         $this->assertEquals(
@@ -510,6 +525,7 @@ class StatementReportTest extends TestCase
             $this->fakeStatementReport->getIdentifications()
         );
     }
+
     public function testGetDependants(): void
     {
         $this->assertEquals(
