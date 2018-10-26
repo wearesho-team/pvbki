@@ -2,19 +2,19 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class MonthlyIncome
  * @package Wearesho\Pvbki\Elements
  */
-class MonthlyIncome extends Element
+class MonthlyIncome extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'MonthlyIncome';
     public const VALUE = 'value';
     public const CURRENCY = 'currency';
 
-    /** @var double|null */
+    /** @var float|null */
     protected $value;
 
     /** @var string|null */
