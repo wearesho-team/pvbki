@@ -75,5 +75,6 @@ class IdentificationTypeTest extends TestCase
         );
 
         $this->assertNull((new IdentificationType(null))->jsonSerialize());
+        $this->assertNull(IdentificationType::UNDEFINED()->getValue());
     }
 }

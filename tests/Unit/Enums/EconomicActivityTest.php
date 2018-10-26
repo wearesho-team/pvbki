@@ -34,5 +34,6 @@ class EconomicActivityTest extends TestCase
         );
 
         $this->assertNull((new EconomicActivity(null))->jsonSerialize());
+        $this->assertNull(EconomicActivity::UNDEFINED()->getValue());
     }
 }

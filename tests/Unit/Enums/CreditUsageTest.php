@@ -20,5 +20,6 @@ class CreditUsageTest extends TestCase
         $this->assertEquals(CreditUsage::NO(), new CreditUsage(CreditUsage::NO));
 
         $this->assertNull((new CreditUsage(null))->jsonSerialize());
+        $this->assertNull(CreditUsage::UNDEFINED()->getValue());
     }
 }

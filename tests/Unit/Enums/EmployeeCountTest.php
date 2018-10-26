@@ -23,5 +23,6 @@ class EmployeeCountTest extends TestCase
         $this->assertEquals(EmployeeCount::MORE_THAN_500(), new EmployeeCount(EmployeeCount::MORE_THAN_500));
 
         $this->assertNull((new EmployeeCount(null))->jsonSerialize());
+        $this->assertNull(EmployeeCount::UNDEFINED()->getValue());
     }
 }

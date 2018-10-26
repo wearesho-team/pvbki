@@ -19,5 +19,8 @@ class MaritalStatusTest extends TestCase
         $this->assertEquals(MaritalStatus::UNKNOWN(), new MaritalStatus(MaritalStatus::UNKNOWN));
         $this->assertEquals(MaritalStatus::UNMARRIED(), new MaritalStatus(MaritalStatus::UNMARRIED));
         $this->assertEquals(MaritalStatus::WIDOW(), new MaritalStatus(MaritalStatus::WIDOW));
+
+        $this->assertNull((new MaritalStatus(null))->jsonSerialize());
+        $this->assertNull(MaritalStatus::UNDEFINED()->getValue());
     }
 }

@@ -35,5 +35,8 @@ class PaymentMethodTest extends TestCase
             new PaymentMethod(PaymentMethod::METHOD_OF_OVERDUE_CALCULATION_LIFO)
         );
         $this->assertEquals(PaymentMethod::UNDETERMINED(), new PaymentMethod(PaymentMethod::UNDETERMINED));
+
+        $this->assertNull((new PaymentMethod(null))->jsonSerialize());
+        $this->assertNull(PaymentMethod::UNDEFINED()->getValue());
     }
 }

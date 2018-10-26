@@ -19,5 +19,6 @@ class StatusTest extends TestCase
         $this->assertEquals(Status::CLOSED(), new Status(Status::CLOSED));
 
         $this->assertNull((new Status(null))->jsonSerialize());
+        $this->assertNull(Status::UNDEFINED()->getValue());
     }
 }

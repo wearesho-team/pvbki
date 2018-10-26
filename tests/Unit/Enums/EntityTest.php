@@ -18,5 +18,8 @@ class EntityTest extends TestCase
         $this->assertEquals(Entity::COMPANY(), new Entity(Entity::COMPANY));
         $this->assertEquals(Entity::INDIVIDUAL(), new Entity(Entity::INDIVIDUAL));
         $this->assertEquals(Entity::SUBJECT(), new Entity(Entity::SUBJECT));
+
+        $this->assertNull((new Entity(null))->jsonSerialize());
+        $this->assertNull(Entity::UNDEFINED()->getValue());
     }
 }

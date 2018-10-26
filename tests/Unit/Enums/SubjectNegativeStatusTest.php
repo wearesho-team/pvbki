@@ -69,5 +69,6 @@ class SubjectNegativeStatusTest extends TestCase
         );
 
         $this->assertNull((new SubjectNegativeStatus(null))->jsonSerialize());
+        $this->assertNull(SubjectNegativeStatus::UNDEFINED()->getValue());
     }
 }

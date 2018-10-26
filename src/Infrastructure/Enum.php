@@ -7,6 +7,8 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
 /**
  * Class Enum
  * @package Wearesho\Pvbki\Infrastructure
+ *
+ * @method static static UNDEFINED()
  */
 abstract class Enum extends \MyCLabs\Enum\Enum implements NullableEnum
 {
