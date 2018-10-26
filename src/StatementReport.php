@@ -8,6 +8,10 @@ namespace Wearesho\Pvbki;
  */
 class StatementReport implements \JsonSerializable
 {
+    public const PROTECTION = 'protection';
+    public const GENERATED = 'generated';
+    public const POWERED = 'powered';
+
     /** @var bool */
     protected $protection;
 
@@ -47,7 +51,7 @@ class StatementReport implements \JsonSerializable
     /** @var Collections\Events */
     protected $events;
 
-    /** @var Elements\Scoring|null */
+    /** @var Elements\Scoring */
     protected $scoring;
 
     public function __construct(
@@ -64,7 +68,7 @@ class StatementReport implements \JsonSerializable
         Collections\Summaries $summaries,
         Collections\Contracts $contracts,
         Collections\Events $events,
-        ?Elements\Scoring $scoring
+        Elements\Scoring $scoring
     ) {
         $this->protection = $protection;
         $this->generated = $generated;
@@ -152,7 +156,7 @@ class StatementReport implements \JsonSerializable
         return $this->events;
     }
 
-    public function getScoring(): ?Elements\Scoring
+    public function getScoring(): Elements\Scoring
     {
         return $this->scoring;
     }
