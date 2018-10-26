@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class EmployeeCount
@@ -15,7 +14,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static EmployeeCount FROM_101_TO_500()
  * @method static EmployeeCount MORE_THAN_500()
  */
-final class EmployeeCount extends Enum implements NullableEnum
+final class EmployeeCount extends Enum
 {
     public const FROM_1_TO_5 = 1;
     public const FROM_6_TO_30 = 2;

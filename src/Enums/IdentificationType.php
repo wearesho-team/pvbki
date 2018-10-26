@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class IdentificationType
@@ -25,7 +24,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static IdentificationType INTERNATIONAL_PASSPORT()
  * @method static IdentificationType TEMPORARY_IDENTITY_CARD_OF_UKRAINE()
  */
-final class IdentificationType extends Enum implements NullableEnum
+final class IdentificationType extends Enum
 {
     public const UNIQUE_NUMBER = 1;
     public const TAX_ID = 2;

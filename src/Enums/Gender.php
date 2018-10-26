@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class Gender
@@ -12,7 +11,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static Gender MAN()
  * @method static Gender FEMALE()
  */
-final class Gender extends Enum implements NullableEnum
+final class Gender extends Enum
 {
     public const MAN = 1;
     public const FEMALE = 2;

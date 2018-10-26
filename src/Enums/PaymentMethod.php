@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class PaymentMethod
@@ -18,7 +17,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static PaymentMethod METHOD_OF_OVERDUE_CALCULATION_LIFO()
  * @method static PaymentMethod METHOD_OF_OVERDUE_CALCULATION_FIFO()
  */
-final class PaymentMethod extends Enum implements NullableEnum
+final class PaymentMethod extends Enum
 {
     public const CURRENT_ACCOUNT_DEBIT = 1;
     public const EXCHANGE_BILL = 2;

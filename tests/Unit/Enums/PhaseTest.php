@@ -21,5 +21,8 @@ class PhaseTest extends TestCase
         $this->assertEquals(Phase::TERMINATED(), new Phase(Phase::TERMINATED));
         $this->assertEquals(Phase::TERMINATED_IN_ADVANCE(), new Phase(Phase::TERMINATED_IN_ADVANCE));
         $this->assertEquals(Phase::WITHDRAWN(), new Phase(Phase::WITHDRAWN));
+
+        $this->assertNull((new Phase(null))->jsonSerialize());
+        $this->assertNull(Phase::UNDEFINED()->getValue());
     }
 }

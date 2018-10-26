@@ -88,5 +88,6 @@ class ContractNegativeStatusTest extends TestCase
         );
 
         $this->assertNull((new ContractNegativeStatus(null))->jsonSerialize());
+        $this->assertNull(ContractNegativeStatus::UNDEFINED()->getValue());
     }
 }

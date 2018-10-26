@@ -29,5 +29,6 @@ class RoleTest extends TestCase
         $this->assertEquals(Role::WIFE_OR_HUSBAND(), new Role(Role::WIFE_OR_HUSBAND));
 
         $this->assertNull((new Role(null))->jsonSerialize());
+        $this->assertNull(Role::UNDEFINED()->getValue());
     }
 }

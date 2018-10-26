@@ -27,5 +27,6 @@ class EducationTest extends TestCase
         $this->assertEquals(Education::UNFINISHED(), new Education(Education::UNFINISHED));
 
         $this->assertNull((new Education(null))->jsonSerialize());
+        $this->assertNull(Education::UNDEFINED()->getValue());
     }
 }

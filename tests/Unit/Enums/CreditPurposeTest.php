@@ -65,6 +65,8 @@ class CreditPurposeTest extends TestCase
             CreditPurpose::REPLENISHMENT_CURRENT_ASSETS(),
             new CreditPurpose(CreditPurpose::REPLENISHMENT_CURRENT_ASSETS)
         );
+
         $this->assertNull((new CreditPurpose(null))->jsonSerialize());
+        $this->assertNull(CreditPurpose::UNDEFINED()->getValue());
     }
 }

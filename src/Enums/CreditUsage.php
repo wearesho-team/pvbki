@@ -2,8 +2,7 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use MyCLabs\Enum\Enum;
-use Wearesho\Pvbki\Interrelations\NullableEnum;
+use Wearesho\Pvbki\Infrastructure\Enum;
 
 /**
  * Class CreditUsage
@@ -13,7 +12,7 @@ use Wearesho\Pvbki\Interrelations\NullableEnum;
  * @method static CreditUsage IN()
  * @method static CreditUsage NO()
  */
-final class CreditUsage extends Enum implements NullableEnum
+final class CreditUsage extends Enum
 {
     public const OUT = 1;
     public const IN = 2;
