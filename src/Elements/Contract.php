@@ -116,10 +116,10 @@ class Contract extends Pvbki\Infrastructure\Element
     /** @var float|null */
     protected $overdueAmount;
 
-    /** @var Pvbki\Collections\Records|null */
+    /** @var Pvbki\Collections\Records */
     protected $records;
 
-    /** @var Pvbki\Collections\Collaterals|null */
+    /** @var Pvbki\Collections\Collaterals */
     protected $collaterals;
 
     public function __construct(
