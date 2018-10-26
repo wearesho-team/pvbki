@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Infrastructure;
 
-use Wearesho\Pvbki\Interrelations;
+use Wearesho\Pvbki;
 
 /**
  * Class Element
  * @package Wearesho\Pvbki\Infrastructure
  */
-abstract class Element implements Interrelations\ElementInterface
+abstract class Element implements Pvbki\Interrelations\ElementInterface
 {
     public const ROOT = null;
 
