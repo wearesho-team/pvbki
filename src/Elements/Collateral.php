@@ -15,12 +15,13 @@ class Collateral extends Pvbki\Infrastructure\Element
     public const TYPE_ID = 'typeId';
     public const VALUE = 'value';
     public const CURRENCY = 'currency';
+    public const ADDRESS_TYPE_ID = 'address-typeId';
     public const LOCATION_ID = 'locationId';
     public const STREET_UA = 'streetUA';
     public const STREET_RU = 'streetRU';
     public const STREET_EN = 'streetEN';
     public const POSTAL_CODE = 'postalCode';
-    public const IDENTIFICATION_TYPE_ID = 'identificationTypeId';
+    public const IDENTIFICATION_TYPE_ID = 'identification-typeId';
     public const NUMBER = 'number';
     public const REGISTRATION_DATE = 'registrationDate';
     public const ISSUE_DATE = 'issueDate';
