@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki;
 
 use Carbon\Carbon;
+use Wearesho\BaseCollection;
 use Wearesho\Pvbki\Collections\Addresses;
 use Wearesho\Pvbki\Collections\Collaterals;
 use Wearesho\Pvbki\Collections\Communications;
@@ -24,6 +25,7 @@ use Wearesho\Pvbki\Elements\MonthlyIncome;
 use Wearesho\Pvbki\Elements\Record;
 use Wearesho\Pvbki\Elements\Summary;
 use Wearesho\Pvbki\Exceptions\InvalidReportXmlStructure;
+use Wearesho\Pvbki\Infrastructure\Element;
 
 /**
  * Class Parser
@@ -139,9 +141,12 @@ class Parser
         );
     }
 
-    protected function fetchIdentifiers(\SimpleXMLElement $xml)
+    protected function fetchIdentifiers(\SimpleXMLElement $xml): Identifiers
     {
-        return new Identifiers($this->fetchCollection(
+        $identifiers = new Identifiers();
+
+        $this->fillCollection(
+            $identifiers,
             function (\SimpleXMLElement $element): Elements\Identifier {
                 return new Elements\Identifier(
                     new Enums\IdentificationType($this->toInt($element, Elements\Identifier::TYPE_ID)),
@@ -155,28 +160,36 @@ class Parser
                     )
                 );
             },
-            $xml,
-            Identifier::class
-        ));
+            $xml
+        );
+
+        return $identifiers;
     }
 
     protected function fetchCommunications(\SimpleXMLElement $xml): Communications
     {
-        return new Communications($this->fetchCollection(
+        $communications = new Communications();
+
+        $this->fillCollection(
+            $communications,
             function (\SimpleXMLElement $element): Elements\Communication {
                 return new Elements\Communication(
                     $this->toString($element, Elements\Communication::VALUE),
                     new Enums\CommunicationType($this->toInt($element, Elements\Communication::TYPE_ID))
                 );
             },
-            $xml,
-            Communication::class
-        ));
+            $xml
+        );
+
+        return $communications;
     }
 
     protected function fetchAddresses(\SimpleXMLElement $xml): Addresses
     {
-        return new Addresses($this->fetchCollection(
+        $addresses = new Addresses();
+
+        $this->fillCollection(
+            $addresses,
             function (\SimpleXMLElement $element): Elements\Address {
                 return new Elements\Address(
                     $this->toInt($element, Elements\Address::LOCATION_ID),
@@ -189,28 +202,36 @@ class Parser
                     $this->toString($element, Elements\Address::POSTAL_CODE)
                 );
             },
-            $xml,
-            Address::class
-        ));
+            $xml
+        );
+
+        return $addresses;
     }
 
     protected function fetchMonthlyIncomes(\SimpleXMLElement $xml): MonthlyIncomes
     {
-        return new MonthlyIncomes($this->fetchCollection(
+        $monthlyIncomes = new MonthlyIncomes();
+
+        $this->fillCollection(
+            $monthlyIncomes,
             function (\SimpleXMLElement $element): Elements\MonthlyIncome {
                 return new Elements\MonthlyIncome(
                     $this->toFloat($element, Elements\MonthlyIncome::VALUE),
                     $this->toString($element, Elements\MonthlyIncome::CURRENCY)
                 );
             },
-            $xml,
-            MonthlyIncome::class
-        ));
+            $xml
+        );
+
+        return $monthlyIncomes;
     }
 
     protected function fetchContracts(\SimpleXMLElement $xml): Contracts
     {
-        return new Contracts($this->fetchCollection(
+        $contracts = new Contracts();
+
+        $this->fillCollection(
+            $contracts,
             function (\SimpleXMLElement $element) use ($xml): Elements\Contract {
                 $contractId = $this->toString($element, Elements\Contract::CONTRACT_ID);
 
@@ -245,14 +266,18 @@ class Parser
                     $this->fetchCollaterals($contractId, $xml)
                 );
             },
-            $xml,
-            Contract::class
-        ));
+            $xml
+        );
+
+        return $contracts;
     }
 
     protected function fetchSummaries(\SimpleXMLElement $xml): Summaries
     {
-        return new Summaries($this->fetchCollection(
+        $summaries = new Summaries();
+
+        $this->fillCollection(
+            $summaries,
             function (\SimpleXMLElement $element): Elements\Summary {
                 return new Elements\Summary(
                     new Enums\Category($this->toString($element, Elements\Summary::CATEGORY)),
@@ -262,14 +287,18 @@ class Parser
                     $this->toFloat($element, Elements\Summary::AMOUNT)
                 );
             },
-            $xml,
-            Summary::class
-        ));
+            $xml
+        );
+
+        return $summaries;
     }
 
     protected function fetchRecords(string $contractId, \SimpleXMLElement $xml): Records
     {
-        return new Records(array_filter($this->fetchCollection(
+        $records = new Records();
+
+        $this->fillCollection(
+            $records,
             function (\SimpleXMLElement $element) use ($contractId): ?Elements\Record {
                 return $contractId === $this->toString($element, Elements\Record::CONTRACT_ID)
                     ? new Elements\Record(
@@ -286,13 +315,18 @@ class Parser
                     : null;
             },
             $xml,
-            Record::class
-        )));
+            true
+        );
+
+        return $records;
     }
 
     protected function fetchCollaterals(string $contractId, \SimpleXMLElement $xml): Collaterals
     {
-        return new Collaterals(array_filter($this->fetchCollection(
+        $collaterals = new Collaterals();
+
+        $this->fillCollection(
+            $collaterals,
             function (\SimpleXMLElement $element) use ($contractId): ?Elements\Collateral {
                 return $contractId === $this->toString($element, Elements\Collateral::CONTRACT_ID)
                     ? new Elements\Collateral(
@@ -326,13 +360,18 @@ class Parser
                     : null;
             },
             $xml,
-            Collateral::class
-        )));
+            true
+        );
+
+        return $collaterals;
     }
 
     protected function fetchEvents(\SimpleXMLElement $xml): Events
     {
-        return new Events($this->fetchCollection(
+        $events = new Events();
+
+        $this->fillCollection(
+            $events,
             function (\SimpleXMLElement $element): Elements\Event {
                 return new Elements\Event(
                     $this->toString($element, Elements\Event::NAME),
@@ -340,28 +379,41 @@ class Parser
                     $this->toInt($element, Elements\Event::PROVIDER)
                 );
             },
-            $xml,
-            Event::class
-        ));
+            $xml
+        );
+
+        return $events;
     }
 
     protected function fetchDependants(\SimpleXMLElement $xml): Dependants
     {
-        return new Collections\Dependants($this->fetchCollection(
+        $dependants = new Dependants();
+
+        $this->fillCollection(
+            $dependants,
             function (\SimpleXMLElement $element): Elements\Dependant {
                 return new Elements\Dependant(
                     $this->toInt($element, Elements\Dependant::COUNT),
                     $this->toInt($element, Elements\Dependant::TYPE_ID)
                 );
             },
-            $xml,
-            Elements\Dependant::class
-        ));
+            $xml
+        );
+
+        return $dependants;
     }
 
-    private function fetchCollection(\Closure $callback, \SimpleXMLElement $xml, string $elementName): array
-    {
-        return array_map($callback, $this->toArray($xml, $elementName));
+    private function fillCollection(
+        BaseCollection $collection,
+        \Closure $callback,
+        \SimpleXMLElement $xml,
+        bool $filter = false
+    ): void {
+        $items = array_map($callback, $this->toArray($xml, $collection->type()));
+
+        foreach ($filter ? array_filter($items) : $items as $item) {
+            $collection->append($item);
+        }
     }
 
     private function toCarbon(\SimpleXMLElement $element, string $tagName): ?Carbon
