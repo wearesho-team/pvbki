@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class ContractType
@@ -14,7 +15,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static ContractType LEASING()
  * @method static ContractType NON_INSTALMENT()
  */
-final class ContractType extends Enum
+final class ContractType extends Enum implements NullableEnum
 {
     public const BUSINESS = 'business';
     public const CREDIT = 'credit';

@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class PaymentPeriod
@@ -20,7 +21,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static PaymentPeriod IRREGULAR_INSTALMENTS()
  * @method static PaymentPeriod ADVANCED_MONTHLY_PAYMENTS()
  */
-final class PaymentPeriod extends Enum
+final class PaymentPeriod extends Enum implements NullableEnum
 {
     public const EVERY_15_DAYS = 1;
     public const EVERY_30_DAYS = 2;

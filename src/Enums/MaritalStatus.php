@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class MaritalStatus
@@ -15,7 +16,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static MaritalStatus MATE()
  * @method static MaritalStatus UNKNOWN()
  */
-final class MaritalStatus extends Enum
+final class MaritalStatus extends Enum implements NullableEnum
 {
     public const UNMARRIED = 1;
     public const MARRIED = 2;

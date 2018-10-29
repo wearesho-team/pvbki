@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class Phase
@@ -15,7 +16,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static Phase TERMINATED()
  * @method static Phase TERMINATED_IN_ADVANCE()
  */
-final class Phase extends Enum
+final class Phase extends Enum implements NullableEnum
 {
     public const REQUESTED = 1;
     public const WITHDRAWN = 2;
