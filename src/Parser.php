@@ -45,8 +45,7 @@ class Parser
         $attributes = $xml->attributes();
 
         return new StatementReport(
-            (string)$attributes[StatementReport::PROTECTION] === 'false'
-                ? false : true,
+            (string)$attributes[StatementReport::PROTECTION] !== 'false',
             Carbon::make((string)$attributes[StatementReport::GENERATED]),
             (string)$attributes[StatementReport::POWERED],
             $errors,
