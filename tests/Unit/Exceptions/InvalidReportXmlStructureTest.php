@@ -32,7 +32,7 @@ class InvalidReportXmlStructureTest extends TestCase
             . $this->fakeInvalidReportXmlStructure->getLine() . PHP_EOL
             . 'Stack trace:' . PHP_EOL
             . $this->fakeInvalidReportXmlStructure->getTraceAsString() . PHP_EOL
-            . 'XML: xml',
+            . 'XML: ' . static::XML,
             $this->fakeInvalidReportXmlStructure->__toString()
         );
     }
