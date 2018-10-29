@@ -19,7 +19,7 @@ class InvalidReportXmlStructure extends \InvalidArgumentException
 
     public function __toString(): string
     {
-        return $this->getMessage() . "\n" . $this->getXml() . parent::__toString();
+        return parent::__toString() . PHP_EOL . 'XML: ' . $this->getXml();
     }
 
     public function getXml(): string
