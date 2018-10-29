@@ -21,10 +21,10 @@ class Record extends Pvbki\Infrastructure\Element
     public const OVERDUE_CURRENCY = 'overdueCurrency';
     public const OVERDUE_COUNT = 'overdueCount';
 
-    /** @var \DateTimeInterface */
+    /** @var \DateTimeInterface|null */
     protected $accountingDate;
 
-    /** @var float */
+    /** @var float|null */
     protected $restAmount;
 
     /** @var string|null */
@@ -49,8 +49,8 @@ class Record extends Pvbki\Infrastructure\Element
     protected $overdueCount;
 
     public function __construct(
-        \DateTimeInterface $accountingDate,
-        float $restAmount,
+        ?\DateTimeInterface $accountingDate,
+        ?float $restAmount,
         ?string $contractId,
         Pvbki\Enums\CreditUsage $creditUsage,
         ?string $restCurrency,
@@ -70,12 +70,12 @@ class Record extends Pvbki\Infrastructure\Element
         $this->overdueCount = $overdueCount;
     }
 
-    public function getAccountingDate(): \DateTimeInterface
+    public function getAccountingDate(): ?\DateTimeInterface
     {
         return $this->accountingDate;
     }
 
-    public function getRestAmount(): float
+    public function getRestAmount(): ?float
     {
         return $this->restAmount;
     }
