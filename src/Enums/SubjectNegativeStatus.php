@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class SubjectNegativeStatus
@@ -22,7 +23,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static SubjectNegativeStatus LIMITED_CIVIL_CAPABILITY()
  * @method static SubjectNegativeStatus CRIMINAL_PROCEEDINGS_STARTED()
  */
-final class SubjectNegativeStatus extends Enum
+final class SubjectNegativeStatus extends Enum implements NullableEnum
 {
     public const WITHOUT_NEGATIVE_STATUS = 0;
     public const CUSTOMER_UNTRACEABLE_OR_DECEASED = 1;

@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class StatementType
@@ -11,7 +12,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static StatementType BASE()
  * @method static StatementType SCORING()
  */
-final class StatementType extends Enum
+final class StatementType extends Enum implements NullableEnum
 {
     public const BASE = 'Report-Statement';
     public const SCORING = 'Report-StatementPlus';
