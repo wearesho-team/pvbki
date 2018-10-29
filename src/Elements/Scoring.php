@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Elements;
 
-use Wearesho\Pvbki\Infrastructure\Element;
+use Wearesho\Pvbki;
 
 /**
  * Class Scoring
  * @package Wearesho\Pvbki\Elements
  */
-class Scoring extends Element
+class Scoring extends Pvbki\Infrastructure\Element
 {
     public const ROOT = 'Scoring';
     public const DEGREE = 'Degree';
