@@ -676,4 +676,13 @@ class ParserTest extends TestCase
             $report
         );
     }
+
+    /**
+     * @expectedException \Wearesho\Pvbki\Exceptions\InvalidReportXmlStructure
+     * @expectedExceptionMessage Xml document have invalid structure
+     */
+    public function testInvalidXml(): void
+    {
+        $this->fakeParser->parse('Invalid xml');
+    }
 }

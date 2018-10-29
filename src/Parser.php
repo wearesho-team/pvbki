@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki;
 
 use Carbon\Carbon;
+use Wearesho\Pvbki\Exceptions\InvalidReportXmlStructure;
 
 /**
  * Class Parser
@@ -13,7 +14,12 @@ class Parser
     public function parse(string $reportXml): StatementReport
     {
         $domDocument = new \DOMDocument('1.0', 'utf-8');
-        $domDocument->loadXML($reportXml);
+
+        try {
+            $domDocument->loadXML($reportXml);
+        } catch (\Exception $exception) {
+            throw new InvalidReportXmlStructure($reportXml, $exception->getCode(), $exception);
+        }
 
         $errors = new Collections\Errors();
 

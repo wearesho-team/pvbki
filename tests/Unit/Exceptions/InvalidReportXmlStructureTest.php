@@ -14,16 +14,18 @@ use PHPUnit\Framework\TestCase;
  */
 class InvalidReportXmlStructureTest extends TestCase
 {
+    protected const INVALID_XML = 'xml';
+
     /** @var InvalidReportXmlStructure */
     protected $fakeInvalidReportXmlStructure;
 
     protected function setUp(): void
     {
-        $this->fakeInvalidReportXmlStructure = new InvalidReportXmlStructure(new \DOMDocument());
+        $this->fakeInvalidReportXmlStructure = new InvalidReportXmlStructure(static::INVALID_XML);
     }
 
     public function testGetXml(): void
     {
-        $this->assertEquals(new \DOMDocument(), $this->fakeInvalidReportXmlStructure->getXml());
+        $this->assertEquals(static::INVALID_XML, $this->fakeInvalidReportXmlStructure->getXml());
     }
 }
