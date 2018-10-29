@@ -23,6 +23,14 @@ class InvalidReportXmlStructureTest extends TestCase
         $this->fakeInvalidReportXmlStructure = new InvalidReportXmlStructure(static::XML);
     }
 
+    public function testToString(): void
+    {
+        $this->assertEquals(
+            (string)$this->fakeInvalidReportXmlStructure,
+            $this->fakeInvalidReportXmlStructure->__toString()
+        );
+    }
+
     public function testGetXml(): void
     {
         $this->assertEquals(static::XML, $this->fakeInvalidReportXmlStructure->getXml());
