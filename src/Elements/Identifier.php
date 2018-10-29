@@ -13,7 +13,7 @@ class Identifier extends Pvbki\Infrastructure\Element
     public const ROOT = 'Identification';
     public const TYPE_ID = 'typeId';
     public const NUMBER = 'number';
-    public const REGISTRATION_DATE = 'registrationDate';
+    public const REGISTRATION_DATE = 'issueDate';
     public const ISSUE_DATE = 'issueDate';
     public const EXPIRATION_DATE = 'expirationDate';
     public const ISSUED_BY_UA = 'authorityUA';
