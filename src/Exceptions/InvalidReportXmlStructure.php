@@ -17,6 +17,11 @@ class InvalidReportXmlStructure extends \InvalidArgumentException
         parent::__construct("Xml document have invalid structure", $code, $previous);
     }
 
+    public function __toString(): string
+    {
+        return $this->getMessage() . "\n" . $this->getXml() . parent::__toString();
+    }
+
     public function getXml(): string
     {
         return $this->xml;
