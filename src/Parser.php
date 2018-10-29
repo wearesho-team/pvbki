@@ -3,6 +3,26 @@
 namespace Wearesho\Pvbki;
 
 use Carbon\Carbon;
+use Wearesho\Pvbki\Collections\Addresses;
+use Wearesho\Pvbki\Collections\Collaterals;
+use Wearesho\Pvbki\Collections\Communications;
+use Wearesho\Pvbki\Collections\Contracts;
+use Wearesho\Pvbki\Collections\Dependants;
+use Wearesho\Pvbki\Collections\Events;
+use Wearesho\Pvbki\Collections\Identifiers;
+use Wearesho\Pvbki\Collections\MonthlyIncomes;
+use Wearesho\Pvbki\Collections\Records;
+use Wearesho\Pvbki\Collections\Summaries;
+use Wearesho\Pvbki\Elements\Address;
+use Wearesho\Pvbki\Elements\Collateral;
+use Wearesho\Pvbki\Elements\Communication;
+use Wearesho\Pvbki\Elements\Contract;
+use Wearesho\Pvbki\Elements\Dependant;
+use Wearesho\Pvbki\Elements\Event;
+use Wearesho\Pvbki\Elements\Identifier;
+use Wearesho\Pvbki\Elements\MonthlyIncome;
+use Wearesho\Pvbki\Elements\Record;
+use Wearesho\Pvbki\Elements\Summary;
 use Wearesho\Pvbki\Exceptions\InvalidReportXmlStructure;
 
 /**
@@ -102,7 +122,27 @@ class Parser
                 new Enums\EconomicActivity($this->toInt($subject, Elements\Subject::ECONOMIC_ACTIVITY)),
                 new Enums\EmployeeCount($this->toInt($subject, Elements\Subject::EMPLOYEE_COUNT))
             ),
-            new Collections\Identifiers(array_map(function (\SimpleXMLElement $element): Elements\Identifier {
+            $this->fetchIdentifiers($xml),
+            $this->fetchCommunications($xml),
+            $this->fetchAddresses($xml),
+            $this->fetchDependants($xml),
+            $this->fetchMonthlyIncomes($xml),
+            $this->fetchSummaries($xml),
+            $this->fetchContracts($xml),
+            $this->fetchEvents($xml),
+            new Elements\Scoring(
+                $this->toString($scoring, Elements\Scoring::DEGREE),
+                $this->toInt($scoring, Elements\Scoring::SCORE),
+                $this->toFloat($scoring, Elements\Scoring::FAULT_CHANCE),
+                $this->toString($scoring, Elements\Scoring::ADVERSE)
+            )
+        );
+    }
+
+    protected function fetchIdentifiers(\SimpleXMLElement $xml)
+    {
+        return new Identifiers($this->fetchCollection(
+            function (\SimpleXMLElement $element): Elements\Identifier {
                 return new Elements\Identifier(
                     new Enums\IdentificationType($this->toInt($element, Elements\Identifier::TYPE_ID)),
                     $this->toString($element, Elements\Identifier::NUMBER),
@@ -114,14 +154,30 @@ class Parser
                         $this->toString($element, Elements\Identifier::ISSUED_BY_EN)
                     )
                 );
-            }, $this->toArray($xml, Elements\Identifier::class))),
-            new Collections\Communications(array_map(function (\SimpleXMLElement $element): Elements\Communication {
+            },
+            $xml,
+            Identifier::class
+        ));
+    }
+
+    protected function fetchCommunications(\SimpleXMLElement $xml): Communications
+    {
+        return new Communications($this->fetchCollection(
+            function (\SimpleXMLElement $element): Elements\Communication {
                 return new Elements\Communication(
                     $this->toString($element, Elements\Communication::VALUE),
                     new Enums\CommunicationType($this->toInt($element, Elements\Communication::TYPE_ID))
                 );
-            }, $this->toArray($xml, Elements\Communication::class))),
-            new Collections\Addresses(array_map(function (\SimpleXMLElement $element): Elements\Address {
+            },
+            $xml,
+            Communication::class
+        ));
+    }
+
+    protected function fetchAddresses(\SimpleXMLElement $xml): Addresses
+    {
+        return new Addresses($this->fetchCollection(
+            function (\SimpleXMLElement $element): Elements\Address {
                 return new Elements\Address(
                     $this->toInt($element, Elements\Address::LOCATION_ID),
                     new Enums\AddressType($this->toInt($element, Elements\Address::TYPE_ID)),
@@ -132,29 +188,30 @@ class Parser
                     ),
                     $this->toString($element, Elements\Address::POSTAL_CODE)
                 );
-            }, $this->toArray($xml, Elements\Address::class))),
-            new Collections\Dependants(array_map(function (\SimpleXMLElement $element): Elements\Dependant {
-                return new Elements\Dependant(
-                    $this->toInt($element, Elements\Dependant::COUNT),
-                    $this->toInt($element, Elements\Dependant::TYPE_ID)
-                );
-            }, $this->toArray($xml, Elements\Dependant::class))),
-            new Collections\MonthlyIncomes(array_map(function (\SimpleXMLElement $element): Elements\MonthlyIncome {
+            },
+            $xml,
+            Address::class
+        ));
+    }
+
+    protected function fetchMonthlyIncomes(\SimpleXMLElement $xml): MonthlyIncomes
+    {
+        return new MonthlyIncomes($this->fetchCollection(
+            function (\SimpleXMLElement $element): Elements\MonthlyIncome {
                 return new Elements\MonthlyIncome(
                     $this->toFloat($element, Elements\MonthlyIncome::VALUE),
                     $this->toString($element, Elements\MonthlyIncome::CURRENCY)
                 );
-            }, $this->toArray($xml, Elements\MonthlyIncome::class))),
-            new Collections\Summaries(array_map(function (\SimpleXMLElement $element): Elements\Summary {
-                return new Elements\Summary(
-                    new Enums\Category($this->toString($element, Elements\Summary::CATEGORY)),
-                    $this->toInt($element, Elements\Summary::VALUE),
-                    $this->toString($element, Elements\Summary::CODE),
-                    $this->toInt($element, Elements\Summary::COUNT),
-                    $this->toFloat($element, Elements\Summary::AMOUNT)
-                );
-            }, $this->toArray($xml, Elements\Summary::class))),
-            new Collections\Contracts(array_map(function (\SimpleXMLElement $element) use ($xml): Elements\Contract {
+            },
+            $xml,
+            MonthlyIncome::class
+        ));
+    }
+
+    protected function fetchContracts(\SimpleXMLElement $xml): Contracts
+    {
+        return new Contracts($this->fetchCollection(
+            function (\SimpleXMLElement $element) use ($xml): Elements\Contract {
                 $contractId = $this->toString($element, Elements\Contract::CONTRACT_ID);
 
                 return new Elements\Contract(
@@ -184,73 +241,127 @@ class Parser
                     $this->toFloat($element, Elements\Contract::REST_AMOUNT),
                     $this->toInt($element, Elements\Contract::OVERDUE_COUNT),
                     $this->toFloat($element, Elements\Contract::OVERDUE_AMOUNT),
-                    new Collections\Records(array_filter(
-                        array_map(function (\SimpleXMLElement $element) use ($contractId): ?Elements\Record {
-                            return $contractId === $this->toString($element, Elements\Record::CONTRACT_ID)
-                                ? new Elements\Record(
-                                    $this->toCarbon($element, Elements\Record::ACCOUNTING_DATE),
-                                    $this->toFloat($element, Elements\Record::REST_AMOUNT),
-                                    $contractId,
-                                    new Enums\CreditUsage($this->toInt($element, Elements\Record::CREDIT_USAGE)),
-                                    $this->toString($element, Elements\Record::REST_CURRENCY),
-                                    $this->toInt($element, Elements\Record::REST_INSTALMENT_COUNT),
-                                    $this->toFloat($element, Elements\Record::OVERDUE_AMOUNT),
-                                    $this->toString($element, Elements\Record::OVERDUE_CURRENCY),
-                                    $this->toInt($element, Elements\Record::OVERDUE_COUNT)
-                                )
-                                : null;
-                        }, $this->toArray($xml, Elements\Record::class))
-                    )),
-                    new Collections\Collaterals(array_filter(
-                        array_map(function (\SimpleXMLElement $element) use ($contractId): ?Elements\Collateral {
-                            return $contractId === $this->toString($element, Elements\Collateral::CONTRACT_ID)
-                                ? new Elements\Collateral(
-                                    $contractId,
-                                    new Enums\CollateralType($this->toInt($element, Elements\Collateral::TYPE_ID)),
-                                    $this->toFloat($element, Elements\Collateral::VALUE),
-                                    $this->toString($element, Elements\Collateral::CURRENCY),
-                                    new Enums\AddressType(
-                                        $this->toInt($element, Elements\Collateral::ADDRESS_TYPE_ID)
-                                    ),
-                                    $this->toInt($element, Elements\Collateral::LOCATION_ID),
-                                    new Sentence\Translation(
-                                        $this->toString($element, Elements\Collateral::STREET_UA),
-                                        $this->toString($element, Elements\Collateral::STREET_RU),
-                                        $this->toString($element, Elements\Collateral::STREET_EN)
-                                    ),
-                                    $this->toString($element, Elements\Collateral::POSTAL_CODE),
-                                    new Enums\IdentificationType(
-                                        $this->toInt($element, Elements\Collateral::IDENTIFICATION_TYPE_ID)
-                                    ),
-                                    $this->toString($element, Elements\Collateral::NUMBER),
-                                    $this->toCarbon($element, Elements\Collateral::REGISTRATION_DATE),
-                                    $this->toCarbon($element, Elements\Collateral::ISSUE_DATE),
-                                    $this->toCarbon($element, Elements\Collateral::EXPIRATION_DATE),
-                                    new Sentence\Translation(
-                                        $this->toString($element, Elements\Collateral::AUTHORITY_UA),
-                                        $this->toString($element, Elements\Collateral::AUTHORITY_RU),
-                                        $this->toString($element, Elements\Collateral::AUTHORITY_EN)
-                                    )
-                                )
-                                : null;
-                        }, $this->toArray($xml, Elements\Collateral::class))
-                    ))
+                    $this->fetchRecords($contractId, $xml),
+                    $this->fetchCollaterals($contractId, $xml)
                 );
-            }, $this->toArray($xml, Elements\Contract::class))),
-            new Collections\Events(array_map(function (\SimpleXMLElement $element): Elements\Event {
+            },
+            $xml,
+            Contract::class
+        ));
+    }
+
+    protected function fetchSummaries(\SimpleXMLElement $xml): Summaries
+    {
+        return new Summaries($this->fetchCollection(
+            function (\SimpleXMLElement $element): Elements\Summary {
+                return new Elements\Summary(
+                    new Enums\Category($this->toString($element, Elements\Summary::CATEGORY)),
+                    $this->toInt($element, Elements\Summary::VALUE),
+                    $this->toString($element, Elements\Summary::CODE),
+                    $this->toInt($element, Elements\Summary::COUNT),
+                    $this->toFloat($element, Elements\Summary::AMOUNT)
+                );
+            },
+            $xml,
+            Summary::class
+        ));
+    }
+
+    protected function fetchRecords(string $contractId, \SimpleXMLElement $xml): Records
+    {
+        return new Records(array_filter($this->fetchCollection(
+            function (\SimpleXMLElement $element) use ($contractId): ?Elements\Record {
+                return $contractId === $this->toString($element, Elements\Record::CONTRACT_ID)
+                    ? new Elements\Record(
+                        $this->toCarbon($element, Elements\Record::ACCOUNTING_DATE),
+                        $this->toFloat($element, Elements\Record::REST_AMOUNT),
+                        $contractId,
+                        new Enums\CreditUsage($this->toInt($element, Elements\Record::CREDIT_USAGE)),
+                        $this->toString($element, Elements\Record::REST_CURRENCY),
+                        $this->toInt($element, Elements\Record::REST_INSTALMENT_COUNT),
+                        $this->toFloat($element, Elements\Record::OVERDUE_AMOUNT),
+                        $this->toString($element, Elements\Record::OVERDUE_CURRENCY),
+                        $this->toInt($element, Elements\Record::OVERDUE_COUNT)
+                    )
+                    : null;
+            },
+            $xml,
+            Record::class
+        )));
+    }
+
+    protected function fetchCollaterals(string $contractId, \SimpleXMLElement $xml): Collaterals
+    {
+        return new Collaterals(array_filter($this->fetchCollection(
+            function (\SimpleXMLElement $element) use ($contractId): ?Elements\Collateral {
+                return $contractId === $this->toString($element, Elements\Collateral::CONTRACT_ID)
+                    ? new Elements\Collateral(
+                        $contractId,
+                        new Enums\CollateralType($this->toInt($element, Elements\Collateral::TYPE_ID)),
+                        $this->toFloat($element, Elements\Collateral::VALUE),
+                        $this->toString($element, Elements\Collateral::CURRENCY),
+                        new Enums\AddressType(
+                            $this->toInt($element, Elements\Collateral::ADDRESS_TYPE_ID)
+                        ),
+                        $this->toInt($element, Elements\Collateral::LOCATION_ID),
+                        new Sentence\Translation(
+                            $this->toString($element, Elements\Collateral::STREET_UA),
+                            $this->toString($element, Elements\Collateral::STREET_RU),
+                            $this->toString($element, Elements\Collateral::STREET_EN)
+                        ),
+                        $this->toString($element, Elements\Collateral::POSTAL_CODE),
+                        new Enums\IdentificationType(
+                            $this->toInt($element, Elements\Collateral::IDENTIFICATION_TYPE_ID)
+                        ),
+                        $this->toString($element, Elements\Collateral::NUMBER),
+                        $this->toCarbon($element, Elements\Collateral::REGISTRATION_DATE),
+                        $this->toCarbon($element, Elements\Collateral::ISSUE_DATE),
+                        $this->toCarbon($element, Elements\Collateral::EXPIRATION_DATE),
+                        new Sentence\Translation(
+                            $this->toString($element, Elements\Collateral::AUTHORITY_UA),
+                            $this->toString($element, Elements\Collateral::AUTHORITY_RU),
+                            $this->toString($element, Elements\Collateral::AUTHORITY_EN)
+                        )
+                    )
+                    : null;
+            },
+            $xml,
+            Collateral::class
+        )));
+    }
+
+    protected function fetchEvents(\SimpleXMLElement $xml): Events
+    {
+        return new Events($this->fetchCollection(
+            function (\SimpleXMLElement $element): Elements\Event {
                 return new Elements\Event(
                     $this->toString($element, Elements\Event::NAME),
                     $this->toCarbon($element, Elements\Event::WHEN),
                     $this->toInt($element, Elements\Event::PROVIDER)
                 );
-            }, $this->toArray($xml, Elements\Event::class))),
-            new Elements\Scoring(
-                $this->toString($scoring, Elements\Scoring::DEGREE),
-                $this->toInt($scoring, Elements\Scoring::SCORE),
-                $this->toFloat($scoring, Elements\Scoring::FAULT_CHANCE),
-                $this->toString($scoring, Elements\Scoring::ADVERSE)
-            )
-        );
+            },
+            $xml,
+            Event::class
+        ));
+    }
+
+    protected function fetchDependants(\SimpleXMLElement $xml): Dependants
+    {
+        return new Collections\Dependants($this->fetchCollection(
+            function (\SimpleXMLElement $element): Elements\Dependant {
+                return new Elements\Dependant(
+                    $this->toInt($element, Elements\Dependant::COUNT),
+                    $this->toInt($element, Elements\Dependant::TYPE_ID)
+                );
+            },
+            $xml,
+            Elements\Dependant::class
+        ));
+    }
+
+    private function fetchCollection(\Closure $callback, \SimpleXMLElement $xml, string $elementName): array
+    {
+        return array_map($callback, $this->toArray($xml, $elementName));
     }
 
     private function toCarbon(\SimpleXMLElement $element, string $tagName): ?Carbon
