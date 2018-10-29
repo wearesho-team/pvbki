@@ -4,28 +4,7 @@ namespace Wearesho\Pvbki;
 
 use Carbon\Carbon;
 use Wearesho\BaseCollection;
-use Wearesho\Pvbki\Collections\Addresses;
-use Wearesho\Pvbki\Collections\Collaterals;
-use Wearesho\Pvbki\Collections\Communications;
-use Wearesho\Pvbki\Collections\Contracts;
-use Wearesho\Pvbki\Collections\Dependants;
-use Wearesho\Pvbki\Collections\Events;
-use Wearesho\Pvbki\Collections\Identifiers;
-use Wearesho\Pvbki\Collections\MonthlyIncomes;
-use Wearesho\Pvbki\Collections\Records;
-use Wearesho\Pvbki\Collections\Summaries;
-use Wearesho\Pvbki\Elements\Address;
-use Wearesho\Pvbki\Elements\Collateral;
-use Wearesho\Pvbki\Elements\Communication;
-use Wearesho\Pvbki\Elements\Contract;
-use Wearesho\Pvbki\Elements\Dependant;
-use Wearesho\Pvbki\Elements\Event;
-use Wearesho\Pvbki\Elements\Identifier;
-use Wearesho\Pvbki\Elements\MonthlyIncome;
-use Wearesho\Pvbki\Elements\Record;
-use Wearesho\Pvbki\Elements\Summary;
 use Wearesho\Pvbki\Exceptions\InvalidReportXmlStructure;
-use Wearesho\Pvbki\Infrastructure\Element;
 
 /**
  * Class Parser
@@ -141,9 +120,9 @@ class Parser
         );
     }
 
-    protected function fetchIdentifiers(\SimpleXMLElement $xml): Identifiers
+    protected function fetchIdentifiers(\SimpleXMLElement $xml): Collections\Identifiers
     {
-        $identifiers = new Identifiers();
+        $identifiers = new Collections\Identifiers();
 
         $this->fillCollection(
             $identifiers,
@@ -166,9 +145,9 @@ class Parser
         return $identifiers;
     }
 
-    protected function fetchCommunications(\SimpleXMLElement $xml): Communications
+    protected function fetchCommunications(\SimpleXMLElement $xml): Collections\Communications
     {
-        $communications = new Communications();
+        $communications = new Collections\Communications();
 
         $this->fillCollection(
             $communications,
@@ -184,9 +163,9 @@ class Parser
         return $communications;
     }
 
-    protected function fetchAddresses(\SimpleXMLElement $xml): Addresses
+    protected function fetchAddresses(\SimpleXMLElement $xml): Collections\Addresses
     {
-        $addresses = new Addresses();
+        $addresses = new Collections\Addresses();
 
         $this->fillCollection(
             $addresses,
@@ -208,9 +187,9 @@ class Parser
         return $addresses;
     }
 
-    protected function fetchMonthlyIncomes(\SimpleXMLElement $xml): MonthlyIncomes
+    protected function fetchMonthlyIncomes(\SimpleXMLElement $xml): Collections\MonthlyIncomes
     {
-        $monthlyIncomes = new MonthlyIncomes();
+        $monthlyIncomes = new Collections\MonthlyIncomes();
 
         $this->fillCollection(
             $monthlyIncomes,
@@ -226,9 +205,9 @@ class Parser
         return $monthlyIncomes;
     }
 
-    protected function fetchContracts(\SimpleXMLElement $xml): Contracts
+    protected function fetchContracts(\SimpleXMLElement $xml): Collections\Contracts
     {
-        $contracts = new Contracts();
+        $contracts = new Collections\Contracts();
 
         $this->fillCollection(
             $contracts,
@@ -272,9 +251,9 @@ class Parser
         return $contracts;
     }
 
-    protected function fetchSummaries(\SimpleXMLElement $xml): Summaries
+    protected function fetchSummaries(\SimpleXMLElement $xml): Collections\Summaries
     {
-        $summaries = new Summaries();
+        $summaries = new Collections\Summaries();
 
         $this->fillCollection(
             $summaries,
@@ -293,9 +272,9 @@ class Parser
         return $summaries;
     }
 
-    protected function fetchRecords(string $contractId, \SimpleXMLElement $xml): Records
+    protected function fetchRecords(string $contractId, \SimpleXMLElement $xml): Collections\Records
     {
-        $records = new Records();
+        $records = new Collections\Records();
 
         $this->fillCollection(
             $records,
@@ -321,9 +300,9 @@ class Parser
         return $records;
     }
 
-    protected function fetchCollaterals(string $contractId, \SimpleXMLElement $xml): Collaterals
+    protected function fetchCollaterals(string $contractId, \SimpleXMLElement $xml): Collections\Collaterals
     {
-        $collaterals = new Collaterals();
+        $collaterals = new Collections\Collaterals();
 
         $this->fillCollection(
             $collaterals,
@@ -366,9 +345,9 @@ class Parser
         return $collaterals;
     }
 
-    protected function fetchEvents(\SimpleXMLElement $xml): Events
+    protected function fetchEvents(\SimpleXMLElement $xml): Collections\Events
     {
-        $events = new Events();
+        $events = new Collections\Events();
 
         $this->fillCollection(
             $events,
@@ -385,9 +364,9 @@ class Parser
         return $events;
     }
 
-    protected function fetchDependants(\SimpleXMLElement $xml): Dependants
+    protected function fetchDependants(\SimpleXMLElement $xml): Collections\Dependants
     {
-        $dependants = new Dependants();
+        $dependants = new Collections\Dependants();
 
         $this->fillCollection(
             $dependants,
