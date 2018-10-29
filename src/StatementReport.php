@@ -51,7 +51,7 @@ class StatementReport implements \JsonSerializable
     /** @var Collections\Events */
     protected $events;
 
-    /** @var Elements\Scoring|null */
+    /** @var Elements\Scoring */
     protected $scoring;
 
     public function __construct(
@@ -156,7 +156,7 @@ class StatementReport implements \JsonSerializable
         return $this->events;
     }
 
-    public function getScoring(): ?Elements\Scoring
+    public function getScoring(): Elements\Scoring
     {
         return $this->scoring;
     }

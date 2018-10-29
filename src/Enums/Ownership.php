@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class Ownership
@@ -18,7 +19,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static Ownership OTHER_LEGAL_FORMS()
  * @method static Ownership OTHER_INDIVIDUAL()
  */
-final class Ownership extends Enum
+final class Ownership extends Enum implements NullableEnum
 {
     public const ENTERPRISES = 1;
     public const ECONOMIC_COMPANIES = 2;

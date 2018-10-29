@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class Role
@@ -21,7 +22,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static Role ACCIDENT_WITNESS()
  * @method static Role CLAIMANT()
  */
-final class Role extends Enum
+final class Role extends Enum implements NullableEnum
 {
     public const BORROWER = 1;
     public const CO_DEBTOR = 2;

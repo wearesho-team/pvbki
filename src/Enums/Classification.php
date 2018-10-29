@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class Classification
@@ -11,7 +12,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static Classification INDIVIDUAL()
  * @method static Classification ENTREPRENEUR()
  */
-final class Classification extends Enum
+final class Classification extends Enum implements NullableEnum
 {
     public const INDIVIDUAL = 1;
     public const ENTREPRENEUR = 2;

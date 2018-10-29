@@ -14,7 +14,7 @@ class MonthlyIncome extends Pvbki\Infrastructure\Element
     public const VALUE = 'value';
     public const CURRENCY = 'currency';
 
-    /** @var double|null */
+    /** @var float|null */
     protected $value;
 
     /** @var string|null */

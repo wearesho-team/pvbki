@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class Entity
@@ -12,7 +13,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static Entity INDIVIDUAL()
  * @method static Entity SUBJECT()
  */
-final class Entity extends Enum
+final class Entity extends Enum implements NullableEnum
 {
     public const COMPANY = 'company';
     public const INDIVIDUAL = 'individual';

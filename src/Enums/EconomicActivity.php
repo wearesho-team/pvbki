@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class EconomicActivity
@@ -17,7 +18,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static EconomicActivity LOGISTICAL_SUPPORT_AND_SALE()
  * @method static EconomicActivity OTHER()
  */
-final class EconomicActivity extends Enum
+final class EconomicActivity extends Enum implements NullableEnum
 {
     public const INDUSTRY = 1;
     public const AGRICULTURE = 2;

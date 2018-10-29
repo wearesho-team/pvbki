@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class Education
@@ -16,7 +17,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static Education ACADEMIC()
  * @method static Education OTHER()
  */
-final class Education extends Enum
+final class Education extends Enum implements NullableEnum
 {
     public const UNFINISHED = 1;
     public const BASIC = 2;

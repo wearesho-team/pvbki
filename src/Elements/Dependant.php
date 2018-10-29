@@ -14,7 +14,7 @@ class Dependant extends Pvbki\Infrastructure\Element
     public const COUNT = 'count';
     public const TYPE_ID = 'typeId';
 
-    /** @var int|null */
+    /** @var int */
     protected $count;
 
     /** @var int|null */
@@ -26,7 +26,7 @@ class Dependant extends Pvbki\Infrastructure\Element
         $this->typeId = $typeId;
     }
 
-    public function getCount(): ?int
+    public function getCount(): int
     {
         return $this->count;
     }

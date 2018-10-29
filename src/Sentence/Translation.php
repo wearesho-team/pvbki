@@ -2,12 +2,16 @@
 
 namespace Wearesho\Pvbki\Sentence;
 
+use Wearesho\Pvbki;
+
 /**
  * Class Translation
  * @package Wearesho\Pvbki\Sentence
  */
 class Translation implements \JsonSerializable
 {
+    use Pvbki\Infrastructure\JsonSerializeTrait;
+
     /** @var string|null */
     protected $ua;
 
@@ -22,11 +26,6 @@ class Translation implements \JsonSerializable
         $this->ua = $ua;
         $this->ru = $ru;
         $this->en = $en;
-    }
-
-    public function jsonSerialize(): array
-    {
-        return get_object_vars($this);
     }
 
     public function ua(): ?string

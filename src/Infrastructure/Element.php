@@ -10,12 +10,9 @@ use Wearesho\Pvbki;
  */
 abstract class Element implements Pvbki\Interrelations\ElementInterface
 {
-    public const ROOT = null;
+    use JsonSerializeTrait;
 
-    public function jsonSerialize(): array
-    {
-        return get_object_vars($this);
-    }
+    public const ROOT = null;
 
     public static function tag(): string
     {

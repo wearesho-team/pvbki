@@ -2,7 +2,8 @@
 
 namespace Wearesho\Pvbki\Enums;
 
-use Wearesho\Pvbki\Infrastructure\Enum;
+use MyCLabs\Enum\Enum;
+use Wearesho\Pvbki\Interrelations\NullableEnum;
 
 /**
  * Class AddressType
@@ -15,7 +16,7 @@ use Wearesho\Pvbki\Infrastructure\Enum;
  * @method static AddressType PREVIOUS_EMPLOYMENT()
  * @method static AddressType COLLATERAL()
  */
-final class AddressType extends Enum
+final class AddressType extends Enum implements NullableEnum
 {
     /**
      * Address of permanent residence or registration
