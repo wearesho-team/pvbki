@@ -3,7 +3,7 @@
 namespace Wearesho\Pvbki\Tests\Unit\Exceptions;
 
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Exceptions\UnsupportedMode;
+use Wearesho\Pvbki;
 
 /**
  * Class InvalidModeExceptionTest
@@ -13,11 +13,12 @@ use Wearesho\Pvbki\Exceptions\UnsupportedMode;
  */
 class InvalidModeExceptionTest extends TestCase
 {
-    public function testGetMode(): void
+    public function testException(): void
     {
         $mode = 5;
-        $exception = new UnsupportedMode($mode);
+        $exception = new Pvbki\Exceptions\UnsupportedMode($mode);
 
         $this->assertEquals($mode, $exception->getMode());
+        $this->assertInstanceOf(Pvbki\Exception::class, $exception);
     }
 }
