@@ -19,6 +19,6 @@ class IdentificationDataValidationTest extends TestCase
         $exception = new Pvbki\Exceptions\IdentificationDataValidation($data);
 
         $this->assertEquals($data, $exception->getData());
-        $this->assertInstanceOf(Pvbki\InvalidArgumentException::class, $exception);
+        $this->assertInstanceOf(Pvbki\Exception::class, $exception);
     }
 }

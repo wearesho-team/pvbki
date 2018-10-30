@@ -44,6 +44,6 @@ class InvalidReportXmlStructureTest extends TestCase
 
     public function testInstanceOf(): void
     {
-        $this->assertInstanceOf(Pvbki\InvalidArgumentException::class, $this->fakeInvalidReportXmlStructure);
+        $this->assertInstanceOf(Pvbki\Exception::class, $this->fakeInvalidReportXmlStructure);
     }
 }

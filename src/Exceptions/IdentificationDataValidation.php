@@ -2,13 +2,13 @@
 
 namespace Wearesho\Pvbki\Exceptions;
 
-use Wearesho\Pvbki\InvalidArgumentException;
+use Wearesho\Pvbki;
 
 /**
  * Class IdentificationDataValidation
  * @package Wearesho\Pvbki\Exceptions
  */
-class IdentificationDataValidation extends InvalidArgumentException
+class IdentificationDataValidation extends \InvalidArgumentException implements Pvbki\Exception
 {
     /** @var string */
     protected $data;

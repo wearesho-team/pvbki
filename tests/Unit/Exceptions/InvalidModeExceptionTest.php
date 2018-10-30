@@ -19,6 +19,6 @@ class InvalidModeExceptionTest extends TestCase
         $exception = new Pvbki\Exceptions\UnsupportedMode($mode);
 
         $this->assertEquals($mode, $exception->getMode());
-        $this->assertInstanceOf(Pvbki\InvalidArgumentException::class, $exception);
+        $this->assertInstanceOf(Pvbki\Exception::class, $exception);
     }
 }

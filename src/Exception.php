@@ -3,14 +3,14 @@
 namespace Wearesho\Pvbki;
 
 /**
- * Class Exception
+ * Interface Exception
  * @package Wearesho\Pvbki
  *
- * Base exception for all exceptions for this package
+ * Base exception interface for all exceptions for this package
  * Use for handling all library exceptions in your own project
  *
  * @example try { ... } catch (Pvbki\Exception $exception) { ... }
  */
-class Exception extends \Exception
+interface Exception extends \Throwable
 {
 }
