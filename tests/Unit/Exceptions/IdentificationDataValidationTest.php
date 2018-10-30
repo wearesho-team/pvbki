@@ -2,23 +2,23 @@
 
 namespace Wearesho\Pvbki\Tests\Unit\Exceptions;
 
-use Wearesho\Pvbki\Exceptions\IdentificationDataValidation;
-
 use PHPUnit\Framework\TestCase;
+use Wearesho\Pvbki;
 
 /**
  * Class IdentificationDataValidationTest
  * @package Wearesho\Pvbki\Tests\Unit\Exceptions
- * @coversDefaultClass IdentificationDataValidation
+ * @coversDefaultClass \Wearesho\Pvbki\Exceptions\IdentificationDataValidation
  * @internal
  */
 class IdentificationDataValidationTest extends TestCase
 {
-    public function testGetData(): void
+    public function testException(): void
     {
         $data = 'some data';
-        $exception = new IdentificationDataValidation($data);
+        $exception = new Pvbki\Exceptions\IdentificationDataValidation($data);
 
         $this->assertEquals($data, $exception->getData());
+        $this->assertInstanceOf(Pvbki\InvalidArgumentException::class, $exception);
     }
 }

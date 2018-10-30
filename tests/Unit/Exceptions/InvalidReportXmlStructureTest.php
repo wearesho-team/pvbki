@@ -3,30 +3,30 @@
 namespace Wearesho\Pvbki\Tests\Unit\Exceptions;
 
 use PHPUnit\Framework\TestCase;
-use Wearesho\Pvbki\Exceptions\InvalidReportXmlStructure;
+use Wearesho\Pvbki;
 
 /**
  * Class InvalidReportXmlStructureTest
  * @package Wearesho\Pvbki\Tests\Unit\Exceptions
- * @coversDefaultClass InvalidReportXmlStructure
+ * @coversDefaultClass \Wearesho\Pvbki\Exceptions\InvalidReportXmlStructure
  * @internal
  */
 class InvalidReportXmlStructureTest extends TestCase
 {
     protected const XML = 'xml';
 
-    /** @var InvalidReportXmlStructure */
+    /** @var Pvbki\Exceptions\InvalidReportXmlStructure */
     protected $fakeInvalidReportXmlStructure;
 
     protected function setUp(): void
     {
-        $this->fakeInvalidReportXmlStructure = new InvalidReportXmlStructure(static::XML);
+        $this->fakeInvalidReportXmlStructure = new Pvbki\Exceptions\InvalidReportXmlStructure(static::XML);
     }
 
     public function testToString(): void
     {
         $this->assertEquals(
-            InvalidReportXmlStructure::class . ': '
+            Pvbki\Exceptions\InvalidReportXmlStructure::class . ': '
             . $this->fakeInvalidReportXmlStructure->getMessage() . ' in '
             . $this->fakeInvalidReportXmlStructure->getFile() . ':'
             . $this->fakeInvalidReportXmlStructure->getLine() . PHP_EOL
@@ -40,5 +40,10 @@ class InvalidReportXmlStructureTest extends TestCase
     public function testGetXml(): void
     {
         $this->assertEquals(static::XML, $this->fakeInvalidReportXmlStructure->getXml());
+    }
+
+    public function testInstanceOf(): void
+    {
+        $this->assertInstanceOf(Pvbki\InvalidArgumentException::class, $this->fakeInvalidReportXmlStructure);
     }
 }

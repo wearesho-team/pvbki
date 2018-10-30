@@ -2,11 +2,13 @@
 
 namespace Wearesho\Pvbki\Exceptions;
 
+use Wearesho\Pvbki\InvalidArgumentException;
+
 /**
  * Class InvalidXmlStructure
  * @package Wearesho\Pvbki\Exceptions
  */
-class InvalidReportXmlStructure extends \InvalidArgumentException
+class InvalidReportXmlStructure extends InvalidArgumentException
 {
     /** @var string */
     protected $xml;
