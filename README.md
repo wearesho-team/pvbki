@@ -68,8 +68,7 @@ PVBKI_MODE=
 ### Service instance
 
 To instantiate service you need config, that implement [ConfigInterface](src/Interrelations/ConfigInterface.php), 
-client, that implement [GuzzleHttp/ClientInterface](http://docs.guzzlephp.org/en/stable), 
-and as optional you can use `Psr\Log\LoggerInterface`.
+client, that implement [GuzzleHttp/ClientInterface](http://docs.guzzlephp.org/en/stable).
 
 ```php
 <?php
@@ -80,9 +79,8 @@ use Wearesho\Pvbki;
 
 $config = new Pvbki\EnvironmentConfig('PVBKI_');
 $client = new GuzzleHttp\Client();
-$logger = new Log\NullLogger();
 
-$service = new Pvbki\Service($config, $client, $logger);
+$service = new Pvbki\Service($config, $client);
 ```
 
 Use [ServiceInterface](./src/Interrelations/ServiceInterface.php) to customize it;
