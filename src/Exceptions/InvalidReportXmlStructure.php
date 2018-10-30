@@ -8,7 +8,7 @@ use Wearesho\Pvbki;
  * Class InvalidXmlStructure
  * @package Wearesho\Pvbki\Exceptions
  */
-class InvalidReportXmlStructure extends \InvalidArgumentException implements Pvbki\Exception
+class InvalidReportXmlStructure extends \RuntimeException implements Pvbki\Exception
 {
     /** @var string */
     protected $xml;
