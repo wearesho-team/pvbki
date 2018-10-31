@@ -176,5 +176,7 @@ $reportObj = (new Pvbki\Parser())->parse($report);
 $serialized = json_encode($reportObj);
 ```
 
+You can see [example](./data/response/example.json) of generated json.
+
 ## License
 [MIT](./LICENSE)
