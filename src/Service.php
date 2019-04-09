@@ -3,6 +3,7 @@
 namespace Wearesho\Pvbki;
 
 use GuzzleHttp;
+use Spatie\ArrayToXml\ArrayToXml;
 
 /**
  * Class Service
@@ -10,9 +11,6 @@ use GuzzleHttp;
  */
 class Service implements Interrelations\ServiceInterface
 {
-    protected const SOAP12 = 'soap12';
-    protected const XMLNS = 'xmlns';
-
     /** @var Interrelations\ConfigInterface */
     protected $config;
 
@@ -53,33 +51,43 @@ class Service implements Interrelations\ServiceInterface
 
     protected function getBody(Interrelations\StatementRequestInterface $request): string
     {
-        $type = $request->getType();
-        $document = new \DOMDocument('1.0', 'UTF-8');
-        $root = $document->createElement(static::SOAP12 . ':Envelope');
-        $root->setAttribute(static::XMLNS . ':xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-        $root->setAttribute(static::XMLNS . ':xsd', 'http://www.w3.org/2001/XMLSchema');
-        $root->setAttribute(static::XMLNS . ':' . static::SOAP12, 'http://www.w3.org/2003/05/soap-envelope');
         $serviceAttributeValue = 'https://service.pvbki.com/reverse';
-        $header = $document->createElement(static::SOAP12 . ':Header');
-        $credential = $document->createElement('AuthenticationCredential');
-        $credential->setAttribute(static::XMLNS, $serviceAttributeValue);
-        $credential->appendChild($document->createElement('UserName', $this->config->getUsername()));
-        $credential->appendChild($document->createElement('Password', $this->config->getPassword()));
-        $identity = $document->createElement('AuthenticationIdentity');
-        $identity->setAttribute(static::XMLNS, $serviceAttributeValue);
-        $identity->appendChild($document->createElement('Name', $this->config->getAccessPoint()));
-        $identity->appendChild($document->createElement('Key', $this->config->getKey()));
-        $header->appendChild($credential);
-        $header->appendChild($identity);
-        $body = $document->createElement(static::SOAP12 . ':Body');
-        $report = $document->createElement($type->getValue());
-        $report->setAttribute(static::XMLNS, $serviceAttributeValue);
-        $report->appendChild($document->createElement('forID', $request->getIdentification()->getId()));
-        $body->appendChild($report);
-        $root->appendChild($header);
-        $root->appendChild($body);
-        $document->appendChild($root);
-        return $document->saveXML();
+        $root = [
+            'rootElementName' => 'soap12:Envelope',
+            '_attributes' => [
+                'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+                'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',
+                'xmlns:soap12' => 'http://www.w3.org/2003/05/soap-envelope',
+            ]
+        ];
+        $params = [
+            'soap12:Header' => [
+                'AuthenticationCredential' => [
+                    '_attributes' => [
+                        'xmlns' => $serviceAttributeValue,
+                    ],
+                    'UserName' => $this->config->getUsername(),
+                    'Password' => $this->config->getPassword(),
+                ],
+                'AuthenticationIdentity' => [
+                    '_attributes' => [
+                        'xmlns' => $serviceAttributeValue
+                    ],
+                    'Name' => $this->config->getAccessPoint(),
+                    'Key' => $this->config->getKey(),
+                ]
+            ],
+            'soap12:Body' => [
+                $request->getType()->getValue() => [
+                    '_attributes' => [
+                        'xmlns' => $serviceAttributeValue
+                    ],
+                    'forID' => $request->getIdentification()->getId(),
+                ]
+            ]
+        ];
+
+        return ArrayToXml::convert($params, $root, true, 'UTF-8');
     }
 
     public function config(): Interrelations\ConfigInterface

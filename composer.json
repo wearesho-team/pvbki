@@ -8,6 +8,7 @@
     "horat1us/environment-config": "^1.2",
     "myclabs/php-enum": "^1.6.3",
     "nesbot/carbon": "^1.33",
+    "spatie/array-to-xml": "^2.8",
     "wearesho-team/base-collection": "^1.0.0"
   },
   "require-dev": {
