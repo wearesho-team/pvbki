@@ -2061,7 +2061,10 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "ext-simplexml": "*",
+        "ext-dom": "*",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "platform-overrides": {
