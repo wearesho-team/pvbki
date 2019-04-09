@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Pvbki\Sentence;
 
 use Wearesho\Pvbki;
