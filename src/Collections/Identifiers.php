@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Pvbki\Collections;
 
 use Wearesho\BaseCollection;

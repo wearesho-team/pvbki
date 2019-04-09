@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Pvbki\Interrelations;
 
 use Wearesho\Pvbki\Enums\StatementType;

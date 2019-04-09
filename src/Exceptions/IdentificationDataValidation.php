@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Pvbki\Exceptions;
 
 use Wearesho\Pvbki;

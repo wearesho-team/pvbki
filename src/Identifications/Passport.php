@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Pvbki\Identifications;
 
 use Wearesho\Pvbki;
