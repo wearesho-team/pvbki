@@ -70,6 +70,21 @@ class Record extends Pvbki\Infrastructure\Element
         $this->overdueCount = $overdueCount;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'accountingDate' => $this->accountingDate,
+            'restAmount' => $this->restAmount,
+            'contractId' => $this->contractId,
+            'creditUsage' => $this->creditUsage,
+            'restCurrency' => $this->restCurrency,
+            'restInstalmentCount' => $this->restInstalmentCount,
+            'overdueAmount' => $this->overdueAmount,
+            'overdueCurrency' => $this->overdueCurrency,
+            'overdueCount' => $this->overdueCount,
+        ];
+    }
+
     public function getAccountingDate(): ?\DateTimeInterface
     {
         return $this->accountingDate;

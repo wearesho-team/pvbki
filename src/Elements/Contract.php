@@ -182,6 +182,40 @@ class Contract extends Pvbki\Infrastructure\Element
         $this->collaterals = $collaterals;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'roleId' => $this->roleId,
+            'provider' => $this->provider,
+            'contractId' => $this->contractId,
+            'lastUpdate' => $this->lastUpdate,
+            'phaseId' => $this->phaseId,
+            'currency' => $this->currency,
+            'dateOfSignature' => $this->dateOfSignature,
+            'creditPurpose' => $this->creditPurpose,
+            'negativeStatus' => $this->negativeStatus,
+            'applicationDate' => $this->applicationDate,
+            'startDate' => $this->startDate,
+            'expectedEndDate' => $this->expectedEndDate,
+            'factualEndDate' => $this->factualEndDate,
+            'type' => $this->type,
+            'paymentMethodId' => $this->paymentMethodId,
+            'paymentPeriodId' => $this->paymentPeriodId,
+            'actualCurrency' => $this->actualCurrency,
+            'totalAmount' => $this->totalAmount,
+            'creditLimit' => $this->creditLimit,
+            'instalmentCount' => $this->instalmentCount,
+            'instalmentAmountCurrency' => $this->instalmentAmountCurrency,
+            'instalmentAmount' => $this->instalmentAmount,
+            'restInstalmentCount' => $this->restInstalmentCount,
+            'restAmount' => $this->restAmount,
+            'overdueCount' => $this->overdueCount,
+            'overdueAmount' => $this->overdueAmount,
+            'records' => $this->records,
+            'collaterals' => $this->collaterals,
+        ];
+    }
+
     public function getRoleId(): Pvbki\Enums\Role
     {
         return $this->roleId;

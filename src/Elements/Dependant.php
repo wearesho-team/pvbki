@@ -26,6 +26,14 @@ class Dependant extends Pvbki\Infrastructure\Element
         $this->typeId = $typeId;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'count' => $this->count,
+            'typeId' => $this->typeId,
+        ];
+    }
+
     public function getCount(): int
     {
         return $this->count;

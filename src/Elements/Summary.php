@@ -41,6 +41,17 @@ class Summary extends Pvbki\Infrastructure\Element
         $this->amount = $amount;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'category' => $this->category,
+            'value' => $this->value,
+            'code' => $this->code,
+            'count' => $this->count,
+            'amount' => $this->amount,
+        ];
+    }
+
     public function getCategory(): Pvbki\Enums\Category
     {
         return $this->category;

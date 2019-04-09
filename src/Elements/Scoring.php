@@ -36,6 +36,16 @@ class Scoring extends Pvbki\Infrastructure\Element
         $this->adverse = $adverse;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'degree' => $this->degree,
+            'score' => $this->score,
+            'faultChance' => $this->faultChance,
+            'adverse' => $this->adverse,
+        ];
+    }
+
     public function getDegree(): ?string
     {
         return $this->degree;

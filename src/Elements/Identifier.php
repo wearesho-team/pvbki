@@ -49,6 +49,17 @@ class Identifier extends Pvbki\Infrastructure\Element
         $this->authority = $authority;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'typeId' => $this->typeId,
+            'number' => $this->number,
+            'registrationDate' => $this->registrationDate,
+            'expirationDate' => $this->expirationDate,
+            'authority' => $this->authority,
+        ];
+    }
+
     public function getTypeId(): Pvbki\Enums\IdentificationType
     {
         return $this->typeId;

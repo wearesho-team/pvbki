@@ -168,6 +168,35 @@ class Subject extends Pvbki\Infrastructure\Element
         $this->employeeCount = $employeeCount;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'requestId' => $this->requestId,
+            'lastUpdate' => $this->lastUpdate,
+            'entity' => $this->entity,
+            'gender' => $this->gender,
+            'surname' => $this->surname,
+            'name' => $this->name,
+            'patronymic' => $this->patronymic,
+            'birthSurname' => $this->birthSurname,
+            'classification' => $this->classification,
+            'birthDate' => $this->birthDate,
+            'birthPlace' => $this->birthPlace,
+            'residency' => $this->residency,
+            'citizenShip' => $this->citizenShip,
+            'negativeStatus' => $this->negativeStatus,
+            'education' => $this->education,
+            'maritalStatus' => $this->maritalStatus,
+            'statusId' => $this->statusId,
+            'fullName' => $this->fullName,
+            'abbreviation' => $this->abbreviation,
+            'ownership' => $this->ownership,
+            'registrationDate' => $this->registrationDate,
+            'economicActivity' => $this->economicActivity,
+            'employeeCount' => $this->employeeCount,
+        ];
+    }
+
     public function getRequestId(): ?string
     {
         return $this->requestId;

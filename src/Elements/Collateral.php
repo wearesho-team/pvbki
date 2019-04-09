@@ -104,6 +104,26 @@ class Collateral extends Pvbki\Infrastructure\Element
         $this->authority = $authority;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'contractId' => $this->contractId,
+            'typeId' => $this->typeId,
+            'value' => $this->value,
+            'currency' => $this->currency,
+            'addressTypeId' => $this->addressTypeId,
+            'locationId' => $this->locationId,
+            'street' => $this->street,
+            'postalCode' => $this->postalCode,
+            'identificationTypeId' => $this->identificationTypeId,
+            'number' => $this->number,
+            'registrationDate' => $this->registrationDate,
+            'issueDate' => $this->issueDate,
+            'expirationDate' => $this->expirationDate,
+            'authority' => $this->authority,
+        ];
+    }
+
     public function getContractId(): ?string
     {
         return $this->contractId;
