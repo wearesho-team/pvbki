@@ -31,6 +31,15 @@ class Event extends Pvbki\Infrastructure\Element
         $this->provider = $provider;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'name' => $this->name,
+            'when' => $this->when,
+            'provider' => $this->provider,
+        ];
+    }
+
     public function getName(): string
     {
         return $this->name;

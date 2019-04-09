@@ -26,6 +26,14 @@ class MonthlyIncome extends Pvbki\Infrastructure\Element
         $this->currency = $currency;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'value' => $this->value,
+            'currency' => $this->currency,
+        ];
+    }
+
     public function getValue(): ?float
     {
         return $this->value;

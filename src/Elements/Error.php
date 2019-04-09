@@ -31,6 +31,15 @@ class Error extends Pvbki\Infrastructure\Element
         $this->type = $type;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'code' => $this->code,
+            'message' => $this->message,
+            'type' => $this->type,
+        ];
+    }
+
     public function getCode(): ?string
     {
         return $this->code;

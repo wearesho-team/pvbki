@@ -26,6 +26,14 @@ class Communication extends Pvbki\Infrastructure\Element
         $this->typeId = $typeId;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'value' => $this->value,
+            'typeId' => $this->typeId,
+        ];
+    }
+
     public function getTypeId(): Pvbki\Enums\CommunicationType
     {
         return $this->typeId;

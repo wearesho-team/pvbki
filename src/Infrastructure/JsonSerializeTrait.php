@@ -5,6 +5,8 @@ namespace Wearesho\Pvbki\Infrastructure;
 /**
  * Trait JsonSerializeTrait
  * @package Wearesho\Pvbki\Infrastructure
+ *
+ * @deprecated Incorrect usage of get_object_vars
  */
 trait JsonSerializeTrait
 {

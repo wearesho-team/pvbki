@@ -43,6 +43,16 @@ class Address extends Pvbki\Infrastructure\Element
         $this->postalCode = $postalCode;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'typeId' => $this->typeId,
+            'locationId' => $this->locationId,
+            'street' => $this->street,
+            'postalCode' => $this->postalCode,
+        ];
+    }
+
     public function getTypeId(): Pvbki\Enums\AddressType
     {
         return $this->typeId;
