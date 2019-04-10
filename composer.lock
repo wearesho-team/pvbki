@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b6693c7d7b818d890e34dfa7d974eff",
+    "content-hash": "e1638408219f80075f10c20aa0ae4115",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -229,19 +229,20 @@
         },
         {
             "name": "myclabs/php-enum",
-            "version": "1.6.3",
+            "version": "1.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "a8284c7c540caf9988e339a404cadcdf1e8b165d"
+                "reference": "32c4202886c51fbe5cc3a7c34ec5c9a4a790345e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/a8284c7c540caf9988e339a404cadcdf1e8b165d",
-                "reference": "a8284c7c540caf9988e339a404cadcdf1e8b165d",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/32c4202886c51fbe5cc3a7c34ec5c9a4a790345e",
+                "reference": "32c4202886c51fbe5cc3a7c34ec5c9a4a790345e",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": ">=5.4"
             },
             "require-dev": {
@@ -269,7 +270,7 @@
             "keywords": [
                 "enum"
             ],
-            "time": "2018-10-27T21:15:22+00:00"
+            "time": "2019-02-04T21:18:49+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -555,19 +556,20 @@
         },
         {
             "name": "wearesho-team/base-collection",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wearesho-team/base-collection.git",
-                "reference": "34e629e71aca115cdb27c13b34e8c6cdd0bc5418"
+                "reference": "4384d817e8eef86e2ab86827a7afa9de2a650ebd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wearesho-team/base-collection/zipball/34e629e71aca115cdb27c13b34e8c6cdd0bc5418",
-                "reference": "34e629e71aca115cdb27c13b34e8c6cdd0bc5418",
+                "url": "https://api.github.com/repos/wearesho-team/base-collection/zipball/4384d817e8eef86e2ab86827a7afa9de2a650ebd",
+                "reference": "4384d817e8eef86e2ab86827a7afa9de2a650ebd",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": "^7.1"
             },
             "require-dev": {
@@ -591,7 +593,7 @@
                 }
             ],
             "description": "Typed collection based on ArrayObject",
-            "time": "2018-10-19T12:17:38+00:00"
+            "time": "2019-04-09T12:53:27+00:00"
         }
     ],
     "packages-dev": [
